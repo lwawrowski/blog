@@ -1,0 +1,45 @@
+baseurl = "https://wawrowski.netlify.com/"
+title = "Łukasz Wawrowski"
+theme = "ghostwriter"
+languageCode = "en-us"
+copyright = "Łukasz Wawrowski"
+disqusShortname = "lukaszwawrowski"
+googleAnalytics = "XXX"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[Author]
+    name = "Łukasz Wawrowski"
+
+[Taxonomies]
+    tag = "tags"
+
+[Params]
+    intro = true
+    headline = "Łukasz Wawrowski"
+    description = "Data Scientist"
+    github = "https://github.com/lwawrowski"
+    linkedin = "https://linkedin.com/in/łukasz-wawrowski-2b106a149/"
+    stackoverflow = "https://stackoverflow.com/users/1651832/lukasz89x"
+    email = "lukasz[dot]wawrowski[at]outlook[dot]com"
+    opengraph = true
+    shareTwitter = true
+    shareFacebook = true
+    shareGooglePlus = true
+    shareLinkedIn = false
+    dateFormat = "Mon, Jan 2, 2006"
+    highlightJsUrl = ""
+    highlightJsLocalUrl = ""
+    highlightjsLang = ["r", "yaml"]
+
+[Permalinks]
+    post = "/:year/:month/:day/:filename/"
+
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "O mnie"
+    url = "/page/about/"
+    weight = 2

@@ -1,0 +1,104 @@
+---
+title: Analiza danych Lotto
+author: ŁW
+date: '2017-10-25'
+slug: lotto
+categories:
+  - R
+tags:
+  - lotto
+  - ggplot2
+  - dplyr
+  - losowanie proste
+---
+
+
+
+<p>Impulsem do przeprowadzenia analizy danych pochodzących z losowań Lotto była konieczność przedstawienia uczniom liceum przykładu losowania prostego. Czy faktycznie każda liczba ma takie samo prawdopodobieństwo wylosowania?</p>
+<p>Dane w formacie tekstowym można pobrać ze strony <a href="http://www.mbnet.com.pl/">mbnet.com.pl</a>. Po wczytaniu do R dokonałem niezbędnego przekształcenia danych.</p>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(zoo)
+
+d &lt;- read.table(&quot;http://www.mbnet.com.pl/dl.txt&quot;, sep=&quot; &quot;, dec=&quot;.&quot;)
+names(d) &lt;- c(&quot;obs&quot;, &quot;date&quot;, &quot;numbers&quot;)
+
+d &lt;- d %&gt;%
+  separate(numbers, into = c(&quot;number1&quot;, &quot;number2&quot;, &quot;number3&quot;, &quot;number4&quot;, &quot;number5&quot;, &quot;number6&quot;)) %&gt;%
+  separate(date, into = c(&quot;day&quot;, &quot;month&quot;, &quot;year&quot;), remove = F) %&gt;%
+  mutate(date_f=as.POSIXct(strptime(date, &quot;%d.%m.%Y&quot;)))</code></pre>
+<p>Do dnia 2017-10-25 przeprowadzono 6013 losowań.</p>
+<p>W pierwszej kolejności sprawdźmy ile razy dana liczba została już wylosowana.</p>
+<pre class="r"><code>freqs &lt;- d %&gt;%
+  select(starts_with(&quot;number&quot;)) %&gt;%
+  gather(number, value) %&gt;%
+  mutate(value=as.numeric(value))
+
+counts_num &lt;- freqs %&gt;%
+  count(value)
+  
+ggplot(counts_num, aes(x=as.factor(value), n)) +
+  geom_bar(stat=&quot;identity&quot;, fill=&quot;#FCBD10&quot;) +
+  xlab(&quot;Liczba&quot;) + ylab(&quot;Częstość&quot;) + 
+  theme_light() +
+  theme(axis.text.x = element_text(size = 7))</code></pre>
+<p><img src="/post/2017-10-25-lotto_files/figure-html/freq%20each%20number-1.png" width="672" /></p>
+<p>Okazuje się, że rozkład liczb losowanych w Lotto jest zbliżony do rozkładu jednostajnego. Najrzadziej losowana była liczba 43 - 664 razy, a najczęściej liczba 34 - 802 razy.</p>
+<p>Z kolei do przedstawienia rozkładu liczb na poszczególnych pozycjach najlepiej sprawdzi się wykres skrzypcowy.</p>
+<pre class="r"><code>ggplot(freqs, aes(x=number, y=value)) + 
+  geom_violin(fill=&quot;#FCBD10&quot;) +
+  xlab(&quot;Pozycja liczby&quot;) + ylab(&quot;Wylosowana liczba&quot;) + 
+  scale_x_discrete(labels = 1:6) +
+  theme_light()</code></pre>
+<p><img src="/post/2017-10-25-lotto_files/figure-html/dist%20violin-1.png" width="672" /></p>
+<p>Rozkład liczb według pozycji nie zaskakuje. Na pierwszym miejscu dominują liczby z początku przedziału <span class="math inline">\([1;49]\)</span>, a na miejscu 6 z końca tego przedziału. Niemniej jednak zdarzyły się takie losowania, jak to z 15 października 2015 roku, w którym padły liczby wyłącznie z czwartej dziesiątki: 40, 41, 42, 46, 47, 49. Z drugiej strony można przywołać 5 grudnia 1987 roku i wylosowane liczby: 1, 2, 8, 10, 11, 12.</p>
+<p>Dane z losowań Lotto pokazują także jak zmieniała się liczba losowań w ciągu ostatnich 60 lat.</p>
+<pre class="r"><code>draw_y &lt;- d %&gt;%
+  filter(year!=&quot;2017&quot;) %&gt;%
+  group_by(year) %&gt;%
+  count()
+
+ggplot(draw_y, aes(x=year, y=n, group = 1)) +
+  geom_line(color=&quot;#FCBD10&quot;, size=2) +
+  geom_point(color=&quot;#FCBD10&quot;, size=3) +
+  xlab(&quot;Rok&quot;) + ylab(&quot;Liczba losowań&quot;) + 
+  theme_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7))</code></pre>
+<p><img src="/post/2017-10-25-lotto_files/figure-html/year-1.png" width="672" /></p>
+<p>W latach 1957-1974 losowania odbywały się raz w tygodniu. Od 1975 wprowadzono drugie losowanie, a w roku 2007 trzecie.</p>
+<p>Na podstawie tych samych danych można jeszcze sprawdzić w jakie dni tygodnia odbywały się te losowania.</p>
+<pre class="r"><code>week_d &lt;- d %&gt;%
+  mutate(weekday=weekdays(date_f)) %&gt;%
+  group_by(year, weekday) %&gt;%
+  count() %&gt;%
+  ungroup() %&gt;%
+  mutate(weekday=ordered(weekday, 
+                         levels=rev(c(&quot;wtorek&quot;, &quot;środa&quot;, &quot;czwartek&quot;, &quot;sobota&quot;, &quot;niedziela&quot;)),
+                         labels=rev(c(&quot;wtorek&quot;, &quot;środa&quot;, &quot;czwartek&quot;, &quot;sobota&quot;, &quot;niedziela&quot;))))
+  
+ggplot(week_d, aes(year, weekday)) + 
+  geom_tile(aes(fill = n), colour = &quot;white&quot;) +
+  # geom_text(aes(label = n), size=3, color = &quot;white&quot;) +
+  scale_fill_gradient(&quot;Liczba losowań&quot;, limits=c(0,max(week_d$n))) + 
+  xlab(&quot;Rok&quot;) + ylab(&quot;Dzień tygodnia&quot;) +
+  theme_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+        axis.text.y = element_text(angle = 90, hjust = 0.5),
+        legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="/post/2017-10-25-lotto_files/figure-html/weekday-1.png" width="672" /></p>
+<p>W pierwszych latach losowania były przeprowadzane w niedzielę. W 1984 roku przeniesiono je na sobotę, a w 1991 roku dodano losowane środowe. Od 2007 roku losowania Lotto odbywają się we wtorki, czwartki i soboty.</p>
+<p>Podobne zestawienie można utworzyć dla dni i miesięcy.</p>
+<pre class="r"><code>draw_dm &lt;- d %&gt;%
+  group_by(month, day) %&gt;%
+  count()
+
+ggplot(draw_dm, aes(day, month)) + 
+  geom_tile(aes(fill = n), colour = &quot;white&quot;) +
+  geom_text(aes(label = n), size=3, color = &quot;white&quot;) +
+  scale_fill_gradient(&quot;Liczba losowań&quot;, limits=c(0,max(draw_dm$n))) + 
+  xlab(&quot;Dzień&quot;) + ylab(&quot;Miesiąc&quot;) +
+  theme_light() +
+  theme(legend.position=&quot;bottom&quot;)</code></pre>
+<p><img src="/post/2017-10-25-lotto_files/figure-html/days%20months-1.png" width="672" /></p>
+<p>W tym przypadku bez niespodzianek. W ciągu 60 lat 3 losowania wypadły 29 lutego.</p>
