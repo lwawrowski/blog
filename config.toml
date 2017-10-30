@@ -1,7 +1,7 @@
 baseurl = "https://wawrowski.netlify.com/"
 title = "Łukasz Wawrowski"
 theme = "ghostwriter"
-languageCode = "en-us"
+languageCode = "pl-pl"
 copyright = "Łukasz Wawrowski"
 disqusShortname = "lukaszwawrowski"
 googleAnalytics = "XXX"

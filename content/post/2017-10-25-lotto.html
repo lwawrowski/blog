@@ -1,7 +1,7 @@
 ---
 title: Analiza danych Lotto
 author: ŁW
-date: '2017-10-25'
+date: '2017-10-30'
 slug: lotto
 categories:
   - R
@@ -15,6 +15,7 @@ tags:
 
 
 <p>Impulsem do przeprowadzenia analizy danych pochodzących z losowań Lotto była konieczność przedstawienia uczniom liceum przykładu losowania prostego. Czy faktycznie każda liczba ma takie samo prawdopodobieństwo wylosowania?</p>
+<p>Lotto, dawniej Toto-Lotek oraz Duży Lotek to losowanie 6 liczb z 49. Dużo ciekawych informacji na temat samej gry oraz jej historii można znaleźć na stronie <a href="https://pl.wikipedia.org/wiki/Lotto_(gra_liczbowa)/">wikipedii</a>.</p>
 <p>Dane w formacie tekstowym można pobrać ze strony <a href="http://www.mbnet.com.pl/">mbnet.com.pl</a>. Po wczytaniu do R dokonałem niezbędnego przekształcenia danych.</p>
 <pre class="r"><code>library(ggplot2)
 library(dplyr)
@@ -28,7 +29,7 @@ d &lt;- d %&gt;%
   separate(numbers, into = c(&quot;number1&quot;, &quot;number2&quot;, &quot;number3&quot;, &quot;number4&quot;, &quot;number5&quot;, &quot;number6&quot;)) %&gt;%
   separate(date, into = c(&quot;day&quot;, &quot;month&quot;, &quot;year&quot;), remove = F) %&gt;%
   mutate(date_f=as.POSIXct(strptime(date, &quot;%d.%m.%Y&quot;)))</code></pre>
-<p>Do dnia 2017-10-25 przeprowadzono 6013 losowań.</p>
+<p>Do dnia 30 października 2017 roku przeprowadzono 6015 losowań. Żadna sekwencja liczb się nie powtórzyła.</p>
 <p>W pierwszej kolejności sprawdźmy ile razy dana liczba została już wylosowana.</p>
 <pre class="r"><code>freqs &lt;- d %&gt;%
   select(starts_with(&quot;number&quot;)) %&gt;%
@@ -45,14 +46,14 @@ ggplot(counts_num, aes(x=as.factor(value), n)) +
   theme(axis.text.x = element_text(size = 7))</code></pre>
 <p><img src="/post/2017-10-25-lotto_files/figure-html/freq%20each%20number-1.png" width="672" /></p>
 <p>Okazuje się, że rozkład liczb losowanych w Lotto jest zbliżony do rozkładu jednostajnego. Najrzadziej losowana była liczba 43 - 664 razy, a najczęściej liczba 34 - 802 razy.</p>
-<p>Z kolei do przedstawienia rozkładu liczb na poszczególnych pozycjach najlepiej sprawdzi się wykres skrzypcowy.</p>
+<p>Z kolei do przedstawienia rozkładu liczb na poszczególnych pozycjach najlepiej sprawdzi się wykres skrzypcowy - połączenie wykresu pudełkowego z rozkładem gęstości.</p>
 <pre class="r"><code>ggplot(freqs, aes(x=number, y=value)) + 
   geom_violin(fill=&quot;#FCBD10&quot;) +
   xlab(&quot;Pozycja liczby&quot;) + ylab(&quot;Wylosowana liczba&quot;) + 
   scale_x_discrete(labels = 1:6) +
   theme_light()</code></pre>
 <p><img src="/post/2017-10-25-lotto_files/figure-html/dist%20violin-1.png" width="672" /></p>
-<p>Rozkład liczb według pozycji nie zaskakuje. Na pierwszym miejscu dominują liczby z początku przedziału <span class="math inline">\([1;49]\)</span>, a na miejscu 6 z końca tego przedziału. Niemniej jednak zdarzyły się takie losowania, jak to z 15 października 2015 roku, w którym padły liczby wyłącznie z czwartej dziesiątki: 40, 41, 42, 46, 47, 49. Z drugiej strony można przywołać 5 grudnia 1987 roku i wylosowane liczby: 1, 2, 8, 10, 11, 12.</p>
+<p>Rozkład liczb według pozycji nie zaskakuje. Na pierwszym miejscu dominują liczby z początku przedziału [1;49], a na miejscu 6 z końca tego przedziału. Niemniej jednak zdarzyły się takie losowania, jak to z 15 października 2015 roku, w którym padły liczby wyłącznie z czwartej dziesiątki: 40, 41, 42, 46, 47, 49. Z drugiej strony można przywołać 5 grudnia 1987 roku i wylosowane liczby: 1, 2, 8, 10, 11, 12.</p>
 <p>Dane z losowań Lotto pokazują także jak zmieniała się liczba losowań w ciągu ostatnich 60 lat.</p>
 <pre class="r"><code>draw_y &lt;- d %&gt;%
   filter(year!=&quot;2017&quot;) %&gt;%
@@ -101,4 +102,6 @@ ggplot(draw_dm, aes(day, month)) +
   theme_light() +
   theme(legend.position=&quot;bottom&quot;)</code></pre>
 <p><img src="/post/2017-10-25-lotto_files/figure-html/days%20months-1.png" width="672" /></p>
-<p>W tym przypadku bez niespodzianek. W ciągu 60 lat 3 losowania wypadły 29 lutego.</p>
+<p>W tym przypadku bez niespodzianek - żadna data nie była dyskryminowana. Oprócz 29 lutego - w ciągu 60 lat w ten dzień odbyły się tylko 3 losowania.</p>
+<p>Szansa trafienia “szóstki” w Lotto to 1 do 13 983 816 czyli bardzo mało. Z wykorzystaniem analizy częstości można wytypować najczęściej losowane “dwójki” czy “trójki”, ale należy pamiętać, że wylosowanie każdej kombinacji liczb jest tak samo prawdopodobne. Ciekawie na ten temat mówi Dan Gilbert w prezentacji <a href="https://www.ted.com/talks/dan_gilbert_researches_happiness?language=pl">Dlaczego podejmujemy złe decyzje</a>.</p>
+<p>Kod w jednym kawałku dostępny jest na <a href="https://github.com/lwawrowski/lotto/">githubie</a>.</p>
