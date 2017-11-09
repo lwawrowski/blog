@@ -1,0 +1,72 @@
+---
+title: Jakie imię było najpopularniejsze wśród papieży
+author: Łukasz Wawrowski
+date: '2017-11-09'
+slug: imie-papiez
+categories:
+  - R
+tags:
+  - tidyverse
+  - rvest
+  - papież
+---
+
+
+
+<p>W ostatnim czasie zastanawiałem się, które imię było najczęściej wybierane przez papieży. Jako przeciętny śmiertelnik potrafię wymienić 6 ostatnich papieży i na tej podstawie stwierdzam, że dużą popularnością cieszyło się na pewno imię Jan oraz Benedykt. Do ustalenia rankingu imion papieży wykorzystam R oraz dane z <a href="https://pl.wikipedia.org/wiki/Poczet_papie%C5%BCy">wikipedii</a>.</p>
+<p>Lista papieży dostępna jest w postaci tabel html w podziale na kolejne wieki naszej ery. Do pobrania zawartości tych tabel najlepszy będzie pakiet <a href="https://cran.r-project.org/web/packages/rvest/index.html">rvest</a>. Oprócz niego ładuje także pakiet <a href="https://www.tidyverse.org/">tidyverse</a>.</p>
+<pre class="r"><code>library(tidyverse)
+library(rvest)
+
+wiki &lt;- &quot;https://pl.wikipedia.org/wiki/Poczet_papie%C5%BCy&quot;
+
+tmp &lt;- wiki %&gt;%
+  read_html %&gt;%
+  html_nodes(&quot;table&quot;)</code></pre>
+<p>Na stronie zidentyfikowano 24 tabele - w 21 znajdują się dane na temat papieży. XX wiek poprzedza tabela zawierająca informację o tym, że papieżowi przysługuje tytuł <strong>Suweren Państwa Watykańskiego</strong>. Dwie ostatnie tabele to stopka strony. W związku z powyższym wybieram tylko tabele zawierające interesujące mnie dane.</p>
+<pre class="r"><code>listPopes &lt;- list()
+
+for(i in c(1:19,21:22)){
+  name &lt;- paste0(&quot;tab&quot;,i)
+  a &lt;- html_table(tmp[[i]])[-1,]
+  listPopes[[name]] &lt;- a
+}</code></pre>
+<p>Imię danego papieża do XI wieku znajdowało się w drugiej kolumnie tabeli, natomiast później dodano do tabel także herb, przez co imię przesunięto do trzeciej kolumny. Wybierając imiona papieży trzeba wziąć to pod uwagę.</p>
+<pre class="r"><code>popesNames &lt;- NULL
+
+for(i in 1:21){
+  if(i &lt; 12){
+    names &lt;- listPopes[[i]][,2]
+    popesNames &lt;- c(popesNames, names)
+  } else{
+    names &lt;- listPopes[[i]][,3]
+    popesNames &lt;- c(popesNames, names)
+  }
+}</code></pre>
+<p>Pobieżna analiza imion papieży na stronie wikipedii może zasygnalizować kilka problemów, które utrudniają uzyskanie obiektu zawierającego wyłącznie imię i numer papieża. W tabelach umieszczono <a href="https://pl.wikipedia.org/wiki/Antypapie%C5%BC">antypapieży</a>, którzy nie są obiektem naszego zainteresowania. Ponadto przy niektórych imionach pojawia się skrót zakonu benedyktynów: OSB. Także kolejne przypisy zostały umieszone obok wybranych imion. Możemy się także dowiedzieć, że papież <a href="https://pl.wikipedia.org/wiki/Benedykt_IX">Benedykt IX</a> papieżem zostawał trzykrotnie, za trzecim razem <em>“(…) przy pomocy entuzjastycznego ludu i łapownictwa.”</em>. Ostatnią zmianą jaką należy przeprowadzić jest traktowanie imienia Jan Paweł jako jednego. Wszystkie te operacje można wykonać wykorzystując wyrażenia regularne.</p>
+<pre class="r"><code>popesNames.df &lt;- as.data.frame(popesNames)
+
+popesNames_filter &lt;- popesNames.df %&gt;%
+  # wyrzucenie antypapieży
+  filter(!grepl(&quot;Antypapież&quot;,popesNames)) %&gt;%
+  # usunięcie OSB
+  mutate(popesNames=gsub(&quot;OSB&quot;, &quot;&quot;, popesNames),
+         # usunięcie przypisów
+         popesNames=gsub(&quot;\\[.*&quot;, &quot;&quot;, popesNames),
+         # usunięcie wyrażenia &quot;po raz ...&quot;
+         popesNames=gsub(&quot;Po raz.*&quot;, &quot;&quot;, popesNames),
+         # Jan Paweł jako jedno imię
+         popesNames=gsub(&quot;Jan Paweł&quot;, &quot;JanPaweł&quot;, popesNames)) %&gt;%
+  distinct() %&gt;%
+  separate(popesNames, into = c(&quot;name&quot;, &quot;number&quot;, &quot;adds&quot;), remove = F)</code></pre>
+<p>Tym sposobem uzyskaliśmy listę 265 unikalnych imion papieży, a w osobnych kolumnach samo imię, numer oraz dodatkowe przydomki (trzech papieży miało przydomek <em>Wielki</em>). Na podstawie tak przygotowanego zbioru możemy przedstawić najczęściej występujące imiona papieży.</p>
+<pre class="r"><code>namesFreq &lt;- popesNames_filter %&gt;%
+  count(name)
+
+filter(namesFreq, n &gt; 4) %&gt;%
+  ggplot(., aes(x=reorder(name, -n), y=n)) + geom_col() + coord_flip() +
+  xlab(&quot;Wybrane imię&quot;) + ylab(&quot;&quot;) +
+  theme_light()</code></pre>
+<p><img src="/post/2017-11-09-imie-papiez_files/figure-html/wykres-1.png" width="672" /></p>
+<p>Najczęściej wybierane imię to Jan - 21 razy (po Janie XV był od razu Jan XVII, a po Janie XIX, Jan XXI), na drugim miejscu Grzegorz (16 razy) wyprzedzający Benedykta (15 razy). Za podium znajduje się Klemens, Innocenty, Leon, Pius i Stefan. Imion występujących tylko raz w ciągu ostatnich 2000 lat było 44, a wsród nich m.in. Anaklet, Eleuteriusz, Hormizdas czy Zefiryn - można się inspirować.</p>
+<p>Kod w jednym kawałku dostępny jest na <a href="https://github.com/lwawrowski/popes">githubie</a>.</p>
