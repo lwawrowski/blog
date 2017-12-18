@@ -1,10 +1,10 @@
-baseurl = "http://wawrowski.netlify.com/"
+baseurl = "https://wawrowski.netlify.com/"
 title = "Łukasz Wawrowski"
 theme = "ghostwriter"
 languageCode = "pl-pl"
 copyright = "Łukasz Wawrowski"
 disqusShortname = "lukaszwawrowski"
-googleAnalytics = "XXX"
+googleAnalytics = "UA-49771039-5"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [Author]
