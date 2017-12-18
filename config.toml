@@ -1,4 +1,4 @@
-baseurl = "https://wawrowski.netlify.com/"
+baseurl = "http://wawrowski.netlify.com/"
 title = "Łukasz Wawrowski"
 theme = "ghostwriter"
 languageCode = "pl-pl"
