@@ -1,5 +1,5 @@
 +++
-title = "Oferta"
+title = "Współpraca"
 date = 2017-10-21T00:05:00Z
 author = "Łukasz"
 +++

@@ -16,7 +16,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [Params]
     intro = true
     headline = "Łukasz Wawrowski"
-    description = "Data Scientist"
+    description = "Statystyczna ciekawość świata"
     github = "https://github.com/lwawrowski"
     linkedin = "https://linkedin.com/in/łukasz-wawrowski-2b106a149/"
     stackoverflow = "https://stackoverflow.com/users/1651832/lukasz89x"
@@ -39,8 +39,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 1
 
 [[menu.main]]
-    name = "Oferta"
-    url = "/page/oferta/"
+    name = "Współpraca"
+    url = "/page/wspolpraca/"
     weight = 2
 
 [[menu.main]]
