@@ -29,7 +29,7 @@ tmp &lt;- wiki %&gt;%
 
 for(i in c(1:19,21:22)){
   name &lt;- paste0(&quot;tab&quot;,i)
-  a &lt;- html_table(tmp[[i]])[-1,]
+  a &lt;- html_table(tmp[[i]], fill=T)[-1,]
   listPopes[[name]] &lt;- a
 }</code></pre>
 <p>Imię danego papieża do XI wieku znajdowało się w drugiej kolumnie tabeli, natomiast później dodano do tabel także herb, przez co imię przesunięto do trzeciej kolumny. Wybierając imiona papieży trzeba wziąć to pod uwagę.</p>
