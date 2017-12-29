@@ -28,7 +28,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     dateFormat = "Mon, Jan 2, 2006"
     highlightJsUrl = ""
     highlightJsLocalUrl = ""
-    highlightjsLang = ["r", "yaml"]
+    highlightjsLang = ["r", "yaml", "javascript"]
 
 [Permalinks]
     post = "/:year/:month/:day/:filename/"
