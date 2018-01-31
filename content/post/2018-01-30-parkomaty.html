@@ -1,0 +1,292 @@
+---
+title: Gdzie jest najbliższy parkomat
+author: Łukasz Wawrowski
+date: '2018-01-30'
+slug: parkomaty
+categories:
+  - R
+tags:
+  - parkomaty
+  - otwarte dane
+  - API
+  - tidyverse
+  - google maps
+---
+
+
+
+<p>Poznań w ramach projektu Otwarty Poznań udostępnia sporo danych publicznych na stronie <a href="http://www.poznan.pl/mim/api/otwarte-dane-otwarte-api,p,25877,38303.html">poznan.pl</a>. Dostęp do tych informacji odbywa się poprzez API. Jest bardzo dużo danych przestrzennych, a także informacje na temat poznańskich wydarzeń czy obiektów. Tematem tego wpisu będą parkomaty.</p>
+<div id="pobranie-danych" class="section level1">
+<h1>Pobranie danych</h1>
+<p>Na początku wczytujemy potrzebne pakiety - <code>jsonlite</code> do wczytania danych z API, <code>tidyverse</code> do kompleksowego przetwarzania danych i pozostałe do działania na obiektach przestrzennych.</p>
+<pre class="r"><code># pobieranie danych
+library(jsonlite)
+# przetwarzanie
+library(tidyverse)
+# operacje przestrzenne
+library(ggmap)
+library(sp)
+library(rgeos)
+library(geosphere)
+library(gmapsdistance)
+
+d &lt;- fromJSON(&quot;http://www.poznan.pl/mim/plan/map_service.html?mtype=pub_transport&amp;co=parking_meters&quot;)</code></pre>
+<p>Dane uzyskujemy w postaci listy, która zawiera współrzędne geograficzne każdego parkomatu oraz informację o przynależności do jednej z trzech stref parkowania i ulicy. Przekształcamy listę do ramki danych.</p>
+<pre class="r"><code>d_coords &lt;- data.frame(matrix(unlist(d$features$geometry$coordinates), 
+                              nrow = nrow(d$features), byrow = T))
+names(d_coords) &lt;- c(c(&quot;lon&quot;, &quot;lat&quot;))
+
+d_prop &lt;- d$features$properties
+
+strefy &lt;- cbind(d_prop, d_coords)
+
+head(strefy) %&gt;%
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">zone</th>
+<th align="left">street</th>
+<th align="right">lon</th>
+<th align="right">lat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A</td>
+<td align="left">Garbary</td>
+<td align="right">16.93762</td>
+<td align="right">52.40551</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="left">Działowa</td>
+<td align="right">16.93105</td>
+<td align="right">52.41267</td>
+</tr>
+<tr class="odd">
+<td align="left">A</td>
+<td align="left">plac Wielkopolski</td>
+<td align="right">16.93205</td>
+<td align="right">52.41088</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92958</td>
+<td align="right">52.41036</td>
+</tr>
+<tr class="odd">
+<td align="left">A</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92950</td>
+<td align="right">52.41095</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92951</td>
+<td align="right">52.41145</td>
+</tr>
+</tbody>
+</table>
+<p>Wszystkie niezbędne informacje są w jednym miejscu, więc możemy zobaczyć jak to wygląda na mapie.</p>
+<pre class="r"><code>get_poznan &lt;- get_map(c(16.917, 52.41), zoom = 14)
+poznan &lt;- ggmap(get_poznan)
+
+poznan + geom_point(data=strefy, aes(x=lon, y=lat, colour=zone)) +
+  scale_color_manual(values=c(&quot;#F80500&quot;, &quot;#F4C604&quot;, &quot;#07D500&quot;), 
+                     guide = guide_legend(title=&quot;Strefa&quot;)) +
+  ylab(&quot;&quot;) + xlab(&quot;&quot;)</code></pre>
+<p><img src="/post/2018-01-30-parkomaty_files/figure-html/mapa1-1.png" width="672" /></p>
+<p>Największa i najdroższa strefa czerwona pokrywa całe centrum miasta. Nieco tańsza strefa pomarańczowa to przede wszystkim Jeżyce oraz okolice dworca PKP. Z kolei strefa zielona to kilka ulic w obrębie Łazarza oraz w północno-zachodniej części Jeżyc. W pozostałych częściach Poznania można (jeszcze) parkować za darmo.</p>
+<p>Zobaczmy jeszcze jak kształtuje się gęstość parkomatów na mapie.</p>
+<pre class="r"><code>poznan + geom_point(data=strefy, aes(x=lon, y=lat, colour=zone)) +
+  scale_color_manual(values=c(&quot;#F80500&quot;, &quot;#F4C604&quot;, &quot;#07D500&quot;), 
+                     guide = guide_legend(title=&quot;Strefa&quot;)) +
+  ylab(&quot;&quot;) + xlab(&quot;&quot;) +
+  geom_density2d(data=d_coords, aes(x=lon, y=lat), size = 0.5, bins = 8)</code></pre>
+<p><img src="/post/2018-01-30-parkomaty_files/figure-html/mapa2-1.png" width="672" /></p>
+<p>Najgęściej jest na Jeżycach oraz w pobliżu Starego Rynku. Niemniej na podstawie tego rysunku można zidentyfikować ulice, na których parkomatów nie ma.</p>
+</div>
+<div id="analiza-danych" class="section level1">
+<h1>Analiza danych</h1>
+<p>Spróbujmy teraz odpowiedzieć na pytanie jak daleko przeciętnie będziemy mieli do parkomatu, jeżeli zaparkujemy gdzieś w centrum. W analizie ograniczymy się do strefy A ponieważ parkując w tej strefie nie interesuje nas parkomat np. w kolorze pomarańczowym.</p>
+<pre class="r"><code>strefa_a &lt;- strefy %&gt;%
+  filter(zone==&quot;A&quot;)
+  
+strefa_a &lt;- strefa_a %&gt;%
+  mutate(id=1:nrow(strefa_a))
+
+strefa_a_sp &lt;- strefa_a
+coordinates(strefa_a_sp) &lt;- ~lon+lat
+
+dist &lt;- distm(strefa_a_sp)</code></pre>
+<p>W pierwszej kolejności filtrujemy interesujące nas obserwacje, a następnie nadaję unikalny identyfikator, którego w danych nie ma, a który ułatwi późniejszą analizę. Aby policzyć odległości pomiędzy parkomatami muszę przekształcić ramkę danych na obiekt klasy <code>SpatialPointDataFrame</code>. Ostatnim krokiem jest wyznaczenie macierzy odległości pomiędzy punktami z wykorzystaniem funkcji <code>distm</code> z pakietu <code>geosphere</code>, która zwraca odległość pomiędzy dwoma punktami w linii prostej w metrach.</p>
+<p>Na podstawie tak utworzonej macierzy dla każdego parkomatu szukamy jego najbliższego sąsiada. Tutaj nieoceniona okazała się pomoc stackoverflow i tego <a href="https://stackoverflow.com/questions/21977720/r-finding-closest-neighboring-point-and-number-of-neighbors-within-a-given-rad">wpisu</a>.</p>
+<pre class="r"><code>min_dist &lt;- apply(dist, 1, function(x) order(x, decreasing=F)[2])
+
+strefa_a_dist &lt;- cbind(strefa_a, strefa_a[min_dist,], 
+                       apply(dist, 1, function(x) sort(x, decreasing=F)[2]))
+
+colnames(strefa_a_dist) &lt;- c(colnames(strefa_a), 
+                             paste0(&quot;n_&quot;, colnames(strefa_a)), &quot;odl_prosta&quot;)
+
+head(select(strefa_a_dist,-zone,-n_zone)) %&gt;% knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">street</th>
+<th align="right">lon</th>
+<th align="right">lat</th>
+<th align="right">id</th>
+<th align="left">n_street</th>
+<th align="right">n_lon</th>
+<th align="right">n_lat</th>
+<th align="right">n_id</th>
+<th align="right">odl_prosta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>67</td>
+<td align="left">Garbary</td>
+<td align="right">16.93762</td>
+<td align="right">52.40551</td>
+<td align="right">1</td>
+<td align="left">Wszystkich Świętych</td>
+<td align="right">16.93777</td>
+<td align="right">52.40554</td>
+<td align="right">67</td>
+<td align="right">10.64656</td>
+</tr>
+<tr class="even">
+<td>106</td>
+<td align="left">Działowa</td>
+<td align="right">16.93105</td>
+<td align="right">52.41267</td>
+<td align="right">2</td>
+<td align="left">Działowa</td>
+<td align="right">16.93129</td>
+<td align="right">52.41204</td>
+<td align="right">106</td>
+<td align="right">72.10591</td>
+</tr>
+<tr class="odd">
+<td>105</td>
+<td align="left">plac Wielkopolski</td>
+<td align="right">16.93205</td>
+<td align="right">52.41088</td>
+<td align="right">3</td>
+<td align="left">Wolnica</td>
+<td align="right">16.93235</td>
+<td align="right">52.41130</td>
+<td align="right">105</td>
+<td align="right">51.17644</td>
+</tr>
+<tr class="even">
+<td>192</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92958</td>
+<td align="right">52.41036</td>
+<td align="right">4</td>
+<td align="left">23 Lutego</td>
+<td align="right">16.92987</td>
+<td align="right">52.41002</td>
+<td align="right">192</td>
+<td align="right">42.88850</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92950</td>
+<td align="right">52.41095</td>
+<td align="right">5</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92951</td>
+<td align="right">52.41145</td>
+<td align="right">6</td>
+<td align="right">55.75699</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92951</td>
+<td align="right">52.41145</td>
+<td align="right">6</td>
+<td align="left">Marcinkowskiego</td>
+<td align="right">16.92950</td>
+<td align="right">52.41095</td>
+<td align="right">5</td>
+<td align="right">55.75699</td>
+</tr>
+</tbody>
+</table>
+<p>W rezultacie uzyskaliśmy informację o najbliższym sąsiedzie oraz odległości w linii prostej dla każdego parkomatu. Zweryfikujmy odległość dla pierwszej pary, która wynosi 10 metrów.</p>
+<div class="figure">
+<img src="/post/2018-01-30-parkomaty_files/figure-html/parkomaty1.png" />
+
+</div>
+<p>Odległość w linii prostej się zgadza, ale w rzeczywistości nie pokonamy tej drogi w ten sposób. Idąc chodnikiem wzdłuż ulicy faktyczna odległość wynosi ponad dwa razy tyle, co odległość w linii prostej.</p>
+<p>Wobec tego uzupełnimy posiadane dane o informacje z google maps, a pomoże w tym pakiet <code>gmapsdistance</code>. Bez podania klucza autoryzującego do dyspozycji jest 1000 bezpłatnych zapytań dziennie, a po weryfikacji liczba ta rośnie do 150 000 zapytań.</p>
+<pre class="r"><code>g_dist &lt;- gmapsdistance(origin = paste0(strefa_a_dist$lat,&quot;+&quot;,strefa_a_dist$lon),
+                        destination = paste0(strefa_a_dist$n_lat,&quot;+&quot;,strefa_a_dist$n_lon), 
+                        mode = &quot;walking&quot;, 
+                        combinations = &quot;pairwise&quot;)
+
+strefa_a_dist &lt;- strefa_a_dist %&gt;%
+  mutate(odl_google=g_dist$Distance$Distance,
+         czas_google=g_dist$Time$Time)</code></pre>
+<p>Funkcja <code>gmapsdistance</code> zwraca informację o czasie (w sekundach), odległości (w metrach) oraz statusie (czy udało się pobrać dane). Dodajemy dane wynikowe do naszego zbioru. Sprawadźmy teraz korelację pomiędzy danymi z funkcji <code>distm</code> a <code>gmapsdistance</code>.</p>
+<pre class="r"><code>ggplot(strefa_a_dist, aes(odl_prosta, odl_google)) + 
+  geom_point() +
+  xlab(&quot;Odległość w linii prostej&quot;) + 
+  ylab(&quot;Odległość na podstawie Google Maps&quot;) +
+  theme_light()</code></pre>
+<p><img src="/post/2018-01-30-parkomaty_files/figure-html/korelacje-1.png" width="672" /></p>
+<p>W większości przypadków istnieje liniowa zależność pomiędzy odległością w linii prostej, a tej obliczonej na podstawie Google Maps. Zaniepokojenie budzą punkty znacznie oddalone od teoretycznej prostej, które pokazują, że dane pobrane z Google Maps nie są idealne.</p>
+<p>Na przykład odległość pomiędzy dwoma parkomatami na ulicy Rybaki wynosi 0 metrów.</p>
+<div class="figure">
+<img src="/post/2018-01-30-parkomaty_files/figure-html/parkomaty2.png" />
+
+</div>
+<p>Trasa bywa także przekombinowana.</p>
+<div class="figure">
+<img src="/post/2018-01-30-parkomaty_files/figure-html/parkomaty3.png" />
+
+</div>
+<p>Z racji tego, że dane nie są idealne i występują wartości odstające to posłużymy się medianą do ustalenia tego ile przeciętnie zajmie nam dotarcie do najbliższego parkomatu.</p>
+<pre class="r"><code>strefa_a_dist %&gt;%
+  select(odl_prosta, odl_google, czas_google) %&gt;%
+  gather(Miara, wartosc) %&gt;%
+  group_by(Miara) %&gt;%
+  summarise(Mediana=round(median(wartosc))) %&gt;%
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Miara</th>
+<th align="right">Mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">czas_google</td>
+<td align="right">58</td>
+</tr>
+<tr class="even">
+<td align="left">odl_google</td>
+<td align="right">78</td>
+</tr>
+<tr class="odd">
+<td align="left">odl_prosta</td>
+<td align="right">62</td>
+</tr>
+</tbody>
+</table>
+<p>Zgodnie z interpretacją mediany - do połowy parkomatów dotrzemy w mniej niż 58 sekund, a do drugiej połowy w 58 sekund lub więcej. Od 50% parkomatów dzieli nas odległość 78 metrów lub mniej, a od 50% parkomatów 78 metrów lub więcej wzdłuż chodnika lub 62 metry w linii prostej.</p>
+<p>Podsumowując, w Poznaniu raczej nie będziemy zmuszeni do szukania parkomatu - zwykle powinien być w zasięgu naszego wzroku. A poza tym możemy skorzystać z mobilnych metod opłacania strefy parkowania.</p>
+<p>Na podstawie takich i podobnych danych przestrzennych można by się pokusić o napisanie aplikacji, która wskazywałaby najbliższy parkomat na podstawie bieżącej lokalizacji.</p>
+<p>Kod w jednym kawałku dostępny jest na <a href="https://github.com/lwawrowski/parkomaty">githubie</a>.</p>
+</div>
