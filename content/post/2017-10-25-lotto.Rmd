@@ -12,6 +12,8 @@ tags:
   - losowanie proste
 ---
 
+> Wpis zaktualizowany 14.02.2018 r.
+
 Impulsem do przeprowadzenia analizy danych pochodzących z losowań Lotto była konieczność przedstawienia uczniom liceum przykładu losowania prostego. Czy faktycznie każda liczba ma takie samo prawdopodobieństwo wylosowania?
 
 Lotto, dawniej Toto-Lotek oraz Duży Lotek to losowanie 6 liczb z 49. Dużo ciekawych informacji na temat samej gry oraz jej historii można znaleźć na stronie [wikipedii](https://pl.wikipedia.org/wiki/Lotto_(gra_liczbowa)/). 
@@ -30,11 +32,12 @@ names(d) <- c("obs", "date", "numbers")
 d <- d %>%
   separate(numbers, into = c("number1", "number2", "number3", "number4", "number5", "number6")) %>%
   separate(date, into = c("day", "month", "year"), remove = F) %>%
-  mutate(date_f=as.POSIXct(strptime(date, "%d.%m.%Y")))
+  mutate(date_f=as.POSIXct(strptime(date, "%d.%m.%Y"))) %>%
+  filter(year<2018)
 
 ```
 
-Do dnia 30 października 2017 roku przeprowadzono 6015 losowań. Żadna sekwencja liczb się nie powtórzyła.
+Do końca 2017 roku przeprowadzono 6041 losowań. Żadna sekwencja liczb się nie powtórzyła.
 
 W pierwszej kolejności sprawdźmy ile razy dana liczba została już wylosowana. 
 
@@ -57,7 +60,7 @@ ggplot(counts_num, aes(x=as.factor(value), n)) +
 
 ```
 
-Okazuje się, że rozkład liczb losowanych w Lotto jest zbliżony do rozkładu jednostajnego. Najrzadziej losowana była liczba 43 - 664 razy, a najczęściej liczba 34 - 802 razy.
+Okazuje się, że rozkład liczb losowanych w Lotto jest zbliżony do rozkładu jednostajnego. Najrzadziej losowana była liczba 43 - 667 razy, a najczęściej liczba 34 - 807 razy.
 
 Z kolei do przedstawienia rozkładu liczb na poszczególnych pozycjach najlepiej sprawdzi się wykres skrzypcowy - połączenie wykresu pudełkowego z rozkładem gęstości.
 
