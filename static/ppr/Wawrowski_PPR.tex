@@ -159,6 +159,7 @@ Literatura podstawowa:
 \item
   Garret Grolemund, Hadley Wickham -
   \href{http://r4ds.had.co.nz/}{\emph{R for Data Science}}
+  (\href{link}{polska wersja})
 \end{itemize}
 
 Literatura dodatkowa:
@@ -170,6 +171,16 @@ Literatura dodatkowa:
   pozycje po polsku}
 \item
   \href{https://bookdown.org/}{inne pozycje po angielsku}
+\end{itemize}
+
+Internet:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.r-bloggers.com/}{R-bloggers}
+\item
+  \href{https://rweekly.org/}{rweekly}
 \end{itemize}
 
 \chapter{Wprowadzenie do R}\label{wprowadzenie-do-r}
@@ -212,6 +223,15 @@ dostępne za darmo na stronie
 Z R można także korzystać w
 \href{https://www.visualstudio.com/pl/vs/rtvs/}{Microsoft Visual
 Studio}.
+
+\section{Ważne informacje}\label{wazne-informacje}
+
+\textbf{R jest wrażliwy na wielkość liter.}
+
+\textbf{Separatorem części dziesiętnej liczby jest kropka.}
+
+\textbf{W codziennej pracy RStudio jest wygodniejsze, jednak długotrwałe
+obliczenia lepiej uruchamiać w trybie wsadowym w zwykłym R.}
 
 \begin{itemize}
 \tightlist
@@ -276,6 +296,57 @@ możliwych funkcji i obiektów wywołuję się klawiszem TAB lub CTRL +
 SPACJA po wpisaniu co najmniej jednej litery. Kolejne naciśnięcie TAB
 lub ENTER powoduje uzupełnienie kodu o wybraną funkcję lub obiekt.
 
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Wykonywanie programów}
+\end{itemize}
+
+Programy w R możemy tworzyć jako skrypty w pliku tekstowym o
+rozszerzeniu .R lub wywoływać polecenia bezpośrednio w konsoli. Kod
+programu napisanego w skrypcie przekazywany jest do konsoli. Gotowość do
+pracy R sygnalizuje w konsoli znakiem zachęty \texttt{\textgreater{}}.
+Jeśli podczas wykonywania programu w konsoli pojawi się znak \texttt{+}
+to oznacza oczekiwanie na kompletny kod - brak domkniętego nawiasu,
+cudzysłowia, itp.:
+
+\begin{verbatim}
+> getwd(
++ 
+\end{verbatim}
+
+W powyższym przykładzie brakuje prawego nawiasu. Dodanie brakującego
+kodu spowoduje wykonanie przekazanego polecenia. Z kolei wciśnięcie
+klawisza ESC spowoduje przerwanie wykonywanie programu i powrót do znaku
+zachęty. Zawartość konsoli można wyczyścić stosując kombinację klawiszy
+CTRL + L.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Pliki }
+\end{itemize}
+
+Jeśli w pamięci znajdują się jakieś obiekty (zakładka Environment) to
+RStudio przy zamykaniu programu zapyta o zapisanie tych obiektów do
+pliku .RData. Jeżeli zdecydujemy się na tą propozycję to po ponownym
+uruchomieniu projektu obiekty znajdujące się w pliku .RData zostaną
+automatycznie wczytane do pamięci.
+
+Można także samodzielnie tworzyć pliki o rozszerzeniu .RData z
+wykorzystaniem funkcji \texttt{save()}:
+
+\begin{verbatim}
+save(obiekt1, obiekt2, obiekt3, file = "nazwa_pliku.RData")
+\end{verbatim}
+
+Wczytanie obiektów z takiego pliku do pamięci odbywa się z zastosowaniem
+funkcji \texttt{load()}:
+
+\begin{verbatim}
+load("nazwa_pliku.RData")
+\end{verbatim}
+
 \section{Pakiety}\label{pakiety}
 
 Podstawowe możliwości R są dosyć ograniczone. Rozszerzają je pakiety,
@@ -284,15 +355,6 @@ kategorii w \href{https://cran.r-project.org/web/views/}{CRAN Task
 Views} lub w wygodnej wyszukiwarce
 \href{https://www.r-pkg.org/}{METACRAN} i
 \href{https://rdrr.io/}{rdrr.io}.
-
-\section{Ważne informacje}\label{wazne-informacje}
-
-\textbf{R jest wrażliwy na wielkość liter.}
-
-\textbf{Separatorem części dziesiętnej liczby liczby jest kropka.}
-
-\textbf{W codziennej pracy RStudio jest wygodniejsze, jednak długotrwałe
-obliczenia lepiej uruchamiać w trybie wsadowym w zwykłym R.}
 
 \section{R jako kalkulator}\label{r-jako-kalkulator}
 
@@ -315,17 +377,18 @@ sqrt() & pierwiastkowanie\tabularnewline
 W R istnieje także stała wbudowana \texttt{pi} przechowująca wartość
 liczby pi.
 
-Funkcja \texttt{factorial(x)} zwraca silnię z podanej wartości x, a
-\texttt{sign(x)} sprawdza znak wyrażenia i zwraca odpowiednio wartość -1
-jeśli wyrażenie jest ujemne, 0 jeśli jest równe 0 i 1 dla wyrażeń
-dodatnich.
+Funkcja \texttt{factorial(x)} zwraca silnię (znak wykrzyknika !) z
+podanej wartości x, a \texttt{sign(x)} sprawdza znak wyrażenia i zwraca
+odpowiednio wartość -1 jeśli wyrażenie jest ujemne, 0 jeśli jest równe 0
+i 1 dla wyrażeń dodatnich.
 
 Funkcja \texttt{exp(x)} zwraca wartość wyrażenia \(e^x\), natomiast
 funkcja \texttt{log(x)} zwraca logarytm z podanej liczby. Domyślnie jest
 to logarytm naturalny, ale można zmienić podstawę podając wartość
 argumentu \texttt{base}.
 
-Funkcja \texttt{abs(x)} zwraca wartość absolutną wyrażenia.
+Funkcja \texttt{abs(x)} zwraca wartość bezwzględną (absolutną)
+wyrażenia.
 
 \textbf{Ćwiczenie}
 
@@ -665,7 +728,7 @@ podając odpowiednie wartości argumentów \texttt{min} i \texttt{max}.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.4613038 0.3760703 0.4049975 0.7187415 0.4607144 0.5527203
+## [1] 0.1682750 0.1150516 0.6388988 0.5143479 0.3864002 0.3169787
 \end{verbatim}
 
 Obserwacje można także generować z innych rozkładów:
@@ -695,7 +758,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.6768611 0.3017154 0.1658514 0.5314126 0.9758312
+## [1] 0.65230048 0.74790898 0.81707627 0.06448738 0.68133472
 \end{verbatim}
 
 \begin{Shaded}
@@ -705,7 +768,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.03936093 0.14406005 0.76353684 0.66516634 0.48137439
+## [1] 0.58448601 0.02847448 0.28051954 0.36799795 0.84602875
 \end{verbatim}
 
 Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:
@@ -1715,8 +1778,15 @@ Wyznaczenie macierzy \texttt{x} w równaniu \texttt{a*x=b}:
 
 \subsection{Zadanie}\label{zadanie}
 
-Estymator parametrów beta w metodzie najmniejszych kwadratów jest dany
-wzorem:
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Co powstanie po przemnożeniu macierzy przez jej macierz odwrotną?
+\item
+  Estymator parametrów beta w metodzie najmniejszych kwadratów jest dany
+  wzorem:
+\end{enumerate}
 
 \[b=(X'X)^{-1}X'y\]
 
@@ -2141,26 +2211,843 @@ Załaduj do pamięci zbiór o nazwie ChickWeight.
   Ile średnio ważyły kurczaki na diecie nr 1, a ile na diecie nr 2?
 \end{enumerate}
 
+\section{Rozwiązania do zadań}\label{rozwiazania-do-zadan}
+
+\subsection{Macierz}\label{macierz-1}
+
+\begin{verbatim}
+x1 <- c(2,4,1,6,9,3,2,9,10,7)
+x2 <- c(1.5,0.2,0.1,2,3.1,1.2,0.4,2.9,2.5,1.9)
+x0 <- rep(1,length(x1))
+y <- c(12,15,10,19,26,13,13,21,29,18)
+
+x <- cbind(x0, x1, x2)
+
+b <- solve(t(x)%*%x)%*%t(x)%*%y
+\end{verbatim}
+
 \chapter{Przetwarzanie danych}\label{przetwarzanie-danych}
 
 \section{Pakiet tidyverse}\label{pakiet-tidyverse}
 
+Pakiet \texttt{tidyverse} to zestaw pakietów do kompleksowego
+przetwarzania i wizualizacji danych. Ładuje następujące pakiety:
+
+\begin{itemize}
+\tightlist
+\item
+  ggplot2 - tworzenie wykresów,
+\item
+  dplyr - przetwarzanie danych,
+\item
+  tidyr - zmiana reprezentacji danych,
+\item
+  readr - wczytywanie danych tekstowych,
+\item
+  purrr - programowanie funkcyjne
+\item
+  tibble - sposób przechowywania danych,
+\item
+  stringr - przetwarzanie tekstów,
+\item
+  forcats - przetwarzanie faktorów
+\end{itemize}
+
+Manifest tidyverse ustala następujące zasady:
+
+\begin{itemize}
+\tightlist
+\item
+  powtórne użycie istniejących struktur danych,
+\item
+  tworzenie czytelnych kodów z operatorem pipe
+  \texttt{\%\textgreater{}\%} (ang. rura, przewód, łącznik).
+\end{itemize}
+
+Wobec tego załadujmy pakiet \texttt{tidyverse}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+W konsoli pojawi się informacja o wersji załadowanych pakietów oraz o
+konfliktach występujących pomiędzy pakietami. Konflikty te wynikają z
+takich samych nazw funkcji w różnych pakietach. Kolejność wczytywania
+pakietów ma znaczenie - kolejny pakiet przykryje funkcje z wcześniej
+wczytanego. Wywołanie przykrytej funkcji jest możliwe poprzez zapis
+\texttt{nazwa\_pakietu::nazwa\_funkcji}.
+
+Korzystanie z pakietu i zasad \texttt{tidyverse} to dużo bardziej
+czytelny kod w porównaniu do wbudowanych funkcji. Poniżej przedstawiony
+jest przykład przetwarzania danych polegający na filtrowaniu, wyborze
+kolumn oraz utworzeniu nowej zmiennej.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"ChickWeight"}\NormalTok{)}
+
+\CommentTok{# bez pakietu tidyverse}
+
+\NormalTok{chick_}\DecValTok{15}\NormalTok{ <-}\StringTok{ }\NormalTok{ChickWeight[ChickWeight}\OperatorTok{$}\NormalTok{Chick}\OperatorTok{==}\StringTok{"15"}\NormalTok{,]}
+\NormalTok{chick_}\DecValTok{15}\NormalTok{ <-}\StringTok{ }\NormalTok{chick_}\DecValTok{15}\NormalTok{[}\KeywordTok{c}\NormalTok{(}\StringTok{"weight"}\NormalTok{, }\StringTok{"Time"}\NormalTok{, }\StringTok{"Diet"}\NormalTok{),]}
+\NormalTok{chick_}\DecValTok{15}\OperatorTok{$}\NormalTok{weight_kg <-}\StringTok{ }\NormalTok{chick_}\DecValTok{15}\OperatorTok{$}\NormalTok{weight}\OperatorTok{/}\DecValTok{1000}
+
+\CommentTok{# z pakietem tidyverse}
+
+\NormalTok{chick_}\DecValTok{15}\NormalTok{ <-}\StringTok{ }\NormalTok{ChickWeight }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Chick}\OperatorTok{==}\StringTok{"15"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{Chick) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{weight_kg=}\NormalTok{weight}\OperatorTok{/}\DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Rozwiązanie z wykorzystaniem wbudowanych funkcji to 133 znaki, natomiast
+wykorzystanie \texttt{tidyverse} to 30\% oszczędność miejsca i tylko 92
+znaki.
+
 \section{Import danych}\label{import-danych}
 
-\section{Wybieranie kolumn}\label{wybieranie-kolumn}
+Wczytywanie danych do R jest możliwe z wielu różnych źródeł. Funkcje,
+które to umożliwiają zwykle mają nazwę rozpoczynającą się od
+\texttt{read}.
+
+Będziemy korzystać z następujących zbiorów danych:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{data/movies.csv}{movies} - plik tekstowy zawierający informacje
+  o filmach,
+\item
+  \href{data/bank.xlsx}{bank} - plik excel zawierający dane dot.
+  kampanii marketingowej banku, \href{data/bank_opis.pdf}{opis
+  zmiennych},
+\item
+  \href{data/rossmann.xlsx}{rossmann} - plik excel zawierający dane ze
+  sklepów Rossmann,
+\item
+  \href{http://www.mbnet.com.pl/dl.txt}{lotto} - plik tekstowy
+  zawierający dane z losowań Lotto.
+\end{itemize}
+
+\subsection{Pliki CSV}\label{pliki-csv}
+
+Do wczytywania plików csv można wykorzystać wbudowaną funkcję
+\texttt{read.csv()} lub tą pochodzącą z pakietu \texttt{readr} -
+\texttt{read\_csv()}. W obu przypadkach wynik wczytania będzie podobny.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{movies <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/movies.csv"}\NormalTok{)}
+
+\NormalTok{movies2 <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/movies.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   title = col_character(),
+##   genre = col_character(),
+##   director = col_character(),
+##   year = col_integer(),
+##   duration = col_integer(),
+##   gross = col_integer(),
+##   budget = col_integer(),
+##   cast_facebook_likes = col_integer(),
+##   votes = col_integer(),
+##   reviews = col_integer(),
+##   rating = col_double()
+## )
+\end{verbatim}
+
+Jeśli nas plik ma nietypową strukturę to w funkcji \texttt{read.csv()}
+możemy określić dodatkowe argumenty informując o nazwach kolumn obecnych
+w pliku (\texttt{header\ =}), separatorze kolumn (\texttt{sep\ =}) lub
+separatorze miejsc dziesiętnych (\texttt{dec\ =})
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{movies <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data/movies.csv"}\NormalTok{, }\DataTypeTok{header =}\NormalTok{ T, }\DataTypeTok{sep=}\StringTok{","}\NormalTok{, }\DataTypeTok{dec=}\StringTok{"."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Pliki excel}\label{pliki-excel}
+
+Do wczytywania plików z Excela niezbędny jest dodatkowy pakiet
+\texttt{readxl}. W funkcji \texttt{read\_xlsx()} podajemy jako argument
+nazwę pliku. Możemy także dodać nazwę lub numer arkusza w argumencie
+(\texttt{sheet\ =}) oraz zakres komórek jako wartość argumentu
+\texttt{range\ =}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readxl)}
+
+\NormalTok{bank <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/bank.xlsx"}\NormalTok{)}
+
+\CommentTok{# bank <- read_xlsx("data/bank.xlsx", sheet = "dane")}
+\CommentTok{# bank <- read_xlsx("data/bank.xlsx", sheet = 1)}
+
+\NormalTok{bank_a1i30 <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/bank.xlsx"}\NormalTok{, }\DataTypeTok{range =} \StringTok{"A1:I30"}\NormalTok{)}
+
+\NormalTok{rossmann <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/rossmann.xlsx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Pliki tekstowe}\label{pliki-tekstowe}
+
+Z kolei do wczytywania plików tekstowych wykorzystuje się funkcję
+\texttt{read.table()}. Wczytywany plik nie musi być zlokalizowany na
+dysku twardym - może to być link internetowy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lotto <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"http://www.mbnet.com.pl/dl.txt"}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(lotto) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"lp"}\NormalTok{, }\StringTok{"data"}\NormalTok{, }\StringTok{"numery"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Filtrowanie}\label{filtrowanie}
 
-\section{Dodawanie nowych zmiennych}\label{dodawanie-nowych-zmiennych}
+Do przetwarzania danych służą funkcje z pakietu \texttt{dplyr}.
+Większość z nich jako pierwszy argument przyjmuje przetwarzany zbiór
+danych, ale można tego uniknąć wykorzystując symbole
+\texttt{\%\textgreater{}\%}.
+
+Filtrowanie polega na wybraniu obserwacji, które spełniają określony
+warunek lub warunki. Ze zbioru \texttt{movies} wybierzmy wszystkie
+komedie:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(movies, genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+lub alternatywnie:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Po zmiennej, która jest filtrowana musimy podać operator porównania
+czyli podwójny znak równości \texttt{==}. Jeśli chcemy filtrować po
+większej liczbie zmiennych to kolejne warunki dodajemy po przecinku:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie_}\DecValTok{2012}\NormalTok{ <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{, year}\OperatorTok{==}\DecValTok{2012}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Wówczas oba warunki muszą zostać spełnione czyli pomiędzy nimi zachodzi
+relacja \texttt{i}. Równoważny zapis jest następujący:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie_}\DecValTok{2012}\NormalTok{ <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"} \OperatorTok{&}\StringTok{ }\NormalTok{year}\OperatorTok{==}\DecValTok{2012}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Pomiędzy warunkami może także zachodzić relacja \texttt{lub}. Wybieramy
+filmy, które są komediami \textbf{lub} miały swoją premierę w 2012 roku.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie_l_}\DecValTok{2012}\NormalTok{ <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"} \OperatorTok{|}\StringTok{ }\NormalTok{year}\OperatorTok{==}\DecValTok{2012}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Możliwy jest także wybór wielu kryteriów filtrowania poprzez operator
+\texttt{\%in\%}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie_familijne <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Comedy"}\NormalTok{, }\StringTok{"Family"}\NormalTok{))}
+
+\NormalTok{movies_2000_}\DecValTok{2010}\NormalTok{ <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{%in%}\StringTok{ }\DecValTok{2000}\OperatorTok{:}\DecValTok{2010}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Wybieranie kolumn}\label{wybieranie-kolumn}
+
+Do wyboru kolumn służy funkcja \texttt{select()}. Zmodyfikujemy
+wcześniej utworzony zbiór \texttt{komedie}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(title, year, duration, budget, rating)}
+\end{Highlighting}
+\end{Shaded}
+
+Ten sam kod możemy zapisać zagnieżdżając funkcje, ale traci on w ten
+sposób na czytelności:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\KeywordTok{select}\NormalTok{(}\KeywordTok{filter}\NormalTok{(movies, genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{), title, year, duration, budget, rating)}
+\end{Highlighting}
+\end{Shaded}
+
+Możemy także wskazać, które zmienne nie mają znaleźć się w zbiorze
+wynikowym:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{genre)}
+\end{Highlighting}
+\end{Shaded}
+
+Natomiast jeśli zmiennych jest więcej to musimy jest umieścić w
+wektorze, żeby nie pisać przed każdą zmienną znaku minus:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{genre, }\OperatorTok{-}\NormalTok{director, }\OperatorTok{-}\NormalTok{gross, }\OperatorTok{-}\NormalTok{budget)}
+
+
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(genre, director, gross, budget))}
+\end{Highlighting}
+\end{Shaded}
+
+Z wykorzystaniem znaku dwukropka możemy także wskazywać zakresy
+zmiennych:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{genre, }\OperatorTok{-}\KeywordTok{c}\NormalTok{(gross}\OperatorTok{:}\NormalTok{reviews))}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Tworzenie nowych zmiennych}\label{tworzenie-nowych-zmiennych}
+
+Do utworzenia nowej zmiennej wykorzystuje się funkcję \texttt{mutate()}.
+Utwórzmy w naszym zbiorze nową zmienną, która będzie zawierała czas
+trwania filmu w godzinach:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{genre, }\OperatorTok{-}\KeywordTok{c}\NormalTok{(gross}\OperatorTok{:}\NormalTok{reviews)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dur_hour =}\NormalTok{ duration}\OperatorTok{/}\DecValTok{60}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Rozsądnie będzie zaokrąglić otrzymaną wartość do jednego miejsca po
+przecinku - służy do tego funkcja \texttt{round()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{genre, }\OperatorTok{-}\KeywordTok{c}\NormalTok{(gross}\OperatorTok{:}\NormalTok{reviews)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dur_hour =} \KeywordTok{round}\NormalTok{(duration}\OperatorTok{/}\DecValTok{60}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Z kolei funkcja \texttt{transmute()} tworzy zbiór w którym jest tylko
+nowo utworzona kolumna:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{komedie_t <-}\StringTok{ }\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre}\OperatorTok{==}\StringTok{"Comedy"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{genre, }\OperatorTok{-}\KeywordTok{c}\NormalTok{(gross}\OperatorTok{:}\NormalTok{reviews)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{transmute}\NormalTok{(}\DataTypeTok{dur_hour =} \KeywordTok{round}\NormalTok{(duration}\OperatorTok{/}\DecValTok{60}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Zmiana nazwy zmiennej}\label{zmiana-nazwy-zmiennej}
+
+Do zmiany nazw zmiennych służy funkcja \texttt{rename()}. Najpierw
+podajemy nazwę nowej zmiennej, a po znaku równości starą nazwę:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank <-}\StringTok{ }\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{karta=}\NormalTok{kredyt)}
+\end{Highlighting}
+\end{Shaded}
+
+Zmiany nazwy można także dokonać z wykorzystaniem funkcji
+\texttt{select}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank_nowy <-}\StringTok{ }\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\DataTypeTok{lokata=}\NormalTok{wynik)}
+\end{Highlighting}
+\end{Shaded}
+
+W takim przypadku trzeba jednak pamiętać o wypisaniu wszystkich
+zmiennych, które mają się znaleźć w zbiorze wynikowym.
+
+\section{Podsumowanie danych}\label{podsumowanie-danych}
+
+Funkcja \texttt{summarise()} służy do podsumowań danych w formie
+zagregowanej:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{saldo_srednia=}\KeywordTok{mean}\NormalTok{(saldo),}
+            \DataTypeTok{saldo_mediana=}\KeywordTok{median}\NormalTok{(saldo))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   saldo_srednia saldo_mediana
+##           <dbl>         <dbl>
+## 1      1362.272           448
+\end{verbatim}
+
+Podsumowanie danych ma najwięcej sensu w połączniu z funkcją grupującą.
 
 \section{Grupowanie}\label{grupowanie}
 
-\section{Podsumowanie}\label{podsumowanie}
+Do grupowania obserwacji służy funkcja \texttt{group\_by()}. Zobaczmy
+jak wyglądają statystyki salda w poszczególnych grupach wykształcenia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(wykszt) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{saldo_srednia=}\KeywordTok{mean}\NormalTok{(saldo),}
+            \DataTypeTok{saldo_mediana=}\KeywordTok{median}\NormalTok{(saldo))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##       wykszt saldo_srednia saldo_mediana
+##        <chr>         <dbl>         <dbl>
+## 1 podstawowe      1250.950           403
+## 2    srednie      1154.881           392
+## 3     wyzsze      1758.416           577
+## 4       <NA>      1526.754           568
+\end{verbatim}
+
+Po przecinku w funkcji \texttt{group\_by()} można wskazać kolejne
+zmienne grupujące:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(wykszt, hipoteka) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{saldo_srednia=}\KeywordTok{mean}\NormalTok{(saldo),}
+            \DataTypeTok{saldo_mediana=}\KeywordTok{median}\NormalTok{(saldo))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 8 x 4
+## # Groups:   wykszt [?]
+##       wykszt hipoteka saldo_srednia saldo_mediana
+##        <chr>    <chr>         <dbl>         <dbl>
+## 1 podstawowe      nie      1571.420         521.0
+## 2 podstawowe      tak      1007.594         343.5
+## 3    srednie      nie      1340.130         416.5
+## 4    srednie      tak      1033.950         380.0
+## 5     wyzsze      nie      1919.123         618.0
+## 6     wyzsze      tak      1583.978         543.0
+## 7       <NA>      nie      1779.766         679.0
+## 8       <NA>      tak      1206.788         442.0
+\end{verbatim}
+
+Przydatna jest także funkcja \texttt{n()}, która nie przyjmuje żadnego
+argumentu i zwraca liczebność zbioru bądź grupy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(wykszt) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{liczebnosc=}\KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{saldo_srednia=}\KeywordTok{mean}\NormalTok{(saldo),}
+            \DataTypeTok{saldo_mediana=}\KeywordTok{median}\NormalTok{(saldo))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 4
+##       wykszt liczebnosc saldo_srednia saldo_mediana
+##        <chr>      <int>         <dbl>         <dbl>
+## 1 podstawowe       6851      1250.950           403
+## 2    srednie      23202      1154.881           392
+## 3     wyzsze      13301      1758.416           577
+## 4       <NA>       1857      1526.754           568
+\end{verbatim}
+
+Jeżeli chcemy tylko wyznaczyć liczebności grup to możemy skorzystać z
+funkcji \texttt{count()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(wykszt) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 2
+## # Groups:   wykszt [4]
+##       wykszt     n
+##        <chr> <int>
+## 1 podstawowe  6851
+## 2    srednie 23202
+## 3     wyzsze 13301
+## 4       <NA>  1857
+\end{verbatim}
+
+Jedną z kategorii zmiennej wykształcenie jest brak danych (\texttt{NA}).
+Zamienimy tą wartość na kategorię \emph{nieustalone} z wykorzystaniem
+funkcji \texttt{mutate()} oraz \texttt{if\_else()}. Funkcja
+\texttt{if\_else()} przyjmuje trzy argumenty - pierwszy
+(\texttt{condition\ =}) to warunek, który jest weryfikowany, następnie
+podajemy wartość, która ma być wprowadzona w przypadku spełnienia
+warunku (\texttt{true\ =}), a na końcu wartość dla niespełnionego
+warunku (\texttt{false\ =}). Jest to odpowiednik funkcji \texttt{JEŻELI}
+z Excela.
+
+W omawianym przykładzie warunkiem jest sprawdzenie czy wartości zmiennej
+\texttt{wykszt} są równe \texttt{NA}. Jeśli tak to na ich miejsce
+wprowadzany jest tekst \emph{nieustalone}, a w przeciwnym przypadku
+pozostaje oryginalna wartość.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{wykszt=}\KeywordTok{if_else}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(wykszt), }\StringTok{"nieustalone"}\NormalTok{, wykszt)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(wykszt) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 2
+## # Groups:   wykszt [4]
+##        wykszt     n
+##         <chr> <int>
+## 1 nieustalone  1857
+## 2  podstawowe  6851
+## 3     srednie 23202
+## 4      wyzsze 13301
+\end{verbatim}
+
+\section{Sortowanie}\label{sortowanie}
+
+Sortowanie jest możliwe z wykorzystaniem funkcji \texttt{arrange()}.
+Jako argument podajemy zmienną według, której chcemy posortować zbiór.
+Domyślne zbiór sortowany jest rosnąco - od wartości najmniejszych do
+największych:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank_sort <-}\StringTok{ }\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(saldo)}
+\end{Highlighting}
+\end{Shaded}
+
+Zmiana kierunku sortowania jest możliwa po zastosowaniu funkcji
+\texttt{desc()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank_sort <-}\StringTok{ }\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(saldo))}
+\end{Highlighting}
+\end{Shaded}
+
+Sortowanie możemy także zastosować do wyników podsumowania danych:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(wykszt) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{liczebnosc=}\KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{saldo_srednia=}\KeywordTok{mean}\NormalTok{(saldo),}
+            \DataTypeTok{saldo_mediana=}\KeywordTok{median}\NormalTok{(saldo)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(saldo_srednia)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 4
+##       wykszt liczebnosc saldo_srednia saldo_mediana
+##        <chr>      <int>         <dbl>         <dbl>
+## 1    srednie      23202      1154.881           392
+## 2 podstawowe       6851      1250.950           403
+## 3       <NA>       1857      1526.754           568
+## 4     wyzsze      13301      1758.416           577
+\end{verbatim}
 
 \section{Łączenie zbiorów}\label{aczenie-zbiorow}
 
-\section{Wąska i szeroka reprezentacja
-danych}\label{waska-i-szeroka-reprezentacja-danych}
+W celu zaprezentowania funkcji łączących dane przygotujemy kilka zbiorów
+pomocniczych:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{praca_czas <-}\StringTok{ }\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(praca) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sr_czas=}\KeywordTok{mean}\NormalTok{(czas))}
+
+\NormalTok{praca_saldo <-}\StringTok{ }\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(praca) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sr_saldo=}\KeywordTok{mean}\NormalTok{(saldo))}
+
+\NormalTok{zawod_saldo <-}\StringTok{ }\NormalTok{bank }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{zawod=}\NormalTok{praca) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(zawod) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sr_saldo=}\KeywordTok{mean}\NormalTok{(saldo))}
+\end{Highlighting}
+\end{Shaded}
+
+Do łączenia dwóch zbiorów danych służy funkcja \texttt{inner\_join()},
+która jako argumenty przyjmuje nazwy zbiorów danych oraz klucz łączenia.
+Jeśli w obu zbiorach występują kolumny o takich samych nazwach to
+zostaną potraktowane jako klucz łączenia:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{praca_czas_saldo <-}\StringTok{ }\KeywordTok{inner_join}\NormalTok{(praca_czas, praca_saldo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = "praca"
+\end{verbatim}
+
+Jeśli takie kolumny nie będą istniały to wywołanie funkcji zwróci błąd:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{praca_czas_saldo <-}\StringTok{ }\KeywordTok{inner_join}\NormalTok{(praca_czas, zawod_saldo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error: `by` required, because the data sources have no common variables
+\end{verbatim}
+
+W takich przypadku należy wskazać klucz połączenia w postaci
+\texttt{by\ =\ c("id1"="id2")}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{praca_czas_saldo <-}\StringTok{ }\KeywordTok{inner_join}\NormalTok{(praca_czas, zawod_saldo, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"praca"}\NormalTok{=}\StringTok{"zawod"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Jeśli w jednym ze zbiorów nie ma wszystkich identyfikatorów, które
+znajdują się w drugim zbiorze to zastosowanie funkcji
+\texttt{inner\_join()} będzie skutkowało zbiorem, w którym znajdą się
+tylko te obserwacje, które udało się połączyć.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{praca_saldo_}\DecValTok{1500}\NormalTok{ <-}\StringTok{ }\NormalTok{praca_saldo }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(sr_saldo }\OperatorTok{>}\StringTok{ }\DecValTok{1500}\NormalTok{)}
+
+\KeywordTok{inner_join}\NormalTok{(praca_czas, praca_saldo_}\DecValTok{1500}\NormalTok{, }\DataTypeTok{by=}\StringTok{"praca"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   praca  sr_czas sr_saldo
+##   <dbl>    <dbl>    <dbl>
+## 1     2 288.5434 1521.746
+## 2     3 253.9958 1763.617
+## 3     5 256.3093 1521.470
+## 4     7 268.1571 1647.971
+## 5     8 287.3613 1984.215
+## 6    NA 237.6111 1772.358
+\end{verbatim}
+
+Jeśli chcemy pozostawić niedopasowane obserwacje to należy wykorzystać
+jedną z funkcji - \texttt{left\_join()} lub \texttt{right\_join()} w
+zależności od tego dla którego zbioru chcemy pozostawić wszystkie
+informacje.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{left_join}\NormalTok{(praca_czas, praca_saldo_}\DecValTok{1500}\NormalTok{, }\DataTypeTok{by=}\StringTok{"praca"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 11 x 3
+##    praca  sr_czas sr_saldo
+##    <dbl>    <dbl>    <dbl>
+##  1     1 246.8967       NA
+##  2     2 288.5434 1521.746
+##  3     3 253.9958 1763.617
+##  4     4 245.8250       NA
+##  5     5 256.3093 1521.470
+##  6     6 262.9016       NA
+##  7     7 268.1571 1647.971
+##  8     8 287.3613 1984.215
+##  9     9 252.9050       NA
+## 10    10 256.9863       NA
+## 11    NA 237.6111 1772.358
+\end{verbatim}
+
+\section{Szeroka i wąska reprezentacja
+danych}\label{szeroka-i-waska-reprezentacja-danych}
+
+Do wyjaśnienia kwestii szerokiej i wąskiej reprezentacji danych
+posłużymy się danymi z GUS dotyczącymi przeciętnego miesięcznego
+spożycie wybranych artykułów żywnościowych na 1 osobę w 2016 roku -
+\href{data/spozycie.xlsx}{plik}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{spozycie <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/spozycie.xlsx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Taka tabela jest przykładem szerokiej reprezentacji danych. Z kolei w
+niektórych sytuacjach wygodnie jest korzystać z wąskiej reprezentacji
+danych, a niektóre pakiety wręcz wymagają takich zbiorów wejściowych.
+
+Do transformacji danych z reprezentacji szerokiej na wąską służy funkcja
+\texttt{gather()} (pol. \emph{gromadzić}). Kluczowe są w niej dwa
+argumenty - pierwszy (\texttt{key}) określa nazwę nowej kolumny, która
+będzie zawierała nazwy zmiennych, a drugi (\texttt{value}) określa nazwę
+nowej kolumny, która będzie zawierała wartości zmiennych. Jako kolejne
+argumenty podaje się nazwy kolumn, które mają być transformowane lub
+nazwy kolumn ze znakiem minus \texttt{-}, które nie mają być
+transformowane.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{spozycie_waskie <-}\StringTok{ }\NormalTok{spozycie }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{gather}\NormalTok{(artykul, spozycie, mieso, owoce, warzywa)}
+
+\CommentTok{# spozycie_waskie <- spozycie %>%}
+\CommentTok{#   gather(artykul, spozycie, -kod, -nazwa)}
+\end{Highlighting}
+\end{Shaded}
+
+W takiej formie łatwiej podsumować dane:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{spozycie_waskie }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(artykul) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sr_spozycie=}\KeywordTok{mean}\NormalTok{(spozycie))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   artykul sr_spozycie
+##     <chr>       <dbl>
+## 1   mieso    5.468750
+## 2   owoce    3.651875
+## 3 warzywa    8.852500
+\end{verbatim}
+
+W porównaniu do szerokiej reprezentacji danych:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{spozycie }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sr_spozycie_mieso=}\KeywordTok{mean}\NormalTok{(mieso),}
+            \DataTypeTok{sr_spozycie_owoce=}\KeywordTok{mean}\NormalTok{(owoce),}
+            \DataTypeTok{sr_spozycie_warzywa=}\KeywordTok{mean}\NormalTok{(warzywa))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   sr_spozycie_mieso sr_spozycie_owoce sr_spozycie_warzywa
+##               <dbl>             <dbl>               <dbl>
+## 1           5.46875          3.651875              8.8525
+\end{verbatim}
+
+Transformacja z wąskiej do szerokiej reprezentacji danych jest możliwa z
+zastosowaniem funkcji \texttt{spread()} (pol. \emph{rozprzestrzeniać}).
+W przypadku tej funkcji niezbędne są dwa argumenty - pierwszy
+(\texttt{key}) wskazuje kolumnę zawierającą nazwy dla nowych zmiennych,
+a drugi argument (\texttt{value}) wskazuje kolumnę zawierającą wartości
+dla nowych zmiennych.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{spozycie_szerokie <-}\StringTok{ }\NormalTok{spozycie_waskie }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{spread}\NormalTok{(artykul, spozycie)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Eksport danych}\label{eksport-danych}
+
+Zapis zbioru danych do zewnętrznego pliku jest możliwy z wykorzystaniem
+funkcji \texttt{write.table()}. Jako argumenty tej funkcji określamy:
+zbiór danych (\texttt{x}), docelowe miejsce na dysku i nazwę pliku
+(\texttt{file}), separator kolumn (\texttt{sep}), separator miejsc
+dziesiętnych (\texttt{dec}) oraz argument \texttt{row.names\ =\ FALSE},
+dzięki któremu unikniemy dodatkowych numerów wierszy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{write.table}\NormalTok{(spozycie_waskie, }\DataTypeTok{file =} \StringTok{"data/spozycie_w.csv"}\NormalTok{, }\DataTypeTok{sep=}\StringTok{";"}\NormalTok{, }\DataTypeTok{dec=}\StringTok{","}\NormalTok{, }\DataTypeTok{row.names=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+Taki plik jest plikiem csv, który możemy otworzyć w Excelu i zapisać go
+z rozszerzeniem .xlsx. Teoretycznie istnieje pakiet \texttt{xlsx}, który
+umożliwia zapisywanie zbiorów od razu do Excela, ale działa w oparciu o
+Javę, co bywa problematyczne.
+
+\section{Zadania}\label{zadania-2}
+
+Na podstawie zbioru rossmann odpowiedź na pytania:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ile było sklepów o asortymencie rozszerzonym w dniu 25-02-2014?
+\item
+  W jaki dzień tygodnia średnia liczba klientów była największa w
+  sklepie nr 101?
+\item
+  Sklep jakiego typu charakteryzuje się największą medianą sprzedaży?
+\item
+  Czy w ciągu roku odległość do najbliższego sklepu konkurencji zmieniła
+  się dla jakiegokolwiek sklepu Rossmann?
+\end{enumerate}
+
+\chapter{Wizualizacja danych}\label{wizualizacja-danych}
+
+\section{Wbudowane funkcje}\label{wbudowane-funkcje}
+
+\section{Pakiet ggplot2}\label{pakiet-ggplot2}
 
 \chapter{Programowanie w R}\label{programowanie-w-r}
 
@@ -2169,12 +3056,6 @@ danych}\label{waska-i-szeroka-reprezentacja-danych}
 \section{Pętle}\label{petle}
 
 \section{Instrukcje warunkowe}\label{instrukcje-warunkowe}
-
-\chapter{Wizualizacja danych}\label{wizualizacja-danych}
-
-\section{Wbudowane funkcje}\label{wbudowane-funkcje}
-
-\section{Pakiet ggplot2}\label{pakiet-ggplot2}
 
 
 \end{document}
