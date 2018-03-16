@@ -728,7 +728,7 @@ podając odpowiednie wartości argumentów \texttt{min} i \texttt{max}.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1682750 0.1150516 0.6388988 0.5143479 0.3864002 0.3169787
+## [1] 0.6666209 0.2487541 0.0660811 0.3471552 0.2560654 0.2310322
 \end{verbatim}
 
 Obserwacje można także generować z innych rozkładów:
@@ -758,7 +758,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.65230048 0.74790898 0.81707627 0.06448738 0.68133472
+## [1] 0.2922356 0.4974030 0.1838886 0.8267032 0.7709177
 \end{verbatim}
 
 \begin{Shaded}
@@ -768,7 +768,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.58448601 0.02847448 0.28051954 0.36799795 0.84602875
+## [1] 0.4185505 0.7628634 0.2373476 0.4794877 0.5926578
 \end{verbatim}
 
 Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:
@@ -1098,8 +1098,8 @@ Działa także na wektorach tekstowych:
 
 \subsection{Sprawdzanie typu wektora}\label{sprawdzanie-typu-wektora}
 
-Do określenia typu wektora służy funkcja \texttt{typeof} lub
-\texttt{mode}.
+Do określenia typu wektora służy funkcja \texttt{typeof}, \texttt{class}
+lub \texttt{mode}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1224,6 +1224,14 @@ I wybranych elementów:
 ## [1] 10 12 14
 \end{verbatim}
 
+W ten sposób można także modyfikować odpowiednie elementy wektora:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wart_10_}\DecValTok{20}\NormalTok{[}\DecValTok{7}\NormalTok{] <-}\StringTok{ }\DecValTok{90}
+\end{Highlighting}
+\end{Shaded}
+
 Wybór obserwacji większych od 15:
 
 \begin{Shaded}
@@ -1233,7 +1241,7 @@ Wybór obserwacji większych od 15:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 16 17 18 19 20
+## [1] 90 17 18 19 20
 \end{verbatim}
 
 Z kolei następujący zapis zwróci nam wektor wartości logicznych:
@@ -1362,7 +1370,8 @@ zwracają.
   Ile wynosi suma elementów większych od 10 dla następujących liczb:
   \texttt{12,\ 5,\ 20,\ 18,\ 8.5,\ 10,\ 4,\ 101,\ -2}?
 \item
-  Utwórz następujący wektor:
+  Z wykorzystaniem funkcji \texttt{seq} i na podstawie wektora \ldots{}
+  dokonaj przekształcenia tworząc następujący wektor:
   \texttt{2\ 0\ 0\ 4\ 0\ 0\ 6\ 0\ 0\ 8\ 0\ 0}.
 \item
   Dane są dwa wektory - a: \texttt{2,\ 3,\ 7,\ 8,\ 2}, b:
@@ -1795,6 +1804,31 @@ zmienna \(x_2\) \texttt{1.5,0.2,0.1,2,3.1,1.2,0.4,2.9,2.5,1.9}, a
 zmienna \(x_0\) to wektor jedynek. Te trzy zmienne tworzą macierz \(X\).
 Z kolei wartości zmiennej \(y\) są następujące
 \texttt{12,15,10,19,26,13,13,21,29,18}. Wyznacz wartość \(b\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zad1 <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DataTypeTok{nrow=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{solve}\NormalTok{(zad1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]   -2  1.5
+## [2,]    1 -0.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zad1 }\OperatorTok{%*%}\StringTok{ }\KeywordTok{solve}\NormalTok{(zad1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    1    0
+## [2,]    0    1
+\end{verbatim}
 
 \section{Czynnik}\label{czynnik}
 
@@ -3043,11 +3077,76 @@ Na podstawie zbioru rossmann odpowiedź na pytania:
   się dla jakiegokolwiek sklepu Rossmann?
 \end{enumerate}
 
+\section{Case study}\label{case-study}
+
+Rozważmy sklepy Rossmann, które w 2014 roku były otwarte powyżej 300 dni
+w roku. Czy średnia sprzedaż wyrażona w zł w sklepach Rossmann różni się
+statystycznie pomiędzy grupami zdefiniowanymi przez asortyment sklepu?
+Dane na temat średniego kursu miesięcznego euro pobierz ze stron
+\href{http://www.nbp.pl/home.aspx?f=/kursy/arch_a.html}{NBP}.
+
 \chapter{Wizualizacja danych}\label{wizualizacja-danych}
 
 \section{Wbudowane funkcje}\label{wbudowane-funkcje}
 
 \section{Pakiet ggplot2}\label{pakiet-ggplot2}
+
+\subsection{Analiza rozkładu}\label{analiza-rozkadu}
+
+Będziemy działać na zbiorze dotyczącym klientów banku
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(readxl)}
+
+\NormalTok{movies <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/movies.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   title = col_character(),
+##   genre = col_character(),
+##   director = col_character(),
+##   year = col_integer(),
+##   duration = col_integer(),
+##   gross = col_integer(),
+##   budget = col_integer(),
+##   cast_facebook_likes = col_integer(),
+##   votes = col_integer(),
+##   reviews = col_integer(),
+##   rating = col_double()
+## )
+\end{verbatim}
+
+Pierwszym sposobem analizy rozkładu jest wykres pudełkowy
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Action"}\NormalTok{, }\StringTok{"Comedy"}\NormalTok{, }\StringTok{"Crime"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{duration, }\DataTypeTok{x=}\NormalTok{genre)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-132-1.pdf}
+
+Te same dane można przedstawić także na histogramie.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{movies }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(genre }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Action"}\NormalTok{, }\StringTok{"Comedy"}\NormalTok{, }\StringTok{"Crime"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{duration)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\DecValTok{15}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{genre)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-133-1.pdf}
 
 \chapter{Programowanie w R}\label{programowanie-w-r}
 

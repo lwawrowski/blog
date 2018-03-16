@@ -157,10 +157,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.11" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#szeroka-i-waska-reprezentacja-danych"><i class="fa fa-check"></i><b>3.11</b> Szeroka i wąska reprezentacja danych</a></li>
 <li class="chapter" data-level="3.12" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#eksport-danych"><i class="fa fa-check"></i><b>3.12</b> Eksport danych</a></li>
 <li class="chapter" data-level="3.13" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#zadania-2"><i class="fa fa-check"></i><b>3.13</b> Zadania</a></li>
+<li class="chapter" data-level="3.14" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#case-study"><i class="fa fa-check"></i><b>3.14</b> Case study</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a><ul>
 <li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wbudowane-funkcje"><i class="fa fa-check"></i><b>4.1</b> Wbudowane funkcje</a></li>
-<li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a></li>
+<li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#analiza-rozkadu"><i class="fa fa-check"></i><b>4.2.1</b> Analiza rozkładu</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.1</b> Funkcje</a></li>
@@ -194,7 +197,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="pakiet-ggplot2" class="section level2">
 <h2><span class="header-section-number">4.2</span> Pakiet ggplot2</h2>
+<div id="analiza-rozkadu" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Analiza rozkładu</h3>
+<p>Będziemy działać na zbiorze dotyczącym klientów banku</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(readxl)
 
+movies &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/movies.csv&quot;</span>)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   title = col_character(),
+##   genre = col_character(),
+##   director = col_character(),
+##   year = col_integer(),
+##   duration = col_integer(),
+##   gross = col_integer(),
+##   budget = col_integer(),
+##   cast_facebook_likes = col_integer(),
+##   votes = col_integer(),
+##   reviews = col_integer(),
+##   rating = col_double()
+## )</code></pre>
+<p>Pierwszym sposobem analizy rozkładu jest wykres pudełkowy</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(genre <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Action&quot;</span>, <span class="st">&quot;Comedy&quot;</span>, <span class="st">&quot;Crime&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">y=</span>duration, <span class="dt">x=</span>genre)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<p>Te same dane można przedstawić także na histogramie.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(genre <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Action&quot;</span>, <span class="st">&quot;Comedy&quot;</span>, <span class="st">&quot;Crime&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>duration)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span><span class="dv">15</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>genre)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+
+</div>
 </div>
 </div>
             </section>

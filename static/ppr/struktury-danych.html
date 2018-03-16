@@ -157,10 +157,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.11" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#szeroka-i-waska-reprezentacja-danych"><i class="fa fa-check"></i><b>3.11</b> Szeroka i wąska reprezentacja danych</a></li>
 <li class="chapter" data-level="3.12" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#eksport-danych"><i class="fa fa-check"></i><b>3.12</b> Eksport danych</a></li>
 <li class="chapter" data-level="3.13" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#zadania-2"><i class="fa fa-check"></i><b>3.13</b> Zadania</a></li>
+<li class="chapter" data-level="3.14" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#case-study"><i class="fa fa-check"></i><b>3.14</b> Case study</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a><ul>
 <li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wbudowane-funkcje"><i class="fa fa-check"></i><b>4.1</b> Wbudowane funkcje</a></li>
-<li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a></li>
+<li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#analiza-rozkadu"><i class="fa fa-check"></i><b>4.2.1</b> Analiza rozkładu</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.1</b> Funkcje</a></li>
@@ -271,7 +274,7 @@ obiekt -&gt; nazwa</code></pre>
 <pre><code>##  [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0</code></pre>
 <p>Do generowania liczb pseudolosowych służy funkcja <code>runif(n)</code>, która do poprawnego wywołania wymaga tylko jednego argumentu - długości wektora wynikowego. Domyślnie losowane są liczby z przedziału <span class="math inline">\([0;1]\)</span> (tak jak w funkcji <code>los()</code> w Excelu), można to jednak zmienić podając odpowiednie wartości argumentów <code>min</code> i <code>max</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">6</span>)</code></pre></div>
-<pre><code>## [1] 0.28738554 0.94988936 0.46857843 0.03828397 0.67228242 0.21078062</code></pre>
+<pre><code>## [1] 0.3921472 0.9717615 0.8471818 0.4151876 0.2692543 0.9570107</code></pre>
 <p>Obserwacje można także generować z innych rozkładów:</p>
 <ul>
 <li><code>rnorm</code> - rozkład normalny,</li>
@@ -282,9 +285,9 @@ obiekt -&gt; nazwa</code></pre>
 <p>Wykaz wszystkich dostępnych w R rozkładów uzyskamy wywołując polecenie <code>help(&quot;Distributions&quot;)</code>.</p>
 <p>Za każdym uruchomieniem jednej z wymienionych wyżej funkcji losujących wartości z danego rozkładu otrzymamy inne wartości:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.8331356 0.3618976 0.8440931 0.8724973 0.6350009</code></pre>
+<pre><code>## [1] 0.4543617 0.3861227 0.3220917 0.2173235 0.2724653</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.8694437 0.1605250 0.9577889 0.4724981 0.7465480</code></pre>
+<pre><code>## [1] 0.6775166 0.2141432 0.3503078 0.4700173 0.2237999</code></pre>
 <p>Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
 <span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
@@ -439,7 +442,7 @@ obiekt -&gt; nazwa</code></pre>
 </div>
 <div id="sprawdzanie-typu-wektora" class="section level3">
 <h3><span class="header-section-number">2.1.7</span> Sprawdzanie typu wektora</h3>
-<p>Do określenia typu wektora służy funkcja <code>typeof</code> lub <code>mode</code>.</p>
+<p>Do określenia typu wektora służy funkcja <code>typeof</code>, <code>class</code> lub <code>mode</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(wart_log)</code></pre></div>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
 <p>Sprawdzenie czy obiekt jest danego typu odbywa się z wykorzystaniem dedykowanych funkcji z przyrostkiem <code>is.</code></p>
@@ -473,9 +476,11 @@ wart_10_<span class="dv">20</span></code></pre></div>
 <p>I wybranych elementów:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</code></pre></div>
 <pre><code>## [1] 10 12 14</code></pre>
+<p>W ten sposób można także modyfikować odpowiednie elementy wektora:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[<span class="dv">7</span>] &lt;-<span class="st"> </span><span class="dv">90</span></code></pre></div>
 <p>Wybór obserwacji większych od 15:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[wart_10_<span class="dv">20</span><span class="op">&gt;</span><span class="dv">15</span>]</code></pre></div>
-<pre><code>## [1] 16 17 18 19 20</code></pre>
+<pre><code>## [1] 90 17 18 19 20</code></pre>
 <p>Z kolei następujący zapis zwróci nam wektor wartości logicznych:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span></code></pre></div>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
@@ -510,7 +515,7 @@ v_null</code></pre></div>
 <h3><span class="header-section-number">2.1.11</span> Zadania</h3>
 <ol style="list-style-type: decimal">
 <li>Ile wynosi suma elementów większych od 10 dla następujących liczb: <code>12, 5, 20, 18, 8.5, 10, 4, 101, -2</code>?</li>
-<li>Utwórz następujący wektor: <code>2 0 0 4 0 0 6 0 0 8 0 0</code>.</li>
+<li>Z wykorzystaniem funkcji <code>seq</code> i na podstawie wektora … dokonaj przekształcenia tworząc następujący wektor: <code>2 0 0 4 0 0 6 0 0 8 0 0</code>.</li>
 <li>Dane są dwa wektory - a: <code>2, 3, 7, 8, 2</code>, b: <code>9, 1, 2, 0, 2</code>. Jakiego typu będzie wektor będący wynikiem działania <code>a&lt;=b</code>?</li>
 <li>Uzupełnij wektor <code>letters</code> o polskie litery diakrytyzowane. Jaką długość ma nowo utworzony wektor?</li>
 <li>Wylosuj z rozkładu normalnego 1000 obserwacji z ziarnem równym 76. Ile wynosi kurtoza tych wartości?</li>
@@ -696,6 +701,15 @@ a;b</code></pre></div>
 </ol>
 <p><span class="math display">\[b=(X&#39;X)^{-1}X&#39;y\]</span></p>
 <p>Zmienna <span class="math inline">\(x_1\)</span> przyjmuje wartości <code>2,4,1,6,9,3,2,9,10,7</code>, zmienna <span class="math inline">\(x_2\)</span> <code>1.5,0.2,0.1,2,3.1,1.2,0.4,2.9,2.5,1.9</code>, a zmienna <span class="math inline">\(x_0\)</span> to wektor jedynek. Te trzy zmienne tworzą macierz <span class="math inline">\(X\)</span>. Z kolei wartości zmiennej <span class="math inline">\(y\)</span> są następujące <code>12,15,10,19,26,13,13,21,29,18</code>. Wyznacz wartość <span class="math inline">\(b\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zad1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow=</span><span class="dv">2</span>)
+<span class="kw">solve</span>(zad1)</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   -2  1.5
+## [2,]    1 -0.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zad1 <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(zad1)</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    0
+## [2,]    0    1</code></pre>
 </div>
 </div>
 <div id="czynnik" class="section level2">
