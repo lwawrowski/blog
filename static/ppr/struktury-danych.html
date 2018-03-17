@@ -274,7 +274,7 @@ obiekt -&gt; nazwa</code></pre>
 <pre><code>##  [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0</code></pre>
 <p>Do generowania liczb pseudolosowych służy funkcja <code>runif(n)</code>, która do poprawnego wywołania wymaga tylko jednego argumentu - długości wektora wynikowego. Domyślnie losowane są liczby z przedziału <span class="math inline">\([0;1]\)</span> (tak jak w funkcji <code>los()</code> w Excelu), można to jednak zmienić podając odpowiednie wartości argumentów <code>min</code> i <code>max</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">6</span>)</code></pre></div>
-<pre><code>## [1] 0.3921472 0.9717615 0.8471818 0.4151876 0.2692543 0.9570107</code></pre>
+<pre><code>## [1] 0.1547197 0.1174799 0.8728875 0.6664409 0.7035869 0.5972573</code></pre>
 <p>Obserwacje można także generować z innych rozkładów:</p>
 <ul>
 <li><code>rnorm</code> - rozkład normalny,</li>
@@ -285,9 +285,9 @@ obiekt -&gt; nazwa</code></pre>
 <p>Wykaz wszystkich dostępnych w R rozkładów uzyskamy wywołując polecenie <code>help(&quot;Distributions&quot;)</code>.</p>
 <p>Za każdym uruchomieniem jednej z wymienionych wyżej funkcji losujących wartości z danego rozkładu otrzymamy inne wartości:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.4543617 0.3861227 0.3220917 0.2173235 0.2724653</code></pre>
+<pre><code>## [1] 0.4772029 0.2216722 0.6076954 0.1790226 0.2906346</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.6775166 0.2141432 0.3503078 0.4700173 0.2237999</code></pre>
+<pre><code>## [1] 0.9263894 0.5656651 0.6251084 0.7164982 0.7984604</code></pre>
 <p>Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
 <span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
