@@ -119,7 +119,8 @@ Literatura podstawowa:
 \item
   Garret Grolemund, Hadley Wickham -
   \href{http://r4ds.had.co.nz/}{\emph{R for Data Science}}
-  (\href{link}{polska wersja})
+  (\href{https://helion.pl/ksiazki/jezyk-r-kompletny-zestaw-narzedzi-dla-analitykow-danych-hadley-wickham-garrett-grolemund,jezrko.htm}{polska
+  wersja})
 \end{itemize}
 
 Literatura dodatkowa:
@@ -156,6 +157,8 @@ Podstawowe cele w analizie danych:
   prognozowanie
 \item
   klasyfikacja
+\item
+  grupowanie
 \end{itemize}
 
 Bez względu na cel analizy jest kilka pojęć, które są wspólne.
@@ -208,7 +211,9 @@ Testy statystyczne dzielą się na dwie grupy:
   dokładne.
 \end{itemize}
 
-\chapter{Regresja prosta}\label{regresja-prosta}
+\chapter{Regresja}\label{regresja}
+
+\section{Regresja prosta}\label{regresja-prosta}
 
 Na podstawie \href{data/Salary_Data.csv}{danych} dotyczących informacji
 o doświadczeniu i wynagrodzeniu pracowników zbuduj model określający
@@ -219,14 +224,14 @@ o doświadczeniu i wynagrodzeniu pracowników zbuduj model określający
 
 \href{res/adr.zip}{cały projekt}
 
-\section{Zadanie}\label{zadanie}
+\subsection{Zadanie}\label{zadanie}
 
 Dla danych dotyczących \href{data/sklep77.csv}{sklepu nr 77} opracuj
 model zależności sprzedaży od liczby klientów. Ile wynosi teoretyczna
 sprzedaż w dniach, w których liczba klientów będzie wynosiła 560, 740,
 811 oraz 999 osób?
 
-\chapter{Regresja wieloraka}\label{regresja-wieloraka}
+\section{Regresja wieloraka}\label{regresja-wieloraka}
 
 Na podstawie danych dotyczących \href{data/pracownicy.csv}{zatrudnienia}
 opracuj model, w którym zmienną zależną jest bieżące wynagrodzenie. Jaka
@@ -265,11 +270,143 @@ Opis zbioru:
 
 \href{res/adr.zip}{cały projekt}
 
-\section{Zadanie}\label{zadanie-1}
+\subsection{Zadanie}\label{zadanie-1}
 
 Na podstawie zbioru dotyczącego \href{data/50_Startups.csv}{50
 startupów} określ jakie czynniki w największym stopniu wpływają na
 przychód startupów.
+
+\chapter{Grupowanie}\label{grupowanie}
+
+Metody grupowania są wykorzystywane np. do segmentacji klientów, w
+przypadku, gdy nie jest znany końcowy podział.
+
+\section{Metoda k-średnich}\label{metoda-k-srednich}
+
+Algorytm:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Wskaź liczbę grup \(k\).
+\item
+  Wybierz dowolne \(k\) punktów jako centra grup.
+\item
+  Przypisz każdą z obserwacji do najbliższego centroidu.
+\item
+  Oblicz nowe centrum grupy.
+\item
+  Przypisz każdą z obserwacji do nowych centroidów. Jeśli któraś
+  obserwacja zmieniła grupę - przejdź do kroku nr 4, a w przeciwnym
+  przypadku zakończ algorytm.
+\end{enumerate}
+
+Zalety:
+
+\begin{itemize}
+\tightlist
+\item
+  dobrze działa zarówno na małych, jak i dużych zbiorach
+\item
+  efektywny
+\end{itemize}
+
+Wady:
+
+\begin{itemize}
+\tightlist
+\item
+  trzeba wskazać liczbę grup
+\item
+  losowy wybór punktów początkowych
+\end{itemize}
+
+\section{Metoda hierarchiczna}\label{metoda-hierarchiczna}
+
+Algorytm:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Każda obserwacji stanowi jedną z \(N\) pojedyńczych grup.
+\item
+  Na podstawie macierzy odległości połącz dwie najbliżej leżące
+  obserwacje w jedną grupę (\(N-1\) grup).
+\item
+  Połącz dwa najbliżej siebie leżące grupy w jedną (\(N-2\) grup).
+\item
+  Powtórz krok nr 3, aż do uzyskania jednej grupy.
+\end{enumerate}
+
+Zalety:
+
+\begin{itemize}
+\tightlist
+\item
+  prosty sposób ustalenia liczby grup
+\item
+  praktyczny sposób wizualizacji
+\end{itemize}
+
+Wady:
+
+\begin{itemize}
+\tightlist
+\item
+  nieodpowiedni dla dużych zbiorów
+\end{itemize}
+
+\subsection{Zadanie}\label{zadanie-2}
+
+Na podstawie zbioru zawierającego informacje o
+\href{data/klienci.csv}{klientach sklepu} dokonaj grupowania klientów.
+
+Opis zbioru:
+
+\begin{itemize}
+\tightlist
+\item
+  klientID - identyfikator klienta
+\item
+  plec - płeć
+\item
+  wiek - wiek
+\item
+  roczny\_dochod - roczny dochód wyrażony w tys. dolarów
+\item
+  wskaznik\_wydatkow - klasyfikacja sklepu od 1 do 100
+\end{itemize}
+
+\subsection{Zadanie 2}\label{zadanie-2-1}
+
+Dokonaj grupowania danych dotyczących \href{data/auta.csv}{32
+samochodów} według następujących zmiennych: pojemność, przebieg, lata
+oraz cena.
+
+\subsection{Zadanie 3}\label{zadanie-3}
+
+Rozpoznawanie czynności na podstawie danych z przyspieszeniomierza w
+telefonie:
+\href{http://archive.ics.uci.edu/ml/datasets/User+Identification+From+Walking+Activity\#}{User
+Identification From Walking Activity Data Set}
+
+\chapter{Klasyfikacja}\label{klasyfikacja}
+
+\href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{A
+visual introduction to machine learning} - niestety powstała tylko jedna
+część.
+
+\section{Regresja logistyczna}\label{regresja-logistyczna}
+
+\section{Drzewa klasyfikacyjne}\label{drzewa-klasyfikacyjne}
+
+\section{Lasy losowe}\label{lasy-losowe}
+
+\section{KNN}\label{knn}
+
+\subsection{Zadanie}\label{zadanie-4}
 
 
 \end{document}

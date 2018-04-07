@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="wprowadzenie-do-analizy-danych.html">
+<link rel="prev" href="regresja.html">
+<link rel="next" href="klasyfikacja.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -115,37 +115,78 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Metody przetwarzania i analizy danych w R</h1>
-<h4 class="author"><em>Łukasz Wawrowski</em></h4>
+<div id="grupowanie" class="section level1">
+<h1><span class="header-section-number">3</span> Grupowanie</h1>
+<p>Metody grupowania są wykorzystywane np. do segmentacji klientów, w przypadku, gdy nie jest znany końcowy podział.</p>
+<div id="metoda-k-srednich" class="section level2">
+<h2><span class="header-section-number">3.1</span> Metoda k-średnich</h2>
+<p>Algorytm:</p>
+<ol style="list-style-type: decimal">
+<li>Wskaź liczbę grup <span class="math inline">\(k\)</span>.</li>
+<li>Wybierz dowolne <span class="math inline">\(k\)</span> punktów jako centra grup.</li>
+<li>Przypisz każdą z obserwacji do najbliższego centroidu.</li>
+<li>Oblicz nowe centrum grupy.</li>
+<li>Przypisz każdą z obserwacji do nowych centroidów. Jeśli któraś obserwacja zmieniła grupę - przejdź do kroku nr 4, a w przeciwnym przypadku zakończ algorytm.</li>
+</ol>
+<p>Zalety:</p>
+<ul>
+<li>dobrze działa zarówno na małych, jak i dużych zbiorach</li>
+<li>efektywny</li>
+</ul>
+<p>Wady:</p>
+<ul>
+<li>trzeba wskazać liczbę grup</li>
+<li>losowy wybór punktów początkowych</li>
+</ul>
 </div>
-<div id="wprowadzenie" class="section level1 unnumbered">
-<h1>Wprowadzenie</h1>
-<p>Literatura podstawowa:</p>
+<div id="metoda-hierarchiczna" class="section level2">
+<h2><span class="header-section-number">3.2</span> Metoda hierarchiczna</h2>
+<p>Algorytm:</p>
+<ol style="list-style-type: decimal">
+<li>Każda obserwacji stanowi jedną z <span class="math inline">\(N\)</span> pojedyńczych grup.</li>
+<li>Na podstawie macierzy odległości połącz dwie najbliżej leżące obserwacje w jedną grupę (<span class="math inline">\(N-1\)</span> grup).</li>
+<li>Połącz dwa najbliżej siebie leżące grupy w jedną (<span class="math inline">\(N-2\)</span> grup).</li>
+<li>Powtórz krok nr 3, aż do uzyskania jednej grupy.</li>
+</ol>
+<p>Zalety:</p>
 <ul>
-<li>Przemysław Biecek - <a href="http://pbiecek.github.io/Przewodnik/"><em>Przewodnik po pakiecie R</em></a></li>
-<li>Marek Gągolewski - <a href="http://www.gagolewski.com/publications/programowanier/"><em>Programowanie w języku R. Analiza danych, obliczenia, symulacje.</em></a></li>
-<li>Garret Grolemund, Hadley Wickham - <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a> (<a href="https://helion.pl/ksiazki/jezyk-r-kompletny-zestaw-narzedzi-dla-analitykow-danych-hadley-wickham-garrett-grolemund,jezrko.htm">polska wersja</a>)</li>
+<li>prosty sposób ustalenia liczby grup</li>
+<li>praktyczny sposób wizualizacji</li>
 </ul>
-<p>Literatura dodatkowa:</p>
+<p>Wady:</p>
 <ul>
-<li><a href="https://github.com/mi2-warsaw/SER/blob/master/histoRia/README.md">inne pozycje po polsku</a></li>
-<li><a href="https://bookdown.org/">inne pozycje po angielsku</a></li>
+<li>nieodpowiedni dla dużych zbiorów</li>
 </ul>
-<p>Internet:</p>
+<div id="zadanie-2" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Zadanie</h3>
+<p>Na podstawie zbioru zawierającego informacje o <a href="data/klienci.csv">klientach sklepu</a> dokonaj grupowania klientów.</p>
+<p>Opis zbioru:</p>
 <ul>
-<li><a href="https://www.r-bloggers.com/">R-bloggers</a></li>
-<li><a href="https://rweekly.org/">rweekly</a></li>
+<li>klientID - identyfikator klienta</li>
+<li>plec - płeć</li>
+<li>wiek - wiek</li>
+<li>roczny_dochod - roczny dochód wyrażony w tys. dolarów</li>
+<li>wskaznik_wydatkow - klasyfikacja sklepu od 1 do 100</li>
 </ul>
+</div>
+<div id="zadanie-2-1" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Zadanie 2</h3>
+<p>Dokonaj grupowania danych dotyczących <a href="data/auta.csv">32 samochodów</a> według następujących zmiennych: pojemność, przebieg, lata oraz cena.</p>
+</div>
+<div id="zadanie-3" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Zadanie 3</h3>
+<p>Rozpoznawanie czynności na podstawie danych z przyspieszeniomierza w telefonie: <a href="http://archive.ics.uci.edu/ml/datasets/User+Identification+From+Walking+Activity#">User Identification From Walking Activity Data Set</a></p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="wprowadzenie-do-analizy-danych.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="regresja.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="klasyfikacja.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
