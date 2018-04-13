@@ -30,12 +30,12 @@ W takiej sytuacji można skorzystać z pewnych miar podobieństwa tekstów (ang.
 Najczęściej wykorzystywane algorytmy to:
 
 - **odległość Levenshteina** - odległość to liczba kroków wymaganych do przekształcenia jednego ciągu znaków w drugi. Działania jakie można wykonywać to wstawienie nowego znaku, usunięcie znaku lub zamianę znaku na nowy znak.
-- **odległość Damerau-Levenshteina** - podobne jak odległość Levenshteina, ale wprowadza działanie polegające na zamianie miejscami sąsiadujących znaków.
-- **najdłuższy wspólny podłańcuch** (ang. longest common substring) - najdłuższy ciąg elementem leżących obok siebie w obu ciągach. Odległość to liczba niesparowanych znaków.
+- **odległość Damerau-Levenshteina** - podobnie jak odległość Levenshteina, ale wprowadza działanie polegające na zamianie miejscami sąsiadujących znaków.
+- **najdłuższy wspólny podłańcuch** (ang. longest common substring) - znajduje najdłuższy ciąg elementów leżących obok siebie w obu ciągach, natomiast odległość to liczba niesparowanych znaków.
 - **odległość Jaro** - średnia z odsetka wspólnych znaków w pierwszym ciągu, odsetka wspólnych znaków w drugim ciągu oraz odsetka wspólnych znaków nie wymagających transpozycji. Przyjmuje wartości od 0 do 1, gdzie 0 to teksty identyczne, a 1 zupełnie różne.
 - **odległość Jaro-Winklera** - zwiększenie podobieństwa ciągów, które według odległości Jaro są do siebie podobne.
 
-Na podstawie wyżej opisanych algorytmów można stwierdzić, że im mniejsza wartość danej odległości tym ciągi będą do siebie bardziej podobne. Pakiet `stringdist` zawiera implementację jeszcze kilku miar, niemniej w tym poście skupiłem się na tych najbardziej popularnych.
+Na podstawie wyżej opisanych algorytmów można stwierdzić, że im mniejsza wartość danej odległości tym ciągi tekstowe będą do siebie bardziej podobne. Pakiet `stringdist` zawiera implementację jeszcze kilku miar, niemniej w tym poście skupiłem się na tych najbardziej popularnych.
 
 # Analiza imion męskich w 2015 roku
 
