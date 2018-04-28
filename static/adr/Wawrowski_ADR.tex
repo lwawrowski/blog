@@ -404,13 +404,73 @@ część.
 
 \section{Drzewa klasyfikacyjne}\label{drzewa-klasyfikacyjne}
 
+Zalety:
+
+\begin{itemize}
+\tightlist
+\item
+  łatwa interpretacja
+\item
+  nie trzeba normalizować cech
+\item
+  rozwiązuje problemy liniowe i nieliniowe
+\end{itemize}
+
+Wady:
+
+\begin{itemize}
+\tightlist
+\item
+  mała efektywność przy małych zbiorach danych
+\item
+  łatwo można przeuczyć
+\end{itemize}
+
 \section{KNN}\label{knn}
 
-\section{Lasy losowe}\label{lasy-losowe}
+Algorytm:
 
-\section{Regresja logistyczna}\label{regresja-logistyczna}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Określ liczbę sąsiadów - \(K\)
+\item
+  Wyznacz \(K\) sąsiadów dla nowego punktu na podstawie wybranej
+  odległości
+\item
+  Oblicz liczbę sąsiadów, w każdej z grup
+\item
+  Przypisz nową obserwację do grupy, w której ma więcej najbliższych
+  sąsiadów
+\end{enumerate}
+
+Zalety:
+
+\begin{itemize}
+\tightlist
+\item
+  łatwa interpretacja
+\item
+  szybki i efektywny
+\end{itemize}
+
+Wady:
+
+\begin{itemize}
+\tightlist
+\item
+  trzeba określić liczbę sąsiadów
+\end{itemize}
 
 \subsection{Zadanie}\label{zadanie-4}
+
+Zbuduj model klasyfikacyjny dla zbioru
+\href{data/Social_Network_Ads.csv}{danych} dotyczących cech internautów
+oraz informacji czy zamówili reklamowany produkt czy nie.
+
+Przeprowadź imputację braków danych dla zbioru
+\href{data/pracownicy.RData}{pracowników}.
 
 
 \end{document}

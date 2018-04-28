@@ -89,10 +89,8 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>4</b> Klasyfikacja</a><ul>
 <li class="chapter" data-level="4.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#drzewa-klasyfikacyjne"><i class="fa fa-check"></i><b>4.1</b> Drzewa klasyfikacyjne</a></li>
-<li class="chapter" data-level="4.2" data-path="klasyfikacja.html"><a href="klasyfikacja.html#knn"><i class="fa fa-check"></i><b>4.2</b> KNN</a></li>
-<li class="chapter" data-level="4.3" data-path="klasyfikacja.html"><a href="klasyfikacja.html#lasy-losowe"><i class="fa fa-check"></i><b>4.3</b> Lasy losowe</a></li>
-<li class="chapter" data-level="4.4" data-path="klasyfikacja.html"><a href="klasyfikacja.html#regresja-logistyczna"><i class="fa fa-check"></i><b>4.4</b> Regresja logistyczna</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#zadanie-4"><i class="fa fa-check"></i><b>4.4.1</b> Zadanie</a></li>
+<li class="chapter" data-level="4.2" data-path="klasyfikacja.html"><a href="klasyfikacja.html#knn"><i class="fa fa-check"></i><b>4.2</b> KNN</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#zadanie-4"><i class="fa fa-check"></i><b>4.2.1</b> Zadanie</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -120,17 +118,40 @@
 <p><a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">A visual introduction to machine learning</a> - niestety powstała tylko jedna część.</p>
 <div id="drzewa-klasyfikacyjne" class="section level2">
 <h2><span class="header-section-number">4.1</span> Drzewa klasyfikacyjne</h2>
+<p>Zalety:</p>
+<ul>
+<li>łatwa interpretacja</li>
+<li>nie trzeba normalizować cech</li>
+<li>rozwiązuje problemy liniowe i nieliniowe</li>
+</ul>
+<p>Wady:</p>
+<ul>
+<li>mała efektywność przy małych zbiorach danych</li>
+<li>łatwo można przeuczyć</li>
+</ul>
 </div>
 <div id="knn" class="section level2">
 <h2><span class="header-section-number">4.2</span> KNN</h2>
-</div>
-<div id="lasy-losowe" class="section level2">
-<h2><span class="header-section-number">4.3</span> Lasy losowe</h2>
-</div>
-<div id="regresja-logistyczna" class="section level2">
-<h2><span class="header-section-number">4.4</span> Regresja logistyczna</h2>
+<p>Algorytm:</p>
+<ol style="list-style-type: decimal">
+<li>Określ liczbę sąsiadów - <span class="math inline">\(K\)</span></li>
+<li>Wyznacz <span class="math inline">\(K\)</span> sąsiadów dla nowego punktu na podstawie wybranej odległości</li>
+<li>Oblicz liczbę sąsiadów, w każdej z grup</li>
+<li>Przypisz nową obserwację do grupy, w której ma więcej najbliższych sąsiadów</li>
+</ol>
+<p>Zalety:</p>
+<ul>
+<li>łatwa interpretacja</li>
+<li>szybki i efektywny</li>
+</ul>
+<p>Wady:</p>
+<ul>
+<li>trzeba określić liczbę sąsiadów</li>
+</ul>
 <div id="zadanie-4" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> Zadanie</h3>
+<h3><span class="header-section-number">4.2.1</span> Zadanie</h3>
+<p>Zbuduj model klasyfikacyjny dla zbioru <a href="data/Social_Network_Ads.csv">danych</a> dotyczących cech internautów oraz informacji czy zamówili reklamowany produkt czy nie.</p>
+<p>Przeprowadź imputację braków danych dla zbioru <a href="data/pracownicy.RData">pracowników</a>.</p>
 
 </div>
 </div>
