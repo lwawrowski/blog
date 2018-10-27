@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="wprowadzenie-1.html">
+<link rel="prev" href="wprowadzenie-1.html">
+<link rel="next" href="regresja.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -156,37 +156,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Metody przetwarzania i analizy danych w R</h1>
-<h4 class="author"><em>Łukasz Wawrowski</em></h4>
+<div id="testowanie-hipotez" class="section level1">
+<h1><span class="header-section-number">2</span> Testowanie hipotez</h1>
+<div id="hipoteza-statystyczna" class="section level2">
+<h2><span class="header-section-number">2.1</span> Hipoteza statystyczna</h2>
+<p>Przypuszczenie dotyczące własności analizowanej cechy, np. średnia w populacji jest równa 10, rozkład cechy jest normalny.</p>
+<p>Formułuje się zawsze dwie hipotezy: hipotezę zerową (<span class="math inline">\(H_0\)</span>) i hipotezę alternatywną (<span class="math inline">\(H_1\)</span>). Hipoteza zerowa jest hipotezą mówiącą o równości:</p>
+<p><span class="math inline">\(H_0: \bar{x}=10\)</span></p>
+<p>Z kolei hipoteza alternatywna zakłada coś przeciwnego:</p>
+<p><span class="math inline">\(H_1: \bar{x}\neq 10\)</span></p>
+<p>Zamiast znaku nierówności (<span class="math inline">\(\neq\)</span>) może się także pojawić znak mniejszości (<span class="math inline">\(&lt;\)</span>) lub większości (<span class="math inline">\(&gt;\)</span>).</p>
 </div>
-<div id="wprowadzenie" class="section level1 unnumbered">
-<h1>Wprowadzenie</h1>
-<p>Literatura podstawowa:</p>
+<div id="poziom-istotnosci-i-wartosc-p" class="section level2">
+<h2><span class="header-section-number">2.2</span> Poziom istotności i wartość p</h2>
+<p>Hipotezy statystyczne weryfikuje się przy określonym poziomie istotności <span class="math inline">\(\alpha\)</span>, który wskazuje maksymalny poziom akceptowalnego błędu (najczęściej <span class="math inline">\(\alpha=0,05\)</span>).</p>
+<p>Większość programów statystycznych podaje w wynikach testu wartość p. Jest to prawdopodobieństwo uzyskania obserwowanych wyników przy założeniu prawdziwości hipotezy zerowej.</p>
+<p>Generalnie jeśli <span class="math inline">\(p &lt; \alpha\)</span> - odrzucamy hipotezę zerową.</p>
+<p><a href="http://idane.pl/blog/asa">Krytyka wartości p</a></p>
+</div>
+<div id="testy-parametryczne-i-nieparametryczne" class="section level2">
+<h2><span class="header-section-number">2.3</span> Testy parametryczne i nieparametryczne</h2>
+<p>Testy statystyczne dzielą się na dwie grupy:</p>
 <ul>
-<li>Przemysław Biecek - <a href="http://pbiecek.github.io/Przewodnik/"><em>Przewodnik po pakiecie R</em></a></li>
-<li>Marek Gągolewski - <a href="http://www.gagolewski.com/publications/programowanier/"><em>Programowanie w języku R. Analiza danych, obliczenia, symulacje.</em></a></li>
-<li>Garret Grolemund, Hadley Wickham - <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a> (<a href="https://helion.pl/ksiazki/jezyk-r-kompletny-zestaw-narzedzi-dla-analitykow-danych-hadley-wickham-garrett-grolemund,jezrko.htm">polska wersja</a>)</li>
-</ul>
-<p>Literatura dodatkowa:</p>
-<ul>
-<li><a href="https://github.com/mi2-warsaw/SER/blob/master/histoRia/README.md">inne pozycje po polsku</a></li>
-<li><a href="https://bookdown.org/">inne pozycje po angielsku</a></li>
-</ul>
-<p>Internet:</p>
-<ul>
-<li><a href="https://www.r-bloggers.com/">R-bloggers</a></li>
-<li><a href="https://rweekly.org/">rweekly</a></li>
+<li>parametryczne, które wymagają spełnienia założeń, ale są dokładniejsze,</li>
+<li>nieparametryczne, które nie wymagają tylu założeń, ale są mniej dokładne.</li>
 </ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="wprowadzenie-1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="wprowadzenie-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regresja.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

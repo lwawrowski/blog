@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="wprowadzenie-1.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="testowanie-hipotez.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -156,37 +156,69 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Metody przetwarzania i analizy danych w R</h1>
-<h4 class="author"><em>Łukasz Wawrowski</em></h4>
+<div id="wprowadzenie-1" class="section level1">
+<h1><span class="header-section-number">1</span> Wprowadzenie</h1>
+<div id="narzedzie" class="section level2">
+<h2><span class="header-section-number">1.1</span> Narzędzie</h2>
+<ul>
+<li>darmowe</li>
+<li>wszechstronne</li>
+<li>wsparcie społeczności</li>
+<li>wersja desktopowa i serwerowa</li>
+</ul>
+<p>czyli <strong>R</strong> - środowisko do obliczeń statystycznych i wizualizacji wyników</p>
+<ul>
+<li>strona projektu: <a href="https://www.r-project.org/">r-project.org</a></li>
+<li>świetne IDE: <a href="https://www.rstudio.com/">RStudio</a></li>
+<li>wersja przeglądarkowa: <a href="https://rstudio.cloud/">rstudio.cloud</a></li>
+</ul>
+<p><a href="https://www.business-science.io/business/2018/10/08/python-and-r.html">R + Python</a></p>
 </div>
-<div id="wprowadzenie" class="section level1 unnumbered">
-<h1>Wprowadzenie</h1>
-<p>Literatura podstawowa:</p>
+<div id="cele-analiz" class="section level2">
+<h2><span class="header-section-number">1.2</span> Cele analiz</h2>
+<p>Podstawowe:</p>
 <ul>
-<li>Przemysław Biecek - <a href="http://pbiecek.github.io/Przewodnik/"><em>Przewodnik po pakiecie R</em></a></li>
-<li>Marek Gągolewski - <a href="http://www.gagolewski.com/publications/programowanier/"><em>Programowanie w języku R. Analiza danych, obliczenia, symulacje.</em></a></li>
-<li>Garret Grolemund, Hadley Wickham - <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a> (<a href="https://helion.pl/ksiazki/jezyk-r-kompletny-zestaw-narzedzi-dla-analitykow-danych-hadley-wickham-garrett-grolemund,jezrko.htm">polska wersja</a>)</li>
+<li>wnioskowanie statystyczne - porównywanie grup</li>
+<li>regresja - poszukiwanie związków</li>
+<li>klasyfikacja - przyporządkowanie do grup</li>
+<li>grupowanie - poszukiwanie grup</li>
+<li>prognozowanie - patrzenie w przyszłość</li>
 </ul>
-<p>Literatura dodatkowa:</p>
+<p>Inne:</p>
 <ul>
-<li><a href="https://github.com/mi2-warsaw/SER/blob/master/histoRia/README.md">inne pozycje po polsku</a></li>
-<li><a href="https://bookdown.org/">inne pozycje po angielsku</a></li>
+<li>analiza języka naturalnego</li>
+<li>rozpoznawanie obrazów</li>
+<li>analiza koszykowa</li>
+<li>…</li>
 </ul>
-<p>Internet:</p>
+<div id="eksporacja-danych" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Eksporacja danych</h3>
+<p>Pakiet <code>tidyverse</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<pre><code>## -- Attaching packages ----------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## &lt;U+221A&gt; ggplot2 3.0.0     &lt;U+221A&gt; purrr   0.2.5
+## &lt;U+221A&gt; tibble  1.4.2     &lt;U+221A&gt; dplyr   0.7.6
+## &lt;U+221A&gt; tidyr   0.8.1     &lt;U+221A&gt; stringr 1.3.1
+## &lt;U+221A&gt; readr   1.1.1     &lt;U+221A&gt; forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts -------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
 <ul>
-<li><a href="https://www.r-bloggers.com/">R-bloggers</a></li>
-<li><a href="https://rweekly.org/">rweekly</a></li>
+<li>analiza częstości dla zmiennych jakościowych</li>
+<li>analiza struktury dla zmiennych ilościowych</li>
 </ul>
+<p>Case study: <a href="data/wybory2018.xlsx">Wybory 2018</a></p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="wprowadzenie-1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="testowanie-hipotez.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
