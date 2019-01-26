@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Metody przetwarzania i analizy danych w R</title>
+  <title>6 Materiały z zajęć | Metody przetwarzania i analizy danych w R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Metody przetwarzania i analizy danych w R.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Metody przetwarzania i analizy danych w R" />
+  <meta property="og:title" content="6 Materiały z zajęć | Metody przetwarzania i analizy danych w R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="lwawrowski/analiza-danych-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Metody przetwarzania i analizy danych w R" />
+  <meta name="twitter:title" content="6 Materiały z zajęć | Metody przetwarzania i analizy danych w R" />
   
   <meta name="twitter:description" content="Materiały dydaktyczne do kursu Metody przetwarzania i analizy danych w R." />
   
@@ -35,6 +35,7 @@
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -140,6 +141,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.1" data-path="materiay-z-zajec.html"><a href="materiay-z-zajec.html#section"><i class="fa fa-check"></i><b>6.1</b> 28.10.2018</a></li>
 <li class="chapter" data-level="6.2" data-path="materiay-z-zajec.html"><a href="materiay-z-zajec.html#section-1"><i class="fa fa-check"></i><b>6.2</b> 18.11.2018</a></li>
 <li class="chapter" data-level="6.3" data-path="materiay-z-zajec.html"><a href="materiay-z-zajec.html#section-2"><i class="fa fa-check"></i><b>6.3</b> 16.12.2018</a></li>
+<li class="chapter" data-level="6.4" data-path="materiay-z-zajec.html"><a href="materiay-z-zajec.html#section-3"><i class="fa fa-check"></i><b>6.4</b> 26.01.2019</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -177,7 +179,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="section-2" class="section level2">
 <h2><span class="header-section-number">6.3</span> 16.12.2018</h2>
 <p><a href="prezentacje\03.html">Prezentacja</a></p>
-<p><a href="data\pracownicy.csv">Pracownicy</a></p>
+<p><a href="data\Salary_Data.csv">Pracownicy</a></p>
+<p><a href="res\korelacje20181216.R">Korelacja w R</a></p>
+<p><a href="res\regresja20181216.Rmd">Regresja w R</a></p>
+</div>
+<div id="section-3" class="section level2">
+<h2><span class="header-section-number">6.4</span> 26.01.2019</h2>
+<p><a href="data\salary.xlsx">Pensja i doświaczenie</a></p>
+<p><a href="data\pracownicy.xlsx">Pracownicy</a></p>
+<p>Opis zbioru:</p>
+<ul>
+<li>id - kod pracownika</li>
+<li>plec - płeć pracownika (0 - mężczyzna, 1 - kobieta)</li>
+<li>data_urodz - data urodzenia</li>
+<li>edukacja - wykształcenie (w latach nauki)</li>
+<li>kat_pracownika - grupa pracownicza (1 - ochroniarz, 2 - urzędnik, 3 - menedżer)</li>
+<li>bwynagrodzenie - bieżące wynagrodzenie</li>
+<li>pwynagrodzenie - początkowe wynagrodzenie</li>
+<li>staz - staż pracy (w miesiącach)</li>
+<li>doswiadczenie - poprzednie zatrudnienie (w miesiącach)</li>
+<li>zwiazki - przynależność do związków zawodowych (0 - nie, 1 - tak)</li>
+<li>wiek - wiek (w latach)</li>
+</ul>
 
 </div>
 </div>
@@ -207,7 +230,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -217,6 +240,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -234,7 +261,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
