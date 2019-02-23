@@ -116,15 +116,16 @@
 }
 
 \setlength{\droptitle}{-2em}
-  \title{Podstawy programowania R}
-  \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-  \author{Łukasz Wawrowski}
-  \preauthor{\centering\large\emph}
-  \postauthor{\par}
-  \date{}
-  \predate{}\postdate{}
 
+  \title{Podstawy programowania R}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Łukasz Wawrowski}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+    \date{}
+    \predate{}\postdate{}
+  
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -159,7 +160,8 @@ Literatura podstawowa:
 \item
   Garret Grolemund, Hadley Wickham -
   \href{http://r4ds.had.co.nz/}{\emph{R for Data Science}}
-  (\href{link}{polska wersja})
+  (\href{https://helion.pl/ksiazki/jezyk-r-kompletny-zestaw-narzedzi-dla-analitykow-danych-hadley-wickham-garrett-grolemund,jezrko.htm}{polska
+  wersja})
 \end{itemize}
 
 Literatura dodatkowa:
@@ -728,7 +730,7 @@ podając odpowiednie wartości argumentów \texttt{min} i \texttt{max}.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.63521849 0.30695357 0.08473827 0.73382410 0.92974004 0.03749978
+## [1] 0.3991616 0.7530615 0.8384006 0.1196702 0.8771482 0.9816750
 \end{verbatim}
 
 Obserwacje można także generować z innych rozkładów:
@@ -758,7 +760,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.3789525 0.2093053 0.0325028 0.2793591 0.2257803
+## [1] 0.218086669 0.774537554 0.007871869 0.119956221 0.884669371
 \end{verbatim}
 
 \begin{Shaded}
@@ -768,7 +770,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.20422796 0.43135278 0.17972521 0.03384843 0.22125243
+## [1] 0.09961691 0.06187958 0.80648641 0.86360898 0.40379194
 \end{verbatim}
 
 Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:
@@ -2386,13 +2388,13 @@ Do wczytywania plików csv można wykorzystać wbudowaną funkcję
 ##   title = col_character(),
 ##   genre = col_character(),
 ##   director = col_character(),
-##   year = col_integer(),
-##   duration = col_integer(),
-##   gross = col_integer(),
-##   budget = col_integer(),
-##   cast_facebook_likes = col_integer(),
-##   votes = col_integer(),
-##   reviews = col_integer(),
+##   year = col_double(),
+##   duration = col_double(),
+##   gross = col_double(),
+##   budget = col_double(),
+##   cast_facebook_likes = col_double(),
+##   votes = col_double(),
+##   reviews = col_double(),
 ##   rating = col_double()
 ## )
 \end{verbatim}
@@ -2655,7 +2657,7 @@ zagregowanej:
 ## # A tibble: 1 x 2
 ##   saldo_srednia saldo_mediana
 ##           <dbl>         <dbl>
-## 1      1362.272           448
+## 1         1362.           448
 \end{verbatim}
 
 Podsumowanie danych ma najwięcej sensu w połączniu z funkcją grupującą.
@@ -2676,12 +2678,12 @@ jak wyglądają statystyki salda w poszczególnych grupach wykształcenia:
 
 \begin{verbatim}
 ## # A tibble: 4 x 3
-##       wykszt saldo_srednia saldo_mediana
-##        <chr>         <dbl>         <dbl>
-## 1 podstawowe      1250.950           403
-## 2    srednie      1154.881           392
-## 3     wyzsze      1758.416           577
-## 4       <NA>      1526.754           568
+##   wykszt     saldo_srednia saldo_mediana
+##   <chr>              <dbl>         <dbl>
+## 1 podstawowe         1251.           403
+## 2 srednie            1155.           392
+## 3 wyzsze             1758.           577
+## 4 <NA>               1527.           568
 \end{verbatim}
 
 Po przecinku w funkcji \texttt{group\_by()} można wskazać kolejne
@@ -2699,16 +2701,16 @@ zmienne grupujące:
 \begin{verbatim}
 ## # A tibble: 8 x 4
 ## # Groups:   wykszt [?]
-##       wykszt hipoteka saldo_srednia saldo_mediana
-##        <chr>    <chr>         <dbl>         <dbl>
-## 1 podstawowe      nie      1571.420         521.0
-## 2 podstawowe      tak      1007.594         343.5
-## 3    srednie      nie      1340.130         416.5
-## 4    srednie      tak      1033.950         380.0
-## 5     wyzsze      nie      1919.123         618.0
-## 6     wyzsze      tak      1583.978         543.0
-## 7       <NA>      nie      1779.766         679.0
-## 8       <NA>      tak      1206.788         442.0
+##   wykszt     hipoteka saldo_srednia saldo_mediana
+##   <chr>      <chr>            <dbl>         <dbl>
+## 1 podstawowe nie              1571.          521 
+## 2 podstawowe tak              1008.          344.
+## 3 srednie    nie              1340.          416.
+## 4 srednie    tak              1034.          380 
+## 5 wyzsze     nie              1919.          618 
+## 6 wyzsze     tak              1584.          543 
+## 7 <NA>       nie              1780.          679 
+## 8 <NA>       tak              1207.          442
 \end{verbatim}
 
 Przydatna jest także funkcja \texttt{n()}, która nie przyjmuje żadnego
@@ -2726,12 +2728,12 @@ argumentu i zwraca liczebność zbioru bądź grupy.
 
 \begin{verbatim}
 ## # A tibble: 4 x 4
-##       wykszt liczebnosc saldo_srednia saldo_mediana
-##        <chr>      <int>         <dbl>         <dbl>
-## 1 podstawowe       6851      1250.950           403
-## 2    srednie      23202      1154.881           392
-## 3     wyzsze      13301      1758.416           577
-## 4       <NA>       1857      1526.754           568
+##   wykszt     liczebnosc saldo_srednia saldo_mediana
+##   <chr>           <int>         <dbl>         <dbl>
+## 1 podstawowe       6851         1251.           403
+## 2 srednie         23202         1155.           392
+## 3 wyzsze          13301         1758.           577
+## 4 <NA>             1857         1527.           568
 \end{verbatim}
 
 Jeżeli chcemy tylko wyznaczyć liczebności grup to możemy skorzystać z
@@ -2748,12 +2750,12 @@ funkcji \texttt{count()}:
 \begin{verbatim}
 ## # A tibble: 4 x 2
 ## # Groups:   wykszt [4]
-##       wykszt     n
-##        <chr> <int>
+##   wykszt         n
+##   <chr>      <int>
 ## 1 podstawowe  6851
-## 2    srednie 23202
-## 3     wyzsze 13301
-## 4       <NA>  1857
+## 2 srednie    23202
+## 3 wyzsze     13301
+## 4 <NA>        1857
 \end{verbatim}
 
 Jedną z kategorii zmiennej wykształcenie jest brak danych (\texttt{NA}).
@@ -2783,12 +2785,12 @@ pozostaje oryginalna wartość.
 \begin{verbatim}
 ## # A tibble: 4 x 2
 ## # Groups:   wykszt [4]
-##        wykszt     n
-##         <chr> <int>
+##   wykszt          n
+##   <chr>       <int>
 ## 1 nieustalone  1857
-## 2  podstawowe  6851
-## 3     srednie 23202
-## 4      wyzsze 13301
+## 2 podstawowe   6851
+## 3 srednie     23202
+## 4 wyzsze      13301
 \end{verbatim}
 
 \section{Sortowanie}\label{sortowanie}
@@ -2830,12 +2832,12 @@ Sortowanie możemy także zastosować do wyników podsumowania danych:
 
 \begin{verbatim}
 ## # A tibble: 4 x 4
-##       wykszt liczebnosc saldo_srednia saldo_mediana
-##        <chr>      <int>         <dbl>         <dbl>
-## 1    srednie      23202      1154.881           392
-## 2 podstawowe       6851      1250.950           403
-## 3       <NA>       1857      1526.754           568
-## 4     wyzsze      13301      1758.416           577
+##   wykszt     liczebnosc saldo_srednia saldo_mediana
+##   <chr>           <int>         <dbl>         <dbl>
+## 1 srednie         23202         1155.           392
+## 2 podstawowe       6851         1251.           403
+## 3 <NA>             1857         1527.           568
+## 4 wyzsze          13301         1758.           577
 \end{verbatim}
 
 \section{Łączenie zbiorów}\label{aczenie-zbiorow}
@@ -2912,14 +2914,14 @@ tylko te obserwacje, które udało się połączyć.
 
 \begin{verbatim}
 ## # A tibble: 6 x 3
-##   praca  sr_czas sr_saldo
-##   <dbl>    <dbl>    <dbl>
-## 1     2 288.5434 1521.746
-## 2     3 253.9958 1763.617
-## 3     5 256.3093 1521.470
-## 4     7 268.1571 1647.971
-## 5     8 287.3613 1984.215
-## 6    NA 237.6111 1772.358
+##   praca sr_czas sr_saldo
+##   <dbl>   <dbl>    <dbl>
+## 1     2    289.    1522.
+## 2     3    254.    1764.
+## 3     5    256.    1521.
+## 4     7    268.    1648.
+## 5     8    287.    1984.
+## 6    NA    238.    1772.
 \end{verbatim}
 
 Jeśli chcemy pozostawić niedopasowane obserwacje to należy wykorzystać
@@ -2935,19 +2937,19 @@ informacje.
 
 \begin{verbatim}
 ## # A tibble: 11 x 3
-##    praca  sr_czas sr_saldo
-##    <dbl>    <dbl>    <dbl>
-##  1     1 246.8967       NA
-##  2     2 288.5434 1521.746
-##  3     3 253.9958 1763.617
-##  4     4 245.8250       NA
-##  5     5 256.3093 1521.470
-##  6     6 262.9016       NA
-##  7     7 268.1571 1647.971
-##  8     8 287.3613 1984.215
-##  9     9 252.9050       NA
-## 10    10 256.9863       NA
-## 11    NA 237.6111 1772.358
+##    praca sr_czas sr_saldo
+##    <dbl>   <dbl>    <dbl>
+##  1     1    247.      NA 
+##  2     2    289.    1522.
+##  3     3    254.    1764.
+##  4     4    246.      NA 
+##  5     5    256.    1521.
+##  6     6    263.      NA 
+##  7     7    268.    1648.
+##  8     8    287.    1984.
+##  9     9    253.      NA 
+## 10    10    257.      NA 
+## 11    NA    238.    1772.
 \end{verbatim}
 
 \section{Szeroka i wąska reprezentacja
@@ -3000,10 +3002,10 @@ W takiej formie łatwiej podsumować dane:
 \begin{verbatim}
 ## # A tibble: 3 x 2
 ##   artykul sr_spozycie
-##     <chr>       <dbl>
-## 1   mieso    5.468750
-## 2   owoce    3.651875
-## 3 warzywa    8.852500
+##   <chr>         <dbl>
+## 1 mieso          5.47
+## 2 owoce          3.65
+## 3 warzywa        8.85
 \end{verbatim}
 
 W porównaniu do szerokiej reprezentacji danych:
@@ -3021,7 +3023,7 @@ W porównaniu do szerokiej reprezentacji danych:
 ## # A tibble: 1 x 3
 ##   sr_spozycie_mieso sr_spozycie_owoce sr_spozycie_warzywa
 ##               <dbl>             <dbl>               <dbl>
-## 1           5.46875          3.651875              8.8525
+## 1              5.47              3.65                8.85
 \end{verbatim}
 
 Transformacja z wąskiej do szerokiej reprezentacji danych jest możliwa z
@@ -3089,66 +3091,368 @@ Dane na temat średniego kursu miesięcznego euro pobierz ze stron
 
 \chapter{Wizualizacja danych}\label{wizualizacja-danych}
 
-\section{Wbudowane funkcje}\label{wbudowane-funkcje}
+\href{https://www.data-to-viz.com/}{Przewodnik po wizualizacji danych}
 
-\section{Pakiet ggplot2}\label{pakiet-ggplot2}
-
-\subsection{Analiza rozkładu}\label{analiza-rozkadu}
-
-Będziemy działać na zbiorze dotyczącym klientów banku
+Będziemy działać na zbiorze dotyczącym sprzedaży w sklepach
+\href{data/rossmann.xlsx}{Rossmann}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
 \KeywordTok{library}\NormalTok{(readxl)}
 
-\NormalTok{movies <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/movies.csv"}\NormalTok{)}
+\NormalTok{rossmann <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/rossmann.xlsx"}\NormalTok{)}
+
+\NormalTok{sklep77 <-}\StringTok{ }\NormalTok{rossmann }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(sklep_id}\OperatorTok{==}\DecValTok{77}\NormalTok{, czy_otwarty}\OperatorTok{==}\StringTok{"Tak"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Parsed with column specification:
-## cols(
-##   title = col_character(),
-##   genre = col_character(),
-##   director = col_character(),
-##   year = col_integer(),
-##   duration = col_integer(),
-##   gross = col_integer(),
-##   budget = col_integer(),
-##   cast_facebook_likes = col_integer(),
-##   votes = col_integer(),
-##   reviews = col_integer(),
-##   rating = col_double()
-## )
-\end{verbatim}
+\section{Wbudowane funkcje}\label{wbudowane-funkcje}
 
-Pierwszym sposobem analizy rozkładu jest wykres pudełkowy
+Do prostych wykresów można wykorzystać wbudowaną funkcję \texttt{plot}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{movies }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(genre }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Action"}\NormalTok{, }\StringTok{"Comedy"}\NormalTok{, }\StringTok{"Crime"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{duration, }\DataTypeTok{x=}\NormalTok{genre)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{()}
+\KeywordTok{plot}\NormalTok{(sklep77}\OperatorTok{$}\NormalTok{sprzedaz, sklep77}\OperatorTok{$}\NormalTok{liczba_klientow, }
+     \DataTypeTok{xlab =} \StringTok{"Sprzedaż", ylab = "}\NormalTok{Liczba klientów",}
+     \DataTypeTok{main =} \StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-131-1.pdf}
 
-Te same dane można przedstawić także na histogramie.
+\section{Pakiet ggplot2}\label{pakiet-ggplot2}
+
+Wiodący pakiet do wizualizacji danych:
+
+\begin{itemize}
+\tightlist
+\item
+  dokumentacja: \url{https://ggplot2.tidyverse.org/}
+\item
+  \href{https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf}{cheatsheet}
+\item
+  tworzenie wykresów poprzez dodawanie (\texttt{+}) kolejnych warstw
+\end{itemize}
+
+\subsection{Wykres punktowy}\label{wykres-punktowy}
+
+Ten sam wykres co wcześniej, ale z wykorzystaniem pakietu ggplot2.
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-132-1.pdf}
+
+Wykonanie krok po kroku:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Utworzenie siatki - określenie co chcemy na wykresie przedstawić
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{movies }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(genre }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Action"}\NormalTok{, }\StringTok{"Comedy"}\NormalTok{, }\StringTok{"Crime"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{duration)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\DecValTok{15}\NormalTok{) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{genre)}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-132-1.pdf}
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-133-1.pdf}
+
+W zależności od typu wykresu w funkcji \texttt{aes} mogą znaleźć się
+argumenty:
+
+\begin{itemize}
+\tightlist
+\item
+  x
+\item
+  y
+\item
+  fill
+\item
+  size
+\item
+  color
+\item
+  shape
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Określenie w jaki sposób chcemy te dane przedstawić - funkcja zawsze
+  zaczyna się od \texttt{geom\_}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-134-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Edytowanie etykiet osi - funkcje \texttt{xlab} i \texttt{ylab}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Sprzedaż") +}
+\StringTok{  ylab("}\NormalTok{Liczba klientów")}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-135-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Dodanie tytułu - funkcja \texttt{ggtitle}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Sprzedaż") +}
+\StringTok{  ylab("}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-136-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Zmiana motywu - funkcja rozpoczynająca się od \texttt{theme\_}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Sprzedaż") +}
+\StringTok{  ylab("}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-137-1.pdf}
+
+Dostępne motywy:
+
+\begin{itemize}
+\tightlist
+\item
+  theme\_bw
+\item
+  theme\_classic
+\item
+  theme\_dark
+\item
+  theme\_gray
+\item
+  theme\_light
+\item
+  theme\_linedraw
+\item
+  theme\_minimal
+\item
+  theme\_void
+\end{itemize}
+
+Powyższe motywy są zaimplementowane w pakiecie ggplot2, ale można także
+skorzystać z dodatkowych pakietów:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://github.com/bbc/bbplot}{theme\_bbc}
+\item
+  \href{https://cran.r-project.org/web/packages/xkcd/}{theme\_xkcd}
+\end{itemize}
+
+Albo stworzyć
+\href{https://www.statworx.com/de/blog/custom-themes-in-ggplot2/}{swój
+własny motyw}.
+
+\emph{Zadanie}
+
+Zmień motyw wykresu na wybrany przez siebie.
+
+Dodamy teraz do wykresu kolejną cechę - rozpoczęcie promocji, żeby
+sprawdzić czy istnieje jakaś tendencja.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow, }\DataTypeTok{color=}\NormalTok{czy_promocja)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Sprzedaż") +}
+\StringTok{  ylab("}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-138-1.pdf}
+
+Okazuje się dosyć interesująco, niemniej nazwa etykiety legendy nie
+wygląda zbyt dobrze. Żeby to poprawić musimy użyć funkcji
+\texttt{scale\_}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow, }\DataTypeTok{color=}\NormalTok{czy_promocja)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Sprzedaż") +}
+\StringTok{  ylab("}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Promocja"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-139-1.pdf}
+
+W funkcji \texttt{scale\_} musimy podać w jaki sposób daną cechę
+wizualizujemy (x/y/color/\ldots{}) oraz jakiego jest typu. Oprócz nazwy
+w tej funkcji możemy określić wiele innych kwestii takich jak:
+
+\begin{itemize}
+\tightlist
+\item
+  wyświetlane etykiety
+\item
+  początek i koniec osi
+\item
+  kolory wariantów
+\item
+  etykiety wariantów
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow, }\DataTypeTok{color=}\NormalTok{czy_promocja)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Sprzedaż") +}
+\StringTok{  scale_y_continuous(name = "}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Promocja"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-140-1.pdf}
+
+Zmiana pozycji legendy możliwa jest z wykorzystaniem funkcji
+\texttt{theme}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow, }\DataTypeTok{color=}\NormalTok{czy_promocja)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Sprzedaż") +}
+\StringTok{  scale_y_continuous(name = "}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Promocja"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-141-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow, }\DataTypeTok{color=}\NormalTok{czy_promocja)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Sprzedaż") +}
+\StringTok{  scale_y_continuous(name = "}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Promocja"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-142-1.pdf}
+
+\subsection{Histogram i wykres
+gęstości}\label{histogram-i-wykres-gestosci}
+
+\begin{itemize}
+\tightlist
+\item
+  sprzedaż wg promocji
+\end{itemize}
+
+\subsection{Wykres pudełkowy}\label{wykres-pudekowy}
+
+\begin{itemize}
+\tightlist
+\item
+  sprzedaż wg dnia tygodnia - czynnik
+\end{itemize}
+
+\subsection{Wykres słupkowy - z grupowaniem i
+bez}\label{wykres-supkowy---z-grupowaniem-i-bez}
+
+\begin{itemize}
+\tightlist
+\item
+  liczba sklepów wg asortymentu
+\end{itemize}
+
+\subsection{Wykres kafelkowy}\label{wykres-kafelkowy}
+
+\begin{itemize}
+\tightlist
+\item
+  czy promocja i czy swieto szkolne
+\end{itemize}
+
+\subsection{Uwzględnienie czasu}\label{uwzglednienie-czasu}
+
+\begin{itemize}
+\tightlist
+\item
+  sprzedaż w kolejnych dniach
+\end{itemize}
+
+\section{Pakiet plotly}\label{pakiet-plotly}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow, }\DataTypeTok{color=}\NormalTok{czy_promocja)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Sprzedaż") +}
+\StringTok{  scale_y_continuous(name = "}\NormalTok{Liczba klientów") }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Promocja"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sprzedaż i liczba klientów w sklepie Rossmann nr 77"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Programowanie w R}\label{programowanie-w-r}
 

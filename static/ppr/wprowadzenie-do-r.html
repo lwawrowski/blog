@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Podstawy programowania R</title>
+  <title>1 Wprowadzenie do R | Podstawy programowania R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Podstawy programowania R" />
+  <meta property="og:title" content="1 Wprowadzenie do R | Podstawy programowania R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="lwawrowski/podstawy-programowania-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Podstawy programowania R" />
+  <meta name="twitter:title" content="1 Wprowadzenie do R | Podstawy programowania R" />
   
   <meta name="twitter:description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
   
@@ -35,6 +35,7 @@
 <link rel="next" href="struktury-danych.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -162,8 +163,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a><ul>
 <li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wbudowane-funkcje"><i class="fa fa-check"></i><b>4.1</b> Wbudowane funkcje</a></li>
 <li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#analiza-rozkadu"><i class="fa fa-check"></i><b>4.2.1</b> Analiza rozkładu</a></li>
+<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-punktowy"><i class="fa fa-check"></i><b>4.2.1</b> Wykres punktowy</a></li>
+<li class="chapter" data-level="4.2.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram-i-wykres-gestosci"><i class="fa fa-check"></i><b>4.2.2</b> Histogram i wykres gęstości</a></li>
+<li class="chapter" data-level="4.2.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-pudekowy"><i class="fa fa-check"></i><b>4.2.3</b> Wykres pudełkowy</a></li>
+<li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy---z-grupowaniem-i-bez"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy - z grupowaniem i bez</a></li>
+<li class="chapter" data-level="4.2.5" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-kafelkowy"><i class="fa fa-check"></i><b>4.2.5</b> Wykres kafelkowy</a></li>
+<li class="chapter" data-level="4.2.6" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#uwzglednienie-czasu"><i class="fa fa-check"></i><b>4.2.6</b> Uwzględnienie czasu</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-plotly"><i class="fa fa-check"></i><b>4.3</b> Pakiet plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.1</b> Funkcje</a></li>
@@ -347,10 +354,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -358,6 +366,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -374,9 +386,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

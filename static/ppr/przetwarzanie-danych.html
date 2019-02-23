@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Podstawy programowania R</title>
+  <title>3 Przetwarzanie danych | Podstawy programowania R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Podstawy programowania R" />
+  <meta property="og:title" content="3 Przetwarzanie danych | Podstawy programowania R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="lwawrowski/podstawy-programowania-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Podstawy programowania R" />
+  <meta name="twitter:title" content="3 Przetwarzanie danych | Podstawy programowania R" />
   
   <meta name="twitter:description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
   
@@ -35,6 +35,7 @@
 <link rel="next" href="wizualizacja-danych.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -162,8 +163,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a><ul>
 <li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wbudowane-funkcje"><i class="fa fa-check"></i><b>4.1</b> Wbudowane funkcje</a></li>
 <li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#analiza-rozkadu"><i class="fa fa-check"></i><b>4.2.1</b> Analiza rozkładu</a></li>
+<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-punktowy"><i class="fa fa-check"></i><b>4.2.1</b> Wykres punktowy</a></li>
+<li class="chapter" data-level="4.2.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram-i-wykres-gestosci"><i class="fa fa-check"></i><b>4.2.2</b> Histogram i wykres gęstości</a></li>
+<li class="chapter" data-level="4.2.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-pudekowy"><i class="fa fa-check"></i><b>4.2.3</b> Wykres pudełkowy</a></li>
+<li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy---z-grupowaniem-i-bez"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy - z grupowaniem i bez</a></li>
+<li class="chapter" data-level="4.2.5" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-kafelkowy"><i class="fa fa-check"></i><b>4.2.5</b> Wykres kafelkowy</a></li>
+<li class="chapter" data-level="4.2.6" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#uwzglednienie-czasu"><i class="fa fa-check"></i><b>4.2.6</b> Uwzględnienie czasu</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-plotly"><i class="fa fa-check"></i><b>4.3</b> Pakiet plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.1</b> Funkcje</a></li>
@@ -212,12 +219,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Wobec tego załadujmy pakiet <code>tidyverse</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## -- Attaching packages ---------------------------------------- tidyverse 1.2.1 --</code></pre>
-<pre><code>## &lt;U+221A&gt; ggplot2 2.2.1     &lt;U+221A&gt; purrr   0.2.4
-## &lt;U+221A&gt; tibble  1.3.4     &lt;U+221A&gt; dplyr   0.7.4
-## &lt;U+221A&gt; tidyr   0.7.2     &lt;U+221A&gt; stringr 1.2.0
-## &lt;U+221A&gt; readr   1.1.1     &lt;U+221A&gt; forcats 0.2.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Attaching packages ---------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## &lt;U+221A&gt; ggplot2 3.1.0     &lt;U+221A&gt; purrr   0.2.5
+## &lt;U+221A&gt; tibble  2.0.1     &lt;U+221A&gt; dplyr   0.7.8
+## &lt;U+221A&gt; tidyr   0.8.2     &lt;U+221A&gt; stringr 1.4.0
+## &lt;U+221A&gt; readr   1.3.1     &lt;U+221A&gt; forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts ------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>W konsoli pojawi się informacja o wersji załadowanych pakietów oraz o konfliktach występujących pomiędzy pakietami. Konflikty te wynikają z takich samych nazw funkcji w różnych pakietach. Kolejność wczytywania pakietów ma znaczenie - kolejny pakiet przykryje funkcje z wcześniej wczytanego. Wywołanie przykrytej funkcji jest możliwe poprzez zapis <code>nazwa_pakietu::nazwa_funkcji</code>.</p>
@@ -259,13 +266,13 @@ movies2 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span cla
 ##   title = col_character(),
 ##   genre = col_character(),
 ##   director = col_character(),
-##   year = col_integer(),
-##   duration = col_integer(),
-##   gross = col_integer(),
-##   budget = col_integer(),
-##   cast_facebook_likes = col_integer(),
-##   votes = col_integer(),
-##   reviews = col_integer(),
+##   year = col_double(),
+##   duration = col_double(),
+##   gross = col_double(),
+##   budget = col_double(),
+##   cast_facebook_likes = col_double(),
+##   votes = col_double(),
+##   reviews = col_double(),
 ##   rating = col_double()
 ## )</code></pre>
 <p>Jeśli nas plik ma nietypową strukturę to w funkcji <code>read.csv()</code> możemy określić dodatkowe argumenty informując o nazwach kolumn obecnych w pliku (<code>header =</code>), separatorze kolumn (<code>sep =</code>) lub separatorze miejsc dziesiętnych (<code>dec =</code>)</p>
@@ -379,7 +386,7 @@ komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <pre><code>## # A tibble: 1 x 2
 ##   saldo_srednia saldo_mediana
 ##           &lt;dbl&gt;         &lt;dbl&gt;
-## 1      1362.272           448</code></pre>
+## 1         1362.           448</code></pre>
 <p>Podsumowanie danych ma najwięcej sensu w połączniu z funkcją grupującą.</p>
 </div>
 <div id="grupowanie" class="section level2">
@@ -390,12 +397,12 @@ komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),
             <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</code></pre></div>
 <pre><code>## # A tibble: 4 x 3
-##       wykszt saldo_srednia saldo_mediana
-##        &lt;chr&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1 podstawowe      1250.950           403
-## 2    srednie      1154.881           392
-## 3     wyzsze      1758.416           577
-## 4       &lt;NA&gt;      1526.754           568</code></pre>
+##   wykszt     saldo_srednia saldo_mediana
+##   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+## 1 podstawowe         1251.           403
+## 2 srednie            1155.           392
+## 3 wyzsze             1758.           577
+## 4 &lt;NA&gt;               1527.           568</code></pre>
 <p>Po przecinku w funkcji <code>group_by()</code> można wskazać kolejne zmienne grupujące:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bank <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(wykszt, hipoteka) <span class="op">%&gt;%</span>
@@ -403,16 +410,16 @@ komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
             <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</code></pre></div>
 <pre><code>## # A tibble: 8 x 4
 ## # Groups:   wykszt [?]
-##       wykszt hipoteka saldo_srednia saldo_mediana
-##        &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1 podstawowe      nie      1571.420         521.0
-## 2 podstawowe      tak      1007.594         343.5
-## 3    srednie      nie      1340.130         416.5
-## 4    srednie      tak      1033.950         380.0
-## 5     wyzsze      nie      1919.123         618.0
-## 6     wyzsze      tak      1583.978         543.0
-## 7       &lt;NA&gt;      nie      1779.766         679.0
-## 8       &lt;NA&gt;      tak      1206.788         442.0</code></pre>
+##   wykszt     hipoteka saldo_srednia saldo_mediana
+##   &lt;chr&gt;      &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;
+## 1 podstawowe nie              1571.          521 
+## 2 podstawowe tak              1008.          344.
+## 3 srednie    nie              1340.          416.
+## 4 srednie    tak              1034.          380 
+## 5 wyzsze     nie              1919.          618 
+## 6 wyzsze     tak              1584.          543 
+## 7 &lt;NA&gt;       nie              1780.          679 
+## 8 &lt;NA&gt;       tak              1207.          442</code></pre>
 <p>Przydatna jest także funkcja <code>n()</code>, która nie przyjmuje żadnego argumentu i zwraca liczebność zbioru bądź grupy.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bank <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span>
@@ -420,24 +427,24 @@ komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
             <span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),
             <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</code></pre></div>
 <pre><code>## # A tibble: 4 x 4
-##       wykszt liczebnosc saldo_srednia saldo_mediana
-##        &lt;chr&gt;      &lt;int&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1 podstawowe       6851      1250.950           403
-## 2    srednie      23202      1154.881           392
-## 3     wyzsze      13301      1758.416           577
-## 4       &lt;NA&gt;       1857      1526.754           568</code></pre>
+##   wykszt     liczebnosc saldo_srednia saldo_mediana
+##   &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+## 1 podstawowe       6851         1251.           403
+## 2 srednie         23202         1155.           392
+## 3 wyzsze          13301         1758.           577
+## 4 &lt;NA&gt;             1857         1527.           568</code></pre>
 <p>Jeżeli chcemy tylko wyznaczyć liczebności grup to możemy skorzystać z funkcji <code>count()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bank <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">count</span>()</code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ## # Groups:   wykszt [4]
-##       wykszt     n
-##        &lt;chr&gt; &lt;int&gt;
+##   wykszt         n
+##   &lt;chr&gt;      &lt;int&gt;
 ## 1 podstawowe  6851
-## 2    srednie 23202
-## 3     wyzsze 13301
-## 4       &lt;NA&gt;  1857</code></pre>
+## 2 srednie    23202
+## 3 wyzsze     13301
+## 4 &lt;NA&gt;        1857</code></pre>
 <p>Jedną z kategorii zmiennej wykształcenie jest brak danych (<code>NA</code>). Zamienimy tą wartość na kategorię <em>nieustalone</em> z wykorzystaniem funkcji <code>mutate()</code> oraz <code>if_else()</code>. Funkcja <code>if_else()</code> przyjmuje trzy argumenty - pierwszy (<code>condition =</code>) to warunek, który jest weryfikowany, następnie podajemy wartość, która ma być wprowadzona w przypadku spełnienia warunku (<code>true =</code>), a na końcu wartość dla niespełnionego warunku (<code>false =</code>). Jest to odpowiednik funkcji <code>JEŻELI</code> z Excela.</p>
 <p>W omawianym przykładzie warunkiem jest sprawdzenie czy wartości zmiennej <code>wykszt</code> są równe <code>NA</code>. Jeśli tak to na ich miejsce wprowadzany jest tekst <em>nieustalone</em>, a w przeciwnym przypadku pozostaje oryginalna wartość.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bank <span class="op">%&gt;%</span>
@@ -446,12 +453,12 @@ komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">count</span>()</code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ## # Groups:   wykszt [4]
-##        wykszt     n
-##         &lt;chr&gt; &lt;int&gt;
+##   wykszt          n
+##   &lt;chr&gt;       &lt;int&gt;
 ## 1 nieustalone  1857
-## 2  podstawowe  6851
-## 3     srednie 23202
-## 4      wyzsze 13301</code></pre>
+## 2 podstawowe   6851
+## 3 srednie     23202
+## 4 wyzsze      13301</code></pre>
 </div>
 <div id="sortowanie" class="section level2">
 <h2><span class="header-section-number">3.9</span> Sortowanie</h2>
@@ -469,12 +476,12 @@ komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
             <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(saldo_srednia)</code></pre></div>
 <pre><code>## # A tibble: 4 x 4
-##       wykszt liczebnosc saldo_srednia saldo_mediana
-##        &lt;chr&gt;      &lt;int&gt;         &lt;dbl&gt;         &lt;dbl&gt;
-## 1    srednie      23202      1154.881           392
-## 2 podstawowe       6851      1250.950           403
-## 3       &lt;NA&gt;       1857      1526.754           568
-## 4     wyzsze      13301      1758.416           577</code></pre>
+##   wykszt     liczebnosc saldo_srednia saldo_mediana
+##   &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+## 1 srednie         23202         1155.           392
+## 2 podstawowe       6851         1251.           403
+## 3 &lt;NA&gt;             1857         1527.           568
+## 4 wyzsze          13301         1758.           577</code></pre>
 </div>
 <div id="aczenie-zbiorow" class="section level2">
 <h2><span class="header-section-number">3.10</span> Łączenie zbiorów</h2>
@@ -505,30 +512,30 @@ zawod_saldo &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span>
 
 <span class="kw">inner_join</span>(praca_czas, praca_saldo_<span class="dv">1500</span>, <span class="dt">by=</span><span class="st">&quot;praca&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 6 x 3
-##   praca  sr_czas sr_saldo
-##   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-## 1     2 288.5434 1521.746
-## 2     3 253.9958 1763.617
-## 3     5 256.3093 1521.470
-## 4     7 268.1571 1647.971
-## 5     8 287.3613 1984.215
-## 6    NA 237.6111 1772.358</code></pre>
+##   praca sr_czas sr_saldo
+##   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+## 1     2    289.    1522.
+## 2     3    254.    1764.
+## 3     5    256.    1521.
+## 4     7    268.    1648.
+## 5     8    287.    1984.
+## 6    NA    238.    1772.</code></pre>
 <p>Jeśli chcemy pozostawić niedopasowane obserwacje to należy wykorzystać jedną z funkcji - <code>left_join()</code> lub <code>right_join()</code> w zależności od tego dla którego zbioru chcemy pozostawić wszystkie informacje.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">left_join</span>(praca_czas, praca_saldo_<span class="dv">1500</span>, <span class="dt">by=</span><span class="st">&quot;praca&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 11 x 3
-##    praca  sr_czas sr_saldo
-##    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1     1 246.8967       NA
-##  2     2 288.5434 1521.746
-##  3     3 253.9958 1763.617
-##  4     4 245.8250       NA
-##  5     5 256.3093 1521.470
-##  6     6 262.9016       NA
-##  7     7 268.1571 1647.971
-##  8     8 287.3613 1984.215
-##  9     9 252.9050       NA
-## 10    10 256.9863       NA
-## 11    NA 237.6111 1772.358</code></pre>
+##    praca sr_czas sr_saldo
+##    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1     1    247.      NA 
+##  2     2    289.    1522.
+##  3     3    254.    1764.
+##  4     4    246.      NA 
+##  5     5    256.    1521.
+##  6     6    263.      NA 
+##  7     7    268.    1648.
+##  8     8    287.    1984.
+##  9     9    253.      NA 
+## 10    10    257.      NA 
+## 11    NA    238.    1772.</code></pre>
 </div>
 <div id="szeroka-i-waska-reprezentacja-danych" class="section level2">
 <h2><span class="header-section-number">3.11</span> Szeroka i wąska reprezentacja danych</h2>
@@ -547,10 +554,10 @@ zawod_saldo &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_spozycie=</span><span class="kw">mean</span>(spozycie))</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   artykul sr_spozycie
-##     &lt;chr&gt;       &lt;dbl&gt;
-## 1   mieso    5.468750
-## 2   owoce    3.651875
-## 3 warzywa    8.852500</code></pre>
+##   &lt;chr&gt;         &lt;dbl&gt;
+## 1 mieso          5.47
+## 2 owoce          3.65
+## 3 warzywa        8.85</code></pre>
 <p>W porównaniu do szerokiej reprezentacji danych:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spozycie <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_spozycie_mieso=</span><span class="kw">mean</span>(mieso),
@@ -559,7 +566,7 @@ zawod_saldo &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span>
 <pre><code>## # A tibble: 1 x 3
 ##   sr_spozycie_mieso sr_spozycie_owoce sr_spozycie_warzywa
 ##               &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;
-## 1           5.46875          3.651875              8.8525</code></pre>
+## 1              5.47              3.65                8.85</code></pre>
 <p>Transformacja z wąskiej do szerokiej reprezentacji danych jest możliwa z zastosowaniem funkcji <code>spread()</code> (pol. <em>rozprzestrzeniać</em>). W przypadku tej funkcji niezbędne są dwa argumenty - pierwszy (<code>key</code>) wskazuje kolumnę zawierającą nazwy dla nowych zmiennych, a drugi argument (<code>value</code>) wskazuje kolumnę zawierającą wartości dla nowych zmiennych.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spozycie_szerokie &lt;-<span class="st"> </span>spozycie_waskie <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">spread</span>(artykul, spozycie)</code></pre></div>
@@ -611,10 +618,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -622,6 +630,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -638,9 +650,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

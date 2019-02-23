@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Podstawy programowania R</title>
+  <title>4 Wizualizacja danych | Podstawy programowania R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Podstawy programowania R" />
+  <meta property="og:title" content="4 Wizualizacja danych | Podstawy programowania R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="lwawrowski/podstawy-programowania-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Podstawy programowania R" />
+  <meta name="twitter:title" content="4 Wizualizacja danych | Podstawy programowania R" />
   
   <meta name="twitter:description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
   
@@ -35,6 +35,7 @@
 <link rel="next" href="programowanie-w-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -162,8 +163,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a><ul>
 <li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wbudowane-funkcje"><i class="fa fa-check"></i><b>4.1</b> Wbudowane funkcje</a></li>
 <li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#analiza-rozkadu"><i class="fa fa-check"></i><b>4.2.1</b> Analiza rozkładu</a></li>
+<li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-punktowy"><i class="fa fa-check"></i><b>4.2.1</b> Wykres punktowy</a></li>
+<li class="chapter" data-level="4.2.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram-i-wykres-gestosci"><i class="fa fa-check"></i><b>4.2.2</b> Histogram i wykres gęstości</a></li>
+<li class="chapter" data-level="4.2.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-pudekowy"><i class="fa fa-check"></i><b>4.2.3</b> Wykres pudełkowy</a></li>
+<li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy---z-grupowaniem-i-bez"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy - z grupowaniem i bez</a></li>
+<li class="chapter" data-level="4.2.5" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-kafelkowy"><i class="fa fa-check"></i><b>4.2.5</b> Wykres kafelkowy</a></li>
+<li class="chapter" data-level="4.2.6" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#uwzglednienie-czasu"><i class="fa fa-check"></i><b>4.2.6</b> Uwzględnienie czasu</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-plotly"><i class="fa fa-check"></i><b>4.3</b> Pakiet plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.1</b> Funkcje</a></li>
@@ -192,47 +199,199 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="wizualizacja-danych" class="section level1">
 <h1><span class="header-section-number">4</span> Wizualizacja danych</h1>
-<div id="wbudowane-funkcje" class="section level2">
-<h2><span class="header-section-number">4.1</span> Wbudowane funkcje</h2>
-</div>
-<div id="pakiet-ggplot2" class="section level2">
-<h2><span class="header-section-number">4.2</span> Pakiet ggplot2</h2>
-<div id="analiza-rozkadu" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Analiza rozkładu</h3>
-<p>Będziemy działać na zbiorze dotyczącym klientów banku</p>
+<p><a href="https://www.data-to-viz.com/">Przewodnik po wizualizacji danych</a></p>
+<p>Będziemy działać na zbiorze dotyczącym sprzedaży w sklepach <a href="data/rossmann.xlsx">Rossmann</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(readxl)
 
-movies &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/movies.csv&quot;</span>)</code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   title = col_character(),
-##   genre = col_character(),
-##   director = col_character(),
-##   year = col_integer(),
-##   duration = col_integer(),
-##   gross = col_integer(),
-##   budget = col_integer(),
-##   cast_facebook_likes = col_integer(),
-##   votes = col_integer(),
-##   reviews = col_integer(),
-##   rating = col_double()
-## )</code></pre>
-<p>Pierwszym sposobem analizy rozkładu jest wykres pudełkowy</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(genre <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Action&quot;</span>, <span class="st">&quot;Comedy&quot;</span>, <span class="st">&quot;Crime&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">y=</span>duration, <span class="dt">x=</span>genre)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
-<p>Te same dane można przedstawić także na histogramie.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(genre <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Action&quot;</span>, <span class="st">&quot;Comedy&quot;</span>, <span class="st">&quot;Crime&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>duration)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span><span class="dv">15</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>genre)</code></pre></div>
-<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+rossmann &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/rossmann.xlsx&quot;</span>)
 
+sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(sklep_id<span class="op">==</span><span class="dv">77</span>, czy_otwarty<span class="op">==</span><span class="st">&quot;Tak&quot;</span>)</code></pre></div>
+<div id="wbudowane-funkcje" class="section level2">
+<h2><span class="header-section-number">4.1</span> Wbudowane funkcje</h2>
+<p>Do prostych wykresów można wykorzystać wbudowaną funkcję <code>plot</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(sklep77<span class="op">$</span>sprzedaz, sklep77<span class="op">$</span>liczba_klientow, 
+     <span class="dt">xlab =</span> <span class="st">&quot;Sprzedaż&quot;, ylab = &quot;</span>Liczba klientów&quot;,
+     <span class="dt">main =</span> <span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 </div>
+<div id="pakiet-ggplot2" class="section level2">
+<h2><span class="header-section-number">4.2</span> Pakiet ggplot2</h2>
+<p>Wiodący pakiet do wizualizacji danych:</p>
+<ul>
+<li>dokumentacja: <a href="https://ggplot2.tidyverse.org/" class="uri">https://ggplot2.tidyverse.org/</a></li>
+<li><a href="https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf">cheatsheet</a></li>
+<li>tworzenie wykresów poprzez dodawanie (<code>+</code>) kolejnych warstw</li>
+</ul>
+<div id="wykres-punktowy" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Wykres punktowy</h3>
+<p>Ten sam wykres co wcześniej, ale z wykorzystaniem pakietu ggplot2.</p>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<p>Wykonanie krok po kroku:</p>
+<ol style="list-style-type: decimal">
+<li>Utworzenie siatki - określenie co chcemy na wykresie przedstawić</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow))</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p>W zależności od typu wykresu w funkcji <code>aes</code> mogą znaleźć się argumenty:</p>
+<ul>
+<li>x</li>
+<li>y</li>
+<li>fill</li>
+<li>size</li>
+<li>color</li>
+<li>shape</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Określenie w jaki sposób chcemy te dane przedstawić - funkcja zawsze zaczyna się od <code>geom_</code>:</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Edytowanie etykiet osi - funkcje <code>xlab</code> i <code>ylab</code>:</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  ylab(&quot;</span>Liczba klientów&quot;)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Dodanie tytułu - funkcja <code>ggtitle</code></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Zmiana motywu - funkcja rozpoczynająca się od <code>theme_</code>:</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+<p>Dostępne motywy:</p>
+<ul>
+<li>theme_bw</li>
+<li>theme_classic</li>
+<li>theme_dark</li>
+<li>theme_gray</li>
+<li>theme_light</li>
+<li>theme_linedraw</li>
+<li>theme_minimal</li>
+<li>theme_void</li>
+</ul>
+<p>Powyższe motywy są zaimplementowane w pakiecie ggplot2, ale można także skorzystać z dodatkowych pakietów:</p>
+<ul>
+<li><a href="https://github.com/bbc/bbplot">theme_bbc</a></li>
+<li><a href="https://cran.r-project.org/web/packages/xkcd/">theme_xkcd</a></li>
+</ul>
+<p>Albo stworzyć <a href="https://www.statworx.com/de/blog/custom-themes-in-ggplot2/">swój własny motyw</a>.</p>
+<p><em>Zadanie</em></p>
+<p>Zmień motyw wykresu na wybrany przez siebie.</p>
+<p>Dodamy teraz do wykresu kolejną cechę - rozpoczęcie promocji, żeby sprawdzić czy istnieje jakaś tendencja.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
+<p>Okazuje się dosyć interesująco, niemniej nazwa etykiety legendy nie wygląda zbyt dobrze. Żeby to poprawić musimy użyć funkcji <code>scale_</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
+<p>W funkcji <code>scale_</code> musimy podać w jaki sposób daną cechę wizualizujemy (x/y/color/…) oraz jakiego jest typu. Oprócz nazwy w tej funkcji możemy określić wiele innych kwestii takich jak:</p>
+<ul>
+<li>wyświetlane etykiety</li>
+<li>początek i koniec osi</li>
+<li>kolory wariantów</li>
+<li>etykiety wariantów</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
+<p>Zmiana pozycji legendy możliwa jest z wykorzystaniem funkcji <code>theme</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+</div>
+<div id="histogram-i-wykres-gestosci" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Histogram i wykres gęstości</h3>
+<ul>
+<li>sprzedaż wg promocji</li>
+</ul>
+</div>
+<div id="wykres-pudekowy" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Wykres pudełkowy</h3>
+<ul>
+<li>sprzedaż wg dnia tygodnia - czynnik</li>
+</ul>
+</div>
+<div id="wykres-supkowy---z-grupowaniem-i-bez" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Wykres słupkowy - z grupowaniem i bez</h3>
+<ul>
+<li>liczba sklepów wg asortymentu</li>
+</ul>
+</div>
+<div id="wykres-kafelkowy" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> Wykres kafelkowy</h3>
+<ul>
+<li>czy promocja i czy swieto szkolne</li>
+</ul>
+</div>
+<div id="uwzglednienie-czasu" class="section level3">
+<h3><span class="header-section-number">4.2.6</span> Uwzględnienie czasu</h3>
+<ul>
+<li>sprzedaż w kolejnych dniach</li>
+</ul>
+</div>
+</div>
+<div id="pakiet-plotly" class="section level2">
+<h2><span class="header-section-number">4.3</span> Pakiet plotly</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
+<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)
+
+plotly<span class="op">::</span><span class="kw">ggplotly</span>(p)</code></pre></div>
+
 </div>
 </div>
             </section>
@@ -259,10 +418,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -270,6 +430,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -286,9 +450,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
