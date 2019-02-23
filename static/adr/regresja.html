@@ -177,7 +177,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="regresja-wieloraka" class="section level2">
 <h2><span class="header-section-number">3.2</span> Regresja wieloraka</h2>
-<p>Na podstawie danych dotyczących <a href="data/pracownicy.csv">zatrudnienia</a> opracuj model, w którym zmienną zależną jest bieżące wynagrodzenie. Jaka cecha ma największy wpływ na tę wartość?</p>
+<p>Na podstawie danych dotyczących <a href="data/pracownicy.xlsx">zatrudnienia</a> opracuj model, w którym zmienną zależną jest bieżące wynagrodzenie. Jaka cecha ma największy wpływ na tę wartość?</p>
 <p>Opis zbioru:</p>
 <ul>
 <li>id - kod pracownika</li>
@@ -192,11 +192,322 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>zwiazki - przynależność do związków zawodowych (0 - nie, 1 - tak)</li>
 <li>wiek - wiek (w latach)</li>
 </ul>
-<p><a href="res/regresja_wieloraka.Rmd">regresja_wieloraka.Rmd</a></p>
-<p><a href="res/adr.zip">cały projekt</a></p>
+<p>Wczytanie bibliotek <code>tidyverse</code>, <code>readxl</code> oraz danych.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(readxl)
+
+<span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">100</span>)
+
+pracownicy &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/pracownicy.xlsx&quot;</span>)
+
+pracownicy2 &lt;-<span class="st"> </span>pracownicy <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(wiek)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>id, <span class="op">-</span>data_urodz) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">plec=</span><span class="kw">as.factor</span>(plec),
+         <span class="dt">kat_pracownika=</span><span class="kw">as.factor</span>(kat_pracownika),
+         <span class="dt">zwiazki=</span><span class="kw">as.factor</span>(zwiazki))
+
+<span class="kw">summary</span>(pracownicy2)</code></pre></div>
+<pre><code>##  plec       edukacja     kat_pracownika bwynagrodzenie   pwynagrodzenie 
+##  0:257   Min.   : 8.00   1:362          Min.   : 15750   Min.   : 9000  
+##  1:216   1st Qu.:12.00   2: 27          1st Qu.: 24000   1st Qu.:12450  
+##          Median :12.00   3: 84          Median : 28800   Median :15000  
+##          Mean   :13.49                  Mean   : 34418   Mean   :17009  
+##          3rd Qu.:15.00                  3rd Qu.: 37050   3rd Qu.:17490  
+##          Max.   :21.00                  Max.   :135000   Max.   :79980  
+##       staz       doswiadczenie    zwiazki      wiek      
+##  Min.   :63.00   Min.   :  0.00   0:369   Min.   :24.00  
+##  1st Qu.:72.00   1st Qu.: 19.00   1:104   1st Qu.:30.00  
+##  Median :81.00   Median : 55.00           Median :33.00  
+##  Mean   :81.14   Mean   : 95.95           Mean   :38.67  
+##  3rd Qu.:90.00   3rd Qu.:139.00           3rd Qu.:47.00  
+##  Max.   :98.00   Max.   :476.00           Max.   :66.00</code></pre>
+<p>W zmiennej wiek występował brak danych, który został usunięty. Usunięto także kolumny, które nie przydadzą się w modelowaniu. Ponadto dokonujemy przekształcenia typu cech, które są jakościowe (płeć, kat_pracownika, zwiazki) z typu liczbowego na czynnik/faktor, który będzie poprawnie interpretowany przez model.</p>
+<p>W modelu zmienna zależna to <code>bwynagrodzenie</code>, natomiast jako zmienne niezależne bierzemy pod uwagę wszystkie pozostałe cechy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>., pracownicy2)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = bwynagrodzenie ~ ., data = pracownicy2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -23185  -3041   -705   2591  46295 
+## 
+## Coefficients:
+##                    Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -4764.87418  3590.49652  -1.327              0.18514    
+## plec1           -1702.43743   796.51779  -2.137              0.03309 *  
+## edukacja          482.43603   160.83977   2.999              0.00285 ** 
+## kat_pracownika2  6643.17910  1638.06138   4.056  0.00005869172850407 ***
+## kat_pracownika3 11169.64519  1372.73990   8.137  0.00000000000000377 ***
+## pwynagrodzenie      1.34021     0.07317  18.315 &lt; 0.0000000000000002 ***
+## staz              154.50876    31.65933   4.880  0.00000145958620443 ***
+## doswiadczenie     -15.77375     5.78369  -2.727              0.00663 ** 
+## zwiazki1        -1011.55276   787.80884  -1.284              0.19978    
+## wiek              -64.78787    47.88015  -1.353              0.17668    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6809 on 463 degrees of freedom
+## Multiple R-squared:  0.8444, Adjusted R-squared:  0.8414 
+## F-statistic: 279.1 on 9 and 463 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Tak zbudowany model wyjaśnia 84% zmienności bieżącego wynagrodzenia, ale nie wszystkie zmienne są w tym modelu istotne.</p>
+<p>Parametry regresji mają następujące interpretacje:</p>
+<ul>
+<li>plec1 - kobiety zarabiają przeciętnie o 1702,44 zł mniej niż mężczyźni,</li>
+<li>edukacja - wzrost liczby lat nauki o rok powoduje średni wzrost bieżącego wynagrodzenia o 482,44 zł</li>
+<li>kat_pracownika2 - pracownicy o kodzie 2 (urzędnik) zarabiają średnio o 6643,18 zł więcej niż pracownik o kodzie 1 (ochroniarz)</li>
+<li>kat_pracownika2 - pracownicy o kodzie 3 (menedżer) zarabiają średnio o 11169,65 zł więcej niż pracownik o kodzie 1 (ochroniarz)</li>
+<li>pwynagrodzenie - wzrost początkowego wynagrodzenia o 1 zł powoduje przecięny wzrost bieżącego wynagrodzenia o 1,34 zł</li>
+<li>staz - wzrost stażu pracy o miesiąc skutkuje przeciętnym wzrostem bieżącego wynagrodzenia o 154,51 zł</li>
+<li>doswiadcznie - wzrost doświadczenia o miesiąc powoduje średni spadek bieżącego wynagrodzenia o 15,77 zł</li>
+<li>zwiazki1 - pracownicy należący do związków zawodowych zarabiają średnio o 1011,55 zł mniej aniżeli pracownicy, którzy do związków nie zależą</li>
+<li>wiek - wzrost wieku pracownika o 1 rok to przecięnym spadek bieżącego wynagrodzenia o 64,79 zł</li>
+</ul>
+<p>Wszystkie te zależności obowiązują przy założeniu <em>ceteris paribus</em> - przy pozostałych warunkach niezmienionych.</p>
+<p>Ten model wymaga oczywiście ulepszenie do czego wykorzystamy m.in. pakiet <a href="https://cran.r-project.org/web/packages/olsrr/index.html">olsrr</a>.</p>
+<p>Pierwszą kwestią, którą się zajmiemy jest współliniowość zmiennych. W regresji zmienne objaśniające powinny być jak najbardziej skorelowane ze zmienną objaśnianą, a możliwie nieskorelowane ze sobą. W związku z tym wybieramy ze zbioru wyłącznie cechy ilościowe, dla którym wyznaczymy współczynnik korelacji liniowej Pearsona.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(corrplot)</code></pre></div>
+<pre><code>## corrplot 0.84 loaded</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(olsrr)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;olsrr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:datasets&#39;:
+## 
+##     rivers</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">korelacje &lt;-<span class="st"> </span>pracownicy2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(plec, kat_pracownika, zwiazki)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cor</span>()
+
+<span class="kw">corrplot</span>(korelacje, <span class="dt">method =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;upper&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Możemy zauważyć, że wartości bieżącego wynagrodzenia są najsilniej skorelowane w wartościami wynagrodzenia początkowego. Także doświadczenie i wiek są silnie ze sobą związane, co może sugerować, że obie zmienne wnoszą do modelu podobną informację.</p>
+<p>W związku z tym powinniśmy wyeliminować niektóre zmienne z modelu pozostawiając te najważniejsze. Wyróżnia się trzy podjeścia do tego zagadnienia:</p>
+<ul>
+<li>ekspercki dobór cech,</li>
+<li>budowa wszystkich możliwych modeli i wybór najlepszego według określonego kryterium,</li>
+<li>regresja krokowa.</li>
+</ul>
+<p>W przypadku budowy wszystkich możliwych modeli należy pamiętać o rosnącej wykładniczo liczbie modeli - <span class="math inline">\(2^p-1\)</span>, gdzie <span class="math inline">\(p\)</span> oznacza liczbę zmiennych objaśniających. w rozważanym przypadku liczba modeli wynosi 255.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wszystkie_modele &lt;-<span class="st"> </span><span class="kw">ols_step_all_possible</span>(model)</code></pre></div>
+<p>W uzyskanym zbiorze danych są informacje o numerze modelu, liczbie użytych zmiennych, nazwie tych zmiennych oraz wiele miar jakości. Te, które warto wziąć pod uwagę to przede wszystkim:</p>
+<ul>
+<li><code>rsquare</code> - współczynnik R-kwadrat,</li>
+<li><code>aic</code> - kryterium informacyjne Akaike,</li>
+<li><code>msep</code> - błąd średniokwadratowy predykcji.</li>
+</ul>
+<p>Najwyższa wartość współczynnika <span class="math inline">\(R^2\)</span> związana jest z modelem zawierającym wszystkie dostępne zmienne objaśniające. Jest to pewna niedoskonałość tej miary, która rośnie wraz z liczbą zmiennych w modelu, nawet jeśli te zmienne nie są istotne.</p>
+<p>W przypadku kryteriów informacyjnych oraz błędu średniokwadratowego interesują nas jak najmniejsze wartości. Wówczas jako najlepszy należy wskazać model nr 219 zawierający 6 zmiennych objaśniających.</p>
+<p>Metodą, która także pozwoli uzyskać optymalny model, ale przy mniejszym obciążeniu obliczeniowym jest regresja krokowa polegająca na krokowym budowaniu modelu.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ols_step_both_aic</span>(model)</code></pre></div>
+<pre><code>## Stepwise Selection Method 
+## -------------------------
+## 
+## Candidate Terms: 
+## 
+## 1 . plec 
+## 2 . edukacja 
+## 3 . kat_pracownika 
+## 4 . pwynagrodzenie 
+## 5 . staz 
+## 6 . doswiadczenie 
+## 7 . zwiazki 
+## 8 . wiek 
+## 
+## 
+## Variables Entered/Removed: 
+## 
+## - pwynagrodzenie added 
+## - kat_pracownika added 
+## - doswiadczenie added 
+## - staz added 
+## - edukacja added 
+## - plec added 
+## 
+## No more variables to be added or removed.</code></pre>
+<pre><code>## 
+## 
+##                                            Stepwise Summary                                            
+## -----------------------------------------------------------------------------------------------------
+## Variable           Method       AIC             RSS               Sum Sq          R-Sq      Adj. R-Sq 
+## -----------------------------------------------------------------------------------------------------
+## pwynagrodzenie    addition    9862.260    31053506813.535    106862706669.340    0.77484      0.77436 
+## kat_pracownika    addition    9786.152    26215474648.689    111700738834.186    0.80992      0.80870 
+## doswiadczenie     addition    9743.487    23853248017.651    114062965465.224    0.82705      0.82557 
+## staz              addition    9719.469    22576592070.620    115339621412.255    0.83630      0.83455 
+## edukacja          addition    9707.338    21912088629.084    116004124853.791    0.84112      0.83907 
+## plec              addition    9703.188    21629051655.016    116287161827.859    0.84317      0.84081 
+## -----------------------------------------------------------------------------------------------------</code></pre>
+<p>Otrzymany w ten sposób model jest tożsamy z modelem charakteryzującym się najlepszymi miarami jakości spośród zbioru wszystkich możliwych modeli:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wybrany_model &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>pwynagrodzenie <span class="op">+</span><span class="st"> </span>kat_pracownika <span class="op">+</span><span class="st"> </span>doswiadczenie <span class="op">+</span><span class="st"> </span>staz <span class="op">+</span><span class="st"> </span>plec <span class="op">+</span><span class="st"> </span>edukacja, <span class="dt">data =</span> pracownicy2)
+<span class="kw">summary</span>(wybrany_model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = bwynagrodzenie ~ pwynagrodzenie + kat_pracownika + 
+##     doswiadczenie + staz + plec + edukacja, data = pracownicy2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -22922  -3300   -673   2537  46524 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -6547.147   3402.860  -1.924              0.05496 .  
+## pwynagrodzenie      1.342      0.073  18.382 &lt; 0.0000000000000002 ***
+## kat_pracownika2  6734.992   1631.122   4.129   0.0000431843301918 ***
+## kat_pracownika3 11226.635   1368.413   8.204   0.0000000000000023 ***
+## doswiadczenie     -22.302      3.571  -6.246   0.0000000009514655 ***
+## staz              147.865     31.461   4.700   0.0000034337703087 ***
+## plec1           -1878.949    761.703  -2.467              0.01399 *  
+## edukacja          501.391    160.270   3.128              0.00187 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6820 on 465 degrees of freedom
+## Multiple R-squared:  0.8432, Adjusted R-squared:  0.8408 
+## F-statistic: 357.1 on 7 and 465 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Uzyskany model charakteryzuje się mniejszym błędem standardowym od modelu ze wszystkimi zmiennymi i tylko jedną nieistotną zmienną. Wyraz wolny (Intercept) nie musi być istotny w modelu.</p>
+<p>Wróćmy jeszcze na chwilę do tematu współliniowości zmiennych objaśniających:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ols_vif_tol</span>(wybrany_model)</code></pre></div>
+<pre><code>## # A tibble: 7 x 3
+##   Variables       Tolerance   VIF
+##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;
+## 1 pwynagrodzenie      0.298  3.36
+## 2 kat_pracownika2     0.687  1.46
+## 3 kat_pracownika3     0.360  2.78
+## 4 doswiadczenie       0.705  1.42
+## 5 staz                0.986  1.01
+## 6 plec1               0.683  1.46
+## 7 edukacja            0.461  2.17</code></pre>
+<p>Współczynnik tolerancji wskazuje na procent niewyjaśnionej zmienności danej zmiennej przez pozostałe zmienne objaśniające. Przykładowo współcznnik tolerancji dla początkowego wynagrodzenia wynosi 0,3371, co oznacza, że 33% zmienności początkowego wynagrodzenia nie jest wyjaśnione przez pozostałe zmienne w modelu. Z kolei współczynnik VIF jest obliczany na podstawie wartości współczynnika tolerancji i wskazuje o ile wariancja szacowanego współcznnika regresji jest podwyższona z powodu współliniowości danej zmiennej objaśniającej z pozostałymi zmiennymi objaśniającymi. Wartość współczynnika VIF powyżej 4 należy uznać za wskazującą na współliniowość. W analizowanym przypadku takie zmienne nie występują.</p>
+<p>Ocena siły wpływu poszczególnych zmiennych objaśniających na zmienną objaśnianą w oryginalnej postaci modelu nie jest możliwa. Należy wyznaczyć standaryzowane współczynniki beta, które wyliczane są na danych standaryzowanych, czyli takich, które są pozbawione jednostek i cechują się średnią równą 0, a odchyleniem standardowym równym 1. Standaryzacja ma sens tylko dla cech numerycznych, w związku z czym korzystamy z funkcji <code>mutate_if()</code>, która jako pierwszy argument przyjmuje warunek, który ma być spełniony, aby była zastosowane przekształcenie podawane jako drugi argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pracownicy2_std &lt;-<span class="st"> </span>pracownicy2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, <span class="kw">funs</span>(scale))
+
+wybrany_model_std &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>pwynagrodzenie <span class="op">+</span><span class="st"> </span>kat_pracownika <span class="op">+</span><span class="st"> </span>
+<span class="st">                          </span>doswiadczenie <span class="op">+</span><span class="st"> </span>staz <span class="op">+</span><span class="st"> </span>plec <span class="op">+</span><span class="st"> </span>edukacja, <span class="dt">data =</span> pracownicy2_std)
+<span class="kw">summary</span>(wybrany_model_std)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = bwynagrodzenie ~ pwynagrodzenie + kat_pracownika + 
+##     doswiadczenie + staz + plec + edukacja, data = pracownicy2_std)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.34098 -0.19306 -0.03939  0.14841  2.72171 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -0.08893    0.03144  -2.828              0.00488 ** 
+## pwynagrodzenie   0.61842    0.03364  18.382 &lt; 0.0000000000000002 ***
+## kat_pracownika2  0.39400    0.09542   4.129   0.0000431843301918 ***
+## kat_pracownika3  0.65677    0.08005   8.204   0.0000000000000023 ***
+## doswiadczenie   -0.13657    0.02187  -6.246   0.0000000009514655 ***
+## staz             0.08691    0.01849   4.700   0.0000034337703087 ***
+## plec1           -0.10992    0.04456  -2.467              0.01399 *  
+## edukacja         0.08464    0.02706   3.128              0.00187 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.399 on 465 degrees of freedom
+## Multiple R-squared:  0.8432, Adjusted R-squared:  0.8408 
+## F-statistic: 357.1 on 7 and 465 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Spośród cech ilościowych największy wpływ na zmienną objaśnianą mają wartości wynagrodzenia początkowego, staż, edukacja i na końcu doświadczenie.</p>
+<p>Reszty czyli różnice pomiędzy obserwowanymi wartościami zmiennej objaśnianej, a wartościami wynikającymi z modelu w klasycznej metodzie najmniejszych kwadratów powinny być zbliżone do rozkładu normalnego. Oznacza to, że najwięcej reszt powinno skupiać się wokół zerowych różnic, natomiast jak najmniej powinno być wartości modelowych znacznie różniących się od tych rzeczywistych.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ols_plot_resid_hist</span>(wybrany_model)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Reszty w naszym modelu wydają się być zbliżone do rozkładu normalnego. Jednoznaczą odpowiedź da jednak odpowiedni test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ols_test_normality</span>(wybrany_model)</code></pre></div>
+<pre><code>## -----------------------------------------------
+##        Test             Statistic       pvalue  
+## -----------------------------------------------
+## Shapiro-Wilk              0.868          0.0000 
+## Kolmogorov-Smirnov        0.1092         0.0000 
+## Cramer-von Mises         42.5504         0.0001 
+## Anderson-Darling         13.0233         0.0000 
+## -----------------------------------------------</code></pre>
+<p>Hipoteza zerowa w tych testach mówi o zgodności rozkładu reszt z rozkładem normalnym. Na podstawie wartości p, które są mniejsze od <span class="math inline">\(\alpha=0,05\)</span> stwierdzamy, że są podstawy do odrzucenia tej hipotezy czyli reszty z naszego modelu nie mają rozkładu normalnego. W diagnostyce przyczyn takiego stanu rzeczy pomoże nam wykres kwantyl-kwantyl:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ols_plot_resid_qq</span>(wybrany_model)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Gdyby wszystkie punkty leżały na prostej to oznaczałoby to normalność rozkładu reszt. Tymczasem po lewej i prawej stronie tego wykresu znajdują się potencjalne wartości odstające, które znacznie wpływają na rozkład reszt modelu.</p>
+<p>Wartości odstające można ustalić na podstawie wielu kryteriów. Do jednych z najbardziej popularnych należy odległość Cooka:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cook &lt;-<span class="st"> </span><span class="kw">ols_plot_cooksd_bar</span>(wybrany_model)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Przypisanie tej funkcji do obiektu zwraca nam tabelę z numerami zidentyfikowanych obserwacji wpływowych. W przypadku odległości Cooka jest to 12 obserwacji.</p>
+<p>Inną miarą są reszty studentyzowane.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stud3 &lt;-<span class="st"> </span><span class="kw">ols_plot_resid_stud</span>(wybrany_model)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Wyżej wykorzystana funkcja jako kryterium odstawania przyjmuje wartość 3 identyfikując 4 obserwacje wpływowe. Z kolei dodanie do powyższej funkcji przyrostka <em>fit</em> powoduje przyjęcie jako granicy wartości równej 2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">obs_wplyw &lt;-<span class="st"> </span><span class="kw">ols_plot_resid_stud_fit</span>(wybrany_model)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>W ten sposób zostało zidentyfikowanych 10 obserwacji odstających. Korzystając z tego ostatniego podejścia wyeliminujemy obserwacje odstające ze zbioru uczącego:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nr_obs_wplyw &lt;-<span class="st"> </span>obs_wplyw<span class="op">$</span>outliers<span class="op">$</span>observation
+
+bez_obs_wplyw &lt;-<span class="st"> </span>pracownicy2[<span class="op">-</span>nr_obs_wplyw,]
+
+wybrany_model_out &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>pwynagrodzenie <span class="op">+</span><span class="st"> </span>kat_pracownika <span class="op">+</span><span class="st"> </span>doswiadczenie <span class="op">+</span><span class="st"> </span>staz <span class="op">+</span><span class="st"> </span>plec <span class="op">+</span><span class="st"> </span>edukacja, 
+                        <span class="dt">data =</span> bez_obs_wplyw)
+<span class="kw">summary</span>(wybrany_model_out)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = bwynagrodzenie ~ pwynagrodzenie + kat_pracownika + 
+##     doswiadczenie + staz + plec + edukacja, data = bez_obs_wplyw)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12997.6  -2816.4   -481.4   2544.6  15180.2 
+## 
+## Coefficients:
+##                    Estimate  Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -4307.25866  2381.76657  -1.808             0.071217 .  
+## pwynagrodzenie      1.39451     0.05382  25.908 &lt; 0.0000000000000002 ***
+## kat_pracownika2  6097.12115  1102.15833   5.532   0.0000000542431348 ***
+## kat_pracownika3  9129.16469   972.97899   9.383 &lt; 0.0000000000000002 ***
+## doswiadczenie     -18.87447     2.41685  -7.810   0.0000000000000419 ***
+## staz              120.56289    21.88184   5.510   0.0000000610683928 ***
+## plec1           -1483.93151   521.34920  -2.846             0.004628 ** 
+## edukacja          384.58159   109.81914   3.502             0.000509 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4592 on 443 degrees of freedom
+## Multiple R-squared:  0.8986, Adjusted R-squared:  0.897 
+## F-statistic:   561 on 7 and 443 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>Model dopasowny na takim zbiorze charakteryzuje się dużo mniejszym błędem standardowym oraz wyższym współczynnikiem <span class="math inline">\(R^2\)</span>. Sprawdźmy w takim razie normalność reszt.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ols_plot_resid_qq</span>(wybrany_model_out)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Wykres kwantyl-kwantyl wygląda już dużo lepiej, ale dla pewności przeprowadzimy testy statystyczne.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ols_test_normality</span>(wybrany_model_out)</code></pre></div>
+<pre><code>## -----------------------------------------------
+##        Test             Statistic       pvalue  
+## -----------------------------------------------
+## Shapiro-Wilk              0.9708         0.0000 
+## Kolmogorov-Smirnov        0.0675         0.0328 
+## Cramer-von Mises         39.1404         0.0001 
+## Anderson-Darling          3.8103         0.0000 
+## -----------------------------------------------</code></pre>
+<p>Tylko jeden test wskazał zgodność rozkładu reszt z rozkładem normalnym.</p>
 <div id="zadanie-1" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Zadanie</h3>
 <p>Na podstawie zbioru dotyczącego <a href="data/50_Startups.csv">50 startupów</a> określ jakie czynniki w największym stopniu wpływają na przychód startupów.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">startupy &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/50_Startups.csv&quot;</span>)
+
+<span class="kw">summary</span>(startupy)</code></pre></div>
+<pre><code>##    R.D.Spend      Administration   Marketing.Spend         State   
+##  Min.   :     0   Min.   : 51283   Min.   :     0   California:17  
+##  1st Qu.: 39936   1st Qu.:103731   1st Qu.:129300   Florida   :16  
+##  Median : 73051   Median :122700   Median :212716   New York  :17  
+##  Mean   : 73722   Mean   :121345   Mean   :211025                  
+##  3rd Qu.:101603   3rd Qu.:144842   3rd Qu.:299469                  
+##  Max.   :165349   Max.   :182646   Max.   :471784                  
+##      Profit      
+##  Min.   : 14681  
+##  1st Qu.: 90139  
+##  Median :107978  
+##  Mean   :112013  
+##  3rd Qu.:139766  
+##  Max.   :192262</code></pre>
 
 </div>
 </div>
