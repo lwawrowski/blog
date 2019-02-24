@@ -730,7 +730,7 @@ podając odpowiednie wartości argumentów \texttt{min} i \texttt{max}.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.3991616 0.7530615 0.8384006 0.1196702 0.8771482 0.9816750
+## [1] 0.9671938 0.9691390 0.3254338 0.1594024 0.1944266 0.8542069
 \end{verbatim}
 
 Obserwacje można także generować z innych rozkładów:
@@ -760,7 +760,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.218086669 0.774537554 0.007871869 0.119956221 0.884669371
+## [1] 0.05189271 0.81401531 0.12169493 0.86456735 0.59058883
 \end{verbatim}
 
 \begin{Shaded}
@@ -770,7 +770,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.09961691 0.06187958 0.80648641 0.86360898 0.40379194
+## [1] 0.08147101 0.92399388 0.40781543 0.78551271 0.28932549
 \end{verbatim}
 
 Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:
@@ -3091,6 +3091,8 @@ Dane na temat średniego kursu miesięcznego euro pobierz ze stron
 
 \chapter{Wizualizacja danych}\label{wizualizacja-danych}
 
+\href{presentations/ggplot2.html}{Wprowadzenie}
+
 \href{https://www.data-to-viz.com/}{Przewodnik po wizualizacji danych}
 
 Będziemy działać na zbiorze dotyczącym sprzedaży w sklepach
@@ -3453,6 +3455,56 @@ bez}\label{wykres-supkowy---z-grupowaniem-i-bez}
 \NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(p)}
 \end{Highlighting}
 \end{Shaded}
+
+\emph{Zadanie}
+
+Stwórz trzy grafiki dla danych dotyczących
+\href{data/movies.csv}{filmów}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filmy <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/movies.csv"}\NormalTok{)}
+
+\KeywordTok{summary}\NormalTok{(filmy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                          title            genre    
+##  Home                       :   3   Comedy   :848  
+##  A Nightmare on Elm Street  :   2   Action   :738  
+##  Across the Universe        :   2   Drama    :498  
+##  Alice in Wonderland        :   2   Adventure:288  
+##  Aloha                      :   2   Crime    :202  
+##  Around the World in 80 Days:   2   Biography:135  
+##  (Other)                    :2948   (Other)  :252  
+##               director         year         duration    
+##  Steven Spielberg :  23   Min.   :1920   Min.   : 37.0  
+##  Clint Eastwood   :  19   1st Qu.:1999   1st Qu.: 95.0  
+##  Martin Scorsese  :  16   Median :2004   Median :106.0  
+##  Tim Burton       :  16   Mean   :2003   Mean   :109.6  
+##  Spike Lee        :  15   3rd Qu.:2010   3rd Qu.:119.0  
+##  Steven Soderbergh:  15   Max.   :2016   Max.   :330.0  
+##  (Other)          :2857                                 
+##      gross               budget          cast_facebook_likes
+##  Min.   :      703   Min.   :      218   Min.   :     0     
+##  1st Qu.: 12276810   1st Qu.: 11000000   1st Qu.:  2241     
+##  Median : 34703228   Median : 26000000   Median :  4604     
+##  Mean   : 58090401   Mean   : 40619384   Mean   : 12394     
+##  3rd Qu.: 75590286   3rd Qu.: 55000000   3rd Qu.: 16926     
+##  Max.   :760505847   Max.   :300000000   Max.   :656730     
+##                                                             
+##      votes            reviews           rating     
+##  Min.   :      5   Min.   :   2.0   Min.   :1.600  
+##  1st Qu.:  19918   1st Qu.: 199.0   1st Qu.:5.800  
+##  Median :  55749   Median : 364.0   Median :6.500  
+##  Mean   : 109308   Mean   : 503.3   Mean   :6.389  
+##  3rd Qu.: 133348   3rd Qu.: 631.0   3rd Qu.:7.100  
+##  Max.   :1689764   Max.   :5312.0   Max.   :9.300  
+## 
+\end{verbatim}
+
+Z racji mnogości gatunków można ograniczyć się do kilku wybranych.
 
 \chapter{Programowanie w R}\label{programowanie-w-r}
 

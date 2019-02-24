@@ -199,6 +199,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="wizualizacja-danych" class="section level1">
 <h1><span class="header-section-number">4</span> Wizualizacja danych</h1>
+<p><a href="presentations/ggplot2.html">Wprowadzenie</a></p>
 <p><a href="https://www.data-to-viz.com/">Przewodnik po wizualizacji danych</a></p>
 <p>Będziemy działać na zbiorze dotyczącym sprzedaży w sklepach <a href="data/rossmann.xlsx">Rossmann</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -391,6 +392,44 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)
 
 plotly<span class="op">::</span><span class="kw">ggplotly</span>(p)</code></pre></div>
+<p><em>Zadanie</em></p>
+<p>Stwórz trzy grafiki dla danych dotyczących <a href="data/movies.csv">filmów</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">filmy &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/movies.csv&quot;</span>)
+
+<span class="kw">summary</span>(filmy)</code></pre></div>
+<pre><code>##                          title            genre    
+##  Home                       :   3   Comedy   :848  
+##  A Nightmare on Elm Street  :   2   Action   :738  
+##  Across the Universe        :   2   Drama    :498  
+##  Alice in Wonderland        :   2   Adventure:288  
+##  Aloha                      :   2   Crime    :202  
+##  Around the World in 80 Days:   2   Biography:135  
+##  (Other)                    :2948   (Other)  :252  
+##               director         year         duration    
+##  Steven Spielberg :  23   Min.   :1920   Min.   : 37.0  
+##  Clint Eastwood   :  19   1st Qu.:1999   1st Qu.: 95.0  
+##  Martin Scorsese  :  16   Median :2004   Median :106.0  
+##  Tim Burton       :  16   Mean   :2003   Mean   :109.6  
+##  Spike Lee        :  15   3rd Qu.:2010   3rd Qu.:119.0  
+##  Steven Soderbergh:  15   Max.   :2016   Max.   :330.0  
+##  (Other)          :2857                                 
+##      gross               budget          cast_facebook_likes
+##  Min.   :      703   Min.   :      218   Min.   :     0     
+##  1st Qu.: 12276810   1st Qu.: 11000000   1st Qu.:  2241     
+##  Median : 34703228   Median : 26000000   Median :  4604     
+##  Mean   : 58090401   Mean   : 40619384   Mean   : 12394     
+##  3rd Qu.: 75590286   3rd Qu.: 55000000   3rd Qu.: 16926     
+##  Max.   :760505847   Max.   :300000000   Max.   :656730     
+##                                                             
+##      votes            reviews           rating     
+##  Min.   :      5   Min.   :   2.0   Min.   :1.600  
+##  1st Qu.:  19918   1st Qu.: 199.0   1st Qu.:5.800  
+##  Median :  55749   Median : 364.0   Median :6.500  
+##  Mean   : 109308   Mean   : 503.3   Mean   :6.389  
+##  3rd Qu.: 133348   3rd Qu.: 631.0   3rd Qu.:7.100  
+##  Max.   :1689764   Max.   :5312.0   Max.   :9.300  
+## </code></pre>
+<p>Z racji mnogości gatunków można ograniczyć się do kilku wybranych.</p>
 
 </div>
 </div>
