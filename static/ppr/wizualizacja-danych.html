@@ -164,9 +164,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wbudowane-funkcje"><i class="fa fa-check"></i><b>4.1</b> Wbudowane funkcje</a></li>
 <li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-punktowy"><i class="fa fa-check"></i><b>4.2.1</b> Wykres punktowy</a></li>
-<li class="chapter" data-level="4.2.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram-i-wykres-gestosci"><i class="fa fa-check"></i><b>4.2.2</b> Histogram i wykres gęstości</a></li>
+<li class="chapter" data-level="4.2.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram"><i class="fa fa-check"></i><b>4.2.2</b> Histogram</a></li>
 <li class="chapter" data-level="4.2.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-pudekowy"><i class="fa fa-check"></i><b>4.2.3</b> Wykres pudełkowy</a></li>
-<li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy---z-grupowaniem-i-bez"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy - z grupowaniem i bez</a></li>
+<li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy</a></li>
 <li class="chapter" data-level="4.2.5" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-kafelkowy"><i class="fa fa-check"></i><b>4.2.5</b> Wykres kafelkowy</a></li>
 <li class="chapter" data-level="4.2.6" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#uwzglednienie-czasu"><i class="fa fa-check"></i><b>4.2.6</b> Uwzględnienie czasu</a></li>
 </ul></li>
@@ -349,23 +349,166 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
 </div>
-<div id="histogram-i-wykres-gestosci" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Histogram i wykres gęstości</h3>
-<ul>
-<li>sprzedaż wg promocji</li>
-</ul>
+<div id="histogram" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Histogram</h3>
+<p>Rozkład cechy można ocenić na podstawie histogramu - domyślnie rysowanych jest 30 słupków.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<p>W funkcji <code>geom_histogram</code> można podać liczbę słupków (<code>bins</code>) albo ich szerokość (<code>binwidth</code>). Poniżej zastosowano słupki o szerokości 1000 euro.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1000</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
+<p>Dodatkowo w tej funkcji można określić kwestie estetyczne - kolory obramowania i wypełnienia słupków.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
+<p>Pełna lista nazw kolorów znajduje się <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">tutaj</a>.</p>
+<p>Z wykorzystaniem funkcji <code>scale_</code> zmieniamy nazwy osi (<code>name</code>), granice (<code>limits</code>) oraz wskazania liczbowe (<code>breaks</code>). Te dwie ostatnie wartości musimy deklarować jako wektory z wykorzystaniem funkcji <code>c()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, 
+                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;, </span>
+<span class="st">                     limits = c(4000,17000),</span>
+<span class="st">                     breaks = c(5000, 8000, 11000)) +</span>
+<span class="st">  scale_y_continuous(name = &quot;</span>Liczebność<span class="st">&quot;,</span>
+<span class="st">                     limits = c(0,50))</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_bar).</code></pre>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<p>Można zaumatyzować proces dobierania wskazań liczbowych z wykorzystaniem funkcji <code>seq</code> opisanej szerzej w rozdziale 2.1.2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, 
+                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;, </span>
+<span class="st">                     limits = c(4000,17000),</span>
+<span class="st">                     breaks = seq(4000, 17000, 1500)) +</span>
+<span class="st">  scale_y_continuous(name = &quot;</span>Liczebność<span class="st">&quot;,</span>
+<span class="st">                     limits = c(0,50))</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_bar).</code></pre>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
 </div>
 <div id="wykres-pudekowy" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Wykres pudełkowy</h3>
-<ul>
-<li>sprzedaż wg dnia tygodnia - czynnik</li>
-</ul>
+<p>Wykres pudełkowy umożliwia porównywanie rozkładów cechy wg zmiennej grupującej. Wymogiem jest aby na osi <code>x</code> znajdowała się zmienna grupująca, a na osi <code>y</code> cecha analizowana.</p>
+<p>Przeanalizujemy sprzedaż według kolejnych dni tygodnia.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
+<pre><code>## Warning: Continuous x aesthetic -- did you forget aes(group=...)?</code></pre>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<p>Zdecydowanie nie jest wykres jakiego oczekiwaliśmy. Wynika to z faktu, że dzień tygodnia w zbiorze danych jest zapisany jako zmienna numeryczna, natomiast prawidłowym typem dla zmiennej grupującej jest typ tekstowy lub czynnik (faktor). Ten typ danych został szczegółowo opisany w części 2.3.</p>
+<p>Dokonujemy zatem zamiany typu danych:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 &lt;-<span class="st"> </span>sklep77 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dzien_tyg=</span><span class="kw">factor</span>(<span class="dt">x =</span> dzien_tyg,
+                          <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,
+                          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Pon&quot;</span>, <span class="st">&quot;Wt&quot;</span>, <span class="st">&quot;Śr&quot;</span>, <span class="st">&quot;Czw&quot;</span>, <span class="st">&quot;Pt&quot;</span>, <span class="st">&quot;Sob&quot;</span>),
+                          <span class="dt">ordered =</span> <span class="ot">TRUE</span>))
+
+<span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
+<p>Z tego wykresu można już odczytać, że najwyższa mediana sprzedaży występuje w poniedziałek, a najniższa w środę.</p>
+<p>Jeżli kategorii jest dużo to można obrócić wykres z wykorzystaniem funkcji <code>coord_flip</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
+<p>Użycie tej funkcji powoduje wyłącznie obrócenie wykresu. Nazwy osi nie uległy zmianie pomimo, że zostały zamienione. Odwrócimy jeszcze kolejność etykiet dnia tygodnia, tak aby na górze był poniedziałek.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits =</span> <span class="kw">rev</span>(<span class="kw">levels</span>(sklep77<span class="op">$</span>dzien_tyg)))</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
 </div>
-<div id="wykres-supkowy---z-grupowaniem-i-bez" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> Wykres słupkowy - z grupowaniem i bez</h3>
+<div id="wykres-supkowy" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Wykres słupkowy</h3>
+<p>W zależności od typu danych wejściowych, wykres słupkowy można stworzyć na dwa sposoby:</p>
 <ul>
-<li>liczba sklepów wg asortymentu</li>
+<li>dane jednostkowe - <code>geom_bar</code> - funkcja sama oblicza wartości do wyświetlenia,</li>
+<li>dane zagregowane - <code>geom_col</code> - funkcja otrzymuje już obliczone wartości.</li>
 </ul>
+<p>Sprawdźmy ile jest sklepów o danym asortymencie. W tym celu potrzebujemy informację o sklepie i typie oferowanego asortymentu.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_asort) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">distinct</span>()
+
+<span class="kw">glimpse</span>(rossmann_asort)</code></pre></div>
+<pre><code>## Observations: 1,115
+## Variables: 2
+## $ sklep_id    &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16,...
+## $ sklep_asort &lt;chr&gt; &quot;Podstawowy&quot;, &quot;Podstawowy&quot;, &quot;Podstawowy&quot;, &quot;Rozszer...</code></pre>
+<p>W funkcji <code>aes</code> podajemy tylko kolumnę zawierającą dane do zliczenia.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
+<p>Natomiast użycie funkcji <code>geom_col</code> wymaga samodzielnego obliczenia wartości:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort2 &lt;-<span class="st"> </span>rossmann_asort <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(sklep_asort)
+
+<span class="kw">glimpse</span>(rossmann_asort2)</code></pre></div>
+<pre><code>## Observations: 3
+## Variables: 2
+## $ sklep_asort &lt;chr&gt; &quot;Extra&quot;, &quot;Podstawowy&quot;, &quot;Rozszerzony&quot;
+## $ n           &lt;int&gt; 9, 593, 513</code></pre>
+<p>Wartość do wyświetlenia podajemy w funkcji <code>aes</code> w argumencie <code>y</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort2, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
+<p>Uporządkujemy etykiety osi <code>x</code> (obecnie są wyświetlane w kolejności alfabetycznej) tworząc czynnik.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort2 &lt;-<span class="st"> </span>rossmann_asort2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sklep_asort=</span><span class="kw">factor</span>(<span class="dt">x =</span> sklep_asort,
+                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Podstawowy&quot;</span>, 
+                                       <span class="st">&quot;Rozszerzony&quot;</span>, 
+                                       <span class="st">&quot;Extra&quot;</span>), 
+                            <span class="dt">ordered =</span> T))
+
+<span class="kw">glimpse</span>(rossmann_asort2)</code></pre></div>
+<pre><code>## Observations: 3
+## Variables: 2
+## $ sklep_asort &lt;ord&gt; Extra, Podstawowy, Rozszerzony
+## $ n           &lt;int&gt; 9, 593, 513</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort2, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<p>Do wykresu słupkowego możemy dodać jeszcze jedną zmienną. W tym przypadku będzie to typ sklepu.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort3 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_asort, sklep_typ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(sklep_asort, sklep_typ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sklep_asort=</span><span class="kw">factor</span>(<span class="dt">x =</span> sklep_asort,
+                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Podstawowy&quot;</span>, 
+                                       <span class="st">&quot;Rozszerzony&quot;</span>, 
+                                       <span class="st">&quot;Extra&quot;</span>), 
+                            <span class="dt">ordered =</span> T))
+
+<span class="kw">glimpse</span>(rossmann_asort3)</code></pre></div>
+<pre><code>## Observations: 9
+## Variables: 3
+## $ sklep_asort &lt;ord&gt; Extra, Podstawowy, Podstawowy, Podstawowy, Podstaw...
+## $ sklep_typ   &lt;chr&gt; &quot;b&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;
+## $ n           &lt;int&gt; 9, 381, 7, 77, 128, 221, 1, 71, 220</code></pre>
+<p>Uwzględnienie kolejnej zmiennej jest możliwe jako argument <code>fill</code> w funkcji <code>aes</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<p>Domyślnie kategorie są układane jedna na drugą - <code>stack</code>. Można je ułożyć obok siebie dodając argument <code>position = &quot;dodge&quot;</code> w funkcji <code>geom_col</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p>Możemy jeszcze dodać etykiety słupków wykorzystując funkcję <code>geom_text</code>, w której trzeba podać argumenty definujące położenie wartości etykiet. Wartości tych argumentów będą zależały od typu wykresu.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), 
+            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
+            <span class="dt">vjust =</span> <span class="op">-</span><span class="fl">0.3</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p>Zmienimy jeszcze nazwę legendy za pomocą funkcji <code>scale_fill_discrete</code>. Wykorzystujemy tę konkretną funkcję ze względu na to, że typ sklepu jest argumentem <code>fill</code> w funkcji <code>aes</code> oraz cechą jakościową (<code>discrete</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), 
+            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
+            <span class="dt">vjust =</span> <span class="op">-</span><span class="fl">0.3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Typ sklepu&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 </div>
 <div id="wykres-kafelkowy" class="section level3">
 <h3><span class="header-section-number">4.2.5</span> Wykres kafelkowy</h3>

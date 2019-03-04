@@ -164,9 +164,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wbudowane-funkcje"><i class="fa fa-check"></i><b>4.1</b> Wbudowane funkcje</a></li>
 <li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-ggplot2"><i class="fa fa-check"></i><b>4.2</b> Pakiet ggplot2</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-punktowy"><i class="fa fa-check"></i><b>4.2.1</b> Wykres punktowy</a></li>
-<li class="chapter" data-level="4.2.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram-i-wykres-gestosci"><i class="fa fa-check"></i><b>4.2.2</b> Histogram i wykres gęstości</a></li>
+<li class="chapter" data-level="4.2.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram"><i class="fa fa-check"></i><b>4.2.2</b> Histogram</a></li>
 <li class="chapter" data-level="4.2.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-pudekowy"><i class="fa fa-check"></i><b>4.2.3</b> Wykres pudełkowy</a></li>
-<li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy---z-grupowaniem-i-bez"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy - z grupowaniem i bez</a></li>
+<li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy</a></li>
 <li class="chapter" data-level="4.2.5" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-kafelkowy"><i class="fa fa-check"></i><b>4.2.5</b> Wykres kafelkowy</a></li>
 <li class="chapter" data-level="4.2.6" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#uwzglednienie-czasu"><i class="fa fa-check"></i><b>4.2.6</b> Uwzględnienie czasu</a></li>
 </ul></li>
@@ -281,7 +281,7 @@ obiekt -&gt; nazwa</code></pre>
 <pre><code>##  [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0</code></pre>
 <p>Do generowania liczb pseudolosowych służy funkcja <code>runif(n)</code>, która do poprawnego wywołania wymaga tylko jednego argumentu - długości wektora wynikowego. Domyślnie losowane są liczby z przedziału <span class="math inline">\([0;1]\)</span> (tak jak w funkcji <code>los()</code> w Excelu), można to jednak zmienić podając odpowiednie wartości argumentów <code>min</code> i <code>max</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">6</span>)</code></pre></div>
-<pre><code>## [1] 0.08015285 0.37265645 0.61798794 0.23768580 0.38253611 0.55269759</code></pre>
+<pre><code>## [1] 0.3538550 0.7881679 0.6691268 0.4081538 0.7999827 0.5348133</code></pre>
 <p>Obserwacje można także generować z innych rozkładów:</p>
 <ul>
 <li><code>rnorm</code> - rozkład normalny,</li>
@@ -292,9 +292,9 @@ obiekt -&gt; nazwa</code></pre>
 <p>Wykaz wszystkich dostępnych w R rozkładów uzyskamy wywołując polecenie <code>help(&quot;Distributions&quot;)</code>.</p>
 <p>Za każdym uruchomieniem jednej z wymienionych wyżej funkcji losujących wartości z danego rozkładu otrzymamy inne wartości:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.8841505 0.7632442 0.8792149 0.2287892 0.6246200</code></pre>
+<pre><code>## [1] 0.93448180 0.43113749 0.22189935 0.33985554 0.07712676</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.52120992 0.26723915 0.51848029 0.03648141 0.04947241</code></pre>
+<pre><code>## [1] 0.76492006 0.78719938 0.94589891 0.09188456 0.50139589</code></pre>
 <p>Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
 <span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>

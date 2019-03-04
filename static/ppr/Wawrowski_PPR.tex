@@ -730,7 +730,7 @@ podając odpowiednie wartości argumentów \texttt{min} i \texttt{max}.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.9671938 0.9691390 0.3254338 0.1594024 0.1944266 0.8542069
+## [1] 0.7448003 0.4103264 0.5238384 0.2073263 0.4109423 0.1227279
 \end{verbatim}
 
 Obserwacje można także generować z innych rozkładów:
@@ -760,7 +760,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.05189271 0.81401531 0.12169493 0.86456735 0.59058883
+## [1] 0.9453459 0.9652331 0.8042120 0.7201546 0.8673821
 \end{verbatim}
 
 \begin{Shaded}
@@ -770,7 +770,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.08147101 0.92399388 0.40781543 0.78551271 0.28932549
+## [1] 0.2868691 0.2883933 0.1081833 0.6003038 0.1915317
 \end{verbatim}
 
 Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:
@@ -3397,31 +3397,368 @@ Zmiana pozycji legendy możliwa jest z wykorzystaniem funkcji
 
 \includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-142-1.pdf}
 
-\subsection{Histogram i wykres
-gęstości}\label{histogram-i-wykres-gestosci}
+\subsection{Histogram}\label{histogram}
 
-\begin{itemize}
-\tightlist
-\item
-  sprzedaż wg promocji
-\end{itemize}
+Rozkład cechy można ocenić na podstawie histogramu - domyślnie
+rysowanych jest 30 słupków.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-143-1.pdf}
+
+W funkcji \texttt{geom\_histogram} można podać liczbę słupków
+(\texttt{bins}) albo ich szerokość (\texttt{binwidth}). Poniżej
+zastosowano słupki o szerokości 1000 euro.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-144-1.pdf}
+
+Dodatkowo w tej funkcji można określić kwestie estetyczne - kolory
+obramowania i wypełnienia słupków.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{500}\NormalTok{, }\DataTypeTok{color =} \StringTok{"black"}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-145-1.pdf}
+
+Pełna lista nazw kolorów znajduje się
+\href{http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf}{tutaj}.
+
+Z wykorzystaniem funkcji \texttt{scale\_} zmieniamy nazwy osi
+(\texttt{name}), granice (\texttt{limits}) oraz wskazania liczbowe
+(\texttt{breaks}). Te dwie ostatnie wartości musimy deklarować jako
+wektory z wykorzystaniem funkcji \texttt{c()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{500}\NormalTok{, }
+                 \DataTypeTok{color =} \StringTok{"black"}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"green"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Sprzedaż", }
+\StringTok{                     limits = c(4000,17000),}
+\StringTok{                     breaks = c(5000, 8000, 11000)) +}
+\StringTok{  scale_y_continuous(name = "}\NormalTok{Liczebność}\StringTok{",}
+\StringTok{                     limits = c(0,50))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (geom_bar).
+\end{verbatim}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-146-1.pdf}
+
+Można zaumatyzować proces dobierania wskazań liczbowych z wykorzystaniem
+funkcji \texttt{seq} opisanej szerzej w rozdziale 2.1.2.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{500}\NormalTok{, }
+                 \DataTypeTok{color =} \StringTok{"black"}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"green"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Sprzedaż", }
+\StringTok{                     limits = c(4000,17000),}
+\StringTok{                     breaks = seq(4000, 17000, 1500)) +}
+\StringTok{  scale_y_continuous(name = "}\NormalTok{Liczebność}\StringTok{",}
+\StringTok{                     limits = c(0,50))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (geom_bar).
+\end{verbatim}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-147-1.pdf}
 
 \subsection{Wykres pudełkowy}\label{wykres-pudekowy}
 
+Wykres pudełkowy umożliwia porównywanie rozkładów cechy wg zmiennej
+grupującej. Wymogiem jest aby na osi \texttt{x} znajdowała się zmienna
+grupująca, a na osi \texttt{y} cecha analizowana.
+
+Przeanalizujemy sprzedaż według kolejnych dni tygodnia.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{dzien_tyg, }\DataTypeTok{y=}\NormalTok{sprzedaz)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Continuous x aesthetic -- did you forget aes(group=...)?
+\end{verbatim}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-148-1.pdf}
+
+Zdecydowanie nie jest wykres jakiego oczekiwaliśmy. Wynika to z faktu,
+że dzień tygodnia w zbiorze danych jest zapisany jako zmienna
+numeryczna, natomiast prawidłowym typem dla zmiennej grupującej jest typ
+tekstowy lub czynnik (faktor). Ten typ danych został szczegółowo opisany
+w części 2.3.
+
+Dokonujemy zatem zamiany typu danych:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sklep77 <-}\StringTok{ }\NormalTok{sklep77 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dzien_tyg=}\KeywordTok{factor}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ dzien_tyg,}
+                          \DataTypeTok{levels =} \DecValTok{1}\OperatorTok{:}\DecValTok{6}\NormalTok{,}
+                          \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Pon"}\NormalTok{, }\StringTok{"Wt"}\NormalTok{, }\StringTok{"Śr"}\NormalTok{, }\StringTok{"Czw"}\NormalTok{, }\StringTok{"Pt"}\NormalTok{, }\StringTok{"Sob"}\NormalTok{),}
+                          \DataTypeTok{ordered =} \OtherTok{TRUE}\NormalTok{))}
+
+\KeywordTok{ggplot}\NormalTok{(sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{dzien_tyg, }\DataTypeTok{y=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-149-1.pdf}
+
+Z tego wykresu można już odczytać, że najwyższa mediana sprzedaży
+występuje w poniedziałek, a najniższa w środę.
+
+Jeżli kategorii jest dużo to można obrócić wykres z wykorzystaniem
+funkcji \texttt{coord\_flip}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{dzien_tyg, }\DataTypeTok{y=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-150-1.pdf}
+
+Użycie tej funkcji powoduje wyłącznie obrócenie wykresu. Nazwy osi nie
+uległy zmianie pomimo, że zostały zamienione. Odwrócimy jeszcze
+kolejność etykiet dnia tygodnia, tak aby na górze był poniedziałek.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{dzien_tyg, }\DataTypeTok{y=}\NormalTok{sprzedaz)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{rev}\NormalTok{(}\KeywordTok{levels}\NormalTok{(sklep77}\OperatorTok{$}\NormalTok{dzien_tyg)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-151-1.pdf}
+
+\subsection{Wykres słupkowy}\label{wykres-supkowy}
+
+W zależności od typu danych wejściowych, wykres słupkowy można stworzyć
+na dwa sposoby:
+
 \begin{itemize}
 \tightlist
 \item
-  sprzedaż wg dnia tygodnia - czynnik
-\end{itemize}
-
-\subsection{Wykres słupkowy - z grupowaniem i
-bez}\label{wykres-supkowy---z-grupowaniem-i-bez}
-
-\begin{itemize}
-\tightlist
+  dane jednostkowe - \texttt{geom\_bar} - funkcja sama oblicza wartości
+  do wyświetlenia,
 \item
-  liczba sklepów wg asortymentu
+  dane zagregowane - \texttt{geom\_col} - funkcja otrzymuje już
+  obliczone wartości.
 \end{itemize}
+
+Sprawdźmy ile jest sklepów o danym asortymencie. W tym celu potrzebujemy
+informację o sklepie i typie oferowanego asortymentu.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rossmann_asort <-}\StringTok{ }\NormalTok{rossmann }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(sklep_id, sklep_asort) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{distinct}\NormalTok{()}
+
+\KeywordTok{glimpse}\NormalTok{(rossmann_asort)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 1,115
+## Variables: 2
+## $ sklep_id    <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16,...
+## $ sklep_asort <chr> "Podstawowy", "Podstawowy", "Podstawowy", "Rozszer...
+\end{verbatim}
+
+W funkcji \texttt{aes} podajemy tylko kolumnę zawierającą dane do
+zliczenia.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rossmann_asort, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sklep_asort)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-153-1.pdf}
+
+Natomiast użycie funkcji \texttt{geom\_col} wymaga samodzielnego
+obliczenia wartości:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rossmann_asort2 <-}\StringTok{ }\NormalTok{rossmann_asort }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{(sklep_asort)}
+
+\KeywordTok{glimpse}\NormalTok{(rossmann_asort2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 3
+## Variables: 2
+## $ sklep_asort <chr> "Extra", "Podstawowy", "Rozszerzony"
+## $ n           <int> 9, 593, 513
+\end{verbatim}
+
+Wartość do wyświetlenia podajemy w funkcji \texttt{aes} w argumencie
+\texttt{y}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rossmann_asort2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sklep_asort, }\DataTypeTok{y=}\NormalTok{n)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-155-1.pdf}
+
+Uporządkujemy etykiety osi \texttt{x} (obecnie są wyświetlane w
+kolejności alfabetycznej) tworząc czynnik.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rossmann_asort2 <-}\StringTok{ }\NormalTok{rossmann_asort2 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sklep_asort=}\KeywordTok{factor}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sklep_asort,}
+                            \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Podstawowy"}\NormalTok{, }
+                                       \StringTok{"Rozszerzony"}\NormalTok{, }
+                                       \StringTok{"Extra"}\NormalTok{), }
+                            \DataTypeTok{ordered =}\NormalTok{ T))}
+
+\KeywordTok{glimpse}\NormalTok{(rossmann_asort2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 3
+## Variables: 2
+## $ sklep_asort <ord> Extra, Podstawowy, Rozszerzony
+## $ n           <int> 9, 593, 513
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rossmann_asort2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sklep_asort, }\DataTypeTok{y=}\NormalTok{n)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-157-1.pdf}
+
+Do wykresu słupkowego możemy dodać jeszcze jedną zmienną. W tym
+przypadku będzie to typ sklepu.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rossmann_asort3 <-}\StringTok{ }\NormalTok{rossmann }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(sklep_id, sklep_asort, sklep_typ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{(sklep_asort, sklep_typ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sklep_asort=}\KeywordTok{factor}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sklep_asort,}
+                            \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Podstawowy"}\NormalTok{, }
+                                       \StringTok{"Rozszerzony"}\NormalTok{, }
+                                       \StringTok{"Extra"}\NormalTok{), }
+                            \DataTypeTok{ordered =}\NormalTok{ T))}
+
+\KeywordTok{glimpse}\NormalTok{(rossmann_asort3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Observations: 9
+## Variables: 3
+## $ sklep_asort <ord> Extra, Podstawowy, Podstawowy, Podstawowy, Podstaw...
+## $ sklep_typ   <chr> "b", "a", "b", "c", "d", "a", "b", "c", "d"
+## $ n           <int> 9, 381, 7, 77, 128, 221, 1, 71, 220
+\end{verbatim}
+
+Uwzględnienie kolejnej zmiennej jest możliwe jako argument \texttt{fill}
+w funkcji \texttt{aes}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rossmann_asort3, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sklep_asort, }\DataTypeTok{y=}\NormalTok{n, }\DataTypeTok{fill=}\NormalTok{sklep_typ)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-159-1.pdf}
+
+Domyślnie kategorie są układane jedna na drugą - \texttt{stack}. Można
+je ułożyć obok siebie dodając argument \texttt{position\ =\ "dodge"} w
+funkcji \texttt{geom\_col}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rossmann_asort3, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sklep_asort, }\DataTypeTok{y=}\NormalTok{n, }\DataTypeTok{fill=}\NormalTok{sklep_typ)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-160-1.pdf}
+
+Możemy jeszcze dodać etykiety słupków wykorzystując funkcję
+\texttt{geom\_text}, w której trzeba podać argumenty definujące
+położenie wartości etykiet. Wartości tych argumentów będą zależały od
+typu wykresu.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rossmann_asort3, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sklep_asort, }\DataTypeTok{y=}\NormalTok{n, }\DataTypeTok{fill=}\NormalTok{sklep_typ)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ n), }
+            \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \FloatTok{0.9}\NormalTok{),}
+            \DataTypeTok{vjust =} \OperatorTok{-}\FloatTok{0.3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-161-1.pdf}
+
+Zmienimy jeszcze nazwę legendy za pomocą funkcji
+\texttt{scale\_fill\_discrete}. Wykorzystujemy tę konkretną funkcję ze
+względu na to, że typ sklepu jest argumentem \texttt{fill} w funkcji
+\texttt{aes} oraz cechą jakościową (\texttt{discrete}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rossmann_asort3, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sklep_asort, }\DataTypeTok{y=}\NormalTok{n, }\DataTypeTok{fill=}\NormalTok{sklep_typ)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_text}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ n), }
+            \DataTypeTok{position =} \KeywordTok{position_dodge}\NormalTok{(}\DataTypeTok{width =} \FloatTok{0.9}\NormalTok{),}
+            \DataTypeTok{vjust =} \OperatorTok{-}\FloatTok{0.3}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_fill_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Typ sklepu"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-162-1.pdf}
 
 \subsection{Wykres kafelkowy}\label{wykres-kafelkowy}
 
