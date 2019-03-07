@@ -1,0 +1,30 @@
++++
+title = "Projekty"
+date = 2017-10-21T00:05:00Z
+author = "Łukasz"
++++
+
+# Aplikacje
+
+Mapa dostępności stacji rowerów miejskich w Katowicach, City Bike Hack, 2.03.2019.
+
+[Gra turowa z algorytmem sztucznej inteligencji](https://lwawrowski.shinyapps.io/combatGame/) - w ramach projektu GAMEINN: Opracowanie silnika sztucznej inteligencji w strategicznej grze ekonomicznej w celu urealnienia i udoskonalenia interakcji graczy z NPC
+
+[Aplikacja do szacowania modelu Faya-Herriota](https://lwawrowski.shinyapps.io/shinyfhmodel/)
+
+# Pakiety
+
+[openPoznan - otwarte dane na temat Poznania](https://github.com/lwawrowski/openPoznan)
+
+# Raporty
+
+[Analiza walorów turystycznych powiatów i ich bezpośredniego otoczenia na podstawie danych statystycznych m. in. z zakresu bazy noclegowej, kultury i dziedzictwa narodowego oraz przyrodniczych obszarów chronionych](http://stat.gov.pl/statystyka-regionalna/statystyka-dla-polityki-spojnosci/statystyka-dla-polityki-spojnosci-2013-2015/badania/inne-prace-badawcze/)
+
+[Dezagregacja wskaźników strategii Europa 2020 na poziom NTS 2 z zakresu pomiaru ubóstwa i wykluczenia społecznego](http://stat.gov.pl/statystyka-regionalna/statystyka-dla-polityki-spojnosci/statystyka-dla-polityki-spojnosci-2013-2015/badania/dezagregacja-wskaznikow-europa-2020/)
+
+[Mapy ubóstwa na poziomie podregionów w Polsce z wykorzystaniem estymacji pośredniej](http://stat.gov.pl/z-prac-studialnych/opracowania-eksperymentalne/mapy-ubostwa-na-poziomie-podregionow-w-polsce-z-wykorzystaniem-estymacji-posredniej,4,1.html)
+
+[Pomiar ubóstwa na poziomie powiatów (LAU 1)](http://stat.gov.pl/statystyka-regionalna/statystyka-dla-polityki-spojnosci/statystyka-dla-polityki-spojnosci-2013-2015/badania/dezagregacja-wskaznikow-z-obszaru-rynku-pracy-i-ubostwa/)
+
+Quality improvement of the monthly unemployment rate
+

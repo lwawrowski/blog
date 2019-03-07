@@ -36,12 +36,12 @@ tags:
 <p>Najczęściej wykorzystywane algorytmy to:</p>
 <ul>
 <li><strong>odległość Levenshteina</strong> - odległość to liczba kroków wymaganych do przekształcenia jednego ciągu znaków w drugi. Działania jakie można wykonywać to wstawienie nowego znaku, usunięcie znaku lub zamianę znaku na nowy znak.</li>
-<li><strong>odległość Damerau-Levenshteina</strong> - podobne jak odległość Levenshteina, ale wprowadza działanie polegające na zamianie miejscami sąsiadujących znaków.</li>
-<li><strong>najdłuższy wspólny podłańcuch</strong> (ang. longest common substring) - najdłuższy ciąg elementem leżących obok siebie w obu ciągach. Odległość to liczba niesparowanych znaków.</li>
+<li><strong>odległość Damerau-Levenshteina</strong> - podobnie jak odległość Levenshteina, ale wprowadza działanie polegające na zamianie miejscami sąsiadujących znaków.</li>
+<li><strong>najdłuższy wspólny podłańcuch</strong> (ang. longest common substring) - znajduje najdłuższy ciąg elementów leżących obok siebie w obu ciągach, natomiast odległość to liczba niesparowanych znaków.</li>
 <li><strong>odległość Jaro</strong> - średnia z odsetka wspólnych znaków w pierwszym ciągu, odsetka wspólnych znaków w drugim ciągu oraz odsetka wspólnych znaków nie wymagających transpozycji. Przyjmuje wartości od 0 do 1, gdzie 0 to teksty identyczne, a 1 zupełnie różne.</li>
 <li><strong>odległość Jaro-Winklera</strong> - zwiększenie podobieństwa ciągów, które według odległości Jaro są do siebie podobne.</li>
 </ul>
-<p>Na podstawie wyżej opisanych algorytmów można stwierdzić, że im mniejsza wartość danej odległości tym ciągi będą do siebie bardziej podobne. Pakiet <code>stringdist</code> zawiera implementację jeszcze kilku miar, niemniej w tym poście skupiłem się na tych najbardziej popularnych.</p>
+<p>Na podstawie wyżej opisanych algorytmów można stwierdzić, że im mniejsza wartość danej odległości tym ciągi tekstowe będą do siebie bardziej podobne. Pakiet <code>stringdist</code> zawiera implementację jeszcze kilku miar, niemniej w tym poście skupiłem się na tych najbardziej popularnych.</p>
 </div>
 <div id="analiza-imion-meskich-w-2015-roku" class="section level1">
 <h1>Analiza imion męskich w 2015 roku</h1>
@@ -156,32 +156,32 @@ head(dl_df) %&gt;%
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">KASPER</td>
+<td align="left">KASPER.1</td>
 <td align="left">KACPER</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td align="left">JONATHAN</td>
+<td align="left">JONATHAN.1</td>
 <td align="left">JONATAN</td>
 <td align="right">1</td>
 </tr>
 <tr class="odd">
-<td align="left">JONATHAN</td>
+<td align="left">JONATHAN.2</td>
 <td align="left">NATHAN</td>
 <td align="right">2</td>
 </tr>
 <tr class="even">
-<td align="left">JANUSZ</td>
+<td align="left">JANUSZ.1</td>
 <td align="left">JONASZ</td>
 <td align="right">2</td>
 </tr>
 <tr class="odd">
-<td align="left">OSCAR</td>
+<td align="left">OSCAR.1</td>
 <td align="left">OSKAR</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td align="left">AMADEUSZ</td>
+<td align="left">AMADEUSZ.1</td>
 <td align="left">MATEUSZ</td>
 <td align="right">2</td>
 </tr>
@@ -207,53 +207,23 @@ tekst_max</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">ALEK</td>
+<td align="left">ALEK.4</td>
 <td align="left">ALAN</td>
 <td align="right">2</td>
 </tr>
 <tr class="even">
-<td align="left">ARON</td>
+<td align="left">ARON.2</td>
 <td align="left">ALAN</td>
 <td align="right">2</td>
 </tr>
 <tr class="odd">
-<td align="left">MILAN</td>
+<td align="left">MILAN.1</td>
 <td align="left">ALAN</td>
 <td align="right">2</td>
 </tr>
 <tr class="even">
-<td align="left">ALEX</td>
+<td align="left">ALEX.3</td>
 <td align="left">ALAN</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">ALAN</td>
-<td align="left">ADAM</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">ALAN</td>
-<td align="left">JAN</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">ALAN</td>
-<td align="left">RYAN</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">ALAN</td>
-<td align="left">OLAF</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="left">ALAN</td>
-<td align="left">ALLAN</td>
-<td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="left">ALAN</td>
-<td align="left">NATAN</td>
 <td align="right">2</td>
 </tr>
 </tbody>
@@ -299,83 +269,33 @@ tekst_max</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">JANUSZ</td>
+<td align="left">JANUSZ.1</td>
 <td align="left">JAN</td>
 <td align="right">3</td>
 </tr>
 <tr class="even">
-<td align="left">ADRIAN</td>
+<td align="left">ADRIAN.1</td>
 <td align="left">BRIAN</td>
 <td align="right">3</td>
 </tr>
 <tr class="odd">
-<td align="left">BRIAN</td>
-<td align="left">BRAJAN</td>
+<td align="left">ARON.3</td>
+<td align="left">JAN</td>
 <td align="right">3</td>
 </tr>
 <tr class="even">
-<td align="left">BRIAN</td>
-<td align="left">DORIAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">BRIAN</td>
-<td align="left">BRAYAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">BRIAN</td>
-<td align="left">FABIAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">BRIAN</td>
-<td align="left">MARIAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">BRIAN</td>
-<td align="left">RYAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">BRIAN</td>
-<td align="left">BRYAN</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="left">ARON</td>
+<td align="left">BRAJAN.3</td>
 <td align="left">JAN</td>
 <td align="right">3</td>
 </tr>
 <tr class="odd">
-<td align="left">BRAJAN</td>
+<td align="left">JULIAN.1</td>
 <td align="left">JAN</td>
 <td align="right">3</td>
 </tr>
 <tr class="even">
-<td align="left">JULIAN</td>
+<td align="left">ALAN.3</td>
 <td align="left">JAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">ALAN</td>
-<td align="left">JAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">JAN</td>
-<td align="left">RYAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">JAN</td>
-<td align="left">KASJAN</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">JAN</td>
-<td align="left">LUCJAN</td>
 <td align="right">3</td>
 </tr>
 </tbody>
@@ -421,72 +341,42 @@ tekst_max</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">JONATHAN</td>
+<td align="left">JONATHAN.2</td>
 <td align="left">NATHAN</td>
 <td align="right">0.0833333</td>
 </tr>
 <tr class="even">
-<td align="left">JONATHAN</td>
+<td align="left">JONATHAN.4</td>
 <td align="left">NATAN</td>
 <td align="right">0.1250000</td>
 </tr>
 <tr class="odd">
-<td align="left">ADRIAN</td>
+<td align="left">ADRIAN.1</td>
 <td align="left">BRIAN</td>
 <td align="right">0.1777778</td>
 </tr>
 <tr class="even">
-<td align="left">BRIAN</td>
-<td align="left">BRAJAN</td>
-<td align="right">0.1777778</td>
-</tr>
-<tr class="odd">
-<td align="left">BRIAN</td>
-<td align="left">DORIAN</td>
-<td align="right">0.1777778</td>
-</tr>
-<tr class="even">
-<td align="left">BRIAN</td>
-<td align="left">BRAYAN</td>
-<td align="right">0.1777778</td>
-</tr>
-<tr class="odd">
-<td align="left">BRIAN</td>
-<td align="left">BRYAN</td>
-<td align="right">0.1333333</td>
-</tr>
-<tr class="even">
-<td align="left">JONATAN</td>
+<td align="left">JONATAN.2</td>
 <td align="left">NATHAN</td>
 <td align="right">0.1507937</td>
 </tr>
 <tr class="odd">
-<td align="left">JONATAN</td>
+<td align="left">JONATAN.3</td>
 <td align="left">NATAN</td>
 <td align="right">0.0952381</td>
 </tr>
 <tr class="even">
-<td align="left">NATHAN</td>
-<td align="left">NATHANIEL</td>
-<td align="right">0.1111111</td>
-</tr>
-<tr class="odd">
-<td align="left">NATHAN</td>
-<td align="left">NATANIEL</td>
-<td align="right">0.1805556</td>
-</tr>
-<tr class="even">
-<td align="left">NATHAN</td>
+<td align="left">NATHAN.5</td>
 <td align="left">NATAN</td>
 <td align="right">0.0555556</td>
 </tr>
 <tr class="odd">
-<td align="left">NATHANIEL</td>
+<td align="left">NATHANIEL.4</td>
 <td align="left">NATAN</td>
 <td align="right">0.1481481</td>
 </tr>
 <tr class="even">
-<td align="left">NATANIEL</td>
+<td align="left">NATANIEL.3</td>
 <td align="left">NATAN</td>
 <td align="right">0.1250000</td>
 </tr>
@@ -540,72 +430,69 @@ tekst_max</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">MARIETTA</td>
+<td align="left">MARIETTA.8</td>
 <td align="left">MARINA</td>
 <td align="right">0.1805556</td>
 </tr>
 <tr class="even">
-<td align="left">MALWINA</td>
+<td align="left">MALWINA.7</td>
 <td align="left">MARINA</td>
 <td align="right">0.1507937</td>
 </tr>
 <tr class="odd">
-<td align="left">KARINA</td>
+<td align="left">KARINA.9</td>
 <td align="left">MARINA</td>
 <td align="right">0.1111111</td>
 </tr>
 <tr class="even">
-<td align="left">ROMINA</td>
+<td align="left">ROMINA.5</td>
 <td align="left">MARINA</td>
 <td align="right">0.1777778</td>
 </tr>
 <tr class="odd">
-<td align="left">MARIKA</td>
+<td align="left">MARIKA.11</td>
 <td align="left">MARINA</td>
 <td align="right">0.1111111</td>
 </tr>
 <tr class="even">
-<td align="left">ALINA</td>
+<td align="left">ALINA.17</td>
 <td align="left">MARINA</td>
 <td align="right">0.1777778</td>
 </tr>
 <tr class="odd">
-<td align="left">MARIAME</td>
+<td align="left">MARIAME.8</td>
 <td align="left">MARINA</td>
 <td align="right">0.1507937</td>
 </tr>
 <tr class="even">
-<td align="left">MARIE</td>
+<td align="left">MARIE.6</td>
 <td align="left">MARINA</td>
 <td align="right">0.1777778</td>
 </tr>
 <tr class="odd">
-<td align="left">MARIJA</td>
+<td align="left">MARIJA.11</td>
 <td align="left">MARINA</td>
 <td align="right">0.1111111</td>
 </tr>
 <tr class="even">
-<td align="left">AMIRA</td>
+<td align="left">AMIRA.7</td>
 <td align="left">MARINA</td>
 <td align="right">0.1888889</td>
 </tr>
 <tr class="odd">
-<td align="left">MARZENA</td>
+<td align="left">MARZENA.3</td>
 <td align="left">MARINA</td>
 <td align="right">0.1507937</td>
 </tr>
 <tr class="even">
-<td align="left">AMNA</td>
+<td align="left">AMNA.5</td>
 <td align="left">MARINA</td>
 <td align="right">0.1944444</td>
 </tr>
 </tbody>
 </table>
 <p>Macierz odległości dla podobnych imion męskich w 2015 roku miała rozmiar 124 x 124, natomiast imiona kobiece w 2017 roku znajdują się w macierzy wielkości 686 na 686. W związku z tym przedstawienie tych danych na wykresie strunowym czyni ten wykres mało czytelnym. Wobec tego pozostaje analiza wyłącznie w oparciu o dane liczbowe.</p>
-<div class="figure">
-<img src="/post/2018-04-12-analiza-imion_files/chord/jd2017.png" />
-
-</div>
+<p><img src="/post/2018-04-12-analiza-imion_files/chord/jd2017.png" /></p>
 </div>
 <div id="podsumowanie" class="section level1">
 <h1>Podsumowanie</h1>
