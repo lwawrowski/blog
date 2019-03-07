@@ -8,6 +8,8 @@ author = "Łukasz"
 
 [Podstawy programowania w R](http://www.wawrowski.edu.pl/ppr/)
 
+[Statystyka opisowa](https://departmentofstatisticspue.github.io/statystyka-opisowa/)
+
 [Metoda reprezentacyjna](https://github.com/lwawrowski/metoda-reprezentacyjna)
 
 [Przetwarzanie danych w SAS](https://github.com/lwawrowski/przetwarzanie-danych-SAS)
