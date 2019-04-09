@@ -4,10 +4,10 @@ date = 2017-10-21T00:05:00Z
 author = "Łukasz"
 +++
 
-![](/img/photo.jpg)
+<img style="float: left; padding: 20px; padding-left: 0px" src="/img/photo2.jpg" height="300px">
 
-Łukasz Wawrowski - doktor nauk ekonomicznych, absolwent Wydziału Informatyki i Gospodarki Elektronicznej Uniwersytetu Ekonomicznego w Poznaniu. Swoją pasją do programowania w R i SAS dzielę się podczas prowadzonych zajęć i szkoleń. Moje główne zainteresowania to technologie webowe, wizualizacja danych, statystyka społeczna, modelowanie ekonometryczne oraz wielowymiarowa analiza statystyczna. 
-
-Na blogu będę prezentował zastosowania oprogramowania statystycznego (głównie R) w analizowaniu różnych zagadnień. 
+Łukasz Wawrowski - doktor nauk ekonomicznych, absolwent Wydziału Informatyki i Gospodarki Elektronicznej Uniwersytetu Ekonomicznego w Poznaniu. Swoją pasją do programowania w R i statystyki dzielę się podczas prowadzonych zajęć i szkoleń.
 
 Kontakt: lukasz [dot] wawrowski [at] outlook [dot] com
+
+![](/img/conf.jpg)
