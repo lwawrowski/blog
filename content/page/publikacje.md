@@ -4,7 +4,7 @@ date = 2017-10-21T00:05:00Z
 author = "Łukasz"
 +++
 
-[Dehnel, G., Wawrowski, Ł., 2018, _Robust estimation of revenues of Polish small companies by NACE section and province, The Socio-Economic Modelling and Forecasting, 1, s. 110-119.](http://www.semf.pl/semf_1/pdf/Dehnel_Wawrowski.pdf)
+[Dehnel, G., Wawrowski, Ł., 2018, _Robust estimation of revenues of Polish small companies by NACE section and province_, The Socio-Economic Modelling and Forecasting, 1, s. 110-119.](http://www.semf.pl/semf_1/pdf/Dehnel_Wawrowski.pdf)
 
 [Beręsewicz, M., Marchetti, S., Salvati, N., Szymkowiak, M., Wawrowski, Ł., 2018, _The use of a three level M-quantile model to map poverty at LAU 1 in Poland_, Journal of the Royal Statistical Society Series A, s. 1-28.](https://rss.onlinelibrary.wiley.com/doi/10.1111/rssa.12349)
 

@@ -12,4 +12,6 @@ author = "Łukasz"
 
 [Metoda reprezentacyjna](https://github.com/lwawrowski/metoda-reprezentacyjna)
 
+[Geomarketing](https://github.com/lwawrowski/geomarketing)
+
 [Przetwarzanie danych w SAS](https://github.com/lwawrowski/przetwarzanie-danych-SAS)

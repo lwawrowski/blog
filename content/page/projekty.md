@@ -8,6 +8,8 @@ author = "Łukasz"
 
 Mapa dostępności stacji rowerów miejskich w Katowicach, City Bike Hack, 2.03.2019.
 
+[Gra memory do nauki statystyki](https://wawrluk.shinyapps.io/memory/)
+
 [Gra turowa z algorytmem sztucznej inteligencji](https://lwawrowski.shinyapps.io/combatGame/) - w ramach projektu GAMEINN: Opracowanie silnika sztucznej inteligencji w strategicznej grze ekonomicznej w celu urealnienia i udoskonalenia interakcji graczy z NPC
 
 [Aplikacja do szacowania modelu Faya-Herriota](https://lwawrowski.shinyapps.io/shinyfhmodel/)
