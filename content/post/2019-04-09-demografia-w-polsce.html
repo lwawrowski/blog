@@ -1,0 +1,31 @@
+---
+title: Demografia w Polsce
+author: Łukasz
+date: '2019-04-09'
+slug: demografia-w-polsce
+categories: []
+tags: []
+description: ''
+draft: true
+---
+
+
+
+<p><a href="https://bdp.stat.gov.pl/" class="uri">https://bdp.stat.gov.pl/</a></p>
+<p>Healthy life expectancy (HALE)</p>
+<p><a href="http://apps.who.int/gho/data/node.main.HALE" class="uri">http://apps.who.int/gho/data/node.main.HALE</a></p>
+<p><a href="https://api.stat.gov.pl/Home/BdlApi" class="uri">https://api.stat.gov.pl/Home/BdlApi</a></p>
+<pre class="r"><code>library(tidyverse)
+library(jsonlite)
+
+hale &lt;- fromJSON(&quot;data/hale.json&quot;)
+
+hale_df &lt;- data.frame(hale$fact$dims, value=as.numeric(hale$fact$Value)) %&gt;%
+  janitor::clean_names() %&gt;%
+  mutate(year=as.numeric(year))
+
+hale_df %&gt;%
+  filter(country == &quot;Poland&quot;) %&gt;%
+  ggplot(aes(x=year, y=value, color=sex)) + geom_point() + geom_line() +
+  facet_wrap(~ gho, nrow = 2, scale = &quot;free_y&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>

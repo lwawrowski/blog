@@ -1,0 +1,110 @@
+---
+title: Demografia w Polsce
+author: Łukasz
+date: '2019-04-09'
+slug: demografia-w-polsce
+categories: []
+tags: []
+description: ''
+draft: true
+---
+
+
+https://bdp.stat.gov.pl/
+
+Healthy life expectancy (HALE)
+
+http://apps.who.int/gho/data/node.main.HALE
+
+https://api.stat.gov.pl/Home/BdlApi
+
+```{r hale,  message=FALSE, warning=FALSE}
+library(tidyverse)
+library(jsonlite)
+
+hale <- fromJSON("data/hale.json")
+
+hale_df <- data.frame(hale$fact$dims, value=as.numeric(hale$fact$Value)) %>%
+  janitor::clean_names() %>%
+  mutate(year=as.numeric(year))
+
+hale_df %>%
+  filter(country == "Poland") %>%
+  ggplot(aes(x=year, y=value, color=sex)) + geom_point() + geom_line() +
+  facet_wrap(~ gho, nrow = 2, scale = "free_y")
+
+```
+
+```{r przyrost_bdl}
+tematy <- "https://bdl.stat.gov.pl/api/v1/subjects?page-size=32"
+
+fromJSON(tematy)
+
+kategorie <- "https://bdl.stat.gov.pl/api/v1/subjects?parent-id=K3"
+
+fromJSON(kategorie)
+
+kategorie2 <- "https://bdl.stat.gov.pl/api/v1/subjects?parent-id=G534"
+
+fromJSON(kategorie2)
+
+# zmienna
+
+zmienna <- "https://bdl.stat.gov.pl/api/v1/Variables?subject-id=P1873"
+
+fromJSON(zmienna)
+
+dane <- "https://bdl.stat.gov.pl/api/v1/data/by-variable/68?unit-level=0&page-size=16"
+
+dane_json <- fromJSON(dane)
+
+przyrost_1995_2017 <- dane_json$results$values[[1]] %>%
+  select(-attrId) %>%
+  mutate(year=as.numeric(year))
+
+```
+
+
+
+```{r przyrost_bdp}
+bdp <- read.csv("data/ruch_naturalny_bdp.csv", sep = "\t") %>% janitor::clean_names()
+
+bdp_long <- bdp %>%
+  select(-jednostka) %>%
+  gather(rok, wartosc, -x_wskaznik, -podzial) %>%
+  mutate(rok=as.numeric(gsub("x", "", rok)),
+         wartosc_num=as.numeric(gsub("[[:space:]]", "", wartosc)))
+
+przyrost_1946_1994 <- bdp_long %>%
+  filter(x_wskaznik=="Przyrost naturalny", podzial=="ogółem") %>%
+  select(year=rok, val=wartosc_num)
+
+przyrost <- union(przyrost_1946_1994, przyrost_1995_2017)
+  
+ggplot(przyrost, aes(x=year, y=val)) + geom_point() + geom_line()
+
+```
+
+```{r plec}
+fromJSON(zmienna)
+
+ur_m <- fromJSON("https://bdl.stat.gov.pl/api/v1/data/by-variable/60?unit-level=0&page-size=16")
+
+ur_k <- fromJSON("https://bdl.stat.gov.pl/api/v1/data/by-variable/61?unit-level=0&page-size=16")
+
+```
+
+```{r urodzenia zywe}
+
+urodzenia_zywe <- bdp_long %>%
+  filter(x_wskaznik=="Urodzenia żywe", podzial=="ogółem") %>%
+  select(year=rok, val=wartosc_num)
+
+ggplot(urodzenia_zywe, aes(x=year, y=val)) + geom_line()
+
+```
+
+```{r trwanie zycia}
+
+```
+
