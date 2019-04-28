@@ -169,13 +169,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-supkowy"><i class="fa fa-check"></i><b>4.2.4</b> Wykres słupkowy</a></li>
 <li class="chapter" data-level="4.2.5" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-kafelkowy"><i class="fa fa-check"></i><b>4.2.5</b> Wykres kafelkowy</a></li>
 <li class="chapter" data-level="4.2.6" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#uwzglednienie-czasu"><i class="fa fa-check"></i><b>4.2.6</b> Uwzględnienie czasu</a></li>
+<li class="chapter" data-level="4.2.7" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#facets"><i class="fa fa-check"></i><b>4.2.7</b> Facets</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#pakiet-plotly"><i class="fa fa-check"></i><b>4.3</b> Pakiet plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.1</b> Funkcje</a></li>
-<li class="chapter" data-level="5.2" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#petle"><i class="fa fa-check"></i><b>5.2</b> Pętle</a></li>
-<li class="chapter" data-level="5.3" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#instrukcje-warunkowe"><i class="fa fa-check"></i><b>5.3</b> Instrukcje warunkowe</a></li>
+<li class="chapter" data-level="5.2" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#instrukcje-warunkowe"><i class="fa fa-check"></i><b>5.2</b> Instrukcje warunkowe</a></li>
+<li class="chapter" data-level="5.3" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#petle"><i class="fa fa-check"></i><b>5.3</b> Pętle</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -521,6 +522,77 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <ul>
 <li>sprzedaż w kolejnych dniach</li>
 </ul>
+</div>
+<div id="facets" class="section level3">
+<h3><span class="header-section-number">4.2.7</span> Facets</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sr_sprzedaz &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(sprzedaz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(sklep_id, sklep_asort) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sprzedaz_sr=</span><span class="kw">mean</span>(sprzedaz))
+
+odleglosc &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_konkurencja) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">distinct</span>()
+
+sprzedaz_odleglosc &lt;-<span class="st"> </span><span class="kw">inner_join</span>(sr_sprzedaz, odleglosc, <span class="dt">by=</span><span class="st">&quot;sklep_id&quot;</span>)
+
+<span class="kw">ggplot</span>(sprzedaz_odleglosc, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz_sr, <span class="dt">y=</span>sklep_konkurencja)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>sklep_asort)</code></pre></div>
+<pre><code>## Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sr_sprzedaz_prom &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(sprzedaz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(sklep_id, czy_promocja) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sprzedaz_sr=</span><span class="kw">mean</span>(sprzedaz))
+
+sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</span>(sr_sprzedaz_prom, odleglosc)</code></pre></div>
+<pre><code>## Joining, by = &quot;sklep_id&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sprzedaz_prom_odl)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   sklep_id [3]
+##   sklep_id czy_promocja sprzedaz_sr sklep_konkurencja
+##      &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;             &lt;dbl&gt;
+## 1        1 Nie                4288.              1270
+## 2        1 Tak                5274.              1270
+## 3        2 Nie                3902.               570
+## 4        2 Tak                6295.               570
+## 5        3 Nie                5286.             14130
+## 6        3 Tak                8790.             14130</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sprzedaz_prom_odl, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz_sr, <span class="dt">y=</span>sklep_konkurencja, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+<p>Zamiana reprezentacji danych na szeroką.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sprzedaz_prom_odl_wide &lt;-<span class="st"> </span>sprzedaz_prom_odl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(czy_promocja, sprzedaz_sr)
+
+<span class="kw">head</span>(sprzedaz_prom_odl_wide)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   sklep_id [6]
+##   sklep_id sklep_konkurencja   Nie    Tak
+##      &lt;dbl&gt;             &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1        1              1270 4288.  5274.
+## 2        2               570 3902.  6295.
+## 3        3             14130 5286.  8790.
+## 4        4               620 9030. 10686.
+## 5        5             29910 3473.  6084.
+## 6        6               310 4189.  6295.</code></pre>
+<p>I na wąską.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sprzedaz_prom_odl_long &lt;-<span class="st"> </span>sprzedaz_prom_odl_wide <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(czy_promocja, sprzedaz_sr, Nie, Tak)
+
+<span class="kw">head</span>(sprzedaz_prom_odl_long)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   sklep_id [6]
+##   sklep_id sklep_konkurencja czy_promocja sprzedaz_sr
+##      &lt;dbl&gt;             &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;
+## 1        1              1270 Nie                4288.
+## 2        2               570 Nie                3902.
+## 3        3             14130 Nie                5286.
+## 4        4               620 Nie                9030.
+## 5        5             29910 Nie                3473.
+## 6        6               310 Nie                4189.</code></pre>
 </div>
 </div>
 <div id="pakiet-plotly" class="section level2">
