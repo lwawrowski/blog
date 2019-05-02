@@ -202,11 +202,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">4</span> Wizualizacja danych</h1>
 <p><a href="presentations/ggplot2.html">Wprowadzenie</a></p>
 <p><a href="https://www.data-to-viz.com/">Przewodnik po wizualizacji danych</a></p>
+<p><a href="https://serialmentor.com/dataviz/">Fundamentals of Data Visualization</a></p>
 <p>Będziemy działać na zbiorze dotyczącym sprzedaży w sklepach <a href="data/rossmann.xlsx">Rossmann</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(readxl)
 
-rossmann &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/rossmann.xlsx&quot;</span>)
+<span class="co"># library(readxl)</span>
+<span class="co"># </span>
+<span class="co"># rossmann &lt;- read_xlsx(&quot;data/rossmann.xlsx&quot;)</span>
+<span class="co">#</span>
+<span class="co"># save(rossmann, file=&quot;data/rossmann.RData&quot;)</span>
+
+<span class="co"># natywny format, mniejszy rozmiar, szybsze wczytywanie</span>
+<span class="kw">load</span>(<span class="st">&quot;data/rossmann.RData&quot;</span>)
 
 sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(sklep_id<span class="op">==</span><span class="dv">77</span>, czy_otwarty<span class="op">==</span><span class="st">&quot;Tak&quot;</span>)</code></pre></div>
@@ -513,15 +520,71 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 </div>
 <div id="wykres-kafelkowy" class="section level3">
 <h3><span class="header-section-number">4.2.5</span> Wykres kafelkowy</h3>
-<ul>
-<li>czy promocja i czy swieto szkolne</li>
-</ul>
+<p>Do wizualizacji tabeli częstości można użyć wykresu kafelkowego. W tym celu najpierw zliczamy wystąpienia wariantów cech czy_promocja oraz czy_swieto_szkolne i wynik przekazujemy bezpośrednio do funkcji <code>ggplot()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, 
+             <span class="dt">y =</span> czy_swieto_szkolne,
+             <span class="dt">fill =</span> n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+<p>Aby dodać do tego wykresu etykiety posłużymy się funkcją <code>geom_label()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, 
+             <span class="dt">y =</span> czy_swieto_szkolne,
+             <span class="dt">fill =</span> n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+<p>Zwykle patrząc na wykres podświadomie zakładamy, że ciemniejszy kolor oznacza wyższe wartości, natomiast jasny małe liczby. W tym przypadku układ kolorów jest odwrócony. Musimy odpowiednio dobrać kolory, aby to poprawić. Bardzo przydatne narzędzie znajduje się pod adresem: <a href="http://colorbrewer2.org/" class="uri">http://colorbrewer2.org/</a>. Następnie korzystamy z funkcji <code>scale_fill_gradient</code>, w której określamy tylko kolor początkowy i końcowy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, 
+                <span class="dt">y =</span> czy_swieto_szkolne,
+                <span class="dt">fill =</span> n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;#66c2a4&quot;</span>, 
+                      <span class="dt">high =</span> <span class="st">&quot;#005824&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
 </div>
 <div id="uwzglednienie-czasu" class="section level3">
 <h3><span class="header-section-number">4.2.6</span> Uwzględnienie czasu</h3>
+<p>Próba stworzenia wykresu przedstawiającego zmianę sprzedaży w czasie za pomocą oryginalnych danych spowoduje uzsykanie niezbyt czytelnej grafiki.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>data,
+                    <span class="dt">y=</span>sprzedaz,
+                    <span class="dt">color=</span>dzien_tyg)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+<p>Wynika to z faktu, że dzien tygodnia jest traktowany jak zmienna numeryczna, a data jest zmienną tekstową. Konwersja tekstu na datę jest możliwa z wykorzystaniem pakietu <code>lubridate</code>. W tym pakiecie każda część daty ma swój akronim, który później jest wykorzystywany w odpowiednich funkcjach:</p>
 <ul>
-<li>sprzedaż w kolejnych dniach</li>
+<li>y - rok (year)</li>
+<li>m - miesiąc (month)</li>
+<li>d - dzień (day)</li>
+<li>h - godzina (hour)</li>
+<li>m - minuta (minute)</li>
 </ul>
+<p>Przykłady funkcji:</p>
+<ul>
+<li>ymd - konwertuje tekst zapisany w postaci rok-miesiąc-dzień na obiekt daty</li>
+<li>dmy_hm - konwertuje tekst zapisany w postaci dzień-miesiąc-rok godzina:minuta na obiekt daty</li>
+<li>month - pobiera z obiektu daty informację o miesiącu</li>
+<li>year - pobiera z obiektu daty informację o roku</li>
+<li>week - pobiera z obiektu daty informację o tygodniu roku</li>
+</ul>
+<p>Według powyższych reguł korzystamy z funkcji <code>ymd()</code> do konwersji daty w naszym zbiorze.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+
+sklep77a &lt;-<span class="st"> </span>sklep77 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dzien_tyg=</span><span class="kw">as.factor</span>(dzien_tyg),
+         <span class="dt">data=</span><span class="kw">ymd</span>(data))
+
+<span class="kw">ggplot</span>(sklep77a, <span class="kw">aes</span>(<span class="dt">x=</span>data,
+                    <span class="dt">y=</span>sprzedaz,
+                    <span class="dt">color=</span>dzien_tyg)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
 </div>
 <div id="facets" class="section level3">
 <h3><span class="header-section-number">4.2.7</span> Facets</h3>
@@ -540,7 +603,7 @@ sprzedaz_odleglosc &lt;-<span class="st"> </span><span class="kw">inner_join</sp
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>sklep_asort)</code></pre></div>
 <pre><code>## Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
-<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sr_sprzedaz_prom &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(sprzedaz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(sklep_id, czy_promocja) <span class="op">%&gt;%</span>
@@ -562,7 +625,7 @@ sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sprzedaz_prom_odl, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz_sr, <span class="dt">y=</span>sklep_konkurencja, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
 <pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
-<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
+<p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
 <p>Zamiana reprezentacji danych na szeroką.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sprzedaz_prom_odl_wide &lt;-<span class="st"> </span>sprzedaz_prom_odl <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">spread</span>(czy_promocja, sprzedaz_sr)
@@ -597,7 +660,10 @@ sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</spa
 </div>
 <div id="pakiet-plotly" class="section level2">
 <h2><span class="header-section-number">4.3</span> Pakiet plotly</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
+<p>Za pomocą pakietu <code>plotly</code> w prosty sposób można zamienić statystyczny wykres <code>ggplot</code> na interaktywny.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plotly)
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
 <span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>

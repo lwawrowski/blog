@@ -164,6 +164,8 @@ Literatura podstawowa:
   wersja})
 \end{itemize}
 
+\href{https://www.rstudio.com/resources/cheatsheets/}{Cheatsheets}
+
 Literatura dodatkowa:
 
 \begin{itemize}
@@ -730,7 +732,7 @@ podając odpowiednie wartości argumentów \texttt{min} i \texttt{max}.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7223764 0.5980228 0.5121268 0.3508371 0.1551445 0.3030189
+## [1] 0.2760102 0.4811113 0.1466939 0.4419546 0.3789953 0.5976319
 \end{verbatim}
 
 Obserwacje można także generować z innych rozkładów:
@@ -760,7 +762,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.9003918 0.6916211 0.9097766 0.7688397 0.8034890
+## [1] 0.6435936 0.9242950 0.9171722 0.3212655 0.1227321
 \end{verbatim}
 
 \begin{Shaded}
@@ -770,7 +772,7 @@ wartości z danego rozkładu otrzymamy inne wartości:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.5036548 0.6852940 0.4413895 0.3043786 0.7865298
+## [1] 0.1945195 0.6729255 0.8607119 0.1546143 0.6415058
 \end{verbatim}
 
 Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:
@@ -3095,15 +3097,24 @@ Dane na temat średniego kursu miesięcznego euro pobierz ze stron
 
 \href{https://www.data-to-viz.com/}{Przewodnik po wizualizacji danych}
 
+\href{https://serialmentor.com/dataviz/}{Fundamentals of Data
+Visualization}
+
 Będziemy działać na zbiorze dotyczącym sprzedaży w sklepach
 \href{data/rossmann.xlsx}{Rossmann}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
-\KeywordTok{library}\NormalTok{(readxl)}
 
-\NormalTok{rossmann <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/rossmann.xlsx"}\NormalTok{)}
+\CommentTok{# library(readxl)}
+\CommentTok{# }
+\CommentTok{# rossmann <- read_xlsx("data/rossmann.xlsx")}
+\CommentTok{#}
+\CommentTok{# save(rossmann, file="data/rossmann.RData")}
+
+\CommentTok{# natywny format, mniejszy rozmiar, szybsze wczytywanie}
+\KeywordTok{load}\NormalTok{(}\StringTok{"data/rossmann.RData"}\NormalTok{)}
 
 \NormalTok{sklep77 <-}\StringTok{ }\NormalTok{rossmann }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(sklep_id}\OperatorTok{==}\DecValTok{77}\NormalTok{, czy_otwarty}\OperatorTok{==}\StringTok{"Tak"}\NormalTok{)}
@@ -3762,19 +3773,139 @@ względu na to, że typ sklepu jest argumentem \texttt{fill} w funkcji
 
 \subsection{Wykres kafelkowy}\label{wykres-kafelkowy}
 
-\begin{itemize}
-\tightlist
-\item
-  czy promocja i czy swieto szkolne
-\end{itemize}
+Do wizualizacji tabeli częstości można użyć wykresu kafelkowego. W tym
+celu najpierw zliczamy wystąpienia wariantów cech czy\_promocja oraz
+czy\_swieto\_szkolne i wynik przekazujemy bezpośrednio do funkcji
+\texttt{ggplot()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sklep77 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{(czy_promocja, czy_swieto_szkolne) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ czy_promocja, }
+             \DataTypeTok{y =}\NormalTok{ czy_swieto_szkolne,}
+             \DataTypeTok{fill =}\NormalTok{ n)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_tile}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-163-1.pdf}
+
+Aby dodać do tego wykresu etykiety posłużymy się funkcją
+\texttt{geom\_label()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sklep77 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{(czy_promocja, czy_swieto_szkolne) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ czy_promocja, }
+             \DataTypeTok{y =}\NormalTok{ czy_swieto_szkolne,}
+             \DataTypeTok{fill =}\NormalTok{ n)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_tile}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_label}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ n), }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-164-1.pdf}
+
+Zwykle patrząc na wykres podświadomie zakładamy, że ciemniejszy kolor
+oznacza wyższe wartości, natomiast jasny małe liczby. W tym przypadku
+układ kolorów jest odwrócony. Musimy odpowiednio dobrać kolory, aby to
+poprawić. Bardzo przydatne narzędzie znajduje się pod adresem:
+\url{http://colorbrewer2.org/}. Następnie korzystamy z funkcji
+\texttt{scale\_fill\_gradient}, w której określamy tylko kolor
+początkowy i końcowy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sklep77 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{count}\NormalTok{(czy_promocja, czy_swieto_szkolne) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ czy_promocja, }
+                \DataTypeTok{y =}\NormalTok{ czy_swieto_szkolne,}
+                \DataTypeTok{fill =}\NormalTok{ n)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_tile}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_label}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ n), }\DataTypeTok{color =} \StringTok{"white"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_fill_gradient}\NormalTok{(}\DataTypeTok{low =} \StringTok{"#66c2a4"}\NormalTok{, }
+                      \DataTypeTok{high =} \StringTok{"#005824"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-165-1.pdf}
 
 \subsection{Uwzględnienie czasu}\label{uwzglednienie-czasu}
 
+Próba stworzenia wykresu przedstawiającego zmianę sprzedaży w czasie za
+pomocą oryginalnych danych spowoduje uzsykanie niezbyt czytelnej
+grafiki.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{data,}
+                    \DataTypeTok{y=}\NormalTok{sprzedaz,}
+                    \DataTypeTok{color=}\NormalTok{dzien_tyg)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-166-1.pdf}
+
+Wynika to z faktu, że dzien tygodnia jest traktowany jak zmienna
+numeryczna, a data jest zmienną tekstową. Konwersja tekstu na datę jest
+możliwa z wykorzystaniem pakietu \texttt{lubridate}. W tym pakiecie
+każda część daty ma swój akronim, który później jest wykorzystywany w
+odpowiednich funkcjach:
+
 \begin{itemize}
 \tightlist
 \item
-  sprzedaż w kolejnych dniach
+  y - rok (year)
+\item
+  m - miesiąc (month)
+\item
+  d - dzień (day)
+\item
+  h - godzina (hour)
+\item
+  m - minuta (minute)
 \end{itemize}
+
+Przykłady funkcji:
+
+\begin{itemize}
+\tightlist
+\item
+  ymd - konwertuje tekst zapisany w postaci rok-miesiąc-dzień na obiekt
+  daty
+\item
+  dmy\_hm - konwertuje tekst zapisany w postaci dzień-miesiąc-rok
+  godzina:minuta na obiekt daty
+\item
+  month - pobiera z obiektu daty informację o miesiącu
+\item
+  year - pobiera z obiektu daty informację o roku
+\item
+  week - pobiera z obiektu daty informację o tygodniu roku
+\end{itemize}
+
+Według powyższych reguł korzystamy z funkcji \texttt{ymd()} do konwersji
+daty w naszym zbiorze.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\NormalTok{sklep77a <-}\StringTok{ }\NormalTok{sklep77 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dzien_tyg=}\KeywordTok{as.factor}\NormalTok{(dzien_tyg),}
+         \DataTypeTok{data=}\KeywordTok{ymd}\NormalTok{(data))}
+
+\KeywordTok{ggplot}\NormalTok{(sklep77a, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{data,}
+                    \DataTypeTok{y=}\NormalTok{sprzedaz,}
+                    \DataTypeTok{color=}\NormalTok{dzien_tyg)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-167-1.pdf}
 
 \subsection{Facets}\label{facets}
 
@@ -3801,7 +3932,7 @@ względu na to, że typ sklepu jest argumentem \texttt{fill} w funkcji
 ## Warning: Removed 3 rows containing missing values (geom_point).
 \end{verbatim}
 
-\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-163-1.pdf}
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-168-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3848,7 +3979,7 @@ względu na to, że typ sklepu jest argumentem \texttt{fill} w funkcji
 ## Warning: Removed 6 rows containing missing values (geom_point).
 \end{verbatim}
 
-\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-164-1.pdf}
+\includegraphics{Wawrowski_PPR_files/figure-latex/unnamed-chunk-169-1.pdf}
 
 Zamiana reprezentacji danych na szeroką.
 
@@ -3900,8 +4031,13 @@ I na wąską.
 
 \section{Pakiet plotly}\label{pakiet-plotly}
 
+Za pomocą pakietu \texttt{plotly} w prosty sposób można zamienić
+statystyczny wykres \texttt{ggplot} na interaktywny.
+
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plotly)}
+
 \NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ sklep77, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sprzedaz, }\DataTypeTok{y=}\NormalTok{liczba_klientow, }\DataTypeTok{color=}\NormalTok{czy_promocja)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Sprzedaż") +}
@@ -3970,6 +4106,33 @@ Z racji mnogości gatunków można ograniczyć się do kilku wybranych.
 \href{presentations/ppr20190427.html}{Prezentacja}
 
 \section{Funkcje}\label{funkcje}
+
+Funkcję ograniczają potrzebę kopiowania kodu i ułatwiają wprowadzanie
+zmian.
+
+Stworzenie funkcji wymaga:
+
+\begin{itemize}
+\tightlist
+\item
+  wymyślenia nazwy funkcji,
+\item
+  określenia elementów wejściowych,
+\item
+  umieszczenia kodu w ciele funkcji.
+\end{itemize}
+
+Istnieją pewne dobre praktyki tworzenia funkcji:
+
+\begin{itemize}
+\tightlist
+\item
+  nazwy funkcji powinny być czasownikami,
+\item
+  podkreślnik vs.~notacja camelCase i konsekwencja stosowania,
+\item
+  wspólny przedrostek np. rnorm, runif.
+\end{itemize}
 
 \section{Instrukcje warunkowe}\label{instrukcje-warunkowe}
 

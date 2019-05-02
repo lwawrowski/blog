@@ -220,7 +220,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Wobec tego załadujmy pakiet <code>tidyverse</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## -- Attaching packages ---------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------ tidyverse 1.2.1 --</code></pre>
 <pre><code>## &lt;U+221A&gt; ggplot2 3.1.1       &lt;U+221A&gt; purrr   0.3.2  
 ## &lt;U+221A&gt; tibble  2.1.1       &lt;U+221A&gt; dplyr   0.8.0.1
 ## &lt;U+221A&gt; tidyr   0.8.3       &lt;U+221A&gt; stringr 1.4.0  
@@ -228,7 +228,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.3</code></pre>
 <pre><code>## Warning: package &#39;tibble&#39; was built under R version 3.5.3</code></pre>
 <pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.5.3</code></pre>
-<pre><code>## -- Conflicts ------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts --------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>W konsoli pojawi się informacja o wersji załadowanych pakietów oraz o konfliktach występujących pomiędzy pakietami. Konflikty te wynikają z takich samych nazw funkcji w różnych pakietach. Kolejność wczytywania pakietów ma znaczenie - kolejny pakiet przykryje funkcje z wcześniej wczytanego. Wywołanie przykrytej funkcji jest możliwe poprzez zapis <code>nazwa_pakietu::nazwa_funkcji</code>.</p>
