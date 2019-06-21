@@ -15,3 +15,5 @@ author = "Łukasz"
 [Geomarketing](https://github.com/lwawrowski/geomarketing)
 
 [Przetwarzanie danych w SAS](https://github.com/lwawrowski/przetwarzanie-danych-SAS)
+
+[Business Intelligence in SAS](http://www.wawrowski.edu.pl/bin/)
