@@ -109,7 +109,7 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
+\providecommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
@@ -321,6 +321,21 @@ Testy statystyczne dzielą się na dwie grupy:
 
 \chapter{Regresja}\label{regresja}
 
+Metody regresji pozwalają na analizowanie zależności
+przyczynowo-skutkowych.
+
+Na początku pracy wczytujemy biblioteki \texttt{tidyverse},
+\texttt{readxl} oraz wyłączamy notację naukową.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(readxl)}
+
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{scipen =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Regresja prosta}\label{regresja-prosta}
 
 Na podstawie \href{data/Salary_Data.csv}{danych} dotyczących informacji
@@ -328,9 +343,141 @@ o doświadczeniu i wynagrodzeniu pracowników zbuduj model określający
 `widełki' dla potencjalnych pracowników o doświadczeniu równym 8, 10 i
 11 lat.
 
-\href{res/regresja_prosta.Rmd}{regresja\_prosta.Rmd}
+Wczytujemy dane i sprawdzamy czy nie występują zera bądź braki danych z
+użyciem funkcji \texttt{summary()}.
 
-\href{res/adr.zip}{cały projekt}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dane <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/Salary_Data.csv"}\NormalTok{)}
+
+\KeywordTok{summary}\NormalTok{(dane)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  YearsExperience      Salary      
+##  Min.   : 1.100   Min.   : 37731  
+##  1st Qu.: 3.200   1st Qu.: 56721  
+##  Median : 4.700   Median : 65237  
+##  Mean   : 5.313   Mean   : 76003  
+##  3rd Qu.: 7.700   3rd Qu.:100545  
+##  Max.   :10.500   Max.   :122391
+\end{verbatim}
+
+Następnie stworzymy wykres.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(dane)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+Najprostszym sposobem wizualizacji jest wykorzystanie funkcji
+\texttt{plot()}, niemniej taki wykres nie jest najpiękniejszy i trudno
+się go formatuje. Dużo lepiej skorzystać z pakietu \texttt{ggplot2}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dane, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{YearsExperience, }\DataTypeTok{y=}\NormalTok{Salary)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{colour =} \StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Doświadczenie"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Pensja"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{12}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylim}\NormalTok{(}\DecValTok{35000}\NormalTok{, }\DecValTok{126000}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+W argumentach funkcji \texttt{ggplot()} podajemy co wizualizujemy,
+natomiast sposób prezentacji ustalany jest przez funkcje \texttt{geom}.
+Funkcje \texttt{xlab()} i \texttt{ylab()} określają etykiety osi, a
+\texttt{xlim()} i \texttt{ylim()} wartości graniczne. Funkcje
+rozpoczynające się od \texttt{theme\_} określają wygląd wykresu.
+
+Modelowanie rozpoczynamy od określenia zmiennej zależnej i niezależnej.
+
+\begin{itemize}
+\tightlist
+\item
+  zmienna zależna/objaśniana: pensja
+\item
+  zmienna niezależna/objaśniająca: doświadczenie
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Salary }\OperatorTok{~}\StringTok{ }\NormalTok{YearsExperience, }\DataTypeTok{data =}\NormalTok{ dane)}
+\KeywordTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Salary ~ YearsExperience, data = dane)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -7958.0 -4088.5  -459.9  3372.6 11448.0 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value             Pr(>|t|)    
+## (Intercept)      25792.2     2273.1   11.35     0.00000000000551 ***
+## YearsExperience   9450.0      378.8   24.95 < 0.0000000000000002 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5788 on 28 degrees of freedom
+## Multiple R-squared:  0.957,  Adjusted R-squared:  0.9554 
+## F-statistic: 622.5 on 1 and 28 DF,  p-value: < 0.00000000000000022
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  b1 = 9450 - wzrost doświadczenia o rok powoduje przeciętny wzrost
+  pensji o 9450 zł
+\item
+  b0 = 25792,2 - pracownik o doświadczeniu 0 lat uzyska pensję w
+  wysokości 25792,2 zł
+\end{itemize}
+
+Resztowy błąd standardowy Su wynosi 5788, co oznacza wartości z modelu
+różnią się od rzeczywistości średnio o +/- 5788 zł
+
+R2 = 0,957 - model wyjaśnia 96\% zmienności pensji
+
+Dokonujemy wyznaczenia wartości teoretycznych dla kilku wybranych lat.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nowiPracownicy <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{YearsExperience=}\KeywordTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\KeywordTok{predict}\NormalTok{(model, nowiPracownicy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        1        2        3 
+## 101391.9 120291.8 129741.8
+\end{verbatim}
+
+Tym sposobem uzyskujemy następujące widełki:
+
+\begin{itemize}
+\tightlist
+\item
+  pracownik o stażu 8 lat - proponowana pensja 101391,9 zł +/- 5788 zł
+\item
+  pracownik o stażu 10 lat - proponowana pensja 120291,8 zł +/- 5788 zł
+\item
+  pracownik o stażu 11 lat - proponowana pensja 129741,8 zł +/- 5788 zł
+\end{itemize}
 
 \subsection{Zadanie}\label{zadanie}
 
@@ -375,15 +522,10 @@ Opis zbioru:
   wiek - wiek (w latach)
 \end{itemize}
 
-Wczytanie bibliotek \texttt{tidyverse}, \texttt{readxl} oraz danych.
+Wczytanie danych.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\KeywordTok{library}\NormalTok{(readxl)}
-
-\KeywordTok{options}\NormalTok{(}\DataTypeTok{scipen =} \DecValTok{100}\NormalTok{)}
-
 \NormalTok{pracownicy <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/pracownicy.xlsx"}\NormalTok{)}
 
 \NormalTok{pracownicy2 <-}\StringTok{ }\NormalTok{pracownicy }\OperatorTok{%>%}
@@ -480,7 +622,7 @@ Parametry regresji mają następujące interpretacje:
   o 11169,65 zł więcej niż pracownik o kodzie 1 (ochroniarz)
 \item
   pwynagrodzenie - wzrost początkowego wynagrodzenia o 1 zł powoduje
-  przecięny wzrost bieżącego wynagrodzenia o 1,34 zł
+  przeciętny wzrost bieżącego wynagrodzenia o 1,34 zł
 \item
   staz - wzrost stażu pracy o miesiąc skutkuje przeciętnym wzrostem
   bieżącego wynagrodzenia o 154,51 zł
@@ -492,7 +634,7 @@ Parametry regresji mają następujące interpretacje:
   średnio o 1011,55 zł mniej aniżeli pracownicy, którzy do związków nie
   zależą
 \item
-  wiek - wzrost wieku pracownika o 1 rok to przecięnym spadek bieżącego
+  wiek - wzrost wieku pracownika o 1 rok to przeciętnym spadek bieżącego
   wynagrodzenia o 64,79 zł
 \end{itemize}
 
@@ -522,7 +664,7 @@ współczynnik korelacji liniowej Pearsona.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-4-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-10-1.pdf}
 
 Możemy zauważyć, że wartości bieżącego wynagrodzenia są najsilniej
 skorelowane w wartościami wynagrodzenia początkowego. Także
@@ -530,7 +672,7 @@ doświadczenie i wiek są silnie ze sobą związane, co może sugerować, że
 obie zmienne wnoszą do modelu podobną informację.
 
 W związku z tym powinniśmy wyeliminować niektóre zmienne z modelu
-pozostawiając te najważniejsze. Wyróżnia się trzy podjeścia do tego
+pozostawiając te najważniejsze. Wyróżnia się trzy podejścia do tego
 zagadnienia:
 
 \begin{itemize}
@@ -699,11 +841,11 @@ objaśniających:
 
 Współczynnik tolerancji wskazuje na procent niewyjaśnionej zmienności
 danej zmiennej przez pozostałe zmienne objaśniające. Przykładowo
-współcznnik tolerancji dla początkowego wynagrodzenia wynosi 0,3371, co
-oznacza, że 33\% zmienności początkowego wynagrodzenia nie jest
+współczynnik tolerancji dla początkowego wynagrodzenia wynosi 0,2980, co
+oznacza, że 30\% zmienności początkowego wynagrodzenia nie jest
 wyjaśnione przez pozostałe zmienne w modelu. Z kolei współczynnik VIF
 jest obliczany na podstawie wartości współczynnika tolerancji i wskazuje
-o ile wariancja szacowanego współcznnika regresji jest podwyższona z
+o ile wariancja szacowanego współczynnika regresji jest podwyższona z
 powodu współliniowości danej zmiennej objaśniającej z pozostałymi
 zmiennymi objaśniającymi. Wartość współczynnika VIF powyżej 4 należy
 uznać za wskazującą na współliniowość. W analizowanym przypadku takie
@@ -722,7 +864,7 @@ przekształcenie podawane jako drugi argument.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{pracownicy2_std <-}\StringTok{ }\NormalTok{pracownicy2 }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate_if}\NormalTok{(is.numeric, }\KeywordTok{funs}\NormalTok{(scale))}
+\StringTok{  }\KeywordTok{mutate_if}\NormalTok{(is.numeric, scale)}
 
 \NormalTok{wybrany_model_std <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(bwynagrodzenie }\OperatorTok{~}\StringTok{ }\NormalTok{pwynagrodzenie }\OperatorTok{+}\StringTok{ }\NormalTok{kat_pracownika }\OperatorTok{+}\StringTok{ }
 \StringTok{                          }\NormalTok{doswiadczenie }\OperatorTok{+}\StringTok{ }\NormalTok{staz }\OperatorTok{+}\StringTok{ }\NormalTok{plec }\OperatorTok{+}\StringTok{ }\NormalTok{edukacja, }\DataTypeTok{data =}\NormalTok{ pracownicy2_std)}
@@ -775,10 +917,10 @@ różniących się od tych rzeczywistych.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-16-1.pdf}
 
 Reszty w naszym modelu wydają się być zbliżone do rozkładu normalnego.
-Jednoznaczą odpowiedź da jednak odpowiedni test.
+Jednoznaczną odpowiedź da jednak odpowiedni test.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -810,7 +952,7 @@ kwantyl-kwantyl:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-12-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-18-1.pdf}
 
 Gdyby wszystkie punkty leżały na prostej to oznaczałoby to normalność
 rozkładu reszt. Tymczasem po lewej i prawej stronie tego wykresu
@@ -826,11 +968,11 @@ jednych z najbardziej popularnych należy odległość Cooka:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-19-1.pdf}
 
 Przypisanie tej funkcji do obiektu zwraca nam tabelę z numerami
 zidentyfikowanych obserwacji wpływowych. W przypadku odległości Cooka
-jest to 12 obserwacji.
+jest to 35 obserwacji.
 
 Inną miarą są reszty studentyzowane.
 
@@ -840,10 +982,10 @@ Inną miarą są reszty studentyzowane.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-14-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-20-1.pdf}
 
 Wyżej wykorzystana funkcja jako kryterium odstawania przyjmuje wartość 3
-identyfikując 4 obserwacje wpływowe. Z kolei dodanie do powyższej
+identyfikując 10 obserwacji wpływowych. Z kolei dodanie do powyższej
 funkcji przyrostka \emph{fit} powoduje przyjęcie jako granicy wartości
 równej 2.
 
@@ -853,15 +995,15 @@ równej 2.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-15-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-21-1.pdf}
 
-W ten sposób zostało zidentyfikowanych 10 obserwacji odstających.
-Korzystając z tego ostatniego podejścia wyeliminujemy obserwacje
-odstające ze zbioru uczącego:
+W ten sposób zostało zidentyfikowanych 22 obserwacji odstających.
+Korzystając z odległości Cooka wyeliminujemy obserwacje odstające ze
+zbioru:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{nr_obs_wplyw <-}\StringTok{ }\NormalTok{obs_wplyw}\OperatorTok{$}\NormalTok{outliers}\OperatorTok{$}\NormalTok{observation}
+\NormalTok{nr_obs_wplyw <-}\StringTok{ }\NormalTok{cook}\OperatorTok{$}\NormalTok{outliers}\OperatorTok{$}\NormalTok{observation}
 
 \NormalTok{bez_obs_wplyw <-}\StringTok{ }\NormalTok{pracownicy2[}\OperatorTok{-}\NormalTok{nr_obs_wplyw,]}
 
@@ -879,27 +1021,27 @@ odstające ze zbioru uczącego:
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -12997.6  -2816.4   -481.4   2544.6  15180.2 
+## -12591.2  -2696.4   -564.8   2263.0  14704.1 
 ## 
 ## Coefficients:
-##                    Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)     -4307.25866  2381.76657  -1.808             0.071217 .  
-## pwynagrodzenie      1.39451     0.05382  25.908 < 0.0000000000000002 ***
-## kat_pracownika2  6097.12115  1102.15833   5.532   0.0000000542431348 ***
-## kat_pracownika3  9129.16469   972.97899   9.383 < 0.0000000000000002 ***
-## doswiadczenie     -18.87447     2.41685  -7.810   0.0000000000000419 ***
-## staz              120.56289    21.88184   5.510   0.0000000610683928 ***
-## plec1           -1483.93151   521.34920  -2.846             0.004628 ** 
-## edukacja          384.58159   109.81914   3.502             0.000509 ***
+##                   Estimate Std. Error t value             Pr(>|t|)    
+## (Intercept)     -3756.8288  2381.5361  -1.577             0.115420    
+## pwynagrodzenie      1.3696     0.0676  20.260 < 0.0000000000000002 ***
+## kat_pracownika2  6480.6971  1049.9539   6.172   0.0000000015569534 ***
+## kat_pracownika3  9791.5000  1059.4980   9.242 < 0.0000000000000002 ***
+## doswiadczenie     -18.5808     2.3229  -7.999   0.0000000000000117 ***
+## staz              116.3809    20.9704   5.550   0.0000000501086186 ***
+## plec1           -1616.6030   505.1391  -3.200             0.001475 ** 
+## edukacja          397.7652   105.8146   3.759             0.000194 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 4592 on 443 degrees of freedom
-## Multiple R-squared:  0.8986, Adjusted R-squared:  0.897 
-## F-statistic:   561 on 7 and 443 DF,  p-value: < 0.00000000000000022
+## Residual standard error: 4271 on 430 degrees of freedom
+## Multiple R-squared:  0.894,  Adjusted R-squared:  0.8923 
+## F-statistic: 518.3 on 7 and 430 DF,  p-value: < 0.00000000000000022
 \end{verbatim}
 
-Model dopasowny na takim zbiorze charakteryzuje się dużo mniejszym
+Model dopasowany na takim zbiorze charakteryzuje się dużo mniejszym
 błędem standardowym oraz wyższym współczynnikiem \(R^2\). Sprawdźmy w
 takim razie normalność reszt.
 
@@ -909,7 +1051,7 @@ takim razie normalność reszt.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-17-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-23-1.pdf}
 
 Wykres kwantyl-kwantyl wygląda już dużo lepiej, ale dla pewności
 przeprowadzimy testy statystyczne.
@@ -924,10 +1066,10 @@ przeprowadzimy testy statystyczne.
 ## -----------------------------------------------
 ##        Test             Statistic       pvalue  
 ## -----------------------------------------------
-## Shapiro-Wilk              0.9708         0.0000 
-## Kolmogorov-Smirnov        0.0675         0.0328 
-## Cramer-von Mises         39.1404         0.0001 
-## Anderson-Darling          3.8103         0.0000 
+## Shapiro-Wilk              0.9696         0.0000 
+## Kolmogorov-Smirnov        0.0667         0.0405 
+## Cramer-von Mises         38.1644         0.0001 
+## Anderson-Darling          3.5421         0.0000 
 ## -----------------------------------------------
 \end{verbatim}
 
@@ -964,20 +1106,186 @@ zajęciach 27.04.2019 r. przedyskutujemy wyniki.
 ##  Max.   :192262
 \end{verbatim}
 
+Podsumowanie danych pokazuje występowanie zer w wartościach zmiennych
+R.D.Spend i Marketing.Spend - należy je wyeliminować.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{startupy <-}\StringTok{ }\NormalTok{startupy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(R.D.Spend }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{, Marketing.Spend }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Na tak przygotowanym zbiorze możemy dopasować model ze wszystkimi
+zmiennymi.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Profit }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data=}\NormalTok{startupy)}
+\KeywordTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Profit ~ ., data = startupy)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -15464  -4887  -1424   5550  13560 
+## 
+## Coefficients:
+##                    Estimate  Std. Error t value             Pr(>|t|)    
+## (Intercept)     59773.09290  6126.19072   9.757     0.00000000000391 ***
+## R.D.Spend           0.77507     0.03909  19.828 < 0.0000000000000002 ***
+## Administration     -0.05759     0.04515  -1.275                0.210    
+## Marketing.Spend     0.02102     0.01528   1.376                0.176    
+## StateFlorida    -1752.43437  2744.96836  -0.638                0.527    
+## StateNew York   -1597.22937  2764.85338  -0.578                0.567    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7503 on 40 degrees of freedom
+## Multiple R-squared:  0.9613, Adjusted R-squared:  0.9565 
+## F-statistic: 198.7 on 5 and 40 DF,  p-value: < 0.00000000000000022
+\end{verbatim}
+
+Jedyną istotną zmienną objaśniającą jest cecha R.D.Spend. W związku z
+tym używamy funkcji krokowej metody doboru zmiennych w celu znalezienia
+istotnych czynników wpływających na przychód startupu.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ols_step_both_p}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Stepwise Selection Method   
+## ---------------------------
+## 
+## Candidate Terms: 
+## 
+## 1. R.D.Spend 
+## 2. Administration 
+## 3. Marketing.Spend 
+## 4. State 
+## 
+## We are selecting variables based on p value...
+## 
+## Variables Entered/Removed: 
+## 
+## - R.D.Spend added 
+## - Administration added 
+## 
+## No more variables to be added/removed.
+## 
+## 
+## Final Model Output 
+## ------------------
+## 
+##                            Model Summary                             
+## --------------------------------------------------------------------
+## R                       0.979       RMSE                   7427.091 
+## R-Squared               0.959       Coef. Var                 6.344 
+## Adj. R-Squared          0.957       MSE                55161684.725 
+## Pred R-Squared          0.953       MAE                    6057.542 
+## --------------------------------------------------------------------
+##  RMSE: Root Mean Square Error 
+##  MSE: Mean Square Error 
+##  MAE: Mean Absolute Error 
+## 
+##                                      ANOVA                                       
+## --------------------------------------------------------------------------------
+##                        Sum of                                                   
+##                       Squares        DF        Mean Square       F         Sig. 
+## --------------------------------------------------------------------------------
+## Regression    55818532409.384         2    27909266204.692    505.954    0.0000 
+## Residual       2371952443.176        43       55161684.725                      
+## Total         58190484852.560        45                                         
+## --------------------------------------------------------------------------------
+## 
+##                                         Parameter Estimates                                          
+## ----------------------------------------------------------------------------------------------------
+##          model         Beta    Std. Error    Std. Beta      t        Sig         lower        upper 
+## ----------------------------------------------------------------------------------------------------
+##    (Intercept)    62996.044      5252.182                 11.994    0.000    52404.009    73588.078 
+##      R.D.Spend        0.814         0.026        0.989    31.507    0.000        0.762        0.866 
+## Administration       -0.079         0.042       -0.059    -1.875    0.068       -0.164        0.006 
+## ----------------------------------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+## 
+##                                  Stepwise Selection Summary                                   
+## ---------------------------------------------------------------------------------------------
+##                            Added/                   Adj.                                         
+## Step       Variable       Removed     R-Square    R-Square     C(p)       AIC         RMSE       
+## ---------------------------------------------------------------------------------------------
+##    1      R.D.Spend       addition       0.956       0.955    3.5750    957.0424    7636.5800    
+##    2    Administration    addition       0.959       0.957    2.1290    955.4259    7427.0913    
+## ---------------------------------------------------------------------------------------------
+\end{verbatim}
+
+Algorytm proponuje tylko dwie cechy w modelu R.D.Spend i Administration.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model_2zm <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Profit }\OperatorTok{~}\StringTok{ }\NormalTok{R.D.Spend }\OperatorTok{+}\StringTok{ }\NormalTok{Administration, }\DataTypeTok{data=}\NormalTok{startupy)}
+\KeywordTok{summary}\NormalTok{(model_2zm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Profit ~ R.D.Spend + Administration, data = startupy)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -16632  -4867  -2488   6280  14410 
+## 
+## Coefficients:
+##                   Estimate  Std. Error t value             Pr(>|t|)    
+## (Intercept)    62996.04359  5252.18190  11.994  0.00000000000000262 ***
+## R.D.Spend          0.81412     0.02584  31.507 < 0.0000000000000002 ***
+## Administration    -0.07897     0.04211  -1.875               0.0675 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7427 on 43 degrees of freedom
+## Multiple R-squared:  0.9592, Adjusted R-squared:  0.9573 
+## F-statistic:   506 on 2 and 43 DF,  p-value: < 0.00000000000000022
+\end{verbatim}
+
+W związku z czym stwierdzamy, że tylko te dwie cechy wpływają istotnie
+na przychód - wydatki na R\&D wpływają na niego pozytywnie, a na
+administracje ujemnie.
+
 \chapter{Grupowanie}\label{grupowanie}
 
-Metody grupowania są wykorzystywane np. do segmentacji klientów, w
-przypadku, gdy nie jest znany końcowy podział.
+Grupowanie polega na przypisanie obiektów do określonych
+grup/klastrów/skupień/segmentów, w których znajdą się jednostki
+najbardziej do siebie podobne, a powstałe grupy będą się między sobą
+różnić. Całe utrudnienie polega na tym, że nie wiemy ile tych grup ma
+powstać.
 
 \section{Metoda k-średnich}\label{metoda-k-srednich}
 
-Algorytm:
+Najpopularniejszą metodą grupowania jest metoda k-średnich. Do jej zalet
+należy zaliczyć to, że dobrze działa zarówno na małych, jak i dużych
+zbiorach i jest bardzo efektywny - zwykle osiąga zbieżność w mniej niż
+10 iteracjach. Z wad należy wskazać losowy wybór początkowych centrów
+skupień, co może skutkować nieprawidłowym przypisaniem obiektów do grup.
+
+Algorytm postępowania jest następujący:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Wskaź liczbę grup \(k\).
+  Wskaż liczbę grup \(k\).
 \item
   Wybierz dowolne \(k\) punktów jako centra grup.
 \item
@@ -990,66 +1298,9 @@ Algorytm:
   przypadku zakończ algorytm.
 \end{enumerate}
 
-Zalety:
-
-\begin{itemize}
-\tightlist
-\item
-  dobrze działa zarówno na małych, jak i dużych zbiorach
-\item
-  efektywny
-\end{itemize}
-
-Wady:
-
-\begin{itemize}
-\tightlist
-\item
-  trzeba wskazać liczbę grup
-\item
-  losowy wybór punktów początkowych
-\end{itemize}
-
-\section{Metoda hierarchiczna}\label{metoda-hierarchiczna}
-
-Algorytm:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Każda obserwacji stanowi jedną z \(N\) pojedyńczych grup.
-\item
-  Na podstawie macierzy odległości połącz dwie najbliżej leżące
-  obserwacje w jedną grupę (\(N-1\) grup).
-\item
-  Połącz dwa najbliżej siebie leżące grupy w jedną (\(N-2\) grup).
-\item
-  Powtórz krok nr 3, aż do uzyskania jednej grupy.
-\end{enumerate}
-
-Zalety:
-
-\begin{itemize}
-\tightlist
-\item
-  prosty sposób ustalenia liczby grup
-\item
-  praktyczny sposób wizualizacji
-\end{itemize}
-
-Wady:
-
-\begin{itemize}
-\tightlist
-\item
-  nieodpowiedni dla dużych zbiorów
-\end{itemize}
-
-\subsection{Zadanie}\label{zadanie-2}
-
-Na podstawie zbioru zawierającego informacje o
-\href{data/klienci.csv}{klientach sklepu} dokonaj grupowania klientów.
+Wykorzystamy informacje ze zbioru zawierającego informacje o
+\href{data/klienci.csv}{klientach sklepu} i dokonamy grupowania tych
+klientów.
 
 Opis zbioru:
 
@@ -1067,28 +1318,356 @@ Opis zbioru:
   wskaznik\_wydatkow - klasyfikacja sklepu od 1 do 100
 \end{itemize}
 
-\href{res/grupowanie.Rmd}{grupowanie.Rmd}
+Wczytujemy zbiór danych i sprawdzamy czy pomiędzy zmiennymi są widoczne
+jakieś zależności.
 
-\href{res/adr.zip}{cały projekt}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
 
-\subsection{Zadanie 2}\label{zadanie-2-1}
+\NormalTok{klienci <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/klienci.csv"}\NormalTok{)}
 
-Dokonaj grupowania danych dotyczących \href{data/auta.csv}{32
-samochodów} według następujących zmiennych: pojemność, przebieg, lata
-oraz cena.
+\KeywordTok{ggplot}\NormalTok{(klienci, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{wiek, }\DataTypeTok{y=}\NormalTok{roczny_dochod)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
-\subsection{Zadanie 3}\label{zadanie-3}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-30-1.pdf}
 
-Rozpoznawanie czynności na podstawie danych z przyspieszeniomierza w
-telefonie:
-\href{http://archive.ics.uci.edu/ml/datasets/User+Identification+From+Walking+Activity\#}{User
-Identification From Walking Activity Data Set}
+Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(klienci, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{wiek, }\DataTypeTok{y=}\NormalTok{wskaznik_wydatkow)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział
+zbioru na dwie grupy za pomocą przekątnej.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(klienci, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{wskaznik_wydatkow, }\DataTypeTok{y=}\NormalTok{roczny_dochod)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+Po zestawieniu rocznego dochodu i wskaźnika wydatków wyłania się 5
+potencjalnych grup, zatem te dwie cechy wykorzystamy do grupowania.
+Jednak przed zastosowaniem algorytmu musimy te dane przygotować
+normalizując zakres obu cech - w tym przypadku za pomocą standaryzacji.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{klienci_z <-}\StringTok{ }\NormalTok{klienci }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(roczny_dochod, wskaznik_wydatkow) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{scale}\NormalTok{()}
+
+\KeywordTok{head}\NormalTok{(klienci_z)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      roczny_dochod wskaznik_wydatkow
+## [1,]     -1.734646        -0.4337131
+## [2,]     -1.734646         1.1927111
+## [3,]     -1.696572        -1.7116178
+## [4,]     -1.696572         1.0378135
+## [5,]     -1.658498        -0.3949887
+## [6,]     -1.658498         0.9990891
+\end{verbatim}
+
+W przypadku, gdy podział na grupy nie jest tak oczywisty lub bierzemy
+pod uwagę więcej niż dwa kryteria to wówczas w wyznaczeniu optymalnej
+liczby skupień może pomóc wykres osypiska (ang. elbow method). Polega to
+na przeprowadzeniu grupowania (z wykorzystaniem funkcji
+\texttt{kmeans()}) dla różniej liczby grup i porównanie wariancji
+wewnątrz-grupowej. Dane do stworzenia wykresu osypiska możemy obliczyć w
+pętli:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{zm_w_gr <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(}\DecValTok{15}\NormalTok{)}
+
+\CommentTok{# wprowadzenie pętli}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(zm_w_gr)) \{}
+  \KeywordTok{set.seed}\NormalTok{(}\DecValTok{14}\NormalTok{)}
+\NormalTok{  gr <-}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(klienci_z, }\DataTypeTok{centers =}\NormalTok{ i)}
+\NormalTok{  zm_w_gr[i] <-}\StringTok{ }\NormalTok{gr}\OperatorTok{$}\NormalTok{tot.withinss}
+\NormalTok{\}}
+
+\KeywordTok{plot}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{, zm_w_gr, }\DataTypeTok{type=}\StringTok{"b"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-34-1.pdf}
+
+Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek
+wartości wariancji wewnątrz-grupowej. Według tego kryterium powinniśmy
+wybrać wartość 6 zamiast 5. Sprawdźmy zatem jakie otrzymamy
+przyporządkowanie do grup. Następnie informację o tym przypisaniu
+umieszczamy w oryginalnym zbiorze danych i przedstawiamy na wykresie. W
+celu uzyskania powtarzalnych wyników zastosujemy stałe ziarno
+generatora.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{14}\NormalTok{)}
+\NormalTok{grupy <-}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ klienci_z, }\DataTypeTok{centers =} \DecValTok{5}\NormalTok{)}
+
+\NormalTok{klienci}\OperatorTok{$}\NormalTok{grupa <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(grupy}\OperatorTok{$}\NormalTok{cluster)}
+
+\KeywordTok{ggplot}\NormalTok{(klienci, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{wskaznik_wydatkow, }
+                    \DataTypeTok{y=}\NormalTok{roczny_dochod,}
+                    \DataTypeTok{color=}\NormalTok{grupa)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-35-1.pdf}
+
+Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy
+przydział centrów skupień na początku algorytmu istnieje spora szansa,
+że rozwiązanie nie będzie optymalne. Rozwiązaniem tego problemu jest
+użycie algorytmu kmeans++ do początkowego ustalenia centrów. Ta metoda
+jest zaimplementowana w pakiecie \texttt{ClusterR}. Ponadto jest tam
+także funkcja do ustalenia optymalnej liczby skupień na podstawie
+wykresu osypiska.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ClusterR)}
+
+\KeywordTok{Optimal_Clusters_KMeans}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ klienci_z, }\DataTypeTok{max_clusters =} \DecValTok{15}\NormalTok{, }\DataTypeTok{criterion =} \StringTok{"WCSSE"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\begin{verbatim}
+##  [1] 398.00000 267.67171 156.91549 108.68209  65.24057  59.83221  49.72816
+##  [8]  39.31585  32.33261  31.70877  29.24003  28.18491  25.34096  22.01873
+## [15]  20.67234
+## attr(,"class")
+## [1] "k-means clustering"
+\end{verbatim}
+
+Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek
+wartości wariancji wewnątrz-grupowej. W analizowanym przypadku będzie to
+5 grup. Następnie korzystamy z funkcji \texttt{KMeans\_rcpp} do
+wyznaczenia przynależności do grup. Ta funkcja domyślnie korzysta z
+algorytmu kmeans++, zatem nie ma niebezpieczeństwa, że uzyskamy
+niewłaściwe przyporządkowanie.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grupy2 <-}\StringTok{ }\KeywordTok{KMeans_rcpp}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ klienci_z, }\DataTypeTok{clusters =} \DecValTok{5}\NormalTok{)}
+
+\NormalTok{klienci}\OperatorTok{$}\NormalTok{grupa2 <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(grupy2}\OperatorTok{$}\NormalTok{clusters)}
+
+\KeywordTok{ggplot}\NormalTok{(klienci, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{wskaznik_wydatkow, }
+                    \DataTypeTok{y=}\NormalTok{roczny_dochod,}
+                    \DataTypeTok{color=}\NormalTok{grupa2)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-37-1.pdf}
+
+Ostatnim etapem analizy jest odpowiednia charakterystyka uzyskanych
+klastrów - najczęściej wyznacza się średnie wartości cech w ramach
+każdej grupy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{klienci }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{klientID, }\OperatorTok{-}\NormalTok{plec, }\OperatorTok{-}\NormalTok{grupa) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(grupa2) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise_all}\NormalTok{(}\DataTypeTok{.funs =} \StringTok{"mean"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 4
+##   grupa2  wiek roczny_dochod wskaznik_wydatkow
+##   <fct>  <dbl>         <dbl>             <dbl>
+## 1 1       25.3          25.7              79.4
+## 2 2       45.2          26.3              20.9
+## 3 3       41.1          88.2              17.1
+## 4 4       32.7          86.5              82.1
+## 5 5       42.7          55.3              49.5
+\end{verbatim}
+
+W grupie pierwszej znalazły się osoby z niskimi dochodami i wysokim
+wskaźnikiem wydatków. Grupa druga to klienci o niskich dochodach i
+wydatkach - ich przeciwieństwem jest grupa 4. W grupie 3 są osoby z
+wysokimi dochodami, ale niskimi wydatkami. Grupa 5 to z kolei średniacy
+- klienci o średnich dochodach i wydatkach.
+
+\section{Metoda hierarchiczna}\label{metoda-hierarchiczna}
+
+Alternatywną metodą grupowania jest metoda hierarchiczna. Do jej zalet
+zaliczymy prosty sposób ustalenia liczby grup oraz praktyczny sposób
+wizualizacji. Niestety nie jest to metoda odpowiednia dla dużych zbiorów
+danych.
+
+Algorytm postępowania:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Każda obserwacji stanowi jedną z \(N\) pojedynczych grup.
+\item
+  Na podstawie macierzy odległości połącz dwie najbliżej leżące
+  obserwacje w jedną grupę (\(N-1\) grup).
+\item
+  Połącz dwa najbliżej siebie leżące grupy w jedną (\(N-2\) grup).
+\item
+  Powtórz krok nr 3, aż do uzyskania jednej grupy.
+\end{enumerate}
+
+Dla tych samych danych przeprowadzimy grupowanie, ale tym razem metodą
+hierarchiczną. W metodzie hierarchicznej bazuje się na macierzy
+odległości pomiędzy obserwacjami. Można zastosować wiele miar
+odległości, ale najczęściej wykorzystywana jest odległość euklidesowa.
+Druga zmienna, na którą mamy wpływ to metoda łączenia skupień - w tym
+przypadku najlepsze rezultaty daje metoda Warda. Z kolei wyniki
+grupowania metodą hierarchiczną są prezentowane na dendrogramie.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{macierz_odl <-}\StringTok{ }\KeywordTok{dist}\NormalTok{(klienci_z)}
+
+\NormalTok{dendrogram <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(macierz_odl, }\DataTypeTok{method =} \StringTok{"ward.D"}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(dendrogram, }\DataTypeTok{xlab=}\StringTok{"Klienci"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Odległość euklidesowa"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+Na podstawie dendrogramu identyfikujemy największe różnice odległości
+opisane na osi Y. Także w tym przypadku identyfikujemy 5 grup. Istnieje
+także wiele kryteriów, które mają na celu wyznaczyć optymalną liczbę
+grup - link.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(dendrogram, }\DataTypeTok{xlab=}\StringTok{"Klienci"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Odległość euklidesowa"}\NormalTok{)}
+\KeywordTok{rect.hclust}\NormalTok{(dendrogram, }\DataTypeTok{k=}\DecValTok{5}\NormalTok{, }\DataTypeTok{border=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-40-1.pdf}
+
+Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych
+grup.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grupy_dendro <-}\StringTok{ }\KeywordTok{cutree}\NormalTok{(dendrogram, }\DecValTok{5}\NormalTok{)}
+
+\NormalTok{klienci}\OperatorTok{$}\NormalTok{grupa3 <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(grupy_dendro)}
+
+\KeywordTok{ggplot}\NormalTok{(klienci, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{wskaznik_wydatkow, }
+                    \DataTypeTok{y=}\NormalTok{roczny_dochod,}
+                    \DataTypeTok{color=}\NormalTok{grupa3)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-41-1.pdf}
+
+Uzyskane wyniki są bardzo zbliżone do tych otrzymanych za pomocą
+algorytmu k-średnich.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{klienci }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{klientID, }\OperatorTok{-}\NormalTok{plec, }\OperatorTok{-}\NormalTok{grupa, }\OperatorTok{-}\NormalTok{grupa2) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(grupa3) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise_all}\NormalTok{(}\DataTypeTok{.funs =} \StringTok{"mean"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 4
+##   grupa3  wiek roczny_dochod wskaznik_wydatkow
+##   <fct>  <dbl>         <dbl>             <dbl>
+## 1 1       45.2          26.3              20.9
+## 2 2       25.3          25.1              80.0
+## 3 3       42.5          55.8              49.1
+## 4 4       32.7          86.5              82.1
+## 5 5       41            89.4              15.6
+\end{verbatim}
+
+Metoda hierarchiczna zastosowała inną numerację grup. Liczebności tych
+grup nieznacznie się różnią, ale charakterystyki wewnątrz grupowe są
+bardzo podobne do tych określonych na podstawie metody k-średnich.
+
+Tworząc tabelę krzyżową możemy zobaczyć, że tylko 4 obserwacje zmieniły
+przypisanie do grup.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(klienci}\OperatorTok{$}\NormalTok{grupa2, klienci}\OperatorTok{$}\NormalTok{grupa3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##      1  2  3  4  5
+##   1  0 21  1  0  0
+##   2 23  0  0  0  0
+##   3  0  0  3  0 32
+##   4  0  0  0 39  0
+##   5  0  0 81  0  0
+\end{verbatim}
+
+Porównajmy jeszcze wyniki działania tych dwóch metod na wykresach:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{klienci }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(roczny_dochod, wskaznik_wydatkow, grupa2, grupa3) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{gather}\NormalTok{(metoda, grupa, }\OperatorTok{-}\NormalTok{roczny_dochod, }\OperatorTok{-}\NormalTok{wskaznik_wydatkow) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{wskaznik_wydatkow, }\DataTypeTok{y=}\NormalTok{roczny_dochod)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color=}\NormalTok{grupa)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{metoda)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
+
+Problematyczne obserwacje pochodziły z grupy klientów o przeciętnych
+dochodach oraz wydatkach.
+
+\subsection{Zadania}\label{zadania}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Dokonaj grupowania danych dotyczących \href{data/auta.csv}{32
+  samochodów} według następujących zmiennych: pojemność, przebieg, lata
+  oraz cena.
+\item
+  Rozpoznawanie czynności na podstawie danych z przyspieszeniomierza w
+  telefonie:
+  \href{http://archive.ics.uci.edu/ml/datasets/User+Identification+From+Walking+Activity\#}{User
+  Identification From Walking Activity Data Set}
+\end{enumerate}
 
 \chapter{Klasyfikacja}\label{klasyfikacja}
 
 \href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{A
-visual introduction to machine learning} - niestety powstała tylko jedna
-część.
+visual introduction to machine learning}
 
 \section{Drzewa klasyfikacyjne}\label{drzewa-klasyfikacyjne}
 
@@ -1151,7 +1730,7 @@ Wady:
   trzeba określić liczbę sąsiadów
 \end{itemize}
 
-\subsection{Zadanie}\label{zadanie-4}
+\subsection{Zadanie}\label{zadanie-2}
 
 Zbuduj model klasyfikacyjny dla zbioru
 \href{data/Social_Network_Ads.csv}{danych} dotyczących cech internautów

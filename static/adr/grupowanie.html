@@ -126,15 +126,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4" data-path="grupowanie.html"><a href="grupowanie.html"><i class="fa fa-check"></i><b>4</b> Grupowanie</a><ul>
 <li class="chapter" data-level="4.1" data-path="grupowanie.html"><a href="grupowanie.html#metoda-k-srednich"><i class="fa fa-check"></i><b>4.1</b> Metoda k-średnich</a></li>
 <li class="chapter" data-level="4.2" data-path="grupowanie.html"><a href="grupowanie.html#metoda-hierarchiczna"><i class="fa fa-check"></i><b>4.2</b> Metoda hierarchiczna</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="grupowanie.html"><a href="grupowanie.html#zadanie-2"><i class="fa fa-check"></i><b>4.2.1</b> Zadanie</a></li>
-<li class="chapter" data-level="4.2.2" data-path="grupowanie.html"><a href="grupowanie.html#zadanie-2-1"><i class="fa fa-check"></i><b>4.2.2</b> Zadanie 2</a></li>
-<li class="chapter" data-level="4.2.3" data-path="grupowanie.html"><a href="grupowanie.html#zadanie-3"><i class="fa fa-check"></i><b>4.2.3</b> Zadanie 3</a></li>
+<li class="chapter" data-level="4.2.1" data-path="grupowanie.html"><a href="grupowanie.html#zadania"><i class="fa fa-check"></i><b>4.2.1</b> Zadania</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>5</b> Klasyfikacja</a><ul>
 <li class="chapter" data-level="5.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#drzewa-klasyfikacyjne"><i class="fa fa-check"></i><b>5.1</b> Drzewa klasyfikacyjne</a></li>
 <li class="chapter" data-level="5.2" data-path="klasyfikacja.html"><a href="klasyfikacja.html#knn"><i class="fa fa-check"></i><b>5.2</b> KNN</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#zadanie-4"><i class="fa fa-check"></i><b>5.2.1</b> Zadanie</a></li>
+<li class="chapter" data-level="5.2.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#zadanie-2"><i class="fa fa-check"></i><b>5.2.1</b> Zadanie</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="materiay-z-zajec.html"><a href="materiay-z-zajec.html"><i class="fa fa-check"></i><b>6</b> Materiały z zajęć</a><ul>
@@ -165,49 +163,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="grupowanie" class="section level1">
 <h1><span class="header-section-number">4</span> Grupowanie</h1>
-<p>Metody grupowania są wykorzystywane np. do segmentacji klientów, w przypadku, gdy nie jest znany końcowy podział.</p>
+<p>Grupowanie polega na przypisanie obiektów do określonych grup/klastrów/skupień/segmentów, w których znajdą się jednostki najbardziej do siebie podobne, a powstałe grupy będą się między sobą różnić. Całe utrudnienie polega na tym, że nie wiemy ile tych grup ma powstać.</p>
 <div id="metoda-k-srednich" class="section level2">
 <h2><span class="header-section-number">4.1</span> Metoda k-średnich</h2>
-<p>Algorytm:</p>
+<p>Najpopularniejszą metodą grupowania jest metoda k-średnich. Do jej zalet należy zaliczyć to, że dobrze działa zarówno na małych, jak i dużych zbiorach i jest bardzo efektywny - zwykle osiąga zbieżność w mniej niż 10 iteracjach. Z wad należy wskazać losowy wybór początkowych centrów skupień, co może skutkować nieprawidłowym przypisaniem obiektów do grup.</p>
+<p>Algorytm postępowania jest następujący:</p>
 <ol style="list-style-type: decimal">
-<li>Wskaź liczbę grup <span class="math inline">\(k\)</span>.</li>
+<li>Wskaż liczbę grup <span class="math inline">\(k\)</span>.</li>
 <li>Wybierz dowolne <span class="math inline">\(k\)</span> punktów jako centra grup.</li>
 <li>Przypisz każdą z obserwacji do najbliższego centroidu.</li>
 <li>Oblicz nowe centrum grupy.</li>
 <li>Przypisz każdą z obserwacji do nowych centroidów. Jeśli któraś obserwacja zmieniła grupę - przejdź do kroku nr 4, a w przeciwnym przypadku zakończ algorytm.</li>
 </ol>
-<p>Zalety:</p>
-<ul>
-<li>dobrze działa zarówno na małych, jak i dużych zbiorach</li>
-<li>efektywny</li>
-</ul>
-<p>Wady:</p>
-<ul>
-<li>trzeba wskazać liczbę grup</li>
-<li>losowy wybór punktów początkowych</li>
-</ul>
-</div>
-<div id="metoda-hierarchiczna" class="section level2">
-<h2><span class="header-section-number">4.2</span> Metoda hierarchiczna</h2>
-<p>Algorytm:</p>
-<ol style="list-style-type: decimal">
-<li>Każda obserwacji stanowi jedną z <span class="math inline">\(N\)</span> pojedyńczych grup.</li>
-<li>Na podstawie macierzy odległości połącz dwie najbliżej leżące obserwacje w jedną grupę (<span class="math inline">\(N-1\)</span> grup).</li>
-<li>Połącz dwa najbliżej siebie leżące grupy w jedną (<span class="math inline">\(N-2\)</span> grup).</li>
-<li>Powtórz krok nr 3, aż do uzyskania jednej grupy.</li>
-</ol>
-<p>Zalety:</p>
-<ul>
-<li>prosty sposób ustalenia liczby grup</li>
-<li>praktyczny sposób wizualizacji</li>
-</ul>
-<p>Wady:</p>
-<ul>
-<li>nieodpowiedni dla dużych zbiorów</li>
-</ul>
-<div id="zadanie-2" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Zadanie</h3>
-<p>Na podstawie zbioru zawierającego informacje o <a href="data/klienci.csv">klientach sklepu</a> dokonaj grupowania klientów.</p>
+<p>Wykorzystamy informacje ze zbioru zawierającego informacje o <a href="data/klienci.csv">klientach sklepu</a> i dokonamy grupowania tych klientów.</p>
 <p>Opis zbioru:</p>
 <ul>
 <li>klientID - identyfikator klienta</li>
@@ -216,16 +184,163 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>roczny_dochod - roczny dochód wyrażony w tys. dolarów</li>
 <li>wskaznik_wydatkow - klasyfikacja sklepu od 1 do 100</li>
 </ul>
-<p><a href="res/grupowanie.Rmd">grupowanie.Rmd</a></p>
-<p><a href="res/adr.zip">cały projekt</a></p>
+<p>Wczytujemy zbiór danych i sprawdzamy czy pomiędzy zmiennymi są widoczne jakieś zależności.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+klienci &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/klienci.csv&quot;</span>)
+
+<span class="kw">ggplot</span>(klienci, <span class="kw">aes</span>(<span class="dt">x=</span>wiek, <span class="dt">y=</span>roczny_dochod)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Pomiędzy wiekiem a rocznym dochodem nie widać zależności.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(klienci, <span class="kw">aes</span>(<span class="dt">x=</span>wiek, <span class="dt">y=</span>wskaznik_wydatkow)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zbioru na dwie grupy za pomocą przekątnej.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(klienci, <span class="kw">aes</span>(<span class="dt">x=</span>wskaznik_wydatkow, <span class="dt">y=</span>roczny_dochod)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>Po zestawieniu rocznego dochodu i wskaźnika wydatków wyłania się 5 potencjalnych grup, zatem te dwie cechy wykorzystamy do grupowania. Jednak przed zastosowaniem algorytmu musimy te dane przygotować normalizując zakres obu cech - w tym przypadku za pomocą standaryzacji.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">klienci_z &lt;-<span class="st"> </span>klienci <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(roczny_dochod, wskaznik_wydatkow) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">scale</span>()
+
+<span class="kw">head</span>(klienci_z)</code></pre></div>
+<pre><code>##      roczny_dochod wskaznik_wydatkow
+## [1,]     -1.734646        -0.4337131
+## [2,]     -1.734646         1.1927111
+## [3,]     -1.696572        -1.7116178
+## [4,]     -1.696572         1.0378135
+## [5,]     -1.658498        -0.3949887
+## [6,]     -1.658498         0.9990891</code></pre>
+<p>W przypadku, gdy podział na grupy nie jest tak oczywisty lub bierzemy pod uwagę więcej niż dwa kryteria to wówczas w wyznaczeniu optymalnej liczby skupień może pomóc wykres osypiska (ang. elbow method). Polega to na przeprowadzeniu grupowania (z wykorzystaniem funkcji <code>kmeans()</code>) dla różniej liczby grup i porównanie wariancji wewnątrz-grupowej. Dane do stworzenia wykresu osypiska możemy obliczyć w pętli:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zm_w_gr &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">15</span>)
+
+<span class="co"># wprowadzenie pętli</span>
+
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(zm_w_gr)) {
+  <span class="kw">set.seed</span>(<span class="dv">14</span>)
+  gr &lt;-<span class="st"> </span><span class="kw">kmeans</span>(klienci_z, <span class="dt">centers =</span> i)
+  zm_w_gr[i] &lt;-<span class="st"> </span>gr<span class="op">$</span>tot.withinss
+}
+
+<span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, zm_w_gr, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. Według tego kryterium powinniśmy wybrać wartość 6 zamiast 5. Sprawdźmy zatem jakie otrzymamy przyporządkowanie do grup. Następnie informację o tym przypisaniu umieszczamy w oryginalnym zbiorze danych i przedstawiamy na wykresie. W celu uzyskania powtarzalnych wyników zastosujemy stałe ziarno generatora.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">14</span>)
+grupy &lt;-<span class="st"> </span><span class="kw">kmeans</span>(<span class="dt">x =</span> klienci_z, <span class="dt">centers =</span> <span class="dv">5</span>)
+
+klienci<span class="op">$</span>grupa &lt;-<span class="st"> </span><span class="kw">as.factor</span>(grupy<span class="op">$</span>cluster)
+
+<span class="kw">ggplot</span>(klienci, <span class="kw">aes</span>(<span class="dt">x=</span>wskaznik_wydatkow, 
+                    <span class="dt">y=</span>roczny_dochod,
+                    <span class="dt">color=</span>grupa)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydział centrów skupień na początku algorytmu istnieje spora szansa, że rozwiązanie nie będzie optymalne. Rozwiązaniem tego problemu jest użycie algorytmu kmeans++ do początkowego ustalenia centrów. Ta metoda jest zaimplementowana w pakiecie <code>ClusterR</code>. Ponadto jest tam także funkcja do ustalenia optymalnej liczby skupień na podstawie wykresu osypiska.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ClusterR)
+
+<span class="kw">Optimal_Clusters_KMeans</span>(<span class="dt">data =</span> klienci_z, <span class="dt">max_clusters =</span> <span class="dv">15</span>, <span class="dt">criterion =</span> <span class="st">&quot;WCSSE&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre><code>##  [1] 398.00000 267.67171 156.91549 108.68209  65.24057  59.83221  49.72816
+##  [8]  39.31585  32.33261  31.70877  29.24003  28.18491  25.34096  22.01873
+## [15]  20.67234
+## attr(,&quot;class&quot;)
+## [1] &quot;k-means clustering&quot;</code></pre>
+<p>Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. W analizowanym przypadku będzie to 5 grup. Następnie korzystamy z funkcji <code>KMeans_rcpp</code> do wyznaczenia przynależności do grup. Ta funkcja domyślnie korzysta z algorytmu kmeans++, zatem nie ma niebezpieczeństwa, że uzyskamy niewłaściwe przyporządkowanie.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grupy2 &lt;-<span class="st"> </span><span class="kw">KMeans_rcpp</span>(<span class="dt">data =</span> klienci_z, <span class="dt">clusters =</span> <span class="dv">5</span>)
+
+klienci<span class="op">$</span>grupa2 &lt;-<span class="st"> </span><span class="kw">as.factor</span>(grupy2<span class="op">$</span>clusters)
+
+<span class="kw">ggplot</span>(klienci, <span class="kw">aes</span>(<span class="dt">x=</span>wskaznik_wydatkow, 
+                    <span class="dt">y=</span>roczny_dochod,
+                    <span class="dt">color=</span>grupa2)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>Ostatnim etapem analizy jest odpowiednia charakterystyka uzyskanych klastrów - najczęściej wyznacza się średnie wartości cech w ramach każdej grupy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">klienci <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>klientID, <span class="op">-</span>plec, <span class="op">-</span>grupa) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(grupa2) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise_all</span>(<span class="dt">.funs =</span> <span class="st">&quot;mean&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 4
+##   grupa2  wiek roczny_dochod wskaznik_wydatkow
+##   &lt;fct&gt;  &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
+## 1 1       25.3          25.7              79.4
+## 2 2       45.2          26.3              20.9
+## 3 3       41.1          88.2              17.1
+## 4 4       32.7          86.5              82.1
+## 5 5       42.7          55.3              49.5</code></pre>
+<p>W grupie pierwszej znalazły się osoby z niskimi dochodami i wysokim wskaźnikiem wydatków. Grupa druga to klienci o niskich dochodach i wydatkach - ich przeciwieństwem jest grupa 4. W grupie 3 są osoby z wysokimi dochodami, ale niskimi wydatkami. Grupa 5 to z kolei średniacy - klienci o średnich dochodach i wydatkach.</p>
 </div>
-<div id="zadanie-2-1" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Zadanie 2</h3>
-<p>Dokonaj grupowania danych dotyczących <a href="data/auta.csv">32 samochodów</a> według następujących zmiennych: pojemność, przebieg, lata oraz cena.</p>
-</div>
-<div id="zadanie-3" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Zadanie 3</h3>
-<p>Rozpoznawanie czynności na podstawie danych z przyspieszeniomierza w telefonie: <a href="http://archive.ics.uci.edu/ml/datasets/User+Identification+From+Walking+Activity#">User Identification From Walking Activity Data Set</a></p>
+<div id="metoda-hierarchiczna" class="section level2">
+<h2><span class="header-section-number">4.2</span> Metoda hierarchiczna</h2>
+<p>Alternatywną metodą grupowania jest metoda hierarchiczna. Do jej zalet zaliczymy prosty sposób ustalenia liczby grup oraz praktyczny sposób wizualizacji. Niestety nie jest to metoda odpowiednia dla dużych zbiorów danych.</p>
+<p>Algorytm postępowania:</p>
+<ol style="list-style-type: decimal">
+<li>Każda obserwacji stanowi jedną z <span class="math inline">\(N\)</span> pojedynczych grup.</li>
+<li>Na podstawie macierzy odległości połącz dwie najbliżej leżące obserwacje w jedną grupę (<span class="math inline">\(N-1\)</span> grup).</li>
+<li>Połącz dwa najbliżej siebie leżące grupy w jedną (<span class="math inline">\(N-2\)</span> grup).</li>
+<li>Powtórz krok nr 3, aż do uzyskania jednej grupy.</li>
+</ol>
+<p>Dla tych samych danych przeprowadzimy grupowanie, ale tym razem metodą hierarchiczną. W metodzie hierarchicznej bazuje się na macierzy odległości pomiędzy obserwacjami. Można zastosować wiele miar odległości, ale najczęściej wykorzystywana jest odległość euklidesowa. Druga zmienna, na którą mamy wpływ to metoda łączenia skupień - w tym przypadku najlepsze rezultaty daje metoda Warda. Z kolei wyniki grupowania metodą hierarchiczną są prezentowane na dendrogramie.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">macierz_odl &lt;-<span class="st"> </span><span class="kw">dist</span>(klienci_z)
+
+dendrogram &lt;-<span class="st"> </span><span class="kw">hclust</span>(macierz_odl, <span class="dt">method =</span> <span class="st">&quot;ward.D&quot;</span>)
+
+<span class="kw">plot</span>(dendrogram, <span class="dt">xlab=</span><span class="st">&quot;Klienci&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Odległość euklidesowa&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>Na podstawie dendrogramu identyfikujemy największe różnice odległości opisane na osi Y. Także w tym przypadku identyfikujemy 5 grup. Istnieje także wiele kryteriów, które mają na celu wyznaczyć optymalną liczbę grup - link.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(dendrogram, <span class="dt">xlab=</span><span class="st">&quot;Klienci&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Odległość euklidesowa&quot;</span>)
+<span class="kw">rect.hclust</span>(dendrogram, <span class="dt">k=</span><span class="dv">5</span>, <span class="dt">border=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych grup.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grupy_dendro &lt;-<span class="st"> </span><span class="kw">cutree</span>(dendrogram, <span class="dv">5</span>)
+
+klienci<span class="op">$</span>grupa3 &lt;-<span class="st"> </span><span class="kw">as.factor</span>(grupy_dendro)
+
+<span class="kw">ggplot</span>(klienci, <span class="kw">aes</span>(<span class="dt">x=</span>wskaznik_wydatkow, 
+                    <span class="dt">y=</span>roczny_dochod,
+                    <span class="dt">color=</span>grupa3)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>Uzyskane wyniki są bardzo zbliżone do tych otrzymanych za pomocą algorytmu k-średnich.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">klienci <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>klientID, <span class="op">-</span>plec, <span class="op">-</span>grupa, <span class="op">-</span>grupa2) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(grupa3) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise_all</span>(<span class="dt">.funs =</span> <span class="st">&quot;mean&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 4
+##   grupa3  wiek roczny_dochod wskaznik_wydatkow
+##   &lt;fct&gt;  &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
+## 1 1       45.2          26.3              20.9
+## 2 2       25.3          25.1              80.0
+## 3 3       42.5          55.8              49.1
+## 4 4       32.7          86.5              82.1
+## 5 5       41            89.4              15.6</code></pre>
+<p>Metoda hierarchiczna zastosowała inną numerację grup. Liczebności tych grup nieznacznie się różnią, ale charakterystyki wewnątrz grupowe są bardzo podobne do tych określonych na podstawie metody k-średnich.</p>
+<p>Tworząc tabelę krzyżową możemy zobaczyć, że tylko 4 obserwacje zmieniły przypisanie do grup.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(klienci<span class="op">$</span>grupa2, klienci<span class="op">$</span>grupa3)</code></pre></div>
+<pre><code>##    
+##      1  2  3  4  5
+##   1  0 21  1  0  0
+##   2 23  0  0  0  0
+##   3  0  0  3  0 32
+##   4  0  0  0 39  0
+##   5  0  0 81  0  0</code></pre>
+<p>Porównajmy jeszcze wyniki działania tych dwóch metod na wykresach:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">klienci <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(roczny_dochod, wskaznik_wydatkow, grupa2, grupa3) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(metoda, grupa, <span class="op">-</span>roczny_dochod, <span class="op">-</span>wskaznik_wydatkow) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>wskaznik_wydatkow, <span class="dt">y=</span>roczny_dochod)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>grupa)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>metoda)</code></pre></div>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>Problematyczne obserwacje pochodziły z grupy klientów o przeciętnych dochodach oraz wydatkach.</p>
+<div id="zadania" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Zadania</h3>
+<ol style="list-style-type: decimal">
+<li><p>Dokonaj grupowania danych dotyczących <a href="data/auta.csv">32 samochodów</a> według następujących zmiennych: pojemność, przebieg, lata oraz cena.</p></li>
+<li><p>Rozpoznawanie czynności na podstawie danych z przyspieszeniomierza w telefonie: <a href="http://archive.ics.uci.edu/ml/datasets/User+Identification+From+Walking+Activity#">User Identification From Walking Activity Data Set</a></p></li>
+</ol>
 
 </div>
 </div>
