@@ -7,6 +7,8 @@ author = "Łukasz"
 | [Google Scholar](https://scholar.google.pl/citations?user=nQFr4NMAAAAJ) | [ResearchGate](https://www.researchgate.net/profile/Lukasz_Wawrowski) | [ORCID](https://orcid.org/0000-0002-1201-5344) |
 |:-----:|:-----:|:-----:|
 
+[Dehnel, G., Wawrowski, Ł., 2019, _Unit level models in the assessment of monthly wages of small enterprises employees_, in M. Papież and S. Śmiech (Eds.), The 13th Professor Aleksander Zelias International Conference on Modelling and Forecasting of Socio-Economic Phenomena. Conference Proceedings. Warszawa: Wydawnictwo C.H. Beck, s. 35-43. ISBN: 978-83-8158-734-1 (pdf)](/articles/proc_2019.pdf)
+
 [Dehnel, G., Wawrowski, Ł., 2018, _Robust estimation of revenues of Polish small companies by NACE section and province_, The Socio-Economic Modelling and Forecasting, 1, s. 110-119.](/articles/proc_2018.pdf)
 
 [Beręsewicz, M., Marchetti, S., Salvati, N., Szymkowiak, M., Wawrowski, Ł., 2018, _The use of a three level M-quantile model to map poverty at LAU 1 in Poland_, Journal of the Royal Statistical Society Series A, 181 (4), s. 1077-1104.](https://rss.onlinelibrary.wiley.com/doi/10.1111/rssa.12349)
