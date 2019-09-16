@@ -1,5 +1,5 @@
 ---
-title: Demografia w Polsce - BDL API i BDP
+title: Demografia w Polsce
 author: Łukasz
 date: '2019-04-09'
 slug: demografia-w-polsce
@@ -9,31 +9,64 @@ description: ''
 draft: true
 ---
 
-# Bazy danych GUS
 
-W grudniu 2018 roku Główny Urząd Statystyczny udostępnił interfejs programistyczny (API) do swojej największej bazy danych statystycznych czyli [Banku Danych Lokalnych ](https://bdl.stat.gov.pl/BDL/start). Na stronie [API GUS](https://api.stat.gov.pl/Home/BdlApi) można zapoznać się z instrukcją korzystania z tego API i automatycznie pobierać dane statystyczne z wykorzystaniem dowolnego języka programowania. Zdecydowanie ułatwia to przeprowadzanie analiz, bo nie trzeba poświęcać czasu na ściąganie pojedyńczych plików i ich ręczne łączenie i czyszczenie. Podczas [Konferencji Metodologia Badań Statystycznych](https://met2019.stat.gov.pl/), która odbyła się na początku lipca w Warszawie została ogłoszona wiadomość o udostępnieniu pakietu R o nazwie [bdl](https://github.com/statisticspoland/R_Package_to_API_BDL), który umożliwia łatwe pobieranie danych bezpośrednio do programu R. W chwili publikacji tego wpisu (2.08.2019) pakietu `bdl` nie ma w repozytorium CRAN i należy go instalować bezpośrednio z githuba.
+https://bdp.stat.gov.pl/
 
-Inną wartą uwagi bazą jest [Bank Danych Polska](https://bdp.stat.gov.pl/), w której dane są prezentowane na bardzo ogólnym poziomie, ale za to dostępne szeregi czasowe zaczynają się w 1946 roku, a kończą w 1999 roku. Dane za kolejne lata są już zazwyczaj w BDL. W przypadku Banku Danych Polska nie mamy do dyspozycji API i dane możemy pobrać np. do Excela.
+Healthy life expectancy (HALE)
 
-W tym wpisie skorzystam z obu tych źródeł do pokazania sytuacji demograficznej w Polsce.
+http://apps.who.int/gho/data/node.main.HALE
 
-# Przyrost naturalny i rzeczywisty
+https://api.stat.gov.pl/Home/BdlApi
 
-Przyrost naturalny to różnica pomiędzy liczbą urodzeń żywych a liczbą zgonów. Natomiast przyrost rzeczywisty uwzględnia dodatkowo saldo migracji. 
-
-Na początku wczytujemy niezbędne pakiety: `tidyverse` i `bdl`.
-
-```{r}
+```{r hale,  message=FALSE, warning=FALSE}
 library(tidyverse)
-# devtools::install_github("statisticspoland/R_Package_to_API_BDL")
-library(bdl)
 library(jsonlite)
+
+hale <- fromJSON("data/hale.json")
+
+hale_df <- data.frame(hale$fact$dims, value=as.numeric(hale$fact$Value)) %>%
+  janitor::clean_names() %>%
+  mutate(year=as.numeric(year))
+
+hale_df %>%
+  filter(country == "Poland") %>%
+  ggplot(aes(x=year, y=value, color=sex)) + geom_point() + geom_line() +
+  facet_wrap(~ gho, nrow = 2, scale = "free_y")
+
+```
+
+```{r przyrost_bdl}
+tematy <- "https://bdl.stat.gov.pl/api/v1/subjects?page-size=32"
+
+fromJSON(tematy)
+
+kategorie <- "https://bdl.stat.gov.pl/api/v1/subjects?parent-id=K3"
+
+fromJSON(kategorie)
+
+kategorie2 <- "https://bdl.stat.gov.pl/api/v1/subjects?parent-id=G534"
+
+fromJSON(kategorie2)
+
+# zmienna
+
+zmienna <- "https://bdl.stat.gov.pl/api/v1/Variables?subject-id=P1873"
+
+fromJSON(zmienna)
+
+dane <- "https://bdl.stat.gov.pl/api/v1/data/by-variable/68?unit-level=0&page-size=16"
+
+dane_json <- fromJSON(dane)
+
+przyrost_1995_2017 <- dane_json$results$values[[1]] %>%
+  select(-attrId) %>%
+  mutate(year=as.numeric(year))
+
 ```
 
 
 
 ```{r przyrost_bdp}
-
 bdp <- read.csv("data/ruch_naturalny_bdp.csv", sep = "\t") %>% janitor::clean_names()
 
 bdp_long <- bdp %>%
@@ -43,244 +76,35 @@ bdp_long <- bdp %>%
          wartosc_num=as.numeric(gsub("[[:space:]]", "", wartosc)))
 
 przyrost_1946_1994 <- bdp_long %>%
-  filter(x_wskaznik=="Przyrost naturalny", 
-         podzial=="ogółem") %>%
+  filter(x_wskaznik=="Przyrost naturalny", podzial=="ogółem") %>%
   select(year=rok, val=wartosc_num)
 
-ggplot(przyrost_1946_1994, aes(x=year, y=val/1000)) + 
-  geom_point() + 
-  geom_line() + 
-  theme_light() +
-  xlab("Rok") + 
-  ylab("Przyrost naturalny na 1000 ludności") +
-  ylim(0,600) +
-  ggtitle("Przyrost naturalny w latach 1946-1994")
+przyrost <- union(przyrost_1946_1994, przyrost_1995_2017)
+  
+ggplot(przyrost, aes(x=year, y=val)) + geom_point() + geom_line()
 
 ```
-
-
-```{r przyrost_bdl}
-przyrost_1995_2018 <- get_data_by_variable(varId = 68, unitLevel = 0) %>%
-  mutate(year=as.numeric(year)) %>%
-  select(year, val)
-
-przyrost <- union(przyrost_1946_1994, przyrost_1995_2018)
-
-strzalki <- data.frame(x1 = c(1960, 1985.5, 1996),
-                       x2 = c(1955, 1983, 2002),
-                       y1 = c(585, 420, -50),
-                       y2 = c(545, 385, -13))
-
-ggplot(przyrost, aes(x=year, y=val/1000)) + 
-  geom_point() + 
-  geom_line() + 
-  theme_light() +
-  xlab("Rok") + 
-  ylab("Przyrost naturalny na 1000 ludności") +
-  ylim(-100,600) +
-  annotate("text", x = 1967, y = 585, label = "1955 r. maksimum", color = "gray20", size = 3.5) +
-  annotate("text", x = 1988, y = 430, label = "1983 r.", color = "gray20", size = 3.5) +
-  annotate("text", x = 1990, y = -50, label = "2002 r. pierwszy \nujemny przyrost", color = "gray20", size = 3.5) +
-  annotate("text", x = 2013, y = 90, label = "2018 r. minimum", color = "gray20", size = 3.5) +
-  geom_curve(data = strzalki, aes(x = x1, y = y1, xend = x2, yend = y2),
-             arrow = arrow(length = unit(0.07, "inch")), size = 0.4,
-             color = "gray20", curvature = 0.3) +
-  geom_curve(data = NULL, aes(x = 2019, y = 80, xend = 2018.5, yend = -25),
-             arrow = arrow(length = unit(0.07, "inch")), size = 0.4,
-             color = "gray20", curvature = -0.3) +
-  ggtitle("Przyrost naturalny w latach 1946-2018")
-
-```
-
-https://pl.wikipedia.org/wiki/Przyrost_rzeczywisty
-
-```{r przyrost rzeczywisty}
-
-search_variables("saldo migracji")
-
-saldo_migracji <- get_data_by_variable(varId = 73776, unitLevel = 0) %>% 
-  rename(migracje=val) %>%
-  mutate(year=as.numeric(year))
-
-przyrost_rzeczywisty <- inner_join(saldo_migracji, przyrost_1995_2018, by="year") %>%
-  rename(pn=val) %>%
-  mutate(pr=pn+migracje) %>%
-  select(year, pn, pr) %>%
-  gather(wsk, wart, -year) %>%
-  mutate(wsk=factor(wsk, levels = c("pn", "pr"), labels = c("Przyrost naturalny", "Przyrost rzeczywisty")))
-
-ggplot(przyrost_rzeczywisty, aes(x=year, y=wart/1000, color=wsk)) + 
-  geom_point() + 
-  geom_line() + 
-  theme_light() +
-  xlab("Rok") + 
-  ylab("Przyrost rzeczywisty na 1000 ludności") +
-  ylim(-40,40) +
-  scale_color_discrete(name = "") + 
-  theme(legend.position = "bottom") +
-  ggtitle("Przyrost rzeczywisty w latach 1999-2018")
-
-```
-
 
 ```{r plec}
+fromJSON(zmienna)
 
-ur_m <- get_data_by_variable(varId = 60, unitLevel = 0)
+ur_m <- fromJSON("https://bdl.stat.gov.pl/api/v1/data/by-variable/60?unit-level=0&page-size=16")
 
-ur_k <- get_data_by_variable(varId = 61, unitLevel = 0)
-
-ur_m <- ur_m %>%
-  select(year, m=val)
-
-ur_k <- ur_k %>%
-  select(year, k=val)
-
-ur_km <- inner_join(ur_k, ur_m, by="year") %>%
-  mutate(diff=k-m)
+ur_k <- fromJSON("https://bdl.stat.gov.pl/api/v1/data/by-variable/61?unit-level=0&page-size=16")
 
 ```
-
-# Liczba urodzeń
 
 ```{r urodzenia zywe}
 
-urodzenia_bdl <- get_data_by_variable(varId = 59, unitLevel = 0) %>%
-  mutate(year=as.numeric(year)) %>%
-  select(year, val)
-
-urodzenia_bdp <- bdp_long %>%
+urodzenia_zywe <- bdp_long %>%
   filter(x_wskaznik=="Urodzenia żywe", podzial=="ogółem") %>%
   select(year=rok, val=wartosc_num)
 
-urodzenia <- union(urodzenia_bdl, urodzenia_bdp)
-
-ggplot(urodzenia, aes(x=year, y=val/1000)) + 
-  geom_point() + 
-  geom_line() + 
-  theme_light() +
-  xlab("Rok") + 
-  ylab("Urodzenia żywe (w tys.)") +
-  ggtitle("Urodzenia żywe w latach 1946-2018")
+ggplot(urodzenia_zywe, aes(x=year, y=val)) + geom_line()
 
 ```
 
-
-
-```{r urodzenia wiek matki}
-ur_wiek <- readxl::read_xlsx("data/urodzenia_wiek.xlsx") %>%
-  mutate_all(as.numeric)
-
-ur_wiek %>%
-#  filter(rok %in% c(2002, 2008, 2012, 2018)) %>%
-  ggplot(., aes(x=wiek, y=wartosc, fill=as.factor(rok))) + 
-  geom_col(position = "dodge")
-
-```
-
-```{r}
-ur_wiek %>%
-  filter(wiek %in% 13:20) %>%
-  ggplot(., aes(x=wiek, y=wartosc, fill=as.factor(rok))) + 
-  geom_col(position = "dodge")
-```
-
-
-```{r}
-kobiety_13_49 <- readxl::read_xlsx("data/kobiety_13_49.xlsx") %>%
-  mutate_all(as.numeric) %>%
-  rename(pop_k=wartosc)
-
-kobiety_ur <- inner_join(ur_wiek, kobiety_13_49, by=c("wiek", "rok")) %>%
-  mutate(odsetek=wartosc/pop_k*100)
-
-kobiety_ur %>%
-  ggplot(., aes(x=wiek, y=odsetek, fill=as.factor(rok))) + geom_col(position = "dodge")
-
-```
-
-```{r}
-
-kobiety_ur %>%
-  filter(wiek %in% 13:20) %>%
-  ggplot(., aes(x=wiek, y=odsetek, fill=as.factor(rok))) + geom_col(position = "dodge")
-
-```
-
-# Przeciętna długość trwania życia
-
-```{r}
-trwanie_zycia_0_m <- get_data_by_variable(varId = 101554, unitLevel = 0) %>% mutate(plec="mężczyźni")
-
-trwanie_zycia_0_k <- get_data_by_variable(varId = 101555, unitLevel = 0) %>% mutate(plec="kobiety")
-
-trwanie_zycia_0 <- union(trwanie_zycia_0_k, trwanie_zycia_0_m) %>%
-  mutate(year=as.numeric(year),
-         zm="Life exp") %>%
-  select(year, val, plec, zm)
-  
-
-ggplot(trwanie_zycia_0, aes(x=year, y=val, color = plec)) +
-  geom_line() +
-  geom_point() +
-  ylim(0,85)
-```
-
-```{r}
-trwanie_zycia_60_m <- get_data_by_variable(varId = 105863, unitLevel = 0) %>% mutate(plec="mężczyźni")
-
-trwanie_zycia_60_k <- get_data_by_variable(varId = 105864, unitLevel = 0) %>% mutate(plec="kobiety")
-
-trwanie_zycia_60 <- union(trwanie_zycia_60_k, trwanie_zycia_60_m) %>%
-  mutate(year=as.numeric(year),
-         zm="Life exp") %>%
-  select(year, val, plec, zm)
-
-ggplot(trwanie_zycia_60, aes(x=year, y=val, color = plec)) +
-  geom_line() +
-  geom_point() +
-  ylim(0,30)
-```
-
-Healthy life expectancy (HALE)
-
-http://apps.who.int/gho/data/node.main.HALE
-
-```{r hale,  message=FALSE, warning=FALSE}
-hale <- fromJSON("data/hale.json")
-
-hale_df <- data.frame(hale$fact$dims, value=as.numeric(hale$fact$Value)) %>%
-  janitor::clean_names() %>%
-  mutate(year=as.numeric(year))
-
-hale_0 <- hale_df %>%
-  filter(country == "Poland", gho == "Healthy life expectancy (HALE) at birth (years)", sex != "Both sexes") %>%
-  mutate(plec=if_else(sex=="Female","kobiety","mężczyźni")) %>%
-  select(year, val=value, plec) %>%
-  mutate(zm="HALE")
-
-trwanie_hale_0 <- union(trwanie_zycia_0, hale_0)
-
-ggplot(trwanie_hale_0, aes(x=year, y=val, color = plec)) +
-  geom_line() +
-  geom_point() +
-  ylim(0,85) +
-  facet_wrap(~zm)
-```
-
-```{r}
-hale_60 <- hale_df %>%
-  filter(country == "Poland", gho == "Healthy life expectancy (HALE) at age 60 (years)", sex != "Both sexes") %>%
-  mutate(plec=if_else(sex=="Female","kobiety","mężczyźni")) %>%
-  select(year, val=value, plec) %>%
-  mutate(zm="HALE")
-
-trwanie_hale_60 <- union(trwanie_zycia_60, hale_60)
-
-ggplot(trwanie_hale_60, aes(x=year, y=val, color = plec)) +
-  geom_line() +
-  geom_point() +
-  ylim(0,30) +
-  facet_wrap(~zm)
+```{r trwanie zycia}
 
 ```
 
