@@ -1,5 +1,5 @@
 ---
-title: Demografia w Polsce
+title: Demografia w Polsce - BDL API i BDP
 author: Łukasz
 date: '2019-04-09'
 slug: demografia-w-polsce
@@ -11,21 +11,252 @@ draft: true
 
 
 
-<p><a href="https://bdp.stat.gov.pl/" class="uri">https://bdp.stat.gov.pl/</a></p>
+<div id="bazy-danych-gus" class="section level1">
+<h1>Bazy danych GUS</h1>
+<p>W grudniu 2018 roku Główny Urząd Statystyczny udostępnił interfejs programistyczny (API) do swojej największej bazy danych statystycznych czyli <a href="https://bdl.stat.gov.pl/BDL/start">Banku Danych Lokalnych</a>. Na stronie <a href="https://api.stat.gov.pl/Home/BdlApi">API GUS</a> można zapoznać się z instrukcją korzystania z tego API i automatycznie pobierać dane statystyczne z wykorzystaniem dowolnego języka programowania. Zdecydowanie ułatwia to przeprowadzanie analiz, bo nie trzeba poświęcać czasu na ściąganie pojedyńczych plików i ich ręczne łączenie i czyszczenie. Podczas <a href="https://met2019.stat.gov.pl/">Konferencji Metodologia Badań Statystycznych</a>, która odbyła się na początku lipca w Warszawie została ogłoszona wiadomość o udostępnieniu pakietu R o nazwie <a href="https://github.com/statisticspoland/R_Package_to_API_BDL">bdl</a>, który umożliwia łatwe pobieranie danych bezpośrednio do programu R. W chwili publikacji tego wpisu (2.08.2019) pakietu <code>bdl</code> nie ma w repozytorium CRAN i należy go instalować bezpośrednio z githuba.</p>
+<p>Inną wartą uwagi bazą jest <a href="https://bdp.stat.gov.pl/">Bank Danych Polska</a>, w której dane są prezentowane na bardzo ogólnym poziomie, ale za to dostępne szeregi czasowe zaczynają się w 1946 roku, a kończą w 1999 roku. Dane za kolejne lata są już zazwyczaj w BDL. W przypadku Banku Danych Polska nie mamy do dyspozycji API i dane możemy pobrać np. do Excela.</p>
+<p>W tym wpisie skorzystam z obu tych źródeł do pokazania sytuacji demograficznej w Polsce.</p>
+</div>
+<div id="przyrost-naturalny-i-rzeczywisty" class="section level1">
+<h1>Przyrost naturalny i rzeczywisty</h1>
+<p>Przyrost naturalny to różnica pomiędzy liczbą urodzeń żywych a liczbą zgonów. Natomiast przyrost rzeczywisty uwzględnia dodatkowo saldo migracji.</p>
+<p>Na początku wczytujemy niezbędne pakiety: <code>tidyverse</code> i <code>bdl</code>.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------------------------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## &lt;U+221A&gt; ggplot2 3.2.1     &lt;U+221A&gt; purrr   0.3.2
+## &lt;U+221A&gt; tibble  2.1.3     &lt;U+221A&gt; dplyr   0.8.3
+## &lt;U+221A&gt; tidyr   0.8.3     &lt;U+221A&gt; stringr 1.4.0
+## &lt;U+221A&gt; readr   1.3.1     &lt;U+221A&gt; forcats 0.4.0</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------------------------------------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code># devtools::install_github(&quot;statisticspoland/R_Package_to_API_BDL&quot;)
+library(bdl)
+library(jsonlite)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;jsonlite&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     flatten</code></pre>
+<pre class="r"><code>bdp &lt;- read.csv(&quot;data/ruch_naturalny_bdp.csv&quot;, sep = &quot;\t&quot;) %&gt;% janitor::clean_names()
+
+bdp_long &lt;- bdp %&gt;%
+  select(-jednostka) %&gt;%
+  gather(rok, wartosc, -x_wskaznik, -podzial) %&gt;%
+  mutate(rok=as.numeric(gsub(&quot;x&quot;, &quot;&quot;, rok)),
+         wartosc_num=as.numeric(gsub(&quot;[[:space:]]&quot;, &quot;&quot;, wartosc)))</code></pre>
+<pre><code>## Warning: attributes are not identical across measure variables;
+## they will be dropped</code></pre>
+<pre class="r"><code>przyrost_1946_1994 &lt;- bdp_long %&gt;%
+  filter(x_wskaznik==&quot;Przyrost naturalny&quot;, 
+         podzial==&quot;ogółem&quot;) %&gt;%
+  select(year=rok, val=wartosc_num)
+
+ggplot(przyrost_1946_1994, aes(x=year, y=val/1000)) + 
+  geom_point() + 
+  geom_line() + 
+  theme_light() +
+  xlab(&quot;Rok&quot;) + 
+  ylab(&quot;Przyrost naturalny na 1000 ludności&quot;) +
+  ylim(0,600) +
+  ggtitle(&quot;Przyrost naturalny w latach 1946-1994&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/przyrost_bdp-1.png" width="672" /></p>
+<pre class="r"><code>przyrost_1995_2018 &lt;- get_data_by_variable(varId = 68, unitLevel = 0) %&gt;%
+  mutate(year=as.numeric(year)) %&gt;%
+  select(year, val)
+
+przyrost &lt;- union(przyrost_1946_1994, przyrost_1995_2018)
+
+strzalki &lt;- data.frame(x1 = c(1960, 1985.5, 1996),
+                       x2 = c(1955, 1983, 2002),
+                       y1 = c(585, 420, -50),
+                       y2 = c(545, 385, -13))
+
+ggplot(przyrost, aes(x=year, y=val/1000)) + 
+  geom_point() + 
+  geom_line() + 
+  theme_light() +
+  xlab(&quot;Rok&quot;) + 
+  ylab(&quot;Przyrost naturalny na 1000 ludności&quot;) +
+  ylim(-100,600) +
+  annotate(&quot;text&quot;, x = 1967, y = 585, label = &quot;1955 r. maksimum&quot;, color = &quot;gray20&quot;, size = 3.5) +
+  annotate(&quot;text&quot;, x = 1988, y = 430, label = &quot;1983 r.&quot;, color = &quot;gray20&quot;, size = 3.5) +
+  annotate(&quot;text&quot;, x = 1990, y = -50, label = &quot;2002 r. pierwszy \nujemny przyrost&quot;, color = &quot;gray20&quot;, size = 3.5) +
+  annotate(&quot;text&quot;, x = 2013, y = 90, label = &quot;2018 r. minimum&quot;, color = &quot;gray20&quot;, size = 3.5) +
+  geom_curve(data = strzalki, aes(x = x1, y = y1, xend = x2, yend = y2),
+             arrow = arrow(length = unit(0.07, &quot;inch&quot;)), size = 0.4,
+             color = &quot;gray20&quot;, curvature = 0.3) +
+  geom_curve(data = NULL, aes(x = 2019, y = 80, xend = 2018.5, yend = -25),
+             arrow = arrow(length = unit(0.07, &quot;inch&quot;)), size = 0.4,
+             color = &quot;gray20&quot;, curvature = -0.3) +
+  ggtitle(&quot;Przyrost naturalny w latach 1946-2018&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/przyrost_bdl-1.png" width="672" /></p>
+<p><a href="https://pl.wikipedia.org/wiki/Przyrost_rzeczywisty" class="uri">https://pl.wikipedia.org/wiki/Przyrost_rzeczywisty</a></p>
+<pre class="r"><code>search_variables(&quot;saldo migracji&quot;)</code></pre>
+<pre><code>## # A tibble: 92 x 8
+##       id subjectId n1      n2     n3    level measureUnitId measureUnitName
+##    &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;         &lt;int&gt; &lt;chr&gt;          
+##  1  3879 P1362     saldo ~ ogółem ogół~     3            26 osoba          
+##  2  3880 P1362     saldo ~ miasta ogół~     3            26 osoba          
+##  3  3881 P1362     saldo ~ miasta kobi~     3            26 osoba          
+##  4  3882 P1362     saldo ~ miasta mężc~     3            26 osoba          
+##  5  3883 P1362     saldo ~ wieś   ogół~     3            26 osoba          
+##  6  3884 P1362     saldo ~ wieś   kobi~     3            26 osoba          
+##  7  3885 P1362     saldo ~ wieś   mężc~     3            26 osoba          
+##  8 32411 P1362     saldo ~ ogółem mężc~     3            26 osoba          
+##  9 32412 P1362     saldo ~ ogółem kobi~     3            26 osoba          
+## 10 72190 P1351     saldo ~ 60 la~ &lt;NA&gt;      3            26 osoba          
+## # ... with 82 more rows</code></pre>
+<pre class="r"><code>saldo_migracji &lt;- get_data_by_variable(varId = 73776, unitLevel = 0) %&gt;% 
+  rename(migracje=val) %&gt;%
+  mutate(year=as.numeric(year))
+
+przyrost_rzeczywisty &lt;- inner_join(saldo_migracji, przyrost_1995_2018, by=&quot;year&quot;) %&gt;%
+  rename(pn=val) %&gt;%
+  mutate(pr=pn+migracje) %&gt;%
+  select(year, pn, pr) %&gt;%
+  gather(wsk, wart, -year) %&gt;%
+  mutate(wsk=factor(wsk, levels = c(&quot;pn&quot;, &quot;pr&quot;), labels = c(&quot;Przyrost naturalny&quot;, &quot;Przyrost rzeczywisty&quot;)))
+
+ggplot(przyrost_rzeczywisty, aes(x=year, y=wart/1000, color=wsk)) + 
+  geom_point() + 
+  geom_line() + 
+  theme_light() +
+  xlab(&quot;Rok&quot;) + 
+  ylab(&quot;Przyrost rzeczywisty na 1000 ludności&quot;) +
+  ylim(-40,40) +
+  scale_color_discrete(name = &quot;&quot;) + 
+  theme(legend.position = &quot;bottom&quot;) +
+  ggtitle(&quot;Przyrost rzeczywisty w latach 1999-2018&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/przyrost%20rzeczywisty-1.png" width="672" /></p>
+<pre class="r"><code>ur_m &lt;- get_data_by_variable(varId = 60, unitLevel = 0)
+
+ur_k &lt;- get_data_by_variable(varId = 61, unitLevel = 0)
+
+ur_m &lt;- ur_m %&gt;%
+  select(year, m=val)
+
+ur_k &lt;- ur_k %&gt;%
+  select(year, k=val)
+
+ur_km &lt;- inner_join(ur_k, ur_m, by=&quot;year&quot;) %&gt;%
+  mutate(diff=k-m)</code></pre>
+</div>
+<div id="liczba-urodzen" class="section level1">
+<h1>Liczba urodzeń</h1>
+<pre class="r"><code>urodzenia_bdl &lt;- get_data_by_variable(varId = 59, unitLevel = 0) %&gt;%
+  mutate(year=as.numeric(year)) %&gt;%
+  select(year, val)
+
+urodzenia_bdp &lt;- bdp_long %&gt;%
+  filter(x_wskaznik==&quot;Urodzenia żywe&quot;, podzial==&quot;ogółem&quot;) %&gt;%
+  select(year=rok, val=wartosc_num)
+
+urodzenia &lt;- union(urodzenia_bdl, urodzenia_bdp)
+
+ggplot(urodzenia, aes(x=year, y=val/1000)) + 
+  geom_point() + 
+  geom_line() + 
+  theme_light() +
+  xlab(&quot;Rok&quot;) + 
+  ylab(&quot;Urodzenia żywe (w tys.)&quot;) +
+  ggtitle(&quot;Urodzenia żywe w latach 1946-2018&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/urodzenia%20zywe-1.png" width="672" /></p>
+<pre class="r"><code>ur_wiek &lt;- readxl::read_xlsx(&quot;data/urodzenia_wiek.xlsx&quot;) %&gt;%
+  mutate_all(as.numeric)
+
+ur_wiek %&gt;%
+#  filter(rok %in% c(2002, 2008, 2012, 2018)) %&gt;%
+  ggplot(., aes(x=wiek, y=wartosc, fill=as.factor(rok))) + 
+  geom_col(position = &quot;dodge&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/urodzenia%20wiek%20matki-1.png" width="672" /></p>
+<pre class="r"><code>ur_wiek %&gt;%
+  filter(wiek %in% 13:20) %&gt;%
+  ggplot(., aes(x=wiek, y=wartosc, fill=as.factor(rok))) + 
+  geom_col(position = &quot;dodge&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>kobiety_13_49 &lt;- readxl::read_xlsx(&quot;data/kobiety_13_49.xlsx&quot;) %&gt;%
+  mutate_all(as.numeric) %&gt;%
+  rename(pop_k=wartosc)
+
+kobiety_ur &lt;- inner_join(ur_wiek, kobiety_13_49, by=c(&quot;wiek&quot;, &quot;rok&quot;)) %&gt;%
+  mutate(odsetek=wartosc/pop_k*100)
+
+kobiety_ur %&gt;%
+  ggplot(., aes(x=wiek, y=odsetek, fill=as.factor(rok))) + geom_col(position = &quot;dodge&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>kobiety_ur %&gt;%
+  filter(wiek %in% 13:20) %&gt;%
+  ggplot(., aes(x=wiek, y=odsetek, fill=as.factor(rok))) + geom_col(position = &quot;dodge&quot;)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="przecietna-dugosc-trwania-zycia" class="section level1">
+<h1>Przeciętna długość trwania życia</h1>
+<pre class="r"><code>trwanie_zycia_0_m &lt;- get_data_by_variable(varId = 101554, unitLevel = 0) %&gt;% mutate(plec=&quot;mężczyźni&quot;)
+
+trwanie_zycia_0_k &lt;- get_data_by_variable(varId = 101555, unitLevel = 0) %&gt;% mutate(plec=&quot;kobiety&quot;)
+
+trwanie_zycia_0 &lt;- union(trwanie_zycia_0_k, trwanie_zycia_0_m) %&gt;%
+  mutate(year=as.numeric(year),
+         zm=&quot;Life exp&quot;) %&gt;%
+  select(year, val, plec, zm)
+  
+
+ggplot(trwanie_zycia_0, aes(x=year, y=val, color = plec)) +
+  geom_line() +
+  geom_point() +
+  ylim(0,85)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>trwanie_zycia_60_m &lt;- get_data_by_variable(varId = 105863, unitLevel = 0) %&gt;% mutate(plec=&quot;mężczyźni&quot;)
+
+trwanie_zycia_60_k &lt;- get_data_by_variable(varId = 105864, unitLevel = 0) %&gt;% mutate(plec=&quot;kobiety&quot;)
+
+trwanie_zycia_60 &lt;- union(trwanie_zycia_60_k, trwanie_zycia_60_m) %&gt;%
+  mutate(year=as.numeric(year),
+         zm=&quot;Life exp&quot;) %&gt;%
+  select(year, val, plec, zm)
+
+ggplot(trwanie_zycia_60, aes(x=year, y=val, color = plec)) +
+  geom_line() +
+  geom_point() +
+  ylim(0,30)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Healthy life expectancy (HALE)</p>
 <p><a href="http://apps.who.int/gho/data/node.main.HALE" class="uri">http://apps.who.int/gho/data/node.main.HALE</a></p>
-<p><a href="https://api.stat.gov.pl/Home/BdlApi" class="uri">https://api.stat.gov.pl/Home/BdlApi</a></p>
-<pre class="r"><code>library(tidyverse)
-library(jsonlite)
-
-hale &lt;- fromJSON(&quot;data/hale.json&quot;)
+<pre class="r"><code>hale &lt;- fromJSON(&quot;data/hale.json&quot;)
 
 hale_df &lt;- data.frame(hale$fact$dims, value=as.numeric(hale$fact$Value)) %&gt;%
   janitor::clean_names() %&gt;%
   mutate(year=as.numeric(year))
 
-hale_df %&gt;%
-  filter(country == &quot;Poland&quot;) %&gt;%
-  ggplot(aes(x=year, y=value, color=sex)) + geom_point() + geom_line() +
-  facet_wrap(~ gho, nrow = 2, scale = &quot;free_y&quot;)</code></pre>
-<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+hale_0 &lt;- hale_df %&gt;%
+  filter(country == &quot;Poland&quot;, gho == &quot;Healthy life expectancy (HALE) at birth (years)&quot;, sex != &quot;Both sexes&quot;) %&gt;%
+  mutate(plec=if_else(sex==&quot;Female&quot;,&quot;kobiety&quot;,&quot;mężczyźni&quot;)) %&gt;%
+  select(year, val=value, plec) %&gt;%
+  mutate(zm=&quot;HALE&quot;)
+
+trwanie_hale_0 &lt;- union(trwanie_zycia_0, hale_0)
+
+ggplot(trwanie_hale_0, aes(x=year, y=val, color = plec)) +
+  geom_line() +
+  geom_point() +
+  ylim(0,85) +
+  facet_wrap(~zm)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/hale-1.png" width="672" /></p>
+<pre class="r"><code>hale_60 &lt;- hale_df %&gt;%
+  filter(country == &quot;Poland&quot;, gho == &quot;Healthy life expectancy (HALE) at age 60 (years)&quot;, sex != &quot;Both sexes&quot;) %&gt;%
+  mutate(plec=if_else(sex==&quot;Female&quot;,&quot;kobiety&quot;,&quot;mężczyźni&quot;)) %&gt;%
+  select(year, val=value, plec) %&gt;%
+  mutate(zm=&quot;HALE&quot;)
+
+trwanie_hale_60 &lt;- union(trwanie_zycia_60, hale_60)
+
+ggplot(trwanie_hale_60, aes(x=year, y=val, color = plec)) +
+  geom_line() +
+  geom_point() +
+  ylim(0,30) +
+  facet_wrap(~zm)</code></pre>
+<p><img src="/post/2019-04-09-demografia-w-polsce_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
