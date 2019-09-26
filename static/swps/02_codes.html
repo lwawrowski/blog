@@ -548,7 +548,31 @@ przyrost151617 &lt;- inner_join(przyrost2015, przyrost2016) %&gt;%
   inner_join(., przyrost2017)
 
 bezr_przed &lt;- inner_join(bezrobocie, pod_10tys, 
-                         by = c(&quot;id_powiat&quot;=&quot;pow&quot;))</code></pre>
+                         by = c(&quot;id_powiat&quot;=&quot;pow&quot;))
+
+as.character(123)
+as.numeric(&quot;123 &quot;)
+as.numeric(&quot;0201&quot;)
+as.numeric(&quot;five&quot;)
+
+# 1 sposób
+bezr_przed &lt;- bezr_przed %&gt;%
+  mutate(id_powiat=as.numeric(id_powiat))
+
+bezr_przed_wyn &lt;- inner_join(bezr_przed, wyn, 
+                             by = c(&quot;id_powiat&quot;=&quot;pow&quot;))
+
+# 2 sposób 
+bezr_przed &lt;- bezr_przed %&gt;%
+  mutate(pow=as.numeric(id_powiat))
+
+bezr_przed_wyn &lt;- inner_join(bezr_przed, wyn)
+
+# 3 sposób
+bezr_przed_wyn &lt;- inner_join(bezrobocie, pod_10tys, 
+                             by=c(&quot;id_powiat&quot;=&quot;pow&quot;)) %&gt;%
+  mutate(pow=as.numeric(id_powiat)) %&gt;%
+  inner_join(., wyn)</code></pre>
 </div>
 
 
