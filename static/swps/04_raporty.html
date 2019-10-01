@@ -285,6 +285,18 @@ __Wynik__
 
 ---
 
+class: inverse
+
+# Zadanie
+
+Wstaw w dokumencie wykres słupkowy zawierający liczebność według płci. Niech wykres ma wysokość 4 i szerokość 6. Wyświetl wyłącznie wynik działania kodu.
+
+<div class="countdown" id="timer_5d92eec5" style="top:0;right:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
 # Tabele ze zbioru
 
 Funkcja `kable()` z pakietu _knitr_ przekazuje zbiór do formy tabelarycznej.
@@ -338,7 +350,7 @@ class: inverse
 
 Stwórz chunk, w którego wynikiem będzie tabela ze średnią wartością wieku w ramach grup płci.
 
-<div class="countdown" id="timer_5d924148" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d92f135" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -426,8 +438,55 @@ class: inverse
 
 Przeprowadź test dla grup zależnych (funkcja `aov()` lub `kruskal.test()`) zmiennej wstyd w ramach 3 grup wieku.
 
-<div class="countdown" id="timer_5d924085" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d92eeaa" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+# Wartości domyślne
+
+- RMarkdown
+
+
+```r
+knitr::opts_chunk$set(fig.width=8, fig.height=5, 
+                      echo = FALSE, 
+                      message = FALSE, warning = FALSE) 
+```
+
+- ggplot2
+
+
+```r
+theme_set(theme_light())
+theme_update(legend.position = "bottom")
+```
+
+- ogólne
+
+
+```r
+options(scipen = 100) # notacja naukowa
+options(digits = 2) # miejsca dziesiętne
+```
+
+---
+
+class: inverse
+
+# Zadanie
+
+Stwórz dokument zawierający eksploracyjną analizę danych (EDA), w którym znajdą się:
+
+- 3 wykresy
+
+- 2 tabele
+
+- 2 odwołania do danych w tekście
+
+<div class="countdown" id="timer_5d92ee74" style="top:0;right:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">30</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
