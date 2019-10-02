@@ -364,7 +364,7 @@ summary {
 
 <h1 class="title toc-ignore">Wizualizacja danych</h1>
 <h4 class="author">Łukasz Wawrowski</h4>
-<h4 class="date">24 09 2019</h4>
+<h4 class="date">1 10 2019</h4>
 
 </div>
 
@@ -509,7 +509,58 @@ ggplot(psycho, aes(x = poczucie_winy, y = wstyd)) +
 
 ggplot(psycho, aes(x = poczucie_winy, y = wstyd)) +
   geom_point() +
-  facet_grid(wiek4 ~ plec)</code></pre>
+  facet_grid(wiek4 ~ plec)
+
+# zadanie
+
+psycho &lt;- psycho %&gt;%
+  mutate(wiek6=cut(x = wiek, 
+                   # breaks = c(18,22,26,30,34,38,42), 
+                   breaks = seq(from = 18, to = 42, by = 4),
+                   include.lowest = TRUE))
+
+ggplot(psycho, aes(x=ruminacja, y=refleksja, color=wiek6)) +
+  geom_point(size = 2) +
+  xlim(0,30) + 
+  ylim(0,30) +
+  scale_color_discrete(name = &quot;Grupy wieku&quot;) +
+  theme_classic() +
+  theme(legend.position = &quot;top&quot;)
+
+ggplot(psycho, aes(x=wiek6)) +
+  geom_bar() +
+  facet_wrap(~ plec)
+  
+
+statystyki &lt;- psycho %&gt;% 
+  select(wstyd:refleksja) %&gt;% 
+  summarise_all(c(&quot;min&quot;, &quot;median&quot;, &quot;mean&quot;, &quot;max&quot;))
+
+# tworzenie identyfikatora
+
+psycho &lt;- psycho %&gt;%
+  mutate(id=1:nrow(psycho))
+
+psycho_long &lt;- psycho %&gt;%
+  select(id, wstyd:refleksja) %&gt;%
+  pivot_longer(wstyd:refleksja)
+
+statystyki2 &lt;- psycho_long %&gt;% 
+  group_by(name) %&gt;%
+  summarise_at(vars(value), 
+               c(&quot;min&quot;, &quot;median&quot;, &quot;mean&quot;, &quot;max&quot;))
+
+ggplot(psycho_long, aes(x = name, y = value)) +
+  geom_boxplot() +
+  coord_flip()
+
+psycho_long2 &lt;- psycho %&gt;%
+  select(id, ps, perf_cmda) %&gt;%
+  pivot_longer(ps:perf_cmda)
+
+ggplot(psycho_long2, aes(x=value)) +
+  geom_histogram(binwidth = 0.5) +
+  facet_wrap(~ name)</code></pre>
 </div>
 
 

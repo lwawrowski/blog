@@ -1,0 +1,76 @@
+---
+title: "Artykuł"
+author: "ŁW"
+date: "wersja 2"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+
+theme_set(theme_light())
+```
+
+## R Markdown
+
+Mój pierwszy dokument - hurra :) 
+
+```{r wczytanie danych, include=FALSE}
+library(tidyverse)
+library(haven)
+
+psycho <- read_sav("data/poz_sop.sav")
+psycho <- janitor::clean_names(psycho)
+```
+
+Wykres słupkowy
+
+```{r wykres1, fig.height=3, echo=FALSE}
+ggplot(psycho, aes(x=plec)) +
+  geom_bar()
+```
+
+Tabela ze średnim wiekiem w ramach grup płci 
+
+```{r}
+psycho %>%
+  group_by(plec) %>%
+  summarise(srednia=mean(wiek)) %>% 
+  knitr::kable()
+```
+
+Przeprowadzamy test normalności dla zmiennej wstyd.
+
+```{r test norm wstyd}
+kurtoza <- e1071::kurtosis(psycho$wstyd)
+
+shapiro.test(psycho$wstyd)
+```
+
+Zmienna wstyd cechuje się asymetrią - skośność wynosi `r e1071::skewness(psycho$wstyd)`, a kurtoza `r kurtoza`.
+
+```{r}
+test <- shapiro.test(psycho$wstyd)
+test$statistic
+```
+
+Wartość statystyki testowej wynosi `r test$statistic`.
+
+```{r}
+t.test(psycho$ps, psycho$perf_cmda, paired = TRUE)
+```
+
+```{r}
+t.test(ps ~ plec, data = psycho)
+```
+
+
+
+
+
+
+
+
+
+
