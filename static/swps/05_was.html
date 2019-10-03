@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 # Język R
 ## Wielowymiarowa analiza statystyczna
 ### © Łukasz Wawrowski
-### Dzień 5/6
+### Dzień 5 i 6
 
 ---
 
@@ -40,109 +40,6 @@ class: inverse
 ???
 
 
-```r
-library(psych)
-```
-
-```
-## Warning: package 'psych' was built under R version 3.6.1
-```
-
-```
-## 
-## Attaching package: 'psych'
-```
-
-```
-## The following objects are masked from 'package:ggplot2':
-## 
-##     %+%, alpha
-```
-
-```r
-describe(psycho)
-```
-
-```
-##                vars   n  mean    sd median trimmed   mad min max range
-## plec              1 696  1.14  0.35   1.00    1.05  0.00   1   2     1
-## wiek              2 696 26.74  7.56  24.00   25.85  5.93  18  42    24
-## ps                3 696  3.40  0.70   3.43    3.42  0.64   1   5     4
-## perf_cmda         4 696  2.69  0.79   2.67    2.67  0.89   1   5     4
-## wstyd             5 696 15.45  7.13  14.00   15.01  5.93   1  38    37
-## poczucie_winy     6 696 10.02  4.31   9.50    9.80  3.71   0  24    24
-## indecisiveness    7 696 39.16 11.19  39.00   38.79 11.86  15  71    56
-## ruminacja         8 696 20.48  5.16  21.00   20.69  5.93   6  30    24
-## refleksja         9 696 21.58  4.81  22.00   21.72  4.45   7  30    23
-##                 skew kurtosis   se
-## plec            2.04     2.18 0.01
-## wiek            0.85    -0.66 0.29
-## ps             -0.36     0.18 0.03
-## perf_cmda       0.27    -0.42 0.03
-## wstyd           0.58     0.04 0.27
-## poczucie_winy   0.54     0.18 0.16
-## indecisiveness  0.28    -0.42 0.42
-## ruminacja      -0.35    -0.46 0.20
-## refleksja      -0.28    -0.39 0.18
-```
-
-```r
-describeBy(psycho, psycho$plec)
-```
-
-```
-## 
-##  Descriptive statistics by group 
-## group: 1
-##                vars   n  mean    sd median trimmed   mad   min max range
-## plec              1 597  1.00  0.00   1.00    1.00  0.00  1.00   1  0.00
-## wiek              2 597 26.84  7.58  24.00   25.98  5.93 18.00  42 24.00
-## ps                3 597  3.41  0.71   3.43    3.43  0.64  1.00   5  4.00
-## perf_cmda         4 597  2.69  0.78   2.67    2.67  0.84  1.06   5  3.94
-## wstyd             5 597 15.56  7.13  14.00   15.10  5.93  1.00  38 37.00
-## poczucie_winy     6 597 10.04  4.32  10.00    9.81  4.45  0.00  24 24.00
-## indecisiveness    7 597 39.41 11.17  39.00   39.08 11.86 15.00  71 56.00
-## ruminacja         8 597 20.68  5.13  21.00   20.91  5.93  6.00  30 24.00
-## refleksja         9 597 21.43  4.69  22.00   21.55  4.45  7.00  30 23.00
-##                 skew kurtosis   se
-## plec             NaN      NaN 0.00
-## wiek            0.82    -0.72 0.31
-## ps             -0.32     0.05 0.03
-## perf_cmda       0.28    -0.37 0.03
-## wstyd           0.59     0.03 0.29
-## poczucie_winy   0.57     0.29 0.18
-## indecisiveness  0.25    -0.43 0.46
-## ruminacja      -0.38    -0.43 0.21
-## refleksja      -0.26    -0.34 0.19
-## -------------------------------------------------------- 
-## group: 2
-##                vars  n  mean    sd median trimmed   mad min   max range
-## plec              1 99  2.00  0.00   2.00    2.00  0.00   2  2.00  0.00
-## wiek              2 99 26.12  7.42  23.00   25.16  4.45  18 42.00 24.00
-## ps                3 99  3.34  0.67   3.43    3.38  0.64   1  4.71  3.71
-## perf_cmda         4 99  2.68  0.87   2.68    2.65  0.99   1  4.76  3.76
-## wstyd             5 99 14.82  7.11  15.00   14.42  7.41   1 38.00 37.00
-## poczucie_winy     6 99  9.86  4.27   9.00    9.69  4.45   2 20.00 18.00
-## indecisiveness    7 99 37.61 11.21  36.00   37.05 10.38  15 66.00 51.00
-## ruminacja         8 99 19.27  5.14  20.00   19.36  5.56   7 30.00 23.00
-## refleksja         9 99 22.43  5.39  23.00   22.79  5.93  10 30.00 20.00
-##                 skew kurtosis   se
-## plec             NaN      NaN 0.00
-## wiek            1.03    -0.25 0.75
-## ps             -0.73     0.94 0.07
-## perf_cmda       0.25    -0.73 0.09
-## wstyd           0.51     0.04 0.71
-## poczucie_winy   0.34    -0.61 0.43
-## indecisiveness  0.44    -0.31 1.13
-## ruminacja      -0.17    -0.60 0.52
-## refleksja      -0.48    -0.57 0.54
-```
-
-```r
-pairs.panels(psycho)
-```
-
-![](05_was_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -166,54 +63,6 @@ Cech ciągłych:
 ???
 
 
-```r
-psycho2 &lt;- psycho %&gt;%
-  mutate(ps2=cut(ps, c(1,3,5), include.lowest = T),
-         plec=as.character(plec))
-
-table(psycho2$plec,psycho2$ps2)
-```
-
-```
-##    
-##     [1,3] (3,5]
-##   1   184   413
-##   2    28    71
-```
-
-```r
-chisq.test(table(psycho2$plec,psycho2$ps2), correct = F)
-```
-
-```
-## 
-## 	Pearson's Chi-squared test
-## 
-## data:  table(psycho2$plec, psycho2$ps2)
-## X-squared = 0.25823, df = 1, p-value = 0.6113
-```
-
-```r
-korelacje &lt;- psycho %&gt;%
-  select(-plec) %&gt;%
-  cor()
-
-library(corrplot)
-```
-
-```
-## Warning: package 'corrplot' was built under R version 3.6.1
-```
-
-```
-## corrplot 0.84 loaded
-```
-
-```r
-corrplot(korelacje, method = "number", type = "upper")
-```
-
-![](05_was_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -290,6 +139,22 @@ Uczenie nienadzorowane - końcowy wynik nie jest znany
 
 ---
 
+# Zadanie
+
+Czwartkowy poranek to idealny czas na analizę skupień!
+
+1. Otwórz RStudio i wczorajszy projekt _analizy_
+
+2. Stwórz nowy skrypt R, który zapisz pod nazwą _03_grupowanie_
+
+3. Pobierz zbiór danych _klienci.csv_ i umieść go w projekcie, w katalogu z danymi 
+
+4. Wczytaj ten zbiór do pamięci R. Może się przydać prezentacja [Wczytywanie danych](http://www.wawrowski.edu.pl/swps/01d_wczytywanie_danych.html) albo skorzystaj z narzędzia `Import Dataset`
+
+5. Stwórz wykres punktowy przedstawiający wartości cech _roczny_dochod_ i _wskaznik_wydatkow_
+
+---
+
 # Grupowanie
 
 Metoda iteracyjna:
@@ -304,30 +169,19 @@ Metoda hierarchiczna:
 
 - pakiet [_ggdendro_](https://cran.r-project.org/web/packages/ggdendro/index.html)
 
+- pakiet [_clusterCrit_](https://cran.r-project.org/web/packages/clusterCrit/)
+
 ???
 
 
-```r
-psycho_z &lt;- psycho %&gt;%
-  select(-plec) %&gt;%
-  scale()
 
-macierz_odl &lt;- dist(psycho_z)
+---
 
-dendrogram &lt;- hclust(macierz_odl, method = "ward.D")
+class: inverse
 
-library(ggdendro)
-```
+# Zadanie
 
-```
-## Warning: package 'ggdendro' was built under R version 3.6.1
-```
-
-```r
-ggdendrogram(dendrogram, rotate = T)
-```
-
-![](05_was_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+Przeprowadź grupowanie obiektów w zbiorze _psycho_ metodą k-średnich.
 
 ---
 
