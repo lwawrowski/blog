@@ -364,7 +364,7 @@ summary {
 
 <h1 class="title toc-ignore">Metody statystyczne</h1>
 <h4 class="author">Łukasz Wawrowski</h4>
-<h4 class="date">2 10 2019</h4>
+<h4 class="date">3 10 2019</h4>
 
 </div>
 
@@ -393,7 +393,6 @@ table(psycho$plec2) # częstość
 table(psycho$plec2, psycho$ps_mediana) # tablica kontyngencji
 
 chisq.test(table(psycho$plec2, psycho$ps_mediana), correct = FALSE)
-summary(tab)
 
 # cechy ciągłe
 
@@ -499,6 +498,157 @@ plot_summs(model3, model4, scale = TRUE, plot.distributions = TRUE)
 export_summs(model3, model4, 
              error_format = &quot;[{conf.low}, {conf.high}]&quot;,
              ci_level = 0.95)</code></pre>
+</div>
+<div id="regresja2" class="section level3">
+<h3>03_regresja2</h3>
+<pre class="r"><code>library(tidyverse)
+library(haven)
+library(jtools)
+library(apaTables)
+library(olsrr)
+library(janitor)
+
+psycho &lt;- read_sav(&quot;dane/poz_sop.sav&quot;)
+psycho &lt;- clean_names(psycho)
+
+model1 &lt;- lm(ps ~ wiek, data = psycho)
+model2 &lt;- lm(ps ~ wiek + wstyd, data = psycho)
+model3 &lt;- lm(ps ~ wiek + wstyd + poczucie_winy, data = psycho)
+
+summary(model1)
+
+# ważna kolejność - od najmniejszeg modelu
+apa.reg.table(model1, model2, model3, filename = &quot;reg3.doc&quot;)
+
+export_summs(model1, model2, model3)
+
+plot_summs(model1, model2, model3) + 
+  ggsave(filename = &quot;beta.png&quot;, width = 16, units = &quot;cm&quot;)
+
+psycho_z &lt;- psycho %&gt;%
+  select(-plec) %&gt;%
+  rename(indec=indecisiveness) %&gt;%
+  # scale() %&gt;%
+  standardize() %&gt;% 
+  mutate(plec=psycho$plec,
+         plec=ifelse(test = plec == 1, yes = 1, no = -1))
+
+model1 &lt;- lm(indec ~ wiek + plec, data = psycho_z)
+model2 &lt;- lm(indec ~ wiek*plec, data = psycho_z)
+model3 &lt;- lm(indec ~ wiek:plec , data = psycho_z)
+
+export_summs(model1, model2, model3, 
+             model.names = c(&quot;M1&quot;, &quot;M2&quot;, &quot;M6&quot;))
+
+apa.reg.table(model1, model2, model3)
+
+stargazer::stargazer(model1, model2, model3, type = &quot;text&quot;)
+
+model4 &lt;- lm(indec ~ wiek*ps + wiek*perf_cmda, data = psycho_z)
+summary(model4)
+
+library(psych)
+
+stats &lt;- describe(psycho)
+
+psycho %&gt;%
+  select(ps:wstyd) %&gt;%
+  describe()
+
+# eksport do pliku csv
+write.table(x = stats, file = &quot;stats.csv&quot;, sep = &quot;;&quot;, dec = &quot;,&quot;)
+
+describeBy(psycho, psycho$plec)
+
+model5 &lt;- mediate(indec ~ ps + perf_cmda + 
+                    (wstyd) + (poczucie_winy), 
+                  data = psycho_z)
+summary(model5)
+mediate.diagram(model5)</code></pre>
+</div>
+<div id="sem" class="section level3">
+<h3>sem</h3>
+<pre class="r"><code>library(lavaan)
+library(tidyverse)
+
+load(&quot;dane/research.RData&quot;)
+
+paste(&quot;ibts&quot;, seq(1,19,2), sep = &quot;&quot;, collapse = &quot;+&quot;)
+paste(&quot;ibts&quot;, seq(2,20,2), sep = &quot;&quot;, collapse = &quot;+&quot;)
+
+model &lt;- &#39;cognitive =~ ibts1+ibts3+ibts5+ibts7+ibts9+ibts11+ibts13+ibts15+ibts17+ibts19
+          affective =~ ibts2+ibts4+ibts6+ibts8+ibts10+ibts12+ibts14+ibts16+ibts18+ibts20&#39;
+
+model_cfa &lt;- cfa(model, data = dane)
+summary(model_cfa, standardized = TRUE, fit.measures = TRUE)
+
+semPlot::semPaths(model_cfa, 
+                  what = &quot;std&quot;, 
+                  layout = &quot;circle&quot;, 
+                  edge.label.cex = 1)
+
+# SEM
+psycho &lt;- haven::read_sav(&quot;dane/poz_sop.sav&quot;)
+psycho &lt;- janitor::clean_names(psycho)
+
+model &lt;- &#39;indecisiveness ~ ps + perf_cmda + wstyd + poczucie_winy
+          wstyd ~ ps + perf_cmda
+          poczucie_winy ~ ps + perf_cmda&#39;
+
+model_sem &lt;- sem(model, data = psycho)
+summary(model_sem, fit.measures = TRUE)
+
+semPlot::semPaths(model_sem, 
+                  what = &quot;std&quot;, 
+                  layout = &quot;tree&quot;, 
+                  edge.label.cex = 1)</code></pre>
+</div>
+<div id="grupowanie" class="section level3">
+<h3>grupowanie</h3>
+<pre class="r"><code>library(tidyverse)
+
+klienci &lt;- read.csv(&quot;dane/klienci.csv&quot;)
+
+ggplot(klienci, aes(x=roczny_dochod, y=wskaznik_wydatkow)) +
+  geom_point()
+
+klienci_z &lt;- klienci %&gt;%
+  select(roczny_dochod, wskaznik_wydatkow) %&gt;%
+  jtools::standardize()
+
+grupy_k5 &lt;- kmeans(x = klienci_z, centers = 5)
+
+klienci$k5 &lt;- as.factor(grupy_k5$cluster)
+
+ggplot(klienci, aes(x=roczny_dochod, 
+                    y=wskaznik_wydatkow,
+                    color = k5)) +
+  geom_point()
+
+library(ClusterR)
+
+Optimal_Clusters_KMeans(data = klienci_z, 
+                        max_clusters = 15,
+                        criterion = &quot;dissimilarity&quot;)
+
+grupy_k5a &lt;- KMeans_rcpp(data = klienci_z, clusters = 5)
+
+klienci$k5a &lt;- as.factor(grupy_k5a$clusters)
+
+ggplot(klienci, aes(x=roczny_dochod, 
+                    y=wskaznik_wydatkow,
+                    color = k5a)) +
+  geom_point()
+
+klienci %&gt;%
+  group_by(k5a) %&gt;%
+  count(plec)
+
+klienci %&gt;%
+  group_by(k5a) %&gt;%
+  summarise_at(vars(wiek:wskaznik_wydatkow), &quot;mean&quot;)
+
+haven::write_sav(klienci, &quot;klienci.sav&quot;)</code></pre>
 </div>
 
 

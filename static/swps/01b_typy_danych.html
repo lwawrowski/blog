@@ -73,6 +73,22 @@ Skrót klawiszowy: ctrl + shift + r
 
 ---
 
+# Uruchamianie kodu R
+
+- przycisk Run w oknie skryptu
+
+- skrót klawiszowy: ctrl + enter (RStudio) lub ctrl + r (R)
+
+**Scenariusz 1**
+
+Umieszczamy kursor w linii, którą chcemy wywołać i podejmujemy akcję uruchomienia.
+
+**Scenariusz 2**
+
+Zaznaczamy fragment kodu i go uruchamiamy.
+
+---
+
 # Funkcja w R
 
 ```
@@ -121,25 +137,6 @@ nazwa_pakietu::nazwa_funkcji()
 
 # Uruchamianie kodu R
 
-- przycisk Run w oknie skryptu
-
-- skrót klawiszowy: ctrl + enter (RStudio) lub ctrl + r (R)
-
-**Scenariusz 1**
-
-Zaznaczamy fragment kodu i go uruchamiamy.
-
-**Scenariusz 2**
-
-Umieszczamy kursor w linii, którą chcemy wywołać i podejmujemy akcję uruchomienia.
-
-
-W R działamy _sekwencyjnie_ (wczytanie danych, prztwarzanie, wykres), zatem scenariusz 2 będzie częściej realizowany.
-
----
-
-# Uruchamianie kodu R
-
 ![](img/run_stop.png)
 
 ---
@@ -179,7 +176,7 @@ Oblicz
 
 4. `\(\sqrt{-1}\)`
 
-<div class="countdown" id="timer_5d8142af" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d9ef95f" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">04</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -232,6 +229,8 @@ Konwencje nazywania obiektów:
 - lowerCamelCase
 
 - UpperCamelCase
+
+Nazwa obiektu nie może zaczynać się od liczby
 
 ]
 
@@ -356,7 +355,7 @@ Jakiego typu będzie wektor będący wynikiem działania `a &lt;= b`?
 
 3. Wylosuj z rozkładu jednostajnego 1000 obserwacji z ziarnem równym 76. Ile wynosi średnia tych wartości?
 
-<div class="countdown" id="timer_5d814320" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d9ef6cf" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -449,7 +448,7 @@ class: inverse
 
 Wygeneruj z rozkładu normalnego 1234 obserwacji i przedstaw te wartości na wykresach różnego typu.
 
-<div class="countdown" id="timer_5d814468" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d9ef693" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
     </textarea>
@@ -499,7 +498,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {

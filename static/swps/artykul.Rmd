@@ -65,6 +65,11 @@ t.test(psycho$ps, psycho$perf_cmda, paired = TRUE)
 t.test(ps ~ plec, data = psycho)
 ```
 
+```{r}
+library(apaTables)
+
+apa.cor.table(psycho)
+```
 
 
 

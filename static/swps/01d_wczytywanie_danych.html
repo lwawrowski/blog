@@ -105,7 +105,7 @@ class: inverse
 
 Czy rozkład ocen filmów charakteryzuje się asymetrią? Jeśli tak to jaką?
 
-<div class="countdown" id="timer_5d814350" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d9ef6cc" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -134,7 +134,7 @@ class: inverse
 3. Na wykresie pudełkowym przedstaw wartości salda w grupach ze względu na hipotekę
 
 
-<div class="countdown" id="timer_5d814628" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d9efa69" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -157,27 +157,10 @@ class: inverse
 Wczytaj plik `poz_sop.sav`. Jak wygląda zależność pomiędzy zmienną WSTYD i POCZUCIE_WINY?
 
 
-<div class="countdown" id="timer_5d814696" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d9ef84e" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
----
-
-# Problemy z nazwami zmiennych
-
-- nazwy zmiennych nie powinny zawierać polskich liter i spacji
-
-- surowe dane zwykle nie posiadają nazw kolumn przystosowanych do przetwarzania przez komputer
-
-- ten problem rozwiązuje pakiet _janitor_ i funkcja `clean_names()`:
-
-```
-
-zbior &lt;- janitor::clean_names(zbior)
-
-```
-
-- funkcja ta zamienia wielkie litery na małe, spacje na podkreślniki i znaki transliteruje do ASCII.
 
 ---
 
@@ -211,9 +194,9 @@ class: inverse
 
 1. Pobierz do R dane zawarte na stronie http://www.mbnet.com.pl/dl.txt
 
-2. Przeprowadź rozpoznawczą analizę danych (EDA) dla zbioru `poz.sav`
+2. Przeprowadź rozpoznawczą analizę danych (EDA) dla zbioru `poz_sop.sav`
 
-<div class="countdown" id="timer_5d814367" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5d9ef7ed" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
     </textarea>
@@ -263,7 +246,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {

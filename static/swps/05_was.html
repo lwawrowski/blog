@@ -37,10 +37,23 @@ class: inverse
 
 6. Wczytaj zbiór danych
 
-???
+---
 
+# Automatyczne wczytywanie pakietów
 
+Z biegiem czasu lista wczytywanych pakietów bardzo się wydłuży. W ramach projektu można stworzyć plik zawierający listę pakietów, które mają być wczytane po otwarciu projektu.
 
+W tym celu należy stworzyć nowy plik tekstowy (File -&gt; New file -&gt; Text file) i zapisać go bez nazwy, ale z rozszerzeniem __.Rprofile__
+
+W ramach tego pliku podajemy listę pakietów wraz z funkcją `library()`
+
+Przykładowa zawartość pliku .Rprofile:
+
+```r
+library(readxl)
+library(haven)
+library(tidyverse)
+```
 
 ---
 
@@ -59,11 +72,6 @@ Cech ciągłych:
 - pakiet [_corrplot_](https://cran.r-project.org/web/packages/corrplot/)
 
 - pakiet [_GGally_](https://cran.r-project.org/web/packages/GGally/index.html)
-
-???
-
-
-
 
 ---
 
@@ -139,9 +147,9 @@ Uczenie nienadzorowane - końcowy wynik nie jest znany
 
 ---
 
-# Zadanie
+class: inverse
 
-Czwartkowy poranek to idealny czas na analizę skupień!
+# Zadanie
 
 1. Otwórz RStudio i wczorajszy projekt _analizy_
 
@@ -170,18 +178,6 @@ Metoda hierarchiczna:
 - pakiet [_ggdendro_](https://cran.r-project.org/web/packages/ggdendro/index.html)
 
 - pakiet [_clusterCrit_](https://cran.r-project.org/web/packages/clusterCrit/)
-
-???
-
-
-
----
-
-class: inverse
-
-# Zadanie
-
-Przeprowadź grupowanie obiektów w zbiorze _psycho_ metodą k-średnich.
 
 ---
 
