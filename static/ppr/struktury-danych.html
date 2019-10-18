@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Struktury danych | Podstawy programowania R</title>
-  <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Struktury danych | Podstawy programowania R" />
   <meta property="og:type" content="book" />
@@ -22,17 +21,17 @@
   <meta name="twitter:description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
   
 
-<meta name="author" content="Łukasz Wawrowski">
+<meta name="author" content="Łukasz Wawrowski" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="wprowadzenie-do-r.html">
-<link rel="next" href="przetwarzanie-danych.html">
+<link rel="prev" href="wprowadzenie-do-r.html"/>
+<link rel="next" href="przetwarzanie-danych.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,41 +49,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -135,9 +159,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#lista"><i class="fa fa-check"></i><b>2.4</b> Lista</a></li>
 <li class="chapter" data-level="2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#ramka-danych"><i class="fa fa-check"></i><b>2.5</b> Ramka danych</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania-1"><i class="fa fa-check"></i><b>2.5.1</b> Zadania</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="struktury-danych.html"><a href="struktury-danych.html#rozwiazania-do-zadan"><i class="fa fa-check"></i><b>2.6</b> Rozwiązania do zadań</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="struktury-danych.html"><a href="struktury-danych.html#macierz-1"><i class="fa fa-check"></i><b>2.6.1</b> Macierz</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html"><i class="fa fa-check"></i><b>3</b> Przetwarzanie danych</a><ul>
@@ -221,68 +242,68 @@ obiekt -&gt; nazwa</code></pre>
 <div id="wektor-wartosci-logicznych" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Wektor wartości logicznych</h3>
 <p>Przyjmuje wartości <em>prawda</em> lub <em>fałsz</em>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE</code></pre>
 <p>lub w skróconej wersji:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(T, F, F)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">c</span>(T, F, F)</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE</code></pre>
 <p>Do sprawdzenia długości wektora używa się funkcji <code>length</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">c</span>(T, F, F))</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">length</span>(<span class="kw">c</span>(T, F, F))</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>lub korzystając z obiektu nazwanego:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_log &lt;-<span class="st"> </span><span class="kw">c</span>(T,F,F)
-<span class="kw">length</span>(wart_log)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">wart_log &lt;-<span class="st"> </span><span class="kw">c</span>(T,F,F)</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw">length</span>(wart_log)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Wektory można także utworzyć poprzez replikację określonej wartości lub wektora z wykorzystaniem funkcji <code>rep</code>. Funkcja ta przyjmuje co najmniej dwa argumenty: obowiązkowo <code>x</code> - wektor wejściowy oraz jeden z następujących: <code>times</code> - liczba powtórzeń elementów wektora <code>x</code>, <code>each</code> - liczba powtórzeń elementów wektora <code>x</code> (wyjaśnienie różnicy poniżej) lub <code>length.out</code> - oczekiwana długość wektora wynikowego.</p>
 <p>Trzy równoważne zapisy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dt">x =</span> <span class="kw">c</span>(T,F), <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">rep</span>(<span class="dt">x =</span> <span class="kw">c</span>(T,F), <span class="dt">times =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dt">times =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
 <p>A tak to wygląda z argumentem <code>each</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dt">each =</span> <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dt">each =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Wykorzystanie argumentu <code>length.out</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dt">length.out =</span> <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">rep</span>(<span class="kw">c</span>(T,F), <span class="dt">length.out =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
 </div>
 <div id="wektor-wartosci-liczbowych" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Wektor wartości liczbowych</h3>
 <p>W wektorze możemy przechowywać także liczby:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="fl">2.5</span>, .<span class="dv">6</span>) <span class="co"># nie trzeba pisać zera przed ułamkiem</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">-5</span>, <span class="fl">2.5</span>, <span class="fl">.6</span>) <span class="co"># nie trzeba pisać zera przed ułamkiem</span></a></code></pre></div>
 <pre><code>## [1]  1.0  3.0 -5.0  2.5  0.6</code></pre>
 <p>Połączenie dwóch wektorów to także wektor:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="kw">c</span>(<span class="fl">3.5</span>,<span class="dv">4</span>,<span class="fl">4.5</span>))</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="kw">c</span>(<span class="fl">3.5</span>,<span class="dv">4</span>,<span class="fl">4.5</span>))</a></code></pre></div>
 <pre><code>## [1] 1.0 2.0 3.0 3.5 4.0 4.5</code></pre>
 <p>Pojedyncza liczba też jest jednoelementowym wektorem:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">length</span>(<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>Proste ciągi o różnicy równej 1 można generować wykorzystując dwukropek:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p>lub</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:-</span><span class="dv">1</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:-</span><span class="dv">1</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##  [1] -5 -4 -3 -2 -1  1  2  3  4  5</code></pre>
 <p>Do generowania ciągów liczbowych o różnych różnicach wykorzystuje się funkcję <code>seq</code>, która przyjmuje następujące argumenty. Wartość początkową <code>from</code>, wartość końcową <code>to</code> oraz jeden z następujących: <code>by</code> - krok lub <code>length.out</code> - oczekiwana długość wektora.</p>
 <p>To samo co <code>1:10</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p>Wartości niecałkowite:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">0.2</span>)</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">0.2</span>)</a></code></pre></div>
 <pre><code>## [1] 1.0 1.2 1.4 1.6 1.8 2.0</code></pre>
 <p>Wektor wartości malejących:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="dt">by=</span><span class="dv">1</span>) <span class="co"># błędny zapis</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="dt">by=</span><span class="dv">1</span>) <span class="co"># błędny zapis</span></a></code></pre></div>
 <pre><code>## Error in seq.default(10, 1, by = 1): wrong sign in &#39;by&#39; argument</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="dt">by=</span><span class="op">-</span><span class="dv">1</span>) <span class="co"># poprawny zapis</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">seq</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="dt">by=</span><span class="op">-</span><span class="dv">1</span>) <span class="co"># poprawny zapis</span></a></code></pre></div>
 <pre><code>##  [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
 <p>Tworzenie wektora w oparciu o argument <code>length.out</code> - funkcja sama dobiera krok:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dt">length.out =</span> <span class="dv">13</span>)</code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dt">length.out =</span> <span class="dv">13</span>)</a></code></pre></div>
 <pre><code>##  [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0</code></pre>
 <p>Do generowania liczb pseudolosowych służy funkcja <code>runif(n)</code>, która do poprawnego wywołania wymaga tylko jednego argumentu - długości wektora wynikowego. Domyślnie losowane są liczby z przedziału <span class="math inline">\([0;1]\)</span> (tak jak w funkcji <code>los()</code> w Excelu), można to jednak zmienić podając odpowiednie wartości argumentów <code>min</code> i <code>max</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">6</span>)</code></pre></div>
-<pre><code>## [1] 0.9596119 0.2476051 0.8829486 0.5150321 0.6992010 0.1036450</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">runif</span>(<span class="dv">6</span>)</a></code></pre></div>
+<pre><code>## [1] 0.0241583 0.7718633 0.3759972 0.8797186 0.2216257 0.4154056</code></pre>
 <p>Obserwacje można także generować z innych rozkładów:</p>
 <ul>
 <li><code>rnorm</code> - rozkład normalny,</li>
@@ -290,69 +311,69 @@ obiekt -&gt; nazwa</code></pre>
 <li><code>rt</code> - rozkład t-studenta,</li>
 <li>itp.</li>
 </ul>
-<p>Wykaz wszystkich dostępnych w R rozkładów uzyskamy wywołując polecenie <code>help(&quot;Distributions&quot;)</code>.</p>
+<p>Wykaz wszystkich dostępnych w R rozkładów uzyskamy wywołując polecenie <code>help("Distributions")</code>.</p>
 <p>Za każdym uruchomieniem jednej z wymienionych wyżej funkcji losujących wartości z danego rozkładu otrzymamy inne wartości:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.5573082 0.3053461 0.2928487 0.5018740 0.3838036</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 0.2121402 0.7674996 0.2308419 0.9640799 0.5392208</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">runif</span>(<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 0.03646998 0.76720839 0.40551559 0.11018784 0.30785054</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">runif</span>(<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] 0.09091646 0.52342968 0.43533863 0.26985996 0.40221682</code></pre>
 <p>Powtarzalność wyników możemy uzyskać ustalając ziarno generatora:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
-<span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="kw">runif</span>(<span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 0.2875775 0.7883051 0.4089769 0.8830174 0.9404673</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
-<span class="kw">runif</span>(<span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="kw">runif</span>(<span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 0.2875775 0.7883051 0.4089769 0.8830174 0.9404673</code></pre>
 </div>
 <div id="wektor-wartosci-tekstowych" class="section level3">
 <h3><span class="header-section-number">2.1.3</span> Wektor wartości tekstowych</h3>
 <p>W wektorze może być przechowywany tekst - wówczas poszczególne elementy zapisujemy w cudzysłowie lub apostrofach:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;ala&quot;</span>, <span class="st">&quot;ma&quot;</span>, <span class="st">&quot;kota&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">c</span>(<span class="st">&quot;ala&quot;</span>, <span class="st">&quot;ma&quot;</span>, <span class="st">&quot;kota&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;ala&quot;  &quot;ma&quot;   &quot;kota&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&#39;ala&#39;</span>, <span class="st">&#39;ma&#39;</span>, <span class="st">&#39;kota&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">c</span>(<span class="st">&#39;ala&#39;</span>, <span class="st">&#39;ma&#39;</span>, <span class="st">&#39;kota&#39;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;ala&quot;  &quot;ma&quot;   &quot;kota&quot;</code></pre>
 <p>W RStudio wygodniej używać cudzysłowu, ponieważ program automatycznie go zamyka.</p>
 <p>Istnieje także stała zawierająca litery alfabetu:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">letters</code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">letters</a></code></pre></div>
 <pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
 ## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LETTERS</code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">LETTERS</a></code></pre></div>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
 ## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 </div>
 <div id="przeciazanie-wektora" class="section level3">
 <h3><span class="header-section-number">2.1.4</span> Przeciążanie wektora</h3>
 <p>Jeśli w wektorze pomieszamy kilka typów zmiennych to R przekształci poszczególne wartości, tak aby stracić jak najmniej informacji:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="dv">2</span>, <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="dv">2</span>, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] 1 2 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">3</span>, <span class="st">&quot;cztery&quot;</span>, <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">c</span>(<span class="dv">3</span>, <span class="st">&quot;cztery&quot;</span>, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;3&quot;      &quot;cztery&quot; &quot;5&quot;</code></pre>
 <p>W pierwszym przypadku wartość <code>TRUE</code> została przekształcona na odpowiednik liczbowy - 1. Z kolei w drugim przykładzie podane liczby zostały przekonwertowane na tekst.</p>
 </div>
 <div id="operacje-na-wektorach" class="section level3">
 <h3><span class="header-section-number">2.1.5</span> Operacje na wektorach</h3>
 <p>Na wektorach logicznych i liczbowych można wykonywać operacje arytmetyczne np. mnożenie:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span><span class="op">*</span><span class="dv">2</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span><span class="op">*</span><span class="dv">2</span></a></code></pre></div>
 <pre><code>##  [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
 <p>Wektor liczbowy plus wektor liczbowy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]  2  4  4  6  6  8  8 10 10 12</code></pre>
 <p>Wektor liczbowy razy wektor liczbowy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]  1  4  3  8  5 12  7 16  9 20</code></pre>
 <p>Wektor liczbowy razy wektor logiczny:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(T, F)</code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(T, F)</a></code></pre></div>
 <pre><code>##  [1] 1 0 3 0 5 0 7 0 9 0</code></pre>
 <p>Długości obu wektorów muszą być odpowiednie:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(T,F,T)</code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(T,F,T)</a></code></pre></div>
 <pre><code>## Warning in 1:10 * c(T, F, T): longer object length is not a multiple of
 ## shorter object length</code></pre>
 <pre><code>##  [1]  1  0  3  4  0  6  7  0  9 10</code></pre>
 <p>Dłuższy z wektorów musi być wielokrotnością krótszego.</p>
 <p>Siłą rzeczy działania arytmetyczne na wektorach tekstowych nie są możliwe:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;jeden&quot;</span>, <span class="st">&quot;dwa&quot;</span>, <span class="st">&quot;trzy&quot;</span>, <span class="st">&quot;cztery&quot;</span>) <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(T,F)</code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">c</span>(<span class="st">&quot;jeden&quot;</span>, <span class="st">&quot;dwa&quot;</span>, <span class="st">&quot;trzy&quot;</span>, <span class="st">&quot;cztery&quot;</span>) <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(T,F)</a></code></pre></div>
 <pre><code>## Error in c(&quot;jeden&quot;, &quot;dwa&quot;, &quot;trzy&quot;, &quot;cztery&quot;) * c(T, F): non-numeric argument to binary operator</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;jeden&quot;</span>, <span class="st">&quot;dwa&quot;</span>, <span class="st">&quot;trzy&quot;</span>, <span class="st">&quot;cztery&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">c</span>(<span class="st">&quot;jeden&quot;</span>, <span class="st">&quot;dwa&quot;</span>, <span class="st">&quot;trzy&quot;</span>, <span class="st">&quot;cztery&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## Error in c(&quot;jeden&quot;, &quot;dwa&quot;, &quot;trzy&quot;, &quot;cztery&quot;) + c(1, 2): non-numeric argument to binary operator</code></pre>
 </div>
 <div id="operacje-agregujace" class="section level3">
@@ -424,100 +445,99 @@ obiekt -&gt; nazwa</code></pre>
 </tbody>
 </table>
 <p>Suma wektora numerycznego:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## [1] 55</code></pre>
 <p>Suma i średnia wektora logicznego:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">c</span>(T, F, F, T))</code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">sum</span>(<span class="kw">c</span>(T, F, F, T))</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">c</span>(T, F, F, T))</code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">mean</span>(<span class="kw">c</span>(T, F, F, T))</a></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>Korzystanie z funkcji pochodzących z pakietów zewnętrznych wymaga wskazania skąd pochodzi dana funkcja. Można to zrobić na dwa sposoby: funkcją <code>library(pakiet)</code> - wówczas wszystkie funkcje z tego pakietu są wczytywane do pamięci i można do nich sięgać bezpośrednio lub wskazując przed nazwą funkcji z jakiego pakietu pochodzi.</p>
 <p>Wczytanie pakietu:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)</code></pre></div>
-<pre><code>## Warning: package &#39;e1071&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skewness</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>))</code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">library</span>(e1071)</a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="kw">skewness</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>))</a></code></pre></div>
 <pre><code>## [1] 0.3451259</code></pre>
 <p>lub równoważnie:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e1071<span class="op">::</span><span class="kw">skewness</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>))</code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">e1071<span class="op">::</span><span class="kw">skewness</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">13</span>))</a></code></pre></div>
 <pre><code>## [1] 0.3451259</code></pre>
 <p>Podsumowanie rozkładu wektora można także uzyskać z wykorzystaniem funkcji <code>summary(x)</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="kw">summary</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    1.00    3.25    5.50    5.50    7.75   10.00</code></pre>
 <p>Działa także na wektorach tekstowych:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">c</span>(<span class="st">&quot;jeden&quot;</span>, <span class="st">&quot;dwa&quot;</span>, <span class="st">&quot;trzy&quot;</span>, <span class="st">&quot;cztery&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="kw">summary</span>(<span class="kw">c</span>(<span class="st">&quot;jeden&quot;</span>, <span class="st">&quot;dwa&quot;</span>, <span class="st">&quot;trzy&quot;</span>, <span class="st">&quot;cztery&quot;</span>))</a></code></pre></div>
 <pre><code>##    Length     Class      Mode 
 ##         4 character character</code></pre>
 </div>
 <div id="sprawdzanie-typu-wektora" class="section level3">
 <h3><span class="header-section-number">2.1.7</span> Sprawdzanie typu wektora</h3>
 <p>Do określenia typu wektora służy funkcja <code>typeof</code>, <code>class</code> lub <code>mode</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(wart_log)</code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" title="1"><span class="kw">typeof</span>(wart_log)</a></code></pre></div>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
 <p>Sprawdzenie czy obiekt jest danego typu odbywa się z wykorzystaniem dedykowanych funkcji z przyrostkiem <code>is.</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.logical</span>(wart_log)</code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" title="1"><span class="kw">is.logical</span>(wart_log)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.character</span>(wart_log)</code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" title="1"><span class="kw">is.character</span>(wart_log)</a></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
 <div id="rzutowanie-wektorow" class="section level3">
 <h3><span class="header-section-number">2.1.8</span> Rzutowanie wektorów</h3>
 <p>Czasami jako np. argument funkcji będzie wymagany inny typ wektora aniżeli aktualnie posiadany w pamięci. Można wówczas spróbować przekształcić taki wektor z wykorzystaniem funkcji rozpoczynającej się od <code>as.</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(wart_log)</code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" title="1"><span class="kw">typeof</span>(wart_log)</a></code></pre></div>
 <pre><code>## [1] &quot;logical&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(wart_log)</code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="kw">as.numeric</span>(wart_log)</a></code></pre></div>
 <pre><code>## [1] 1 0 0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">as.numeric</span>(wart_log))</code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" title="1"><span class="kw">typeof</span>(<span class="kw">as.numeric</span>(wart_log))</a></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 </div>
 <div id="indeksowanie-wektorow" class="section level3">
 <h3><span class="header-section-number">2.1.9</span> Indeksowanie wektorów</h3>
 <p>Aby uzyskać dostęp do części wektora korzysta się z indeksatora w postaci nawiasów kwadratowych. Utworzymy nowy wektor zawierający liczby całkowite od 10 do 20:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span> &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">20</span>)
-wart_10_<span class="dv">20</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1">wart_<span class="dv">10</span>_<span class="dv">20</span> &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb109-2" title="2">wart_<span class="dv">10</span>_<span class="dv">20</span></a></code></pre></div>
 <pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 <p>a następnie wybieramy trzecią obserwację:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[<span class="dv">3</span>]</code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1">wart_<span class="dv">10</span>_<span class="dv">20</span>[<span class="dv">3</span>]</a></code></pre></div>
 <pre><code>## [1] 12</code></pre>
 <p>Możemy także odwołać się do większego zakresu:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>]</code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1">wart_<span class="dv">10</span>_<span class="dv">20</span>[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
 <pre><code>## [1] 12 13 14</code></pre>
 <p>I wybranych elementów:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1">wart_<span class="dv">10</span>_<span class="dv">20</span>[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)]</a></code></pre></div>
 <pre><code>## [1] 10 12 14</code></pre>
 <p>W ten sposób można także modyfikować odpowiednie elementy wektora:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[<span class="dv">7</span>] &lt;-<span class="st"> </span><span class="dv">90</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" title="1">wart_<span class="dv">10</span>_<span class="dv">20</span>[<span class="dv">7</span>] &lt;-<span class="st"> </span><span class="dv">90</span></a></code></pre></div>
 <p>Wybór obserwacji większych od 15:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span>[wart_10_<span class="dv">20</span><span class="op">&gt;</span><span class="dv">15</span>]</code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" title="1">wart_<span class="dv">10</span>_<span class="dv">20</span>[wart_<span class="dv">10</span>_<span class="dv">20</span><span class="op">&gt;</span><span class="dv">15</span>]</a></code></pre></div>
 <pre><code>## [1] 90 17 18 19 20</code></pre>
 <p>Z kolei następujący zapis zwróci nam wektor wartości logicznych:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wart_10_<span class="dv">20</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" title="1">wart_<span class="dv">10</span>_<span class="dv">20</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span></a></code></pre></div>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
 </div>
 <div id="wartosci-nieliczbowe" class="section level3">
 <h3><span class="header-section-number">2.1.10</span> Wartości nieliczbowe</h3>
 <p>Brak danych w R jest przedstawiany jako wartość <code>NA</code> (ang. <em>not available</em>) i może powodować trudności z wywoływaniem niektórych funkcji:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v_na &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="ot">NA</span>,<span class="dv">1</span>)
-v_na</code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" title="1">v_na &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="ot">NA</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb122-2" title="2">v_na</a></code></pre></div>
 <pre><code>## [1]  1  2  1 NA  1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(v_na)</code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" title="1"><span class="kw">sum</span>(v_na)</a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>W związku z tym większość funkcji ma zaimplementowany dodatkowy argument służący do obsługi tego typu wartości, który najczęściej nie uwzględnia tych wartości w obliczeniach:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(v_na, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1"><span class="kw">sum</span>(v_na, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>Oprócz braku danych podczas obliczeń możemy natrafić na wartości nieokreślone <code>NaN</code> (ang. <em>not a number</em>) oraz nieskończone <code>Inf</code> (ang. <em>infinity</em>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">0</span><span class="op">/</span><span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" title="1"><span class="dv">0</span><span class="op">/</span><span class="dv">0</span></a></code></pre></div>
 <pre><code>## [1] NaN</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">/</span><span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="dv">1</span><span class="op">/</span><span class="dv">0</span></a></code></pre></div>
 <pre><code>## [1] Inf</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" title="1"><span class="kw">sqrt</span>(<span class="op">-</span><span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## Warning in sqrt(-10): NaNs produced</code></pre>
 <pre><code>## [1] NaN</code></pre>
 <p>W R istnieje także wartość <code>NULL</code>, która jest podstawowym typem danych a nie wartością. <code>NULL</code> można traktować jako odpowiednik zbioru pustego. Jest stosowany np. w funkcjach, które niczego nie zwracają.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v_null &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="ot">NULL</span>,<span class="dv">1</span>)
-v_null</code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" title="1">v_null &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="ot">NULL</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb135-2" title="2">v_null</a></code></pre></div>
 <pre><code>## [1] 1 2 1 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(v_null)</code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1"><span class="kw">sum</span>(v_null)</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
 <div id="zadania" class="section level3">
@@ -535,32 +555,32 @@ v_null</code></pre></div>
 <h2><span class="header-section-number">2.2</span> Macierz</h2>
 <p>Macierze są wykorzystywane w R do przechowywania np. odległości pomiędzy punktami czy wskazywania sąsiedztwa obszarów geograficznych.</p>
 <p>Do tworzenia macierzy służy funkcja <code>matrix</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol=</span><span class="dv">3</span>)
-m</code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb139-2" title="2">m</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]    2    4    6</code></pre>
 <p>Z wykorzystaniem wybranych funkcji można sprawdzić wymiary macierzy, liczbę wierszy oraz kolumn:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(m)</code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1"><span class="kw">dim</span>(m)</a></code></pre></div>
 <pre><code>## [1] 2 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(m)</code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1"><span class="kw">ncol</span>(m)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(m)</code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1"><span class="kw">nrow</span>(m)</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>Macierz może także zawierać tekst:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="dt">nrow=</span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1"><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="dt">nrow=</span><span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,] &quot;a&quot;  &quot;d&quot;  &quot;g&quot; 
 ## [2,] &quot;b&quot;  &quot;e&quot;  &quot;h&quot; 
 ## [3,] &quot;c&quot;  &quot;f&quot;  &quot;i&quot;</code></pre>
 <p>Domyślnie macierz układana jest kolumnami. Aby to zmienić należy dodać argument <code>byrow=TRUE</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,] &quot;a&quot;  &quot;b&quot;  &quot;c&quot; 
 ## [2,] &quot;d&quot;  &quot;e&quot;  &quot;f&quot; 
 ## [3,] &quot;g&quot;  &quot;h&quot;  &quot;i&quot;</code></pre>
 <p>Jeśli liczba elementów wejściowych jest mniejsza iloczyn podanej liczby kolumn i wierszy to w brakujące miejsce wstawiane są elementy z początku wektora wejściowego:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## Warning in matrix(letters[1:7], nrow = 3, byrow = TRUE): data length [7] is
 ## not a sub-multiple or multiple of the number of rows [3]</code></pre>
 <pre><code>##      [,1] [,2] [,3]
@@ -568,30 +588,30 @@ m</code></pre></div>
 ## [2,] &quot;d&quot;  &quot;e&quot;  &quot;f&quot; 
 ## [3,] &quot;g&quot;  &quot;a&quot;  &quot;b&quot;</code></pre>
 <p>Z kolei macierz diagnonalną posiadającą elementy niezerowe wyłącznie na przekątnej tworzy się z wykorzystaniem funkcji <code>diag</code>. Macierz jednostkowa o wymiarach <span class="math inline">\(4 \times 4\)</span>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diag</span>(<span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="kw">diag</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    0    0    0
 ## [2,]    0    1    0    0
 ## [3,]    0    0    1    0
 ## [4,]    0    0    0    1</code></pre>
 <p>Macierz diagonalna o wartościach 5 na przekątnej i wymiarach <span class="math inline">\(3 \times 3\)</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diag</span>(<span class="dv">5</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="kw">diag</span>(<span class="dv">5</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    5    0    0
 ## [2,]    0    5    0
 ## [3,]    0    0    5</code></pre>
 <p>Funkcja <code>diag</code> umożliwia także ekstrakcję przekątnej z istniejącej już macierzy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diag</span>(<span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="dt">nrow=</span><span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="kw">diag</span>(<span class="kw">matrix</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="dt">nrow=</span><span class="dv">3</span>))</a></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;e&quot; &quot;i&quot;</code></pre>
 <div id="aczenie-macierzy" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Łączenie macierzy</h3>
 <p>Z wykorzystaniem funkcji <code>rbind</code> i <code>cbind</code> można odpowiednio łączyć obiekty wierszami (ang. <em>row bind</em>) lub kolumnami (ang. <em>col bind</em>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbind</span>(m, <span class="kw">c</span>(<span class="dv">99</span>, <span class="dv">88</span>, <span class="dv">77</span>))</code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">rbind</span>(m, <span class="kw">c</span>(<span class="dv">99</span>, <span class="dv">88</span>, <span class="dv">77</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]    2    4    6
 ## [3,]   99   88   77</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(m, <span class="kw">matrix</span>(<span class="dv">101</span><span class="op">:</span><span class="dv">104</span>, <span class="dt">nrow=</span><span class="dv">2</span>))</code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="kw">cbind</span>(m, <span class="kw">matrix</span>(<span class="dv">101</span><span class="op">:</span><span class="dv">104</span>, <span class="dt">nrow=</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
 ## [1,]    1    3    5  101  103
 ## [2,]    2    4    6  102  104</code></pre>
@@ -599,23 +619,23 @@ m</code></pre></div>
 <div id="indeksowanie-macierzy" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Indeksowanie macierzy</h3>
 <p>Dostęp do poszczególnych elementów macierzy odbywa się z wykorzystaniem nawiasów kwadratowych, ale można podać dwie wartość - <code>obiekt[wiersz,kolumna]</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="co"># drugi wiersz, pierwsza kolumna</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1">m[<span class="dv">2</span>,<span class="dv">1</span>] <span class="co"># drugi wiersz, pierwsza kolumna</span></a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[<span class="dv">2</span>,]  <span class="co"># tylko drugi wiersz</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1">m[<span class="dv">2</span>,]  <span class="co"># tylko drugi wiersz</span></a></code></pre></div>
 <pre><code>## [1] 2 4 6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[,<span class="dv">1</span>]  <span class="co"># tylko pierwsza kolumna</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1">m[,<span class="dv">1</span>]  <span class="co"># tylko pierwsza kolumna</span></a></code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[,]   <span class="co"># wszystkie obserwacje</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1">m[,]   <span class="co"># wszystkie obserwacje</span></a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]    2    4    6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[]    <span class="co"># wszystkie obserwacje</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1">m[]    <span class="co"># wszystkie obserwacje</span></a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]    2    4    6</code></pre>
 <p>W ten sposób można dokonać modyfikacji konkretnych elementów macierzy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[<span class="dv">2</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">77</span>
-m</code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1">m[<span class="dv">2</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">77</span></a>
+<a class="sourceLine" id="cb174-2" title="2">m</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    3    5
 ## [2,]   77    4    6</code></pre>
@@ -654,9 +674,9 @@ m</code></pre></div>
 </tbody>
 </table>
 <p>Rozważmy dwie macierze:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)
-b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">ncol=</span><span class="dv">2</span>)
-a;b</code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb176-2" title="2">b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">ncol=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb176-3" title="3">a;b</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    2    1
 ## [2,]    3    1    3
@@ -666,37 +686,37 @@ a;b</code></pre></div>
 ## [2,]    5    2
 ## [3,]    4    1</code></pre>
 <p>Aby przeprowadzić mnożenie macierzy <code>a</code> i <code>b</code>, liczba kolumn macierzy <code>a</code> musi być równa liczbie wierszy w macierzy <code>b</code>. Z kolei rozmiar macierzy wyjściowej to liczba wierszy macierzy <code>a</code> i liczba kolumn macierzy <code>b</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">%*%</span><span class="st"> </span>b</code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1">a <span class="op">%*%</span><span class="st"> </span>b</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   26   11
 ## [2,]   35   14
 ## [3,]   42   18</code></pre>
 <p>Transpozycja macierzy <code>b</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(b)</code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="kw">t</span>(b)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    6    5    4
 ## [2,]    3    2    1</code></pre>
 <p>Wyznacznik macierzy <code>a</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">det</span>(a)</code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">det</span>(a)</a></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>Macierz odwrotna do macierzy <code>a</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">solve</span>(a)</code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="kw">solve</span>(a)</a></code></pre></div>
 <pre><code>##            [,1]       [,2]       [,3]
 ## [1,] -0.6666667 -0.3333333  0.8333333
 ## [2,]  1.0000000  0.0000000 -0.5000000
 ## [3,]  0.3333333  0.6666667 -0.6666667</code></pre>
 <p>Wyznaczenie macierzy <code>x</code> w równaniu <code>a*x=b</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">solve</span>(a,b)</code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1"><span class="kw">solve</span>(a,b)</a></code></pre></div>
 <pre><code>##           [,1]      [,2]
 ## [1,] -2.333333 -1.833333
 ## [2,]  4.000000  2.500000
 ## [3,]  2.666667  1.666667</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(a,b)</code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">a <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(a,b)</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    6    3
 ## [2,]    5    2
 ## [3,]    4    1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b</code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" title="1">b</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    6    3
 ## [2,]    5    2
@@ -710,12 +730,12 @@ a;b</code></pre></div>
 </ol>
 <p><span class="math display">\[b=(X&#39;X)^{-1}X&#39;y\]</span></p>
 <p>Zmienna <span class="math inline">\(x_1\)</span> przyjmuje wartości <code>2,4,1,6,9,3,2,9,10,7</code>, zmienna <span class="math inline">\(x_2\)</span> <code>1.5,0.2,0.1,2,3.1,1.2,0.4,2.9,2.5,1.9</code>, a zmienna <span class="math inline">\(x_0\)</span> to wektor jedynek. Te trzy zmienne tworzą macierz <span class="math inline">\(X\)</span>. Z kolei wartości zmiennej <span class="math inline">\(y\)</span> są następujące <code>12,15,10,19,26,13,13,21,29,18</code>. Wyznacz wartość <span class="math inline">\(b\)</span>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zad1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow=</span><span class="dv">2</span>)
-<span class="kw">solve</span>(zad1)</code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" title="1">zad1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb193-2" title="2"><span class="kw">solve</span>(zad1)</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]   -2  1.5
 ## [2,]    1 -0.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zad1 <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(zad1)</code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">zad1 <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(zad1)</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    0
 ## [2,]    0    1</code></pre>
@@ -725,32 +745,32 @@ a;b</code></pre></div>
 <h2><span class="header-section-number">2.3</span> Czynnik</h2>
 <p>Czynnik (ang. <em>factor</em>) służy do przechowywania danych jakościowych o mało licznej liczbie kategorii, mierzonych na skali nominalnej i porządkowej.</p>
 <p>Rozważmy informacje o wykształceniu:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wyk &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;podstawowe&quot;</span>, <span class="st">&quot;średnie&quot;</span>, <span class="st">&quot;wyższe&quot;), c(5,3,2))</span>
-<span class="st">wyk</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1">wyk &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;podstawowe&quot;</span>, <span class="st">&quot;średnie&quot;</span>, <span class="st">&quot;wyższe&quot;), c(5,3,2))</span></a>
+<a class="sourceLine" id="cb197-2" title="2"><span class="st">wyk</span></a></code></pre></div>
 <pre><code>##  [1] &quot;podstawowe&quot; &quot;podstawowe&quot; &quot;podstawowe&quot; &quot;podstawowe&quot; &quot;podstawowe&quot;
 ##  [6] &quot;średnie&quot;    &quot;średnie&quot;    &quot;średnie&quot;    &quot;wyższe&quot;     &quot;wyższe&quot;</code></pre>
 <p>i dokonajmy transformacji na czynnik:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wyk_f &lt;-<span class="st"> </span><span class="kw">factor</span>(wyk)
-wyk_f</code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">wyk_f &lt;-<span class="st"> </span><span class="kw">factor</span>(wyk)</a>
+<a class="sourceLine" id="cb199-2" title="2">wyk_f</a></code></pre></div>
 <pre><code>##  [1] podstawowe podstawowe podstawowe podstawowe podstawowe średnie   
 ##  [7] średnie    średnie    wyższe     wyższe    
 ## Levels: podstawowe średnie wyższe</code></pre>
 <p>Funkcja <code>summary()</code> wywołana na czynniku zwraca wynik innego typu aniżeli na wektorze tekstowym:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(wyk)</code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1"><span class="kw">summary</span>(wyk)</a></code></pre></div>
 <pre><code>##    Length     Class      Mode 
 ##        10 character character</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(wyk_f)</code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1"><span class="kw">summary</span>(wyk_f)</a></code></pre></div>
 <pre><code>## podstawowe    średnie     wyższe 
 ##          5          3          2</code></pre>
 <p>Jeśli chcemy zaakcentować fakt, że zmienne są mierzone na skali porządkowej dodajemy argument <code>ordered=TRUE</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wyk_of &lt;-<span class="st"> </span><span class="kw">factor</span>(wyk, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)
-wyk_of</code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">wyk_of &lt;-<span class="st"> </span><span class="kw">factor</span>(wyk, <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb205-2" title="2">wyk_of</a></code></pre></div>
 <pre><code>##  [1] podstawowe podstawowe podstawowe podstawowe podstawowe średnie   
 ##  [7] średnie    średnie    wyższe     wyższe    
 ## Levels: podstawowe &lt; średnie &lt; wyższe</code></pre>
 <p>W łatwy sposób możemy edytować etykiety:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(wyk_of) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;pod.&quot;</span>, <span class="st">&quot;śr.&quot;</span>, <span class="st">&quot;wyż.&quot;</span>)
-wyk_of</code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1"><span class="kw">levels</span>(wyk_of) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;pod.&quot;</span>, <span class="st">&quot;śr.&quot;</span>, <span class="st">&quot;wyż.&quot;</span>)</a>
+<a class="sourceLine" id="cb207-2" title="2">wyk_of</a></code></pre></div>
 <pre><code>##  [1] pod. pod. pod. pod. pod. śr.  śr.  śr.  wyż. wyż.
 ## Levels: pod. &lt; śr. &lt; wyż.</code></pre>
 <p>Czynniki mają szczególne znaczenie w przypadku tworzenia wykresów, gdy chcemy określić porządek wyświetlania.</p>
@@ -759,8 +779,8 @@ wyk_of</code></pre></div>
 <h2><span class="header-section-number">2.4</span> Lista</h2>
 <p>Listy to ciągi złożone z elementów o dowolnych typach. Mogą przydać się w szczególności przy budowaniu funkcji, które zwracają tylko jedną wartość. Wówczas dane różnego typu mogą być zawarte w takiej liście.</p>
 <p>Tworzenie prostej listy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="st">&quot;element tekstowy&quot;</span>)
-l</code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1">l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="ot">TRUE</span>, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="st">&quot;element tekstowy&quot;</span>)</a>
+<a class="sourceLine" id="cb209-2" title="2">l</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] TRUE
 ## 
@@ -770,20 +790,20 @@ l</code></pre></div>
 ## [[3]]
 ## [1] &quot;element tekstowy&quot;</code></pre>
 <p>Już na pierwszy rzut oka widać bardziej złożoną strukturę listy. W związku z tym odwoływanie do poszczególnych elementów będzie trochę się różnić od wektorów czy macierzy.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l[<span class="dv">2</span>] <span class="co"># druga lista</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1">l[<span class="dv">2</span>] <span class="co"># druga lista</span></a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1 2 3 4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l[[<span class="dv">2</span>]] <span class="co"># zawartość listy</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" title="1">l[[<span class="dv">2</span>]] <span class="co"># zawartość listy</span></a></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l[[<span class="dv">2</span>]][<span class="dv">3</span>] <span class="co"># trzeci element wektora drugiej listy</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1">l[[<span class="dv">2</span>]][<span class="dv">3</span>] <span class="co"># trzeci element wektora drugiej listy</span></a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Listę można także rozwinąć do wektora z wykorzystaniem funkcji <code>unlist</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unlist</span>(l)</code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" title="1"><span class="kw">unlist</span>(l)</a></code></pre></div>
 <pre><code>## [1] &quot;TRUE&quot;             &quot;1&quot;                &quot;2&quot;               
 ## [4] &quot;3&quot;                &quot;4&quot;                &quot;element tekstowy&quot;</code></pre>
 <p>Poszczególne elementy listy można nazwać:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ln &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">log=</span><span class="ot">TRUE</span>, <span class="dt">num=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">tekst=</span><span class="st">&quot;element tekstowy&quot;</span>)
-ln</code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1">ln &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">log=</span><span class="ot">TRUE</span>, <span class="dt">num=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">tekst=</span><span class="st">&quot;element tekstowy&quot;</span>)</a>
+<a class="sourceLine" id="cb219-2" title="2">ln</a></code></pre></div>
 <pre><code>## $log
 ## [1] TRUE
 ## 
@@ -793,22 +813,22 @@ ln</code></pre></div>
 ## $tekst
 ## [1] &quot;element tekstowy&quot;</code></pre>
 <p>Wówczas można uzyskać do nich dostęp poprzez symbol <code>$</code> i podaną nazwę:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ln<span class="op">$</span>num</code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1">ln<span class="op">$</span>num</a></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ln[[<span class="dv">2</span>]] <span class="co"># normalne indeksowanie nadal działa</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1">ln[[<span class="dv">2</span>]] <span class="co"># normalne indeksowanie nadal działa</span></a></code></pre></div>
 <pre><code>## [1] 1 2 3 4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ln<span class="op">$</span>num[<span class="dv">2</span>]</code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">ln<span class="op">$</span>num[<span class="dv">2</span>]</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </div>
 <div id="ramka-danych" class="section level2">
 <h2><span class="header-section-number">2.5</span> Ramka danych</h2>
 <p>Ramka danych to tabela, która przypomina tą z Excela zawierająca dane o różnych typach. Tworzona za pomocą funkcji <code>data.frame</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">plec=</span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>, <span class="st">&quot;k&quot;</span>, <span class="st">&quot;k&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;k&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;m&quot;</span>),
-                 <span class="dt">wzrost=</span><span class="kw">c</span>(<span class="dv">173</span>, <span class="dv">170</span>, <span class="dv">163</span>, <span class="dv">178</span>, <span class="dv">169</span>, <span class="dv">180</span>, <span class="dv">175</span>, <span class="ot">NA</span>),
-                 <span class="dt">pali=</span><span class="kw">c</span>(T, F, F, F, T, F, <span class="ot">NA</span>, T))</code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">plec=</span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>, <span class="st">&quot;k&quot;</span>, <span class="st">&quot;k&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;k&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;m&quot;</span>),</a>
+<a class="sourceLine" id="cb227-2" title="2">                 <span class="dt">wzrost=</span><span class="kw">c</span>(<span class="dv">173</span>, <span class="dv">170</span>, <span class="dv">163</span>, <span class="dv">178</span>, <span class="dv">169</span>, <span class="dv">180</span>, <span class="dv">175</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb227-3" title="3">                 <span class="dt">pali=</span><span class="kw">c</span>(T, F, F, F, T, F, <span class="ot">NA</span>, T))</a></code></pre></div>
 <p>W RStudio po wybraniu tego obiektu w zakładce <code>Environment</code> pojawia się przyjazne okno do przeglądania oraz poglądowego filtrowania i sortowania danych ze zbioru.</p>
 <p>Możemy zobaczyć podsumowanie całego zbioru wywołując na nim funkcję <code>summary()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)</code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1"><span class="kw">summary</span>(df)</a></code></pre></div>
 <pre><code>##  plec      wzrost         pali        
 ##  k:3   Min.   :163.0   Mode :logical  
 ##  m:5   1st Qu.:169.5   FALSE:4        
@@ -818,11 +838,11 @@ ln</code></pre></div>
 ##        Max.   :180.0                  
 ##        NA&#39;s   :1</code></pre>
 <p>Ramki danych można indeksować w taki sam sposób jak macierze lub z wykorzystaniem operatora <code>$</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[,<span class="dv">2</span>] <span class="co"># druga kolumna</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">df[,<span class="dv">2</span>] <span class="co"># druga kolumna</span></a></code></pre></div>
 <pre><code>## [1] 173 170 163 178 169 180 175  NA</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>wzrost <span class="co"># kolumna wzrost</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1">df<span class="op">$</span>wzrost <span class="co"># kolumna wzrost</span></a></code></pre></div>
 <pre><code>## [1] 173 170 163 178 169 180 175  NA</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[,<span class="kw">c</span>(<span class="st">&quot;plec&quot;</span>, <span class="st">&quot;pali&quot;</span>)]</code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb234-1" title="1">df[,<span class="kw">c</span>(<span class="st">&quot;plec&quot;</span>, <span class="st">&quot;pali&quot;</span>)]</a></code></pre></div>
 <pre><code>##   plec  pali
 ## 1    m  TRUE
 ## 2    k FALSE
@@ -833,7 +853,7 @@ ln</code></pre></div>
 ## 7    m    NA
 ## 8    m  TRUE</code></pre>
 <p>Z kolei do wyboru obserwacji można wykorzystać warunek:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[df<span class="op">$</span>plec<span class="op">==</span><span class="st">&quot;m&quot;</span>,]</code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb236-1" title="1">df[df<span class="op">$</span>plec<span class="op">==</span><span class="st">&quot;m&quot;</span>,]</a></code></pre></div>
 <pre><code>##   plec wzrost  pali
 ## 1    m    173  TRUE
 ## 4    m    178 FALSE
@@ -841,13 +861,13 @@ ln</code></pre></div>
 ## 7    m    175    NA
 ## 8    m     NA  TRUE</code></pre>
 <p>Wyodrębnienie informacji o wzroście tylko dla kobiet i wyznaczenie średniej:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wzrost_k &lt;-<span class="st"> </span>df<span class="op">$</span>wzrost[df<span class="op">$</span>plec <span class="op">==</span><span class="st"> &quot;k&quot;</span>]
-wzrost_k</code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb238-1" title="1">wzrost_k &lt;-<span class="st"> </span>df<span class="op">$</span>wzrost[df<span class="op">$</span>plec <span class="op">==</span><span class="st"> &quot;k&quot;</span>]</a>
+<a class="sourceLine" id="cb238-2" title="2">wzrost_k</a></code></pre></div>
 <pre><code>## [1] 170 163 169</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(wzrost_k)</code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" title="1"><span class="kw">mean</span>(wzrost_k)</a></code></pre></div>
 <pre><code>## [1] 167.3333</code></pre>
 <p>Widzimy, że dla mężczyzn nie udało się ustalić wszystkich informacji i jeden z nich nie ma podanego wzrostu, a dla drugiego brakuje informacji o paleniu papierosów. Możemy usunąć braki danych w kolumnach korzystając z funkcji <code>complete.cases()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="kw">complete.cases</span>(df<span class="op">$</span>wzrost),] <span class="co"># tylko zmienna wzrost</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb242-1" title="1">df[<span class="kw">complete.cases</span>(df<span class="op">$</span>wzrost),] <span class="co"># tylko zmienna wzrost</span></a></code></pre></div>
 <pre><code>##   plec wzrost  pali
 ## 1    m    173  TRUE
 ## 2    k    170 FALSE
@@ -856,7 +876,7 @@ wzrost_k</code></pre></div>
 ## 5    k    169  TRUE
 ## 6    m    180 FALSE
 ## 7    m    175    NA</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="kw">complete.cases</span>(df),] <span class="co"># wszystkie zmienne</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb244-1" title="1">df[<span class="kw">complete.cases</span>(df),] <span class="co"># wszystkie zmienne</span></a></code></pre></div>
 <pre><code>##   plec wzrost  pali
 ## 1    m    173  TRUE
 ## 2    k    170 FALSE
@@ -864,9 +884,9 @@ wzrost_k</code></pre></div>
 ## 4    m    178 FALSE
 ## 5    k    169  TRUE
 ## 6    m    180 FALSE</code></pre>
-<p>Zbiory danych przechowywane są także w R i pochodzą z różnych pakietów. Wywołując funkcję <code>data(&quot;zbior&quot;)</code> ładujemy dany zbiór do pamięci. Do szybkiego podglądu zebranych danych służy funkcja <code>head()</code>, która domyślnie wyświetla 6 pierwszych obserwacji ze zbioru:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)
-<span class="kw">head</span>(iris)</code></pre></div>
+<p>Zbiory danych przechowywane są także w R i pochodzą z różnych pakietów. Wywołując funkcję <code>data("zbior")</code> ładujemy dany zbiór do pamięci. Do szybkiego podglądu zebranych danych służy funkcja <code>head()</code>, która domyślnie wyświetla 6 pierwszych obserwacji ze zbioru:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb246-1" title="1"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</a>
+<a class="sourceLine" id="cb246-2" title="2"><span class="kw">head</span>(iris)</a></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
@@ -882,21 +902,6 @@ wzrost_k</code></pre></div>
 <li>Ile wynosi mediana wagi kurczaka o numerze 35?</li>
 <li>Ile średnio ważyły kurczaki na diecie nr 1, a ile na diecie nr 2?</li>
 </ol>
-</div>
-</div>
-<div id="rozwiazania-do-zadan" class="section level2">
-<h2><span class="header-section-number">2.6</span> Rozwiązania do zadań</h2>
-<div id="macierz-1" class="section level3">
-<h3><span class="header-section-number">2.6.1</span> Macierz</h3>
-<pre><code>x1 &lt;- c(2,4,1,6,9,3,2,9,10,7)
-x2 &lt;- c(1.5,0.2,0.1,2,3.1,1.2,0.4,2.9,2.5,1.9)
-x0 &lt;- rep(1,length(x1))
-y &lt;- c(12,15,10,19,26,13,13,21,29,18)
-
-x &lt;- cbind(x0, x1, x2)
-
-b &lt;- solve(t(x)%*%x)%*%t(x)%*%y
-</code></pre>
 
 </div>
 </div>
@@ -957,10 +962,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

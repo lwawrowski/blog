@@ -1,0 +1,43 @@
+---
+title: "Big Data & Society"
+date: "Materiały"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+---
+
+# Prowadzący
+
+dr Łukasz Wawrowski
+
+www: [wawrowski.edu.pl](http://www.wawrowski.edu.pl/)
+
+e-mail: lukasz.wawrowski [at] cdv.pl
+
+# Podstawy programowania w R
+
+[Podręcznik](http://www.wawrowski.edu.pl/ppr/)
+
+## Prezentacje
+
+[Wprowadzenie](http://www.wawrowski.edu.pl/ppr/presentations/01_wprowadzenie.html)
+
+[Wczytywanie danych](http://www.wawrowski.edu.pl/ppr/presentations/02_wczytywanie.html)
+
+[Przetwarzanie danych](http://www.wawrowski.edu.pl/ppr/presentations/03_przetwarzanie.html)
+
+# Metody analizy i przetwarzania danych
+
+
+
+# Zbiory danych
+
+- [gus.RData](data/gus.RData)
+
+- [movies.csv](data/movies.csv)
+
+- [pgss.RData](data/pgss.RData) 
+- [opis zbioru pgss](data/P0091DOC.pdf)
+
+- [sf_ny_homes.csv](data/sf_ny_homes.csv)

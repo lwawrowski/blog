@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Wizualizacja danych | Podstawy programowania R</title>
-  <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Wizualizacja danych | Podstawy programowania R" />
   <meta property="og:type" content="book" />
@@ -22,17 +21,17 @@
   <meta name="twitter:description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
   
 
-<meta name="author" content="Łukasz Wawrowski">
+<meta name="author" content="Łukasz Wawrowski" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="przetwarzanie-danych.html">
-<link rel="next" href="programowanie-w-r.html">
+<link rel="prev" href="przetwarzanie-danych.html"/>
+<link rel="next" href="programowanie-w-r.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,41 +49,66 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -135,9 +159,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#lista"><i class="fa fa-check"></i><b>2.4</b> Lista</a></li>
 <li class="chapter" data-level="2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#ramka-danych"><i class="fa fa-check"></i><b>2.5</b> Ramka danych</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania-1"><i class="fa fa-check"></i><b>2.5.1</b> Zadania</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="struktury-danych.html"><a href="struktury-danych.html#rozwiazania-do-zadan"><i class="fa fa-check"></i><b>2.6</b> Rozwiązania do zadań</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="struktury-danych.html"><a href="struktury-danych.html#macierz-1"><i class="fa fa-check"></i><b>2.6.1</b> Macierz</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html"><i class="fa fa-check"></i><b>3</b> Przetwarzanie danych</a><ul>
@@ -200,29 +221,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="wizualizacja-danych" class="section level1">
 <h1><span class="header-section-number">4</span> Wizualizacja danych</h1>
-<p><a href="presentations/ggplot2.html">Wprowadzenie</a></p>
 <p><a href="https://www.data-to-viz.com/">Przewodnik po wizualizacji danych</a></p>
 <p><a href="https://serialmentor.com/dataviz/">Fundamentals of Data Visualization</a></p>
 <p>Będziemy działać na zbiorze dotyczącym sprzedaży w sklepach <a href="data/rossmann.xlsx">Rossmann</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-
-<span class="co"># library(readxl)</span>
-<span class="co"># </span>
-<span class="co"># rossmann &lt;- read_xlsx(&quot;data/rossmann.xlsx&quot;)</span>
-<span class="co">#</span>
-<span class="co"># save(rossmann, file=&quot;data/rossmann.RData&quot;)</span>
-
-<span class="co"># natywny format, mniejszy rozmiar, szybsze wczytywanie</span>
-<span class="kw">load</span>(<span class="st">&quot;data/rossmann.RData&quot;</span>)
-
-sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(sklep_id<span class="op">==</span><span class="dv">77</span>, czy_otwarty<span class="op">==</span><span class="st">&quot;Tak&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb311-2" title="2"></a>
+<a class="sourceLine" id="cb311-3" title="3"><span class="co"># library(readxl)</span></a>
+<a class="sourceLine" id="cb311-4" title="4"><span class="co"># </span></a>
+<a class="sourceLine" id="cb311-5" title="5"><span class="co"># rossmann &lt;- read_xlsx(&quot;data/rossmann.xlsx&quot;)</span></a>
+<a class="sourceLine" id="cb311-6" title="6"><span class="co">#</span></a>
+<a class="sourceLine" id="cb311-7" title="7"><span class="co"># save(rossmann, file=&quot;data/rossmann.RData&quot;)</span></a>
+<a class="sourceLine" id="cb311-8" title="8"></a>
+<a class="sourceLine" id="cb311-9" title="9"><span class="co"># natywny format, mniejszy rozmiar, szybsze wczytywanie</span></a>
+<a class="sourceLine" id="cb311-10" title="10"><span class="kw">load</span>(<span class="st">&quot;data/rossmann.RData&quot;</span>)</a>
+<a class="sourceLine" id="cb311-11" title="11"></a>
+<a class="sourceLine" id="cb311-12" title="12">sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb311-13" title="13"><span class="st">  </span><span class="kw">filter</span>(sklep_id<span class="op">==</span><span class="dv">77</span>, czy_otwarty<span class="op">==</span><span class="st">&quot;Tak&quot;</span>)</a></code></pre></div>
 <div id="wbudowane-funkcje" class="section level2">
 <h2><span class="header-section-number">4.1</span> Wbudowane funkcje</h2>
 <p>Do prostych wykresów można wykorzystać wbudowaną funkcję <code>plot</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(sklep77<span class="op">$</span>sprzedaz, sklep77<span class="op">$</span>liczba_klientow, 
-     <span class="dt">xlab =</span> <span class="st">&quot;Sprzedaż&quot;, ylab = &quot;</span>Liczba klientów&quot;,
-     <span class="dt">main =</span> <span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="kw">plot</span>(sklep77<span class="op">$</span>sprzedaz, sklep77<span class="op">$</span>liczba_klientow, </a>
+<a class="sourceLine" id="cb312-2" title="2">     <span class="dt">xlab =</span> <span class="st">&quot;Sprzedaż&quot;, ylab = &quot;</span>Liczba klientów&quot;,</a>
+<a class="sourceLine" id="cb312-3" title="3">     <span class="dt">main =</span> <span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 </div>
 <div id="pakiet-ggplot2" class="section level2">
@@ -241,7 +261,7 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <ol style="list-style-type: decimal">
 <li>Utworzenie siatki - określenie co chcemy na wykresie przedstawić</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow))</code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow))</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p>W zależności od typu wykresu w funkcji <code>aes</code> mogą znaleźć się argumenty:</p>
 <ul>
@@ -255,35 +275,35 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <ol start="2" style="list-style-type: decimal">
 <li>Określenie w jaki sposób chcemy te dane przedstawić - funkcja zawsze zaczyna się od <code>geom_</code>:</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb314-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Edytowanie etykiet osi - funkcje <code>xlab</code> i <code>ylab</code>:</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  ylab(&quot;</span>Liczba klientów&quot;)</code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb315-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb315-3" title="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb315-4" title="4"><span class="st">  ylab(&quot;</span>Liczba klientów&quot;)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Dodanie tytułu - funkcja <code>ggtitle</code></li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb316-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb316-3" title="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb316-4" title="4"><span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb316-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
 <ol start="5" style="list-style-type: decimal">
 <li>Zmiana motywu - funkcja rozpoczynająca się od <code>theme_</code>:</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb317-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb317-3" title="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb317-4" title="4"><span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb317-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb317-6" title="6"><span class="st">  </span><span class="kw">theme_light</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
 <p>Dostępne motywy:</p>
 <ul>
@@ -305,21 +325,21 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <p><em>Zadanie</em></p>
 <p>Zmień motyw wykresu na wybrany przez siebie.</p>
 <p>Dodamy teraz do wykresu kolejną cechę - rozpoczęcie promocji, żeby sprawdzić czy istnieje jakaś tendencja.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb318-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb318-3" title="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb318-4" title="4"><span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb318-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb318-6" title="6"><span class="st">  </span><span class="kw">theme_light</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
 <p>Okazuje się dosyć interesująco, niemniej nazwa etykiety legendy nie wygląda zbyt dobrze. Żeby to poprawić musimy użyć funkcji <code>scale_</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb319-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb319-3" title="3"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb319-4" title="4"><span class="st">  ylab(&quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb319-5" title="5"><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb319-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb319-7" title="7"><span class="st">  </span><span class="kw">theme_light</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
 <p>W funkcji <code>scale_</code> musimy podać w jaki sposób daną cechę wizualizujemy (x/y/color/…) oraz jakiego jest typu. Oprócz nazwy w tej funkcji możemy określić wiele innych kwestii takich jak:</p>
 <ul>
@@ -328,71 +348,71 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <li>kolory wariantów</li>
 <li>etykiety wariantów</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_light</span>()</code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb320-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb320-3" title="3"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb320-4" title="4"><span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb320-5" title="5"><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb320-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb320-7" title="7"><span class="st">  </span><span class="kw">theme_light</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
 <p>Zmiana pozycji legendy możliwa jest z wykorzystaniem funkcji <code>theme</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb321-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb321-3" title="3"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb321-4" title="4"><span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb321-5" title="5"><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb321-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb321-7" title="7"><span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb321-8" title="8"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-4" title="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb322-5" title="5"><span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-6" title="6"><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-7" title="7"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-8" title="8"><span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-9" title="9"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
 </div>
 <div id="histogram" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Histogram</h3>
 <p>Rozkład cechy można ocenić na podstawie histogramu - domyślnie rysowanych jest 30 słupków.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb323-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
 <p>W funkcji <code>geom_histogram</code> można podać liczbę słupków (<code>bins</code>) albo ich szerokość (<code>binwidth</code>). Poniżej zastosowano słupki o szerokości 1000 euro.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1000</span>)</code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb325-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">1000</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <p>Dodatkowo w tej funkcji można określić kwestie estetyczne - kolory obramowania i wypełnienia słupków.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb326-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
 <p>Pełna lista nazw kolorów znajduje się <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">tutaj</a>.</p>
 <p>Z wykorzystaniem funkcji <code>scale_</code> zmieniamy nazwy osi (<code>name</code>), granice (<code>limits</code>) oraz wskazania liczbowe (<code>breaks</code>). Te dwie ostatnie wartości musimy deklarować jako wektory z wykorzystaniem funkcji <code>c()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, 
-                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;, </span>
-<span class="st">                     limits = c(4000,17000),</span>
-<span class="st">                     breaks = c(5000, 8000, 11000)) +</span>
-<span class="st">  scale_y_continuous(name = &quot;</span>Liczebność<span class="st">&quot;,</span>
-<span class="st">                     limits = c(0,50))</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb327-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, </a>
+<a class="sourceLine" id="cb327-3" title="3">                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb327-4" title="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;, </span></a>
+<a class="sourceLine" id="cb327-5" title="5"><span class="st">                     limits = c(4000,17000),</span></a>
+<a class="sourceLine" id="cb327-6" title="6"><span class="st">                     breaks = c(5000, 8000, 11000)) +</span></a>
+<a class="sourceLine" id="cb327-7" title="7"><span class="st">  scale_y_continuous(name = &quot;</span>Liczebność<span class="st">&quot;,</span></a>
+<a class="sourceLine" id="cb327-8" title="8"><span class="st">                     limits = c(0,50))</span></a></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_bar).</code></pre>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
 <p>Można zaumatyzować proces dobierania wskazań liczbowych z wykorzystaniem funkcji <code>seq</code> opisanej szerzej w rozdziale 2.1.2.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, 
-                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;, </span>
-<span class="st">                     limits = c(4000,17000),</span>
-<span class="st">                     breaks = seq(4000, 17000, 1500)) +</span>
-<span class="st">  scale_y_continuous(name = &quot;</span>Liczebność<span class="st">&quot;,</span>
-<span class="st">                     limits = c(0,50))</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">500</span>, </a>
+<a class="sourceLine" id="cb329-3" title="3">                 <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-4" title="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;, </span></a>
+<a class="sourceLine" id="cb329-5" title="5"><span class="st">                     limits = c(4000,17000),</span></a>
+<a class="sourceLine" id="cb329-6" title="6"><span class="st">                     breaks = seq(4000, 17000, 1500)) +</span></a>
+<a class="sourceLine" id="cb329-7" title="7"><span class="st">  scale_y_continuous(name = &quot;</span>Liczebność<span class="st">&quot;,</span></a>
+<a class="sourceLine" id="cb329-8" title="8"><span class="st">                     limits = c(0,50))</span></a></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_bar).</code></pre>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
 </div>
@@ -400,31 +420,32 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <h3><span class="header-section-number">4.2.3</span> Wykres pudełkowy</h3>
 <p>Wykres pudełkowy umożliwia porównywanie rozkładów cechy wg zmiennej grupującej. Wymogiem jest aby na osi <code>x</code> znajdowała się zmienna grupująca, a na osi <code>y</code> cecha analizowana.</p>
 <p>Przeanalizujemy sprzedaż według kolejnych dni tygodnia.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" title="1"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
 <pre><code>## Warning: Continuous x aesthetic -- did you forget aes(group=...)?</code></pre>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
 <p>Zdecydowanie nie jest wykres jakiego oczekiwaliśmy. Wynika to z faktu, że dzień tygodnia w zbiorze danych jest zapisany jako zmienna numeryczna, natomiast prawidłowym typem dla zmiennej grupującej jest typ tekstowy lub czynnik (faktor). Ten typ danych został szczegółowo opisany w części 2.3.</p>
 <p>Dokonujemy zatem zamiany typu danych:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 &lt;-<span class="st"> </span>sklep77 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dzien_tyg=</span><span class="kw">factor</span>(<span class="dt">x =</span> dzien_tyg,
-                          <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,
-                          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Pon&quot;</span>, <span class="st">&quot;Wt&quot;</span>, <span class="st">&quot;Śr&quot;</span>, <span class="st">&quot;Czw&quot;</span>, <span class="st">&quot;Pt&quot;</span>, <span class="st">&quot;Sob&quot;</span>),
-                          <span class="dt">ordered =</span> <span class="ot">TRUE</span>))
-
-<span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1">sklep77 &lt;-<span class="st"> </span>sklep77 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb333-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dzien_tyg=</span><span class="kw">factor</span>(<span class="dt">x =</span> dzien_tyg,</a>
+<a class="sourceLine" id="cb333-3" title="3">                          <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb333-4" title="4">                          <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Pon&quot;</span>, <span class="st">&quot;Wt&quot;</span>, <span class="st">&quot;Śr&quot;</span>, <span class="st">&quot;Czw&quot;</span>, <span class="st">&quot;Pt&quot;</span>, <span class="st">&quot;Sob&quot;</span>),</a>
+<a class="sourceLine" id="cb333-5" title="5">                          <span class="dt">ordered =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb333-6" title="6"></a>
+<a class="sourceLine" id="cb333-7" title="7"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb333-8" title="8"><span class="st">  </span><span class="kw">geom_boxplot</span>() </a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
 <p>Z tego wykresu można już odczytać, że najwyższa mediana sprzedaży występuje w poniedziałek, a najniższa w środę.</p>
 <p>Jeżli kategorii jest dużo to można obrócić wykres z wykorzystaniem funkcji <code>coord_flip</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" title="1"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb334-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb334-3" title="3"><span class="st">  </span><span class="kw">coord_flip</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
-<p>Użycie tej funkcji powoduje wyłącznie obrócenie wykresu. Nazwy osi nie uległy zmianie pomimo, że zostały zamienione. Odwrócimy jeszcze kolejność etykiet dnia tygodnia, tak aby na górze był poniedziałek.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits =</span> <span class="kw">rev</span>(<span class="kw">levels</span>(sklep77<span class="op">$</span>dzien_tyg)))</code></pre></div>
+<p>Użycie tej funkcji powoduje wyłącznie obrócenie wykresu. Nazwy osi nie uległy zmianie pomimo, że zostały zamienione.
+Odwrócimy jeszcze kolejność etykiet dnia tygodnia, tak aby na górze był poniedziałek.</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" title="1"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>dzien_tyg, <span class="dt">y=</span>sprzedaz)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb335-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb335-3" title="3"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb335-4" title="4"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits =</span> <span class="kw">rev</span>(<span class="kw">levels</span>(sklep77<span class="op">$</span>dzien_tyg)))</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
 </div>
 <div id="wykres-supkowy" class="section level3">
@@ -435,127 +456,127 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <li>dane zagregowane - <code>geom_col</code> - funkcja otrzymuje już obliczone wartości.</li>
 </ul>
 <p>Sprawdźmy ile jest sklepów o danym asortymencie. W tym celu potrzebujemy informację o sklepie i typie oferowanego asortymentu.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_asort) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">distinct</span>()
-
-<span class="kw">glimpse</span>(rossmann_asort)</code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1">rossmann_asort &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb336-2" title="2"><span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_asort) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb336-3" title="3"><span class="st">  </span><span class="kw">distinct</span>()</a>
+<a class="sourceLine" id="cb336-4" title="4"></a>
+<a class="sourceLine" id="cb336-5" title="5"><span class="kw">glimpse</span>(rossmann_asort)</a></code></pre></div>
 <pre><code>## Observations: 1,115
 ## Variables: 2
 ## $ sklep_id    &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16,...
 ## $ sklep_asort &lt;chr&gt; &quot;Podstawowy&quot;, &quot;Podstawowy&quot;, &quot;Podstawowy&quot;, &quot;Rozszer...</code></pre>
 <p>W funkcji <code>aes</code> podajemy tylko kolumnę zawierającą dane do zliczenia.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1"><span class="kw">ggplot</span>(rossmann_asort, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb338-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <p>Natomiast użycie funkcji <code>geom_col</code> wymaga samodzielnego obliczenia wartości:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort2 &lt;-<span class="st"> </span>rossmann_asort <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(sklep_asort)
-
-<span class="kw">glimpse</span>(rossmann_asort2)</code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1">rossmann_asort2 &lt;-<span class="st"> </span>rossmann_asort <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb339-2" title="2"><span class="st">  </span><span class="kw">count</span>(sklep_asort)</a>
+<a class="sourceLine" id="cb339-3" title="3"></a>
+<a class="sourceLine" id="cb339-4" title="4"><span class="kw">glimpse</span>(rossmann_asort2)</a></code></pre></div>
 <pre><code>## Observations: 3
 ## Variables: 2
 ## $ sklep_asort &lt;chr&gt; &quot;Extra&quot;, &quot;Podstawowy&quot;, &quot;Rozszerzony&quot;
 ## $ n           &lt;int&gt; 9, 593, 513</code></pre>
 <p>Wartość do wyświetlenia podajemy w funkcji <code>aes</code> w argumencie <code>y</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort2, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" title="1"><span class="kw">ggplot</span>(rossmann_asort2, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb341-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
 <p>Uporządkujemy etykiety osi <code>x</code> (obecnie są wyświetlane w kolejności alfabetycznej) tworząc czynnik.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort2 &lt;-<span class="st"> </span>rossmann_asort2 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sklep_asort=</span><span class="kw">factor</span>(<span class="dt">x =</span> sklep_asort,
-                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Podstawowy&quot;</span>, 
-                                       <span class="st">&quot;Rozszerzony&quot;</span>, 
-                                       <span class="st">&quot;Extra&quot;</span>), 
-                            <span class="dt">ordered =</span> T))
-
-<span class="kw">glimpse</span>(rossmann_asort2)</code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" title="1">rossmann_asort2 &lt;-<span class="st"> </span>rossmann_asort2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb342-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sklep_asort=</span><span class="kw">factor</span>(<span class="dt">x =</span> sklep_asort,</a>
+<a class="sourceLine" id="cb342-3" title="3">                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Podstawowy&quot;</span>, </a>
+<a class="sourceLine" id="cb342-4" title="4">                                       <span class="st">&quot;Rozszerzony&quot;</span>, </a>
+<a class="sourceLine" id="cb342-5" title="5">                                       <span class="st">&quot;Extra&quot;</span>), </a>
+<a class="sourceLine" id="cb342-6" title="6">                            <span class="dt">ordered =</span> T))</a>
+<a class="sourceLine" id="cb342-7" title="7"></a>
+<a class="sourceLine" id="cb342-8" title="8"><span class="kw">glimpse</span>(rossmann_asort2)</a></code></pre></div>
 <pre><code>## Observations: 3
 ## Variables: 2
 ## $ sklep_asort &lt;ord&gt; Extra, Podstawowy, Rozszerzony
 ## $ n           &lt;int&gt; 9, 593, 513</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort2, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1"><span class="kw">ggplot</span>(rossmann_asort2, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb344-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
 <p>Do wykresu słupkowego możemy dodać jeszcze jedną zmienną. W tym przypadku będzie to typ sklepu.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rossmann_asort3 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_asort, sklep_typ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(sklep_asort, sklep_typ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sklep_asort=</span><span class="kw">factor</span>(<span class="dt">x =</span> sklep_asort,
-                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Podstawowy&quot;</span>, 
-                                       <span class="st">&quot;Rozszerzony&quot;</span>, 
-                                       <span class="st">&quot;Extra&quot;</span>), 
-                            <span class="dt">ordered =</span> T))
-
-<span class="kw">glimpse</span>(rossmann_asort3)</code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" title="1">rossmann_asort3 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb345-2" title="2"><span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_asort, sklep_typ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb345-3" title="3"><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb345-4" title="4"><span class="st">  </span><span class="kw">count</span>(sklep_asort, sklep_typ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb345-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sklep_asort=</span><span class="kw">factor</span>(<span class="dt">x =</span> sklep_asort,</a>
+<a class="sourceLine" id="cb345-6" title="6">                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Podstawowy&quot;</span>, </a>
+<a class="sourceLine" id="cb345-7" title="7">                                       <span class="st">&quot;Rozszerzony&quot;</span>, </a>
+<a class="sourceLine" id="cb345-8" title="8">                                       <span class="st">&quot;Extra&quot;</span>), </a>
+<a class="sourceLine" id="cb345-9" title="9">                            <span class="dt">ordered =</span> T))</a>
+<a class="sourceLine" id="cb345-10" title="10"></a>
+<a class="sourceLine" id="cb345-11" title="11"><span class="kw">glimpse</span>(rossmann_asort3)</a></code></pre></div>
 <pre><code>## Observations: 9
 ## Variables: 3
 ## $ sklep_asort &lt;ord&gt; Extra, Podstawowy, Podstawowy, Podstawowy, Podstaw...
 ## $ sklep_typ   &lt;chr&gt; &quot;b&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;
 ## $ n           &lt;int&gt; 9, 381, 7, 77, 128, 221, 1, 71, 220</code></pre>
 <p>Uwzględnienie kolejnej zmiennej jest możliwe jako argument <code>fill</code> w funkcji <code>aes</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" title="1"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb347-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
-<p>Domyślnie kategorie są układane jedna na drugą - <code>stack</code>. Można je ułożyć obok siebie dodając argument <code>position = &quot;dodge&quot;</code> w funkcji <code>geom_col</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+<p>Domyślnie kategorie są układane jedna na drugą - <code>stack</code>. Można je ułożyć obok siebie dodając argument <code>position = "dodge"</code> w funkcji <code>geom_col</code>.</p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" title="1"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb348-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
 <p>Możemy jeszcze dodać etykiety słupków wykorzystując funkcję <code>geom_text</code>, w której trzeba podać argumenty definujące położenie wartości etykiet. Wartości tych argumentów będą zależały od typu wykresu.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), 
-            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
-            <span class="dt">vjust =</span> <span class="op">-</span><span class="fl">0.3</span>)</code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" title="1"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb349-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb349-3" title="3"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), </a>
+<a class="sourceLine" id="cb349-4" title="4">            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb349-5" title="5">            <span class="dt">vjust =</span> <span class="fl">-0.3</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
 <p>Zmienimy jeszcze nazwę legendy za pomocą funkcji <code>scale_fill_discrete</code>. Wykorzystujemy tę konkretną funkcję ze względu na to, że typ sklepu jest argumentem <code>fill</code> w funkcji <code>aes</code> oraz cechą jakościową (<code>discrete</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), 
-            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),
-            <span class="dt">vjust =</span> <span class="op">-</span><span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Typ sklepu&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1"><span class="kw">ggplot</span>(rossmann_asort3, <span class="kw">aes</span>(<span class="dt">x=</span>sklep_asort, <span class="dt">y=</span>n, <span class="dt">fill=</span>sklep_typ)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb350-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb350-3" title="3"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), </a>
+<a class="sourceLine" id="cb350-4" title="4">            <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>),</a>
+<a class="sourceLine" id="cb350-5" title="5">            <span class="dt">vjust =</span> <span class="fl">-0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb350-6" title="6"><span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Typ sklepu&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 </div>
 <div id="wykres-kafelkowy" class="section level3">
 <h3><span class="header-section-number">4.2.5</span> Wykres kafelkowy</h3>
 <p>Do wizualizacji tabeli częstości można użyć wykresu kafelkowego. W tym celu najpierw zliczamy wystąpienia wariantów cech czy_promocja oraz czy_swieto_szkolne i wynik przekazujemy bezpośrednio do funkcji <code>ggplot()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, 
-             <span class="dt">y =</span> czy_swieto_szkolne,
-             <span class="dt">fill =</span> n)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>()</code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" title="1">sklep77 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb351-2" title="2"><span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb351-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, </a>
+<a class="sourceLine" id="cb351-4" title="4">             <span class="dt">y =</span> czy_swieto_szkolne,</a>
+<a class="sourceLine" id="cb351-5" title="5">             <span class="dt">fill =</span> n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb351-6" title="6"><span class="st">  </span><span class="kw">geom_tile</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
 <p>Aby dodać do tego wykresu etykiety posłużymy się funkcją <code>geom_label()</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, 
-             <span class="dt">y =</span> czy_swieto_szkolne,
-             <span class="dt">fill =</span> n)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1">sklep77 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb352-2" title="2"><span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb352-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, </a>
+<a class="sourceLine" id="cb352-4" title="4">             <span class="dt">y =</span> czy_swieto_szkolne,</a>
+<a class="sourceLine" id="cb352-5" title="5">             <span class="dt">fill =</span> n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb352-6" title="6"><span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb352-7" title="7"><span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 <p>Zwykle patrząc na wykres podświadomie zakładamy, że ciemniejszy kolor oznacza wyższe wartości, natomiast jasny małe liczby. W tym przypadku układ kolorów jest odwrócony. Musimy odpowiednio dobrać kolory, aby to poprawić. Bardzo przydatne narzędzie znajduje się pod adresem: <a href="http://colorbrewer2.org/" class="uri">http://colorbrewer2.org/</a>. Następnie korzystamy z funkcji <code>scale_fill_gradient</code>, w której określamy tylko kolor początkowy i końcowy.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sklep77 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, 
-                <span class="dt">y =</span> czy_swieto_szkolne,
-                <span class="dt">fill =</span> n)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;#66c2a4&quot;</span>, 
-                      <span class="dt">high =</span> <span class="st">&quot;#005824&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" title="1">sklep77 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb353-2" title="2"><span class="st">  </span><span class="kw">count</span>(czy_promocja, czy_swieto_szkolne) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb353-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> czy_promocja, </a>
+<a class="sourceLine" id="cb353-4" title="4">                <span class="dt">y =</span> czy_swieto_szkolne,</a>
+<a class="sourceLine" id="cb353-5" title="5">                <span class="dt">fill =</span> n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb353-6" title="6"><span class="st">  </span><span class="kw">geom_tile</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb353-7" title="7"><span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> n), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb353-8" title="8"><span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;#66c2a4&quot;</span>, </a>
+<a class="sourceLine" id="cb353-9" title="9">                      <span class="dt">high =</span> <span class="st">&quot;#005824&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
 </div>
 <div id="uwzglednienie-czasu" class="section level3">
 <h3><span class="header-section-number">4.2.6</span> Uwzględnienie czasu</h3>
 <p>Próba stworzenia wykresu przedstawiającego zmianę sprzedaży w czasie za pomocą oryginalnych danych spowoduje uzsykanie niezbyt czytelnej grafiki.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>data,
-                    <span class="dt">y=</span>sprzedaz,
-                    <span class="dt">color=</span>dzien_tyg)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1"><span class="kw">ggplot</span>(sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>data,</a>
+<a class="sourceLine" id="cb354-2" title="2">                    <span class="dt">y=</span>sprzedaz,</a>
+<a class="sourceLine" id="cb354-3" title="3">                    <span class="dt">color=</span>dzien_tyg)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb354-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
 <p>Wynika to z faktu, że dzien tygodnia jest traktowany jak zmienna numeryczna, a data jest zmienną tekstową. Konwersja tekstu na datę jest możliwa z wykorzystaniem pakietu <code>lubridate</code>. W tym pakiecie każda część daty ma swój akronim, który później jest wykorzystywany w odpowiednich funkcjach:</p>
 <ul>
@@ -574,44 +595,44 @@ sklep77 &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
 <li>week - pobiera z obiektu daty informację o tygodniu roku</li>
 </ul>
 <p>Według powyższych reguł korzystamy z funkcji <code>ymd()</code> do konwersji daty w naszym zbiorze.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
-
-sklep77a &lt;-<span class="st"> </span>sklep77 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dzien_tyg=</span><span class="kw">as.factor</span>(dzien_tyg),
-         <span class="dt">data=</span><span class="kw">ymd</span>(data))
-
-<span class="kw">ggplot</span>(sklep77a, <span class="kw">aes</span>(<span class="dt">x=</span>data,
-                    <span class="dt">y=</span>sprzedaz,
-                    <span class="dt">color=</span>dzien_tyg)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" title="1"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb355-2" title="2"></a>
+<a class="sourceLine" id="cb355-3" title="3">sklep77a &lt;-<span class="st"> </span>sklep77 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb355-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dzien_tyg=</span><span class="kw">as.factor</span>(dzien_tyg),</a>
+<a class="sourceLine" id="cb355-5" title="5">         <span class="dt">data=</span><span class="kw">ymd</span>(data))</a>
+<a class="sourceLine" id="cb355-6" title="6"></a>
+<a class="sourceLine" id="cb355-7" title="7"><span class="kw">ggplot</span>(sklep77a, <span class="kw">aes</span>(<span class="dt">x=</span>data,</a>
+<a class="sourceLine" id="cb355-8" title="8">                    <span class="dt">y=</span>sprzedaz,</a>
+<a class="sourceLine" id="cb355-9" title="9">                    <span class="dt">color=</span>dzien_tyg)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb355-10" title="10"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
 </div>
 <div id="facets" class="section level3">
 <h3><span class="header-section-number">4.2.7</span> Facets</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sr_sprzedaz &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(sprzedaz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(sklep_id, sklep_asort) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sprzedaz_sr=</span><span class="kw">mean</span>(sprzedaz))
-
-odleglosc &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_konkurencja) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">distinct</span>()
-
-sprzedaz_odleglosc &lt;-<span class="st"> </span><span class="kw">inner_join</span>(sr_sprzedaz, odleglosc, <span class="dt">by=</span><span class="st">&quot;sklep_id&quot;</span>)
-
-<span class="kw">ggplot</span>(sprzedaz_odleglosc, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz_sr, <span class="dt">y=</span>sklep_konkurencja)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>sklep_asort)</code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" title="1">sr_sprzedaz &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb356-2" title="2"><span class="st">  </span><span class="kw">filter</span>(sprzedaz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb356-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(sklep_id, sklep_asort) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb356-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sprzedaz_sr=</span><span class="kw">mean</span>(sprzedaz))</a>
+<a class="sourceLine" id="cb356-5" title="5"></a>
+<a class="sourceLine" id="cb356-6" title="6">odleglosc &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb356-7" title="7"><span class="st">  </span><span class="kw">select</span>(sklep_id, sklep_konkurencja) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb356-8" title="8"><span class="st">  </span><span class="kw">distinct</span>()</a>
+<a class="sourceLine" id="cb356-9" title="9"></a>
+<a class="sourceLine" id="cb356-10" title="10">sprzedaz_odleglosc &lt;-<span class="st"> </span><span class="kw">inner_join</span>(sr_sprzedaz, odleglosc, <span class="dt">by=</span><span class="st">&quot;sklep_id&quot;</span>)</a>
+<a class="sourceLine" id="cb356-11" title="11"></a>
+<a class="sourceLine" id="cb356-12" title="12"><span class="kw">ggplot</span>(sprzedaz_odleglosc, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz_sr, <span class="dt">y=</span>sklep_konkurencja)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb356-13" title="13"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb356-14" title="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>sklep_asort)</a></code></pre></div>
 <pre><code>## Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sr_sprzedaz_prom &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(sprzedaz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(sklep_id, czy_promocja) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sprzedaz_sr=</span><span class="kw">mean</span>(sprzedaz))
-
-sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</span>(sr_sprzedaz_prom, odleglosc)</code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" title="1">sr_sprzedaz_prom &lt;-<span class="st"> </span>rossmann <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb358-2" title="2"><span class="st">  </span><span class="kw">filter</span>(sprzedaz <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb358-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(sklep_id, czy_promocja) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb358-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sprzedaz_sr=</span><span class="kw">mean</span>(sprzedaz))</a>
+<a class="sourceLine" id="cb358-5" title="5"></a>
+<a class="sourceLine" id="cb358-6" title="6">sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</span>(sr_sprzedaz_prom, odleglosc)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;sklep_id&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(sprzedaz_prom_odl)</code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" title="1"><span class="kw">head</span>(sprzedaz_prom_odl)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ## # Groups:   sklep_id [3]
 ##   sklep_id czy_promocja sprzedaz_sr sklep_konkurencja
@@ -622,15 +643,15 @@ sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</spa
 ## 4        2 Tak                6295.               570
 ## 5        3 Nie                5286.             14130
 ## 6        3 Tak                8790.             14130</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sprzedaz_prom_odl, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz_sr, <span class="dt">y=</span>sklep_konkurencja, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" title="1"><span class="kw">ggplot</span>(sprzedaz_prom_odl, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz_sr, <span class="dt">y=</span>sklep_konkurencja, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb362-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <pre><code>## Warning: Removed 6 rows containing missing values (geom_point).</code></pre>
 <p><img src="Wawrowski_PPR_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
 <p>Zamiana reprezentacji danych na szeroką.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sprzedaz_prom_odl_wide &lt;-<span class="st"> </span>sprzedaz_prom_odl <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">spread</span>(czy_promocja, sprzedaz_sr)
-
-<span class="kw">head</span>(sprzedaz_prom_odl_wide)</code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" title="1">sprzedaz_prom_odl_wide &lt;-<span class="st"> </span>sprzedaz_prom_odl <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb364-2" title="2"><span class="st">  </span><span class="kw">spread</span>(czy_promocja, sprzedaz_sr)</a>
+<a class="sourceLine" id="cb364-3" title="3"></a>
+<a class="sourceLine" id="cb364-4" title="4"><span class="kw">head</span>(sprzedaz_prom_odl_wide)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ## # Groups:   sklep_id [6]
 ##   sklep_id sklep_konkurencja   Nie    Tak
@@ -642,10 +663,10 @@ sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</spa
 ## 5        5             29910 3473.  6084.
 ## 6        6               310 4189.  6295.</code></pre>
 <p>I na wąską.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sprzedaz_prom_odl_long &lt;-<span class="st"> </span>sprzedaz_prom_odl_wide <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(czy_promocja, sprzedaz_sr, Nie, Tak)
-
-<span class="kw">head</span>(sprzedaz_prom_odl_long)</code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" title="1">sprzedaz_prom_odl_long &lt;-<span class="st"> </span>sprzedaz_prom_odl_wide <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb366-2" title="2"><span class="st">  </span><span class="kw">gather</span>(czy_promocja, sprzedaz_sr, Nie, Tak)</a>
+<a class="sourceLine" id="cb366-3" title="3"></a>
+<a class="sourceLine" id="cb366-4" title="4"><span class="kw">head</span>(sprzedaz_prom_odl_long)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ## # Groups:   sklep_id [6]
 ##   sklep_id sklep_konkurencja czy_promocja sprzedaz_sr
@@ -661,23 +682,23 @@ sprzedaz_prom_odl &lt;-<span class="st"> </span><span class="kw">inner_join</spa
 <div id="pakiet-plotly" class="section level2">
 <h2><span class="header-section-number">4.3</span> Pakiet plotly</h2>
 <p>Za pomocą pakietu <code>plotly</code> w prosty sposób można zamienić statystyczny wykres <code>ggplot</code> na interaktywny.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plotly)
-
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span>
-<span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)
-
-plotly<span class="op">::</span><span class="kw">ggplotly</span>(p)</code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb368-2" title="2"></a>
+<a class="sourceLine" id="cb368-3" title="3">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> sklep77, <span class="kw">aes</span>(<span class="dt">x=</span>sprzedaz, <span class="dt">y=</span>liczba_klientow, <span class="dt">color=</span>czy_promocja)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb368-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb368-5" title="5"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Sprzedaż&quot;) +</span></a>
+<a class="sourceLine" id="cb368-6" title="6"><span class="st">  scale_y_continuous(name = &quot;</span>Liczba klientów&quot;) <span class="op">+</span></a>
+<a class="sourceLine" id="cb368-7" title="7"><span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&quot;Promocja&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb368-8" title="8"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Sprzedaż i liczba klientów w sklepie Rossmann nr 77&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb368-9" title="9"><span class="st">  </span><span class="kw">theme_light</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb368-10" title="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</a>
+<a class="sourceLine" id="cb368-11" title="11"></a>
+<a class="sourceLine" id="cb368-12" title="12">plotly<span class="op">::</span><span class="kw">ggplotly</span>(p)</a></code></pre></div>
 <p><em>Zadanie</em></p>
 <p>Stwórz trzy grafiki dla danych dotyczących <a href="data/movies.csv">filmów</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">filmy &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/movies.csv&quot;</span>)
-
-<span class="kw">summary</span>(filmy)</code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" title="1">filmy &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/movies.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb369-2" title="2"></a>
+<a class="sourceLine" id="cb369-3" title="3"><span class="kw">summary</span>(filmy)</a></code></pre></div>
 <pre><code>##                          title            genre    
 ##  Home                       :   3   Comedy   :848  
 ##  A Nightmare on Elm Street  :   2   Action   :738  
@@ -770,10 +791,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
