@@ -33,11 +33,11 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 # Zbiory danych
 
-- [gus.RData](data/gus.RData)
+- [gus.RData](http://www.wawrowski.edu.pl/data/gus.RData)
 
-- [movies.csv](data/movies.csv)
+- [movies.csv](http://www.wawrowski.edu.pl/data/movies.csv)
 
-- [pgss.RData](data/pgss.RData) 
-- [opis zbioru pgss](data/P0091DOC.pdf)
+- [pgss.RData](http://www.wawrowski.edu.pl/data/pgss.RData) 
+- [opis zbioru pgss](http://www.wawrowski.edu.pl/data/P0091DOC.pdf)
 
-- [sf_ny_homes.csv](data/sf_ny_homes.csv)
+- [sf_ny_homes.csv](http://www.wawrowski.edu.pl/data/sf_ny_homes.csv)
