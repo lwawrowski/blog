@@ -27,6 +27,10 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 [Przetwarzanie danych](http://www.wawrowski.edu.pl/ppr/presentations/03_przetwarzanie.html)
 
+## Kody z zajęć
+
+[19.10.2019](gr_20191019.html)
+
 # Metody analizy i przetwarzania danych
 
 
