@@ -31,11 +31,21 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 ## Kody z zajęć
 
+### Grupa 1
+
 [19.10.2019](gr_20191019.html)
 
-[20.10.2019 grupa 1](gr1_20191020.html)
+[20.10.2019](gr1_20191020.html)
 
-[20.10.2019 grupa 2](gr2_20191020.html)
+[16.11.2019](gr1_20191116.html)
+
+### Grupa 2
+
+[19.10.2019](gr_20191019.html)
+
+[20.10.2019](gr2_20191020.html)
+
+[16.11.2019](gr2_20191116.html)
 
 # Metody analizy i przetwarzania danych
 
