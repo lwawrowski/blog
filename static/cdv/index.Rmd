@@ -27,6 +27,8 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 [Przetwarzanie danych](http://www.wawrowski.edu.pl/ppr/presentations/03_przetwarzanie.html)
 
+[Wizualizacja danych](http://www.wawrowski.edu.pl/ppr/presentations/04_wizualizacja.html)
+
 ## Kody z zajęć
 
 [19.10.2019](gr_20191019.html)
@@ -47,5 +49,7 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 - [pgss.RData](http://www.wawrowski.edu.pl/data/pgss.RData) 
 - [opis zbioru pgss](http://www.wawrowski.edu.pl/data/P0091DOC.pdf)
+
+- [rossmann.xlsx](http://www.wawrowski.edu.pl/data/rossmann.xlsx)
 
 - [sf_ny_homes.csv](http://www.wawrowski.edu.pl/data/sf_ny_homes.csv)
