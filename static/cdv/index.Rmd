@@ -49,7 +49,13 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 # Metody analizy i przetwarzania danych
 
+## Prezentacje
 
+[Eksploracyjna analiza danych](http://www.wawrowski.edu.pl/adr/presentations/01_eda.html)
+
+[Raporty](http://www.wawrowski.edu.pl/adr/presentations/02_raporty.html)
+
+[Testy statystyczne](http://www.wawrowski.edu.pl/adr/presentations/03_testy.html)
 
 # Zbiory danych
 
@@ -59,6 +65,8 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 - [pgss.RData](http://www.wawrowski.edu.pl/data/pgss.RData) 
 - [opis zbioru pgss](http://www.wawrowski.edu.pl/data/P0091DOC.pdf)
+
+- [pracownicy.xlsx](http://www.wawrowski.edu.pl/data/pracownicy.xlsx)
 
 - [rossmann.xlsx](http://www.wawrowski.edu.pl/data/rossmann.xlsx)
 
