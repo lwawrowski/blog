@@ -39,6 +39,8 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 [16.11.2019](gr1_20191116.html)
 
+[17.11.2019](gr1_20191117.html)
+
 ### Grupa 2
 
 [19.10.2019](gr_20191019.html)
@@ -46,6 +48,8 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 [20.10.2019](gr2_20191020.html)
 
 [16.11.2019](gr2_20191116.html)
+
+[17.11.2019](gr2_20191117.html)
 
 # Metody analizy i przetwarzania danych
 
