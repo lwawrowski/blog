@@ -55,6 +55,8 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 # Metody analizy i przetwarzania danych
 
+[Podręcznik](http://www.wawrowski.edu.pl/adr/)
+
 ## Prezentacje
 
 [Eksploracyjna analiza danych](http://www.wawrowski.edu.pl/adr/presentations/01_eda.html)
@@ -62,6 +64,22 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 [Raporty](http://www.wawrowski.edu.pl/adr/presentations/02_raporty.html)
 
 [Testy statystyczne](http://www.wawrowski.edu.pl/adr/presentations/03_testy.html)
+
+## Kody z zajęć
+
+### Grupa 1
+
+[30.11.2019 EDA](gr1_20191130_eda.html)
+
+[30.11.2019 pracownicy](gr1_20191130_pracownicy.Rmd)
+
+### Grupa 2
+
+[1.12.2019 EDA](gr2_20191201_eda.html)
+
+[1.12.2019 raport](gr2_20191201_raport.Rmd)
+
+[1.12.2019 pracownicy](gr2_20191201_pracownicy.Rmd)
 
 # Zbiory danych
 
