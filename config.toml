@@ -20,6 +20,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     github = "https://github.com/lwawrowski"
     linkedin = "https://linkedin.com/in/łukasz-wawrowski-2b106a149/"
     stackoverflow = "https://stackoverflow.com/users/1651832/lukasz89x"
+    twitter = "https://twitter.com/wawrluk"
     opengraph = true
     shareTwitter = true
     shareFacebook = true
