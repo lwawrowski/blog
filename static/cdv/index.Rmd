@@ -65,6 +65,8 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 [Testy statystyczne](http://www.wawrowski.edu.pl/adr/presentations/03_testy.html)
 
+[Regresja liniowa](http://www.wawrowski.edu.pl/adr/presentations/04_regresja.html)
+
 ## Kody z zajęć
 
 ### Grupa 1
