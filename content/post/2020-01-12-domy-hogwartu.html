@@ -1,0 +1,132 @@
+---
+title: Domy Hogwartu - częstość występowania w książkach
+author: Łukasz
+date: '2020-01-12'
+slug: domy-hogwartu
+categories:
+  - R
+tags:
+  - dplyr
+  - ggplot2
+  - text mining
+  - harry potter
+description: ''
+---
+
+
+
+<p>Do dziś pamiętam dzień, w którym dostałem do ręki pierwsze książki o przygodach Harrego Pottera. Wiele lat później zainteresowanie serią powróciło, ale tym razem od strony statystycznej. Czy Gryffindor jako dom głównego bohatera jest najczęściej wymienianym domem w książkach sagi? Przekonajmy się.</p>
+<div id="dane" class="section level1">
+<h1>Dane</h1>
+<p>Wyszukując w Google frazę “harry potter txt” znalazłem wiele stron z tekstową wersją książki. Ostatecznie dane do analizy pobrałem <a href="http://www.glozman.com/textpages.html">stąd</a>. Posługiwanie się angielską wersją książki będzie prostsze z punktu widzenia analizy, ponieważ nie trzeba będzie rozważać wszystkich odmian i przypadków nazwy domu.</p>
+<p>W celu wydobycia nazw domów z tekstu wszystkich książek napisałem funkcję, która w całkiem elegancki sposób się tym zajmuje i może także posłużyć w innych analizach tekstu.</p>
+<pre class="r"><code>library(tidyverse)
+library(tidytext)
+
+words_in_book &lt;- function(book, selected_words){
+  
+  hp &lt;- read_lines(book) # wczytanie tekstu
+  
+  df &lt;- data.frame(org_line=as.character(hp)) %&gt;% 
+    filter(str_length(org_line) &gt; 0) %&gt;% # usunięcie pustych wierszy
+    mutate(book_name = book %&gt;% 
+             str_replace_all(&quot;txt/&quot;, &quot;&quot;) %&gt;% # usunięcie ścieżki z nazwy książki
+             str_replace_all(&quot;.txt&quot;, &quot;&quot;), # usunięcie rozszerzenia z nazwy książki
+           line = org_line %&gt;% 
+             str_replace_all(&quot;[^[:alnum:] ]&quot;, &quot; &quot;)) %&gt;% # usunięcie znaków niealfanumerycznych
+    unnest_tokens(output = words, input = line) # rodzielenie tekstu książki na pojedyńcze wyrazy
+  
+  houses &lt;- df %&gt;% 
+    mutate(house=str_match(words, selected_words)) %&gt;% # identyfikacja szukanych słów 
+    filter(!is.na(house)) # usunięcie wszystkich pozostałych
+  
+  return(houses)
+  
+}</code></pre>
+<p>Następnie deklaruję jakie pliki chcę przeanalizować oraz jakie słowa mnie interesują.</p>
+<pre class="r"><code>books &lt;- str_c(&quot;txt/&quot;, list.files(&quot;txt&quot;))
+
+hp_houses &lt;- map_df(books, words_in_book, 
+                    selected_words = &quot;gryffindor|hufflepuff|ravenclaw|slytherin&quot;)</code></pre>
+<p>Wykorzystuję tutaj funkcję <code>map_df</code> z pakietu <a href="https://purrr.tidyverse.org/">purrr</a>, który jest wspaniałym narzędziem w sytuacji, w której nie chcemy bawić się w pętle. Pokazany powyżej zapis argumentu <code>selected_words</code> powoduje dopasowanie także liczby mnogiej nazwy domu. W rezultacie powstał zbiór zawierający 1206 obserwacji oraz 4 kolumny - z fragmentem książki, tytułem książki, pasującym słowem oraz nazwą domu w Hogwarcie.</p>
+</div>
+<div id="czestosci" class="section level1">
+<h1>Częstości</h1>
+<p>Dokonujemy jeszcze drobnych przekształceń w tekście:</p>
+<pre class="r"><code>hp_houses &lt;- hp_houses %&gt;% 
+  mutate(book=str_replace(book_name, &quot; - &quot;, &quot; \n&quot;), # tytuł książki w dwóch wierszach
+         house=str_c(str_to_upper(str_sub(house,1,1)), 
+                     str_sub(house,2,str_length(house)))) # nazwa domu z wielkiej litery</code></pre>
+<p>Następnie zliczamy wystąpienia danego domu w ramach książki.</p>
+<pre class="r"><code>hp_houses %&gt;% 
+  group_by(book, house) %&gt;% 
+  count() %&gt;% 
+  ungroup() %&gt;% 
+  mutate(book_fct=factor(book, levels = unique(book), ordered = T),
+         house_fct=factor(house, levels = unique(house), ordered = T)) %&gt;% 
+  ggplot(aes(x = fct_rev(book_fct), y = n, fill = fct_rev(house))) +
+    geom_col(position = &quot;dodge&quot;) +
+    geom_text(aes(label = n), position = position_dodge(0.95), hjust = -0.2) +
+    xlab(&quot;&quot;) +
+    ylab(&quot;Count&quot;) +
+    ylim(0,130) +
+    scale_fill_manual(values = rev(c(&quot;#670001&quot;, &quot;#FF9D0A&quot;, &quot;#002E5F&quot;, &quot;#2E751C&quot;)), name = &quot;&quot;) +
+    coord_flip() +
+    labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+    theme_bw() +
+    theme(legend.position = &quot;top&quot;, 
+          plot.caption = element_text(color = &quot;grey80&quot;)) +
+    guides(fill = guide_legend(reverse = TRUE)) + 
+    ggtitle(&quot;Occurence of house name in Harry Potter books&quot;)</code></pre>
+<p><img src="/post/2020-01-12-domy-hogwartu_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>We wszystkich częściach sagi oprócz drugiej (Komnata Tajemnic) zgodnie z oczekiwaniami dominuje Gryffindor. Slytherin zwykle jest na drugim miejscu. Wyjątek stanowi wspomniana część druga (pierwsze miejsce) oraz siódma, gdzie zajmuje trzecie miejsce przegrywając jeszcze z Ravenclawem.</p>
+<p>Procentowo wygląda to następująco:</p>
+<pre class="r"><code>hp_houses %&gt;% 
+  group_by(book) %&gt;%
+  count(house) %&gt;% 
+  mutate(percent=n/sum(n),
+         percent_label=round_preserve_sum(percent*100)) %&gt;% 
+  ungroup() %&gt;% 
+  mutate(book_fct=factor(book, levels = unique(book), ordered = T),
+         house_fct=factor(house, levels = unique(house), ordered = T)) %&gt;% 
+  ggplot(aes(x = fct_rev(book_fct), y = percent, fill = fct_rev(house))) +
+    geom_col() + 
+    geom_text(aes(label = percent_label), position = position_stack(0.5), color = &quot;white&quot;) +
+    xlab(&quot;&quot;) +
+    ylab(&quot;Percentage&quot;) +
+    scale_fill_manual(values = rev(c(&quot;#670001&quot;, &quot;#FF9D0A&quot;, &quot;#002E5F&quot;, &quot;#2E751C&quot;)), name = &quot;&quot;) +
+    scale_y_continuous(labels=scales::percent) +
+    coord_flip() +
+    labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+    theme_bw() +
+    theme(legend.position = &quot;top&quot;, 
+          plot.caption = element_text(color = &quot;grey80&quot;)) +
+    guides(fill = guide_legend(reverse = TRUE)) + 
+    ggtitle(&quot;Occurence of house name in Harry Potter books (in %)&quot;)</code></pre>
+<p><img src="/post/2020-01-12-domy-hogwartu_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Najwięcej Gryffindoru było w trzeciej części przygód Harrego Pottera, Hufflepuffu w czwartej, Ravenclawu w siódmej, a Slytherinu w drugiej części.</p>
+<p>Dodatkowo możemy wyznaczyć wskaźnik liczby wzmianek o domach w odniesieniu do liczby stron książki danej części HP. Liczbę stron znalazłem na <a href="https://dustyloft.wordpress.com/2007/07/12/number-of-pages-harry-potter/">tej stronie</a> i bezpośrednio dodałem do istniejących danych.</p>
+<pre class="r"><code>pages &lt;- hp_houses %&gt;% 
+  distinct(book) %&gt;% 
+  mutate(pages=c(223, 251, 317, 636, 766, 607, 607))
+
+hp_houses %&gt;% 
+  count(book) %&gt;% 
+  inner_join(., pages, by = &quot;book&quot;) %&gt;% 
+  mutate(house_per_page=round(n/pages,2),
+         book_fct=factor(book, levels = unique(book), ordered = T)) %&gt;% 
+  ggplot(aes(x = fct_rev(book_fct), y = house_per_page)) +
+    geom_col(fill = &quot;#FFC001&quot;) +
+    geom_text(aes(label = house_per_page), hjust = -0.2) +
+    coord_flip() +
+    xlab(&quot;&quot;) +
+    ylab(&quot;House per page&quot;) +
+    ylim(0,1.05) +
+    labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+    theme_bw() +
+    theme(plot.caption = element_text(color = &quot;grey80&quot;)) +
+    ggtitle(&quot;House name mentioned per page in Harry Potter books&quot;)</code></pre>
+<p><img src="/post/2020-01-12-domy-hogwartu_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>W pierwszych dwóch częściach nazwa domu padała prawie raz na stronę. W Więźniu z Azkabanu średnio na co drugiej stronie znajdowało się odwołanie do nazwy domu. Z kolei w ostatnich czterech częściach wartość ta spadła do około 1/4 zapewne ze względu na przeniesienie akcji poza Hogwart.</p>
+<p>Wszystkie kody są na <a href="https://github.com/lwawrowski/harrypotter">githubie</a>.</p>
+</div>
