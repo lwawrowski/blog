@@ -586,138 +586,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Tylko jeden test wskazał zgodność rozkładu reszt z rozkładem normalnym.</p>
 <div id="zadanie-1" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Zadanie</h3>
-<p>Na podstawie zbioru dotyczącego <a href="data/50_Startups.csv">50 startupów</a> określ jakie czynniki wpływają na przychód startupów. Na zajęciach 27.04.2019 r. przedyskutujemy wyniki.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">startupy &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/50_Startups.csv&quot;</span>)</a>
+<p>Na podstawie zbioru dotyczącego <a href="data/50_Startups.csv">50 startupów</a> określ jakie czynniki wpływają na przychód startupów.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">startupy &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/startups.xlsx&quot;</span>)</a>
 <a class="sourceLine" id="cb72-2" title="2"></a>
-<a class="sourceLine" id="cb72-3" title="3"><span class="kw">summary</span>(startupy)</a></code></pre></div>
-<pre><code>##    R.D.Spend      Administration   Marketing.Spend         State   
-##  Min.   :     0   Min.   : 51283   Min.   :     0   California:17  
-##  1st Qu.: 39936   1st Qu.:103731   1st Qu.:129300   Florida   :16  
-##  Median : 73051   Median :122700   Median :212716   New York  :17  
-##  Mean   : 73722   Mean   :121345   Mean   :211025                  
-##  3rd Qu.:101603   3rd Qu.:144842   3rd Qu.:299469                  
-##  Max.   :165349   Max.   :182646   Max.   :471784                  
-##      Profit      
+<a class="sourceLine" id="cb72-3" title="3">startupy &lt;-<span class="st"> </span>janitor<span class="op">::</span><span class="kw">clean_names</span>(startupy)</a>
+<a class="sourceLine" id="cb72-4" title="4"></a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="kw">summary</span>(startupy)</a></code></pre></div>
+<pre><code>##    r_d_spend      administration   marketing_spend     state          
+##  Min.   :     0   Min.   : 51283   Min.   :     0   Length:50         
+##  1st Qu.: 39936   1st Qu.:103731   1st Qu.:129300   Class :character  
+##  Median : 73051   Median :122700   Median :212716   Mode  :character  
+##  Mean   : 73722   Mean   :121345   Mean   :211025                     
+##  3rd Qu.:101603   3rd Qu.:144842   3rd Qu.:299469                     
+##  Max.   :165349   Max.   :182646   Max.   :471784                     
+##      profit      
 ##  Min.   : 14681  
 ##  1st Qu.: 90139  
 ##  Median :107978  
 ##  Mean   :112013  
 ##  3rd Qu.:139766  
 ##  Max.   :192262</code></pre>
-<p>Podsumowanie danych pokazuje występowanie zer w wartościach zmiennych R.D.Spend i Marketing.Spend - należy je wyeliminować.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1">startupy &lt;-<span class="st"> </span>startupy <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb74-2" title="2"><span class="st">  </span><span class="kw">filter</span>(R.D.Spend <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, Marketing.Spend <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
-<p>Na tak przygotowanym zbiorze możemy dopasować model ze wszystkimi zmiennymi.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Profit <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>startupy)</a>
-<a class="sourceLine" id="cb75-2" title="2"><span class="kw">summary</span>(model)</a></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Profit ~ ., data = startupy)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -15464  -4887  -1424   5550  13560 
-## 
-## Coefficients:
-##                    Estimate  Std. Error t value             Pr(&gt;|t|)    
-## (Intercept)     59773.09290  6126.19072   9.757     0.00000000000391 ***
-## R.D.Spend           0.77507     0.03909  19.828 &lt; 0.0000000000000002 ***
-## Administration     -0.05759     0.04515  -1.275                0.210    
-## Marketing.Spend     0.02102     0.01528   1.376                0.176    
-## StateFlorida    -1752.43437  2744.96836  -0.638                0.527    
-## StateNew York   -1597.22937  2764.85338  -0.578                0.567    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 7503 on 40 degrees of freedom
-## Multiple R-squared:  0.9613, Adjusted R-squared:  0.9565 
-## F-statistic: 198.7 on 5 and 40 DF,  p-value: &lt; 0.00000000000000022</code></pre>
-<p>Jedyną istotną zmienną objaśniającą jest cecha R.D.Spend. W związku z tym używamy funkcji krokowej metody doboru zmiennych w celu znalezienia istotnych czynników wpływających na przychód startupu.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">ols_step_both_p</span>(model)</a></code></pre></div>
-<pre><code>## Stepwise Selection Method   
-## ---------------------------
-## 
-## Candidate Terms: 
-## 
-## 1. R.D.Spend 
-## 2. Administration 
-## 3. Marketing.Spend 
-## 4. State 
-## 
-## We are selecting variables based on p value...
-## 
-## Variables Entered/Removed: 
-## 
-## - R.D.Spend added 
-## - Administration added 
-## 
-## No more variables to be added/removed.
-## 
-## 
-## Final Model Output 
-## ------------------
-## 
-##                            Model Summary                             
-## --------------------------------------------------------------------
-## R                       0.979       RMSE                   7427.091 
-## R-Squared               0.959       Coef. Var                 6.344 
-## Adj. R-Squared          0.957       MSE                55161684.725 
-## Pred R-Squared          0.953       MAE                    6057.542 
-## --------------------------------------------------------------------
-##  RMSE: Root Mean Square Error 
-##  MSE: Mean Square Error 
-##  MAE: Mean Absolute Error 
-## 
-##                                      ANOVA                                       
-## --------------------------------------------------------------------------------
-##                        Sum of                                                   
-##                       Squares        DF        Mean Square       F         Sig. 
-## --------------------------------------------------------------------------------
-## Regression    55818532409.384         2    27909266204.692    505.954    0.0000 
-## Residual       2371952443.176        43       55161684.725                      
-## Total         58190484852.560        45                                         
-## --------------------------------------------------------------------------------
-## 
-##                                         Parameter Estimates                                          
-## ----------------------------------------------------------------------------------------------------
-##          model         Beta    Std. Error    Std. Beta      t        Sig         lower        upper 
-## ----------------------------------------------------------------------------------------------------
-##    (Intercept)    62996.044      5252.182                 11.994    0.000    52404.009    73588.078 
-##      R.D.Spend        0.814         0.026        0.989    31.507    0.000        0.762        0.866 
-## Administration       -0.079         0.042       -0.059    -1.875    0.068       -0.164        0.006 
-## ----------------------------------------------------------------------------------------------------</code></pre>
-<pre><code>## 
-##                                  Stepwise Selection Summary                                   
-## ---------------------------------------------------------------------------------------------
-##                            Added/                   Adj.                                         
-## Step       Variable       Removed     R-Square    R-Square     C(p)       AIC         RMSE       
-## ---------------------------------------------------------------------------------------------
-##    1      R.D.Spend       addition       0.956       0.955    3.5750    957.0424    7636.5800    
-##    2    Administration    addition       0.959       0.957    2.1290    955.4259    7427.0913    
-## ---------------------------------------------------------------------------------------------</code></pre>
-<p>Algorytm proponuje tylko dwie cechy w modelu R.D.Spend i Administration.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">model_2zm &lt;-<span class="st"> </span><span class="kw">lm</span>(Profit <span class="op">~</span><span class="st"> </span>R.D.Spend <span class="op">+</span><span class="st"> </span>Administration, <span class="dt">data=</span>startupy)</a>
-<a class="sourceLine" id="cb80-2" title="2"><span class="kw">summary</span>(model_2zm)</a></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Profit ~ R.D.Spend + Administration, data = startupy)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -16632  -4867  -2488   6280  14410 
-## 
-## Coefficients:
-##                   Estimate  Std. Error t value             Pr(&gt;|t|)    
-## (Intercept)    62996.04359  5252.18190  11.994  0.00000000000000262 ***
-## R.D.Spend          0.81412     0.02584  31.507 &lt; 0.0000000000000002 ***
-## Administration    -0.07897     0.04211  -1.875               0.0675 .  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 7427 on 43 degrees of freedom
-## Multiple R-squared:  0.9592, Adjusted R-squared:  0.9573 
-## F-statistic:   506 on 2 and 43 DF,  p-value: &lt; 0.00000000000000022</code></pre>
-<p>W związku z czym stwierdzamy, że tylko te dwie cechy wpływają istotnie na przychód - wydatki na R&amp;D wpływają na niego pozytywnie, a na administracje ujemnie.</p>
 
 </div>
 </div>

@@ -1508,25 +1508,27 @@ Tylko jeden test wskazał zgodność rozkładu reszt z rozkładem normalnym.
 \hypertarget{zadanie-1}{%
 \subsection{Zadanie}\label{zadanie-1}}
 
-Na podstawie zbioru dotyczącego \href{data/50_Startups.csv}{50 startupów} określ jakie czynniki wpływają na przychód startupów. Na zajęciach 27.04.2019 r. przedyskutujemy wyniki.
+Na podstawie zbioru dotyczącego \href{data/50_Startups.csv}{50 startupów} określ jakie czynniki wpływają na przychód startupów.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{startupy <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/50_Startups.csv"}\NormalTok{)}
+\NormalTok{startupy <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/startups.xlsx"}\NormalTok{)}
+
+\NormalTok{startupy <-}\StringTok{ }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean_names}\NormalTok{(startupy)}
 
 \KeywordTok{summary}\NormalTok{(startupy)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##    R.D.Spend      Administration   Marketing.Spend         State   
-##  Min.   :     0   Min.   : 51283   Min.   :     0   California:17  
-##  1st Qu.: 39936   1st Qu.:103731   1st Qu.:129300   Florida   :16  
-##  Median : 73051   Median :122700   Median :212716   New York  :17  
-##  Mean   : 73722   Mean   :121345   Mean   :211025                  
-##  3rd Qu.:101603   3rd Qu.:144842   3rd Qu.:299469                  
-##  Max.   :165349   Max.   :182646   Max.   :471784                  
-##      Profit      
+##    r_d_spend      administration   marketing_spend     state          
+##  Min.   :     0   Min.   : 51283   Min.   :     0   Length:50         
+##  1st Qu.: 39936   1st Qu.:103731   1st Qu.:129300   Class :character  
+##  Median : 73051   Median :122700   Median :212716   Mode  :character  
+##  Mean   : 73722   Mean   :121345   Mean   :211025                     
+##  3rd Qu.:101603   3rd Qu.:144842   3rd Qu.:299469                     
+##  Max.   :165349   Max.   :182646   Max.   :471784                     
+##      profit      
 ##  Min.   : 14681  
 ##  1st Qu.: 90139  
 ##  Median :107978  
@@ -1534,157 +1536,6 @@ Na podstawie zbioru dotyczącego \href{data/50_Startups.csv}{50 startupów} okre
 ##  3rd Qu.:139766  
 ##  Max.   :192262
 \end{verbatim}
-
-Podsumowanie danych pokazuje występowanie zer w wartościach zmiennych R.D.Spend i Marketing.Spend - należy je wyeliminować.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{startupy <-}\StringTok{ }\NormalTok{startupy }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(R.D.Spend }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{, Marketing.Spend }\OperatorTok{!=}\StringTok{ }\DecValTok{0}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Na tak przygotowanym zbiorze możemy dopasować model ze wszystkimi zmiennymi.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Profit }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data=}\NormalTok{startupy)}
-\KeywordTok{summary}\NormalTok{(model)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = Profit ~ ., data = startupy)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -15464  -4887  -1424   5550  13560 
-## 
-## Coefficients:
-##                    Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)     59773.09290  6126.19072   9.757     0.00000000000391 ***
-## R.D.Spend           0.77507     0.03909  19.828 < 0.0000000000000002 ***
-## Administration     -0.05759     0.04515  -1.275                0.210    
-## Marketing.Spend     0.02102     0.01528   1.376                0.176    
-## StateFlorida    -1752.43437  2744.96836  -0.638                0.527    
-## StateNew York   -1597.22937  2764.85338  -0.578                0.567    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 7503 on 40 degrees of freedom
-## Multiple R-squared:  0.9613, Adjusted R-squared:  0.9565 
-## F-statistic: 198.7 on 5 and 40 DF,  p-value: < 0.00000000000000022
-\end{verbatim}
-
-Jedyną istotną zmienną objaśniającą jest cecha R.D.Spend. W związku z tym używamy funkcji krokowej metody doboru zmiennych w celu znalezienia istotnych czynników wpływających na przychód startupu.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ols_step_both_p}\NormalTok{(model)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Stepwise Selection Method   
-## ---------------------------
-## 
-## Candidate Terms: 
-## 
-## 1. R.D.Spend 
-## 2. Administration 
-## 3. Marketing.Spend 
-## 4. State 
-## 
-## We are selecting variables based on p value...
-## 
-## Variables Entered/Removed: 
-## 
-## - R.D.Spend added 
-## - Administration added 
-## 
-## No more variables to be added/removed.
-## 
-## 
-## Final Model Output 
-## ------------------
-## 
-##                            Model Summary                             
-## --------------------------------------------------------------------
-## R                       0.979       RMSE                   7427.091 
-## R-Squared               0.959       Coef. Var                 6.344 
-## Adj. R-Squared          0.957       MSE                55161684.725 
-## Pred R-Squared          0.953       MAE                    6057.542 
-## --------------------------------------------------------------------
-##  RMSE: Root Mean Square Error 
-##  MSE: Mean Square Error 
-##  MAE: Mean Absolute Error 
-## 
-##                                      ANOVA                                       
-## --------------------------------------------------------------------------------
-##                        Sum of                                                   
-##                       Squares        DF        Mean Square       F         Sig. 
-## --------------------------------------------------------------------------------
-## Regression    55818532409.384         2    27909266204.692    505.954    0.0000 
-## Residual       2371952443.176        43       55161684.725                      
-## Total         58190484852.560        45                                         
-## --------------------------------------------------------------------------------
-## 
-##                                         Parameter Estimates                                          
-## ----------------------------------------------------------------------------------------------------
-##          model         Beta    Std. Error    Std. Beta      t        Sig         lower        upper 
-## ----------------------------------------------------------------------------------------------------
-##    (Intercept)    62996.044      5252.182                 11.994    0.000    52404.009    73588.078 
-##      R.D.Spend        0.814         0.026        0.989    31.507    0.000        0.762        0.866 
-## Administration       -0.079         0.042       -0.059    -1.875    0.068       -0.164        0.006 
-## ----------------------------------------------------------------------------------------------------
-\end{verbatim}
-
-\begin{verbatim}
-## 
-##                                  Stepwise Selection Summary                                   
-## ---------------------------------------------------------------------------------------------
-##                            Added/                   Adj.                                         
-## Step       Variable       Removed     R-Square    R-Square     C(p)       AIC         RMSE       
-## ---------------------------------------------------------------------------------------------
-##    1      R.D.Spend       addition       0.956       0.955    3.5750    957.0424    7636.5800    
-##    2    Administration    addition       0.959       0.957    2.1290    955.4259    7427.0913    
-## ---------------------------------------------------------------------------------------------
-\end{verbatim}
-
-Algorytm proponuje tylko dwie cechy w modelu R.D.Spend i Administration.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{model_2zm <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Profit }\OperatorTok{~}\StringTok{ }\NormalTok{R.D.Spend }\OperatorTok{+}\StringTok{ }\NormalTok{Administration, }\DataTypeTok{data=}\NormalTok{startupy)}
-\KeywordTok{summary}\NormalTok{(model_2zm)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = Profit ~ R.D.Spend + Administration, data = startupy)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -16632  -4867  -2488   6280  14410 
-## 
-## Coefficients:
-##                   Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)    62996.04359  5252.18190  11.994  0.00000000000000262 ***
-## R.D.Spend          0.81412     0.02584  31.507 < 0.0000000000000002 ***
-## Administration    -0.07897     0.04211  -1.875               0.0675 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 7427 on 43 degrees of freedom
-## Multiple R-squared:  0.9592, Adjusted R-squared:  0.9573 
-## F-statistic:   506 on 2 and 43 DF,  p-value: < 0.00000000000000022
-\end{verbatim}
-
-W związku z czym stwierdzamy, że tylko te dwie cechy wpływają istotnie na przychód - wydatki na R\&D wpływają na niego pozytywnie, a na administracje ujemnie.
 
 \hypertarget{grupowanie}{%
 \chapter{Grupowanie}\label{grupowanie}}
@@ -1744,7 +1595,7 @@ Wczytujemy zbiór danych i sprawdzamy czy pomiędzy zmiennymi są widoczne jakie
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-46-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-42-1.pdf}
 
 Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 
@@ -1755,7 +1606,7 @@ Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-43-1.pdf}
 
 W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zbioru na dwie grupy za pomocą przekątnej.
 
@@ -1766,7 +1617,7 @@ W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zb
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
 
 Po zestawieniu rocznego dochodu i wskaźnika wydatków wyłania się 5 potencjalnych grup, zatem te dwie cechy wykorzystamy do grupowania. Jednak przed zastosowaniem algorytmu musimy te dane przygotować normalizując zakres obu cech - w tym przypadku za pomocą standaryzacji.
 
@@ -1808,7 +1659,7 @@ W przypadku, gdy podział na grupy nie jest tak oczywisty lub bierzemy pod uwag�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-50-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-46-1.pdf}
 
 Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. Według tego kryterium powinniśmy wybrać wartość 6 zamiast 5. Sprawdźmy zatem jakie otrzymamy przyporządkowanie do grup. Następnie informację o tym przypisaniu umieszczamy w oryginalnym zbiorze danych i przedstawiamy na wykresie. W celu uzyskania powtarzalnych wyników zastosujemy stałe ziarno generatora.
 
@@ -1826,7 +1677,7 @@ Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wart
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-51-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
 
 Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydział centrów skupień na początku algorytmu istnieje spora szansa, że rozwiązanie nie będzie optymalne. Rozwiązaniem tego problemu jest użycie algorytmu kmeans++ do początkowego ustalenia centrów. Ta metoda jest zaimplementowana w pakiecie \texttt{ClusterR}. Ponadto jest tam także funkcja do ustalenia optymalnej liczby skupień na podstawie wykresu osypiska.
 
@@ -1838,7 +1689,7 @@ Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydzia�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-52-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
 
 \begin{verbatim}
 ##  [1] 398.00000 267.67171 156.91549 108.68209  65.24057  59.83221  49.72816
@@ -1863,7 +1714,7 @@ Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wart
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-49-1.pdf}
 
 Ostatnim etapem analizy jest odpowiednia charakterystyka uzyskanych klastrów - najczęściej wyznacza się średnie wartości cech w ramach każdej grupy.
 
@@ -1921,7 +1772,7 @@ Dla tych samych danych przeprowadzimy grupowanie, ale tym razem metodą hierarch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-55-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-51-1.pdf}
 
 Na podstawie dendrogramu identyfikujemy największe różnice odległości opisane na osi Y. Także w tym przypadku identyfikujemy 5 grup. Istnieje także wiele kryteriów, które mają na celu wyznaczyć optymalną liczbę grup - link.
 
@@ -1932,7 +1783,7 @@ Na podstawie dendrogramu identyfikujemy największe różnice odległości opisa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-56-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-52-1.pdf}
 
 Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych grup.
 
@@ -1949,7 +1800,7 @@ Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych grup.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-57-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-53-1.pdf}
 
 Uzyskane wyniki są bardzo zbliżone do tych otrzymanych za pomocą algorytmu k-średnich.
 
@@ -2006,7 +1857,7 @@ Porównajmy jeszcze wyniki działania tych dwóch metod na wykresach:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-60-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-56-1.pdf}
 
 Problematyczne obserwacje pochodziły z grupy klientów o przeciętnych dochodach oraz wydatkach.
 
