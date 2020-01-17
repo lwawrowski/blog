@@ -457,7 +457,7 @@ W tym przypadku wygląd tablicy krzyżowej może sugerować występowanie zależ
 ##  Pearson's Chi-squared test with Yates' continuity correction
 ## 
 ## data:  table(pracownicy$plec, pracownicy$bwyn_mediana)
-## X-squared = 104.8, df = 1, p-value < 0.00000000000000022
+## X-squared = 104.8, df = 1, p-value < 2.2e-16
 \end{verbatim}
 
 Test \(\chi^2\) to potwierdza - mamy podstawy do odrzucenia hipotezy zerowej na korzyść hipotezy alternatywnej - istnieje zależność pomiędzy płcią, a grupami wynagrodzenia.
@@ -579,7 +579,7 @@ Czy cecha \emph{doświadczenie} ma rozkład normalny? Sprawdź za pomocą odpowi
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  pracownicy$doswiadczenie
-## W = 0.8136, p-value < 0.00000000000000022
+## W = 0.8136, p-value < 2.2e-16
 \end{verbatim}
 
 Na poziomie \(\alpha = 0,05\) Odrzucamy \(H_0\) (p \textless{} \(\alpha\)) - doświadczenie nie ma rozkładu normalnego. Sprawdźmy jeszcze jak te wartości wyglądają na wykresie kwantyl-kwantyl.
@@ -795,7 +795,7 @@ W pierwszej kolejności weryfikujemy normalność rozkładu analizowanych cech.
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  pracownicy$pwynagrodzenie
-## W = 0.71535, p-value < 0.00000000000000022
+## W = 0.71535, p-value < 2.2e-16
 \end{verbatim}
 
 \begin{Shaded}
@@ -809,7 +809,7 @@ W pierwszej kolejności weryfikujemy normalność rozkładu analizowanych cech.
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  pracownicy$bwynagrodzenie
-## W = 0.77061, p-value < 0.00000000000000022
+## W = 0.77061, p-value < 2.2e-16
 \end{verbatim}
 
 Wynagrodzenie w tym zbiorze danych zdecydowanie nie przypomina rozkładu normalnego. W tym przypadku analizujemy próby zależne - badamy dwie różne cechy dla tych samych jednostek (obserwacji).
@@ -827,7 +827,7 @@ Wynagrodzenie w tym zbiorze danych zdecydowanie nie przypomina rozkładu normaln
 ##  Wilcoxon signed rank test with continuity correction
 ## 
 ## data:  pracownicy$pwynagrodzenie and pracownicy$bwynagrodzenie
-## V = 0, p-value < 0.00000000000000022
+## V = 0, p-value < 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 
@@ -852,8 +852,7 @@ Analogicznie można także sprawdzić czy np. doświadczenie różni się w rama
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  pracownicy$doswiadczenie by pracownicy$kat_pracownika
-## Kruskal-Wallis chi-squared = 57.466, df = 2, p-value =
-## 0.0000000000003322
+## Kruskal-Wallis chi-squared = 57.466, df = 2, p-value = 3.322e-13
 \end{verbatim}
 
 Przyjmując poziom istotności \(\alpha = 0,05\) odrzucamy hipotezę zerową - co najmniej jedna para kategorii pracownika różni się pod względem średniego wynagrodzenia.
@@ -861,31 +860,38 @@ Przyjmując poziom istotności \(\alpha = 0,05\) odrzucamy hipotezę zerową - c
 \hypertarget{regresja}{%
 \chapter{Regresja}\label{regresja}}
 
-Metody regresji pozwalają na analizowanie zależności przyczynowo-skutkowych.
+Metody regresji pozwalają na analizowanie zależności przyczynowo-skutkowych oraz predycję nieznanych wartości. Korzystając z tej metody należy jednak pamiętać, że model regresji jest tylko przybliżeniem rzeczywistości.
 
-Na początku pracy wczytujemy biblioteki \texttt{tidyverse}, \texttt{readxl} oraz wyłączamy notację naukową.
+Przykłady zastosowania regresji:
+
+\begin{itemize}
+\item
+  zależność wielkości sprzedaży od wydatków na reklamę
+\item
+  zależność wynagrodzenia od lat doświadczenia
+\end{itemize}
+
+Na początku pracy wczytujemy biblioteki \emph{tidyverse} i \emph{readxl}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
 \KeywordTok{library}\NormalTok{(readxl)}
-
-\KeywordTok{options}\NormalTok{(}\DataTypeTok{scipen =} \DecValTok{100}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{regresja-prosta}{%
 \section{Regresja prosta}\label{regresja-prosta}}
 
-Na podstawie \href{data/Salary_Data.csv}{danych} dotyczących informacji o doświadczeniu i wynagrodzeniu pracowników zbuduj model określający `widełki' dla potencjalnych pracowników o doświadczeniu równym 8, 10 i 11 lat.
+Na podstawie \href{data/salary.xlsx}{danych} dotyczących informacji o doświadczeniu i wynagrodzeniu pracowników zbuduj model określający `widełki' dla potencjalnych pracowników o doświadczeniu równym 8, 10 i 11 lat.
 
 Wczytujemy dane i sprawdzamy czy nie występują zera bądź braki danych z użyciem funkcji \texttt{summary()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dane <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/Salary_Data.csv"}\NormalTok{)}
+\NormalTok{salary <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/salary.xlsx"}\NormalTok{)}
 
-\KeywordTok{summary}\NormalTok{(dane)}
+\KeywordTok{summary}\NormalTok{(salary)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -903,7 +909,7 @@ Następnie stworzymy wykres.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(dane)}
+\KeywordTok{plot}\NormalTok{(salary)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -913,9 +919,9 @@ Najprostszym sposobem wizualizacji jest wykorzystanie funkcji \texttt{plot()}, n
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(dane, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{YearsExperience, }\DataTypeTok{y=}\NormalTok{Salary)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{colour =} \StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{ggplot}\NormalTok{(salary, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{YearsExperience, }\DataTypeTok{y=}\NormalTok{Salary)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Doświadczenie"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Pensja"}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{12}\NormalTok{) }\OperatorTok{+}
@@ -933,58 +939,93 @@ Modelowanie rozpoczynamy od określenia zmiennej zależnej i niezależnej.
 \begin{itemize}
 \tightlist
 \item
-  zmienna zależna/objaśniana: pensja
+  zmienna zależna/objaśniana: pensja - \(y\)
 \item
-  zmienna niezależna/objaśniająca: doświadczenie
+  zmienna niezależna/objaśniająca: doświadczenie - \(x\)
 \end{itemize}
+
+Szukamy teraz wzoru na prostą opisującą badane cechy.
+
+Ogólna postać regresji prostej jest następująca:
+
+\[\hat{y}_{i}=b_{1}x_{i}+b_{0}\]
+
+gdzie \(\hat{y}\) oznacza wartość teoretyczną, leżącą na wyznaczonej prostej, \(x_i\) wartość zmiennej niezależnej, a \(b_1\) i \(b_0\) to współczynniki modelu.
+
+Wobec tego wartości empiryczne \(y\) będą opisane formułą:
+
+\[y_{i}=b_{1}x_{i}+b_{0}+u_{i}\]
+
+w której \(u_i\) oznacza składnik resztowy wyliczany jako \(u_{i}=y_{i}-\hat{y}_{i}\).
+
+\textbf{Współczynnik kierunkowy} \(b_1\) informuje o ile przeciętne zmieni się wartość zmiennej objaśnianej \(y\), gdy wartość zmiennej objaśniającej \(x\) wzrośnie o jednostkę.
+
+\textbf{Wyraz wolny} \(b_0\) to wartość zmiennej objaśnianej \(y\), w sytuacji w której wartość zmiennej objaśniającej \(x\) będzie równa 0. Często interpretacja tego parametru nie ma sensu.
+
+Następnie w R korzystamy z funkcji \texttt{lm}, w której należy określić zależność funkcyjną w formie: \texttt{zmienna\_zalezna\ \textasciitilde{}\ zmienna\ niezalezna}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Salary }\OperatorTok{~}\StringTok{ }\NormalTok{YearsExperience, }\DataTypeTok{data =}\NormalTok{ dane)}
-\KeywordTok{summary}\NormalTok{(model)}
+\NormalTok{salary_model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\DataTypeTok{formula =}\NormalTok{ Salary }\OperatorTok{~}\StringTok{ }\NormalTok{YearsExperience, }\DataTypeTok{data =}\NormalTok{ salary)}
+\KeywordTok{summary}\NormalTok{(salary_model)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = Salary ~ YearsExperience, data = dane)
+## lm(formula = Salary ~ YearsExperience, data = salary)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
 ## -7958.0 -4088.5  -459.9  3372.6 11448.0 
 ## 
 ## Coefficients:
-##                 Estimate Std. Error t value             Pr(>|t|)    
-## (Intercept)      25792.2     2273.1   11.35     0.00000000000551 ***
-## YearsExperience   9450.0      378.8   24.95 < 0.0000000000000002 ***
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      25792.2     2273.1   11.35 5.51e-12 ***
+## YearsExperience   9450.0      378.8   24.95  < 2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 5788 on 28 degrees of freedom
 ## Multiple R-squared:  0.957,  Adjusted R-squared:  0.9554 
-## F-statistic: 622.5 on 1 and 28 DF,  p-value: < 0.00000000000000022
+## F-statistic: 622.5 on 1 and 28 DF,  p-value: < 2.2e-16
 \end{verbatim}
+
+Na podstawie otrzymanego wyniku dokonujemy interpretacji parametrów.
 
 \begin{itemize}
 \tightlist
 \item
-  b1 = 9450 - wzrost doświadczenia o rok powoduje przeciętny wzrost pensji o 9450 zł
+  b1 = 9450 - wzrost doświadczenia o rok powoduje przeciętny wzrost pensji o 9450 \$
 \item
-  b0 = 25792,2 - pracownik o doświadczeniu 0 lat uzyska pensję w wysokości 25792,2 zł
+  b0 = 25792,2 - pracownik o doświadczeniu 0 lat uzyska pensję w wysokości 25792,2 \$
 \end{itemize}
 
-Resztowy błąd standardowy Su wynosi 5788, co oznacza wartości z modelu różnią się od rzeczywistości średnio o +/- 5788 zł
+Trzy gwiazki przy współczynniku \(b_1\) oznaczają, że doświadczenie ma istotny wpływ na wartości pensji. Wyraz wolny także jest istotny, natomiast ogólnie nie jest wymagana jesgo istotność.
 
-R2 = 0,957 - model wyjaśnia 96\% zmienności pensji
+Oprócz interpretacji współczynników ważne są jeszcze inne miary jakości modelu.
 
-Dokonujemy wyznaczenia wartości teoretycznych dla kilku wybranych lat.
+\textbf{Odchylenie standardowe składnika resztowego} jest pierwiastkiem z sumy kwadratów reszt podzielonej przez liczbę obserwacji pomniejszoną o 2:
+
+\[S_{u}=\sqrt{\frac{\sum\limits_{i=1}^{n}{(y_{i}-\hat{y}_{i})^2}}{n-2}}\]
+
+Błąd resztowy (odchylenie standardowe składnika resztowego) \(S_u\) wynosi 5788\$, co oznacza, że wartości obliczone na podstawie modelu różnią się od rzeczywistości średnio o +/- 5788
+\$
+
+\textbf{Współczynnik determinacji} określa, jaki procent wariancji zmiennej objaśnianej został wyjaśniony przez funkcję regresji. \(R^2\) przyjmuje wartości z przedziału \(<0;1>\) ( \(<0\%;100\%>\) ), przy czym model regresji tym lepiej opisuje zachowanie się badanej zmiennej objaśnianej, im \(R^2\) jest bliższy jedności (bliższy 100\%)
+
+\[R^2=1-\frac{\sum\limits_{i=1}^{n}{(y_{i}-\hat{y}_{i})^2}}{\sum\limits_{i=1}^{n}{(y_{i}-\bar{y}_{i})^2}}\]
+
+Współczynnik \(R^2\) (multiple R-squared) wynosi 0,957 czyli doświadczenie wyjaśnia 95,7\% zmienności pensji
+
+Na podstawie tego modelu dokonamy wyznaczenia wartości teoretycznych dla kilku wybranych wartości doświadczenia. Nowe wartości muszą być w postaci zbioru danych, zatem tworzymy nową ramkę danych.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{nowiPracownicy <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{YearsExperience=}\KeywordTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{11}\NormalTok{))}
 
-\KeywordTok{predict}\NormalTok{(model, nowiPracownicy)}
+\KeywordTok{predict}\NormalTok{(salary_model, nowiPracownicy)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -998,22 +1039,51 @@ Tym sposobem uzyskujemy następujące widełki:
 \begin{itemize}
 \tightlist
 \item
-  pracownik o stażu 8 lat - proponowana pensja 101391,9 zł +/- 5788 zł
+  pracownik o 8 latach doświadczenia - proponowana pensja 101391,9 \$ +/- 5788
+  \$
 \item
-  pracownik o stażu 10 lat - proponowana pensja 120291,8 zł +/- 5788 zł
+  pracownik o 10 latach doświadczenia - proponowana pensja 120291,8 \$ +/- 5788
+  \$
 \item
-  pracownik o stażu 11 lat - proponowana pensja 129741,8 zł +/- 5788 zł
+  pracownik o 11 latach doświadczenia - proponowana pensja 129741,8 \$ +/- 5788
+  \$
 \end{itemize}
+
+W powyższym przykładzie prognozowane wartości pojawiły się w konsoli, natomiast w sytuacji, w której chcielibyśmy wykonać predykcję dla bardzo wielu nowych wartości to warto te prognozowane wartości umieścić od razu w zbiorze danych. Można to zrobić w następujący sposób:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nowiPracownicy <-}\StringTok{ }\NormalTok{nowiPracownicy }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{salary_pred=}\KeywordTok{predict}\NormalTok{(}\DataTypeTok{object =}\NormalTok{ salary_model, }\DataTypeTok{newdata =}\NormalTok{ .))}
+
+\NormalTok{nowiPracownicy}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   YearsExperience salary_pred
+## 1               8    101391.9
+## 2              10    120291.8
+## 3              11    129741.8
+\end{verbatim}
+
+W powyższym kodzie symbol \texttt{.} oznacza analizowany zbiór danych, zatem nie ma potrzeby powtarzania jego nazwy.
 
 \hypertarget{zadanie}{%
 \subsection{Zadanie}\label{zadanie}}
 
-Dla danych dotyczących \href{data/sklep77.csv}{sklepu nr 77} opracuj model zależności sprzedaży od liczby klientów. Ile wynosi teoretyczna sprzedaż w dniach, w których liczba klientów będzie wynosiła 560, 740, 811 oraz 999 osób?
+Dla danych dotyczących \href{data/sklep77.xlsx}{sklepu nr 77} opracuj model zależności sprzedaży od liczby klientów. Ile wynosi teoretyczna sprzedaż w dniach, w których liczba klientów będzie wynosiła 560, 740, 811 oraz 999 osób?
 
 \hypertarget{regresja-wieloraka}{%
 \section{Regresja wieloraka}\label{regresja-wieloraka}}
 
-Na podstawie danych dotyczących \href{data/pracownicy.xlsx}{zatrudnienia} opracuj model, w którym zmienną zależną jest bieżące wynagrodzenie. Jaka cecha ma największy wpływ na tę wartość?
+Ogólna postać regresji wielorakiej jest następująca:
+
+\[\hat{y}_{i}=b_{1}x_{1i}+b_{2}x_{2i}+...+b_{k}x_{ki}+b_{0}\]
+
+W tym przypadku nie wyznaczamy prostej tylko \(k\)-wymiarową przestrzeń.
+
+Na podstawie danych dotyczących \href{data/pracownicy.xlsx}{zatrudnienia} opracuj model, w którym zmienną zależną jest bieżące wynagrodzenie. Za pomocą regresji określimy jakie cechy mają istotny wpływ na to wynagrodzenie.
 
 Opis zbioru:
 
@@ -1028,7 +1098,7 @@ Opis zbioru:
 \item
   edukacja - wykształcenie (w latach nauki)
 \item
-  kat\_pracownika - grupa pracownicza (1 - ochroniarz, 2 - urzędnik, 3 - menedżer)
+  kat\_pracownika - grupa pracownicza (1 - specjalista, 2 - menedżer, 3 - konsultant)
 \item
   bwynagrodzenie - bieżące wynagrodzenie
 \item
@@ -1043,7 +1113,7 @@ Opis zbioru:
   wiek - wiek (w latach)
 \end{itemize}
 
-Wczytanie danych.
+Rozpoczynamy od wczytania danych,
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1077,12 +1147,44 @@ Wczytanie danych.
 ##  Max.   :98.00   Max.   :476.00           Max.   :66.00
 \end{verbatim}
 
-W zmiennej wiek występował brak danych, który został usunięty. Usunięto także kolumny, które nie przydadzą się w modelowaniu. Ponadto dokonujemy przekształcenia typu cech, które są jakościowe (płeć, kat\_pracownika, zwiazki) z typu liczbowego na czynnik/faktor, który będzie poprawnie interpretowany przez model.
+W zmiennej wiek występował brak danych, który został usunięty. Usunięto także kolumny, które nie przydadzą się w modelowaniu. Ponadto dokonujemy przekształcenia typu cech, które są jakościowe (płeć, kat\_pracownika, zwiazki) z typu liczbowego na czynnik/faktor. Taka modyfikacja powoduje, że ta cecha będzie przez model traktowana jako zmienna dychotomiczna (zerojedynkowa). Proces trasformacji takiej cechy jest pokazany poniżej.
 
-W modelu zmienna zależna to \texttt{bwynagrodzenie}, natomiast jako zmienne niezależne bierzemy pod uwagę wszystkie pozostałe cechy.
+Oryginalny zbiór
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+id & stanowisko\tabularnewline
+\midrule
+\endhead
+1 & specjalista\tabularnewline
+2 & menedżer\tabularnewline
+3 & specjalista\tabularnewline
+4 & konsultant\tabularnewline
+5 & konsultant\tabularnewline
+\bottomrule
+\end{longtable}
+
+Zmienna zerojedynkowa
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+id & menedżer & konsultant\tabularnewline
+\midrule
+\endhead
+1 & 0 & 0\tabularnewline
+2 & 1 & 0\tabularnewline
+3 & 0 & 0\tabularnewline
+4 & 0 & 1\tabularnewline
+5 & 0 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+W modelu zmienna zależna to \texttt{bwynagrodzenie}, natomiast jako zmienne niezależne bierzemy pod uwagę wszystkie pozostałe cechy. W celu uniknięcia notacji naukowej w uzyskiwanych wynikach dodajemy opcję \texttt{options(scipen\ =\ 5)}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{scipen =} \DecValTok{5}\NormalTok{)}
+
 \NormalTok{model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(bwynagrodzenie }\OperatorTok{~}\StringTok{ }\NormalTok{., pracownicy2)}
 \KeywordTok{summary}\NormalTok{(model)}
 \end{Highlighting}
@@ -1098,26 +1200,26 @@ W modelu zmienna zależna to \texttt{bwynagrodzenie}, natomiast jako zmienne nie
 ## -23185  -3041   -705   2591  46295 
 ## 
 ## Coefficients:
-##                    Estimate  Std. Error t value             Pr(>|t|)    
-## (Intercept)     -4764.87418  3590.49652  -1.327              0.18514    
-## plec1           -1702.43743   796.51779  -2.137              0.03309 *  
-## edukacja          482.43603   160.83977   2.999              0.00285 ** 
-## kat_pracownika2  6643.17910  1638.06138   4.056  0.00005869172850407 ***
-## kat_pracownika3 11169.64519  1372.73990   8.137  0.00000000000000377 ***
-## pwynagrodzenie      1.34021     0.07317  18.315 < 0.0000000000000002 ***
-## staz              154.50876    31.65933   4.880  0.00000145958620443 ***
-## doswiadczenie     -15.77375     5.78369  -2.727              0.00663 ** 
-## zwiazki1        -1011.55276   787.80884  -1.284              0.19978    
-## wiek              -64.78787    47.88015  -1.353              0.17668    
+##                    Estimate  Std. Error t value Pr(>|t|)    
+## (Intercept)     -4764.87418  3590.49652  -1.327  0.18514    
+## plec1           -1702.43743   796.51779  -2.137  0.03309 *  
+## edukacja          482.43603   160.83977   2.999  0.00285 ** 
+## kat_pracownika2  6643.17910  1638.06138   4.056 5.87e-05 ***
+## kat_pracownika3 11169.64519  1372.73990   8.137 3.77e-15 ***
+## pwynagrodzenie      1.34021     0.07317  18.315  < 2e-16 ***
+## staz              154.50876    31.65933   4.880 1.46e-06 ***
+## doswiadczenie     -15.77375     5.78369  -2.727  0.00663 ** 
+## zwiazki1        -1011.55276   787.80884  -1.284  0.19978    
+## wiek              -64.78787    47.88015  -1.353  0.17668    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 6809 on 463 degrees of freedom
 ## Multiple R-squared:  0.8444, Adjusted R-squared:  0.8414 
-## F-statistic: 279.1 on 9 and 463 DF,  p-value: < 0.00000000000000022
+## F-statistic: 279.1 on 9 and 463 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
-Tak zbudowany model wyjaśnia 84\% zmienności bieżącego wynagrodzenia, ale nie wszystkie zmienne są w tym modelu istotne.
+Tak zbudowany model wyjaśnia 84,4\% zmienności bieżącego wynagrodzenia, ale nie wszystkie zmienne są w tym modelu istotne.
 
 Parametry regresji mają następujące interpretacje:
 
@@ -1128,9 +1230,9 @@ Parametry regresji mają następujące interpretacje:
 \item
   edukacja - wzrost liczby lat nauki o rok powoduje średni wzrost bieżącego wynagrodzenia o 482,44 zł
 \item
-  kat\_pracownika2 - pracownicy o kodzie 2 (urzędnik) zarabiają średnio o 6643,18 zł więcej niż pracownik o kodzie 1 (ochroniarz)
+  kat\_pracownika2 - pracownicy o kodzie 2 (menedżer) zarabiają średnio o 6643,18 zł więcej niż pracownik o kodzie 1 (specjalista)
 \item
-  kat\_pracownika2 - pracownicy o kodzie 3 (menedżer) zarabiają średnio o 11169,65 zł więcej niż pracownik o kodzie 1 (ochroniarz)
+  kat\_pracownika2 - pracownicy o kodzie 3 (konsultant) zarabiają średnio o 11169,65 zł więcej niż pracownik o kodzie 1 (specjalista)
 \item
   pwynagrodzenie - wzrost początkowego wynagrodzenia o 1 zł powoduje przeciętny wzrost bieżącego wynagrodzenia o 1,34 zł
 \item
@@ -1143,11 +1245,11 @@ Parametry regresji mają następujące interpretacje:
   wiek - wzrost wieku pracownika o 1 rok to przeciętnym spadek bieżącego wynagrodzenia o 64,79 zł
 \end{itemize}
 
-Wszystkie te zależności obowiązują przy założeniu \emph{ceteris paribus} - przy pozostałych warunkach niezmienionych.
+Wszystkie te interpretacje obowiązują przy założeniu \emph{ceteris paribus} - przy pozostałych warunkach niezmienionych.
 
-Ten model wymaga oczywiście ulepszenie do czego wykorzystamy m.in. pakiet \href{https://cran.r-project.org/web/packages/olsrr/index.html}{olsrr}.
+Ten model wymaga oczywiście ulepszenia do czego wykorzystamy pakiet \href{https://cran.r-project.org/web/packages/olsrr/index.html}{olsrr}.
 
-Pierwszą kwestią, którą się zajmiemy jest współliniowość zmiennych. W regresji zmienne objaśniające powinny być jak najbardziej skorelowane ze zmienną objaśnianą, a możliwie nieskorelowane ze sobą. W związku z tym wybieramy ze zbioru wyłącznie cechy ilościowe, dla którym wyznaczymy współczynnik korelacji liniowej Pearsona.
+Pierwszą kwestią, którą się zajmiemy jest współliniowość zmiennych. W regresji zmienne objaśniające powinny być jak najbardziej skorelowane ze zmienną objaśnianą, a możliwie nieskorelowane ze sobą. W związku z tym wybieramy ze zbioru wyłącznie cechy ilościowe, dla którym wyznaczymy współczynnik korelacji liniowej Pearsona. Do wizualizacji tych wartości wykorzystamy pakiet \href{https://cran.r-project.org/web/packages/corrplot/}{corrplot} służący do wizualizacji współczynnika korelacji.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1162,7 +1264,7 @@ Pierwszą kwestią, którą się zajmiemy jest współliniowość zmiennych. W r
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-26-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-27-1.pdf}
 
 Możemy zauważyć, że wartości bieżącego wynagrodzenia są najsilniej skorelowane w wartościami wynagrodzenia początkowego. Także doświadczenie i wiek są silnie ze sobą związane, co może sugerować, że obie zmienne wnoszą do modelu podobną informację.
 
@@ -1178,7 +1280,7 @@ W związku z tym powinniśmy wyeliminować niektóre zmienne z modelu pozostawia
   regresja krokowa.
 \end{itemize}
 
-W przypadku budowy wszystkich możliwych modeli należy pamiętać o rosnącej wykładniczo liczbie modeli - \(2^p-1\), gdzie \(p\) oznacza liczbę zmiennych objaśniających. w rozważanym przypadku liczba modeli wynosi 255.
+W przypadku budowy wszystkich możliwych modeli należy pamiętać o rosnącej wykładniczo liczbie modeli: \(2^p-1\), gdzie \(p\) oznacza liczbę zmiennych objaśniających. w rozważanym przypadku liczba modeli wynosi 255.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1274,24 +1376,24 @@ Otrzymany w ten sposób model jest tożsamy z modelem charakteryzującym się na
 ## -22922  -3300   -673   2537  46524 
 ## 
 ## Coefficients:
-##                  Estimate Std. Error t value             Pr(>|t|)    
-## (Intercept)     -6547.147   3402.860  -1.924              0.05496 .  
-## pwynagrodzenie      1.342      0.073  18.382 < 0.0000000000000002 ***
-## kat_pracownika2  6734.992   1631.122   4.129   0.0000431843301918 ***
-## kat_pracownika3 11226.635   1368.413   8.204   0.0000000000000023 ***
-## doswiadczenie     -22.302      3.571  -6.246   0.0000000009514655 ***
-## staz              147.865     31.461   4.700   0.0000034337703087 ***
-## plec1           -1878.949    761.703  -2.467              0.01399 *  
-## edukacja          501.391    160.270   3.128              0.00187 ** 
+##                  Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     -6547.147   3402.860  -1.924  0.05496 .  
+## pwynagrodzenie      1.342      0.073  18.382  < 2e-16 ***
+## kat_pracownika2  6734.992   1631.122   4.129 4.32e-05 ***
+## kat_pracownika3 11226.635   1368.413   8.204 2.30e-15 ***
+## doswiadczenie     -22.302      3.571  -6.246 9.51e-10 ***
+## staz              147.865     31.461   4.700 3.43e-06 ***
+## plec1           -1878.949    761.703  -2.467  0.01399 *  
+## edukacja          501.391    160.270   3.128  0.00187 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 6820 on 465 degrees of freedom
 ## Multiple R-squared:  0.8432, Adjusted R-squared:  0.8408 
-## F-statistic: 357.1 on 7 and 465 DF,  p-value: < 0.00000000000000022
+## F-statistic: 357.1 on 7 and 465 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
-Uzyskany model charakteryzuje się mniejszym błędem standardowym od modelu ze wszystkimi zmiennymi i tylko jedną nieistotną zmienną. Wyraz wolny (Intercept) nie musi być istotny w modelu.
+Uzyskany model charakteryzuje się mniejszym błędem standardowym od modelu ze wszystkimi zmiennymi i tylko jedną nieistotną zmienną. Wyraz wolny \texttt{(Intercept)} nie musi być istotny w modelu.
 
 Wróćmy jeszcze na chwilę do tematu współliniowości zmiennych objaśniających:
 
@@ -1340,21 +1442,21 @@ Ocena siły wpływu poszczególnych zmiennych objaśniających na zmienną obja�
 ## -1.34098 -0.19306 -0.03939  0.14841  2.72171 
 ## 
 ## Coefficients:
-##                 Estimate Std. Error t value             Pr(>|t|)    
-## (Intercept)     -0.08893    0.03144  -2.828              0.00488 ** 
-## pwynagrodzenie   0.61842    0.03364  18.382 < 0.0000000000000002 ***
-## kat_pracownika2  0.39400    0.09542   4.129   0.0000431843301918 ***
-## kat_pracownika3  0.65677    0.08005   8.204   0.0000000000000023 ***
-## doswiadczenie   -0.13657    0.02187  -6.246   0.0000000009514655 ***
-## staz             0.08691    0.01849   4.700   0.0000034337703087 ***
-## plec1           -0.10992    0.04456  -2.467              0.01399 *  
-## edukacja         0.08464    0.02706   3.128              0.00187 ** 
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     -0.08893    0.03144  -2.828  0.00488 ** 
+## pwynagrodzenie   0.61842    0.03364  18.382  < 2e-16 ***
+## kat_pracownika2  0.39400    0.09542   4.129 4.32e-05 ***
+## kat_pracownika3  0.65677    0.08005   8.204 2.30e-15 ***
+## doswiadczenie   -0.13657    0.02187  -6.246 9.51e-10 ***
+## staz             0.08691    0.01849   4.700 3.43e-06 ***
+## plec1           -0.10992    0.04456  -2.467  0.01399 *  
+## edukacja         0.08464    0.02706   3.128  0.00187 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.399 on 465 degrees of freedom
 ## Multiple R-squared:  0.8432, Adjusted R-squared:  0.8408 
-## F-statistic: 357.1 on 7 and 465 DF,  p-value: < 0.00000000000000022
+## F-statistic: 357.1 on 7 and 465 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
 Spośród cech ilościowych największy wpływ na zmienną objaśnianą mają wartości wynagrodzenia początkowego, staż, edukacja i na końcu doświadczenie.
@@ -1367,7 +1469,7 @@ Reszty czyli różnice pomiędzy obserwowanymi wartościami zmiennej objaśniane
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-32-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-33-1.pdf}
 
 Reszty w naszym modelu wydają się być zbliżone do rozkładu normalnego. Jednoznaczną odpowiedź da jednak odpowiedni test.
 
@@ -1396,7 +1498,7 @@ Hipoteza zerowa w tych testach mówi o zgodności rozkładu reszt z rozkładem n
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-34-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-35-1.pdf}
 
 Gdyby wszystkie punkty leżały na prostej to oznaczałoby to normalność rozkładu reszt. Tymczasem po lewej i prawej stronie tego wykresu znajdują się potencjalne wartości odstające, które znacznie wpływają na rozkład reszt modelu.
 
@@ -1408,7 +1510,7 @@ Wartości odstające można ustalić na podstawie wielu kryteriów. Do jednych z
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-35-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-36-1.pdf}
 
 Przypisanie tej funkcji do obiektu zwraca nam tabelę z numerami zidentyfikowanych obserwacji wpływowych. W przypadku odległości Cooka jest to 35 obserwacji.
 
@@ -1420,28 +1522,28 @@ Inną miarą są reszty studentyzowane.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-36-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-37-1.pdf}
 
 Wyżej wykorzystana funkcja jako kryterium odstawania przyjmuje wartość 3 identyfikując 10 obserwacji wpływowych. Z kolei dodanie do powyższej funkcji przyrostka \emph{fit} powoduje przyjęcie jako granicy wartości równej 2.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{obs_wplyw <-}\StringTok{ }\KeywordTok{ols_plot_resid_stud_fit}\NormalTok{(wybrany_model)}
+\NormalTok{stud2 <-}\StringTok{ }\KeywordTok{ols_plot_resid_stud_fit}\NormalTok{(wybrany_model)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-37-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-38-1.pdf}
 
 W ten sposób zostało zidentyfikowanych 22 obserwacji odstających. Korzystając z odległości Cooka wyeliminujemy obserwacje odstające ze zbioru:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{nr_obs_wplyw <-}\StringTok{ }\NormalTok{cook}\OperatorTok{$}\NormalTok{outliers}\OperatorTok{$}\NormalTok{observation}
+\NormalTok{outliers <-}\StringTok{ }\NormalTok{cook}\OperatorTok{$}\NormalTok{outliers}\OperatorTok{$}\NormalTok{observation}
 
-\NormalTok{bez_obs_wplyw <-}\StringTok{ }\NormalTok{pracownicy2[}\OperatorTok{-}\NormalTok{nr_obs_wplyw,]}
+\NormalTok{pracownicy_out <-}\StringTok{ }\NormalTok{pracownicy2[}\OperatorTok{-}\NormalTok{outliers,]}
 
 \NormalTok{wybrany_model_out <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(bwynagrodzenie }\OperatorTok{~}\StringTok{ }\NormalTok{pwynagrodzenie }\OperatorTok{+}\StringTok{ }\NormalTok{kat_pracownika }\OperatorTok{+}\StringTok{ }\NormalTok{doswiadczenie }\OperatorTok{+}\StringTok{ }\NormalTok{staz }\OperatorTok{+}\StringTok{ }\NormalTok{plec }\OperatorTok{+}\StringTok{ }\NormalTok{edukacja, }
-                        \DataTypeTok{data =}\NormalTok{ bez_obs_wplyw)}
+                        \DataTypeTok{data =}\NormalTok{ pracownicy_out)}
 \KeywordTok{summary}\NormalTok{(wybrany_model_out)}
 \end{Highlighting}
 \end{Shaded}
@@ -1450,31 +1552,31 @@ W ten sposób zostało zidentyfikowanych 22 obserwacji odstających. Korzystają
 ## 
 ## Call:
 ## lm(formula = bwynagrodzenie ~ pwynagrodzenie + kat_pracownika + 
-##     doswiadczenie + staz + plec + edukacja, data = bez_obs_wplyw)
+##     doswiadczenie + staz + plec + edukacja, data = pracownicy_out)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
 ## -12591.2  -2696.4   -564.8   2263.0  14704.1 
 ## 
 ## Coefficients:
-##                   Estimate Std. Error t value             Pr(>|t|)    
-## (Intercept)     -3756.8288  2381.5361  -1.577             0.115420    
-## pwynagrodzenie      1.3696     0.0676  20.260 < 0.0000000000000002 ***
-## kat_pracownika2  6480.6971  1049.9539   6.172   0.0000000015569534 ***
-## kat_pracownika3  9791.5000  1059.4980   9.242 < 0.0000000000000002 ***
-## doswiadczenie     -18.5808     2.3229  -7.999   0.0000000000000117 ***
-## staz              116.3809    20.9704   5.550   0.0000000501086186 ***
-## plec1           -1616.6030   505.1391  -3.200             0.001475 ** 
-## edukacja          397.7652   105.8146   3.759             0.000194 ***
+##                   Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     -3756.8288  2381.5361  -1.577 0.115420    
+## pwynagrodzenie      1.3696     0.0676  20.260  < 2e-16 ***
+## kat_pracownika2  6480.6971  1049.9539   6.172 1.56e-09 ***
+## kat_pracownika3  9791.5000  1059.4980   9.242  < 2e-16 ***
+## doswiadczenie     -18.5808     2.3229  -7.999 1.17e-14 ***
+## staz              116.3809    20.9704   5.550 5.01e-08 ***
+## plec1           -1616.6030   505.1391  -3.200 0.001475 ** 
+## edukacja          397.7652   105.8146   3.759 0.000194 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 4271 on 430 degrees of freedom
 ## Multiple R-squared:  0.894,  Adjusted R-squared:  0.8923 
-## F-statistic: 518.3 on 7 and 430 DF,  p-value: < 0.00000000000000022
+## F-statistic: 518.3 on 7 and 430 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
-Model dopasowany na takim zbiorze charakteryzuje się dużo mniejszym błędem standardowym oraz wyższym współczynnikiem \(R^2\). Sprawdźmy w takim razie normalność reszt.
+Model dopasowany na takim zbiorze charakteryzuje się dużo mniejszym błędem standardowym oraz wyższym współczynnikiem \(R^2\) w porównaniu do poprzedniego. Sprawdźmy w takim razie normalność reszt.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1482,9 +1584,9 @@ Model dopasowany na takim zbiorze charakteryzuje się dużo mniejszym błędem s
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-39-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-40-1.pdf}
 
-Wykres kwantyl-kwantyl wygląda już dużo lepiej, ale dla pewności przeprowadzimy testy statystyczne.
+Wykres kwantyl-kwantyl wygląda już dużo lepiej i w zasadzie nie obserwuje tu się dużych odstępstw od rozkładu normalnego. Przeprowadźmy jeszcze odpowiednie testy statystyczne.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1503,12 +1605,12 @@ Wykres kwantyl-kwantyl wygląda już dużo lepiej, ale dla pewności przeprowadz
 ## -----------------------------------------------
 \end{verbatim}
 
-Tylko jeden test wskazał zgodność rozkładu reszt z rozkładem normalnym.
+Tylko test Kołmogorova-Smirnova na poziomie istotności \(\alpha=0,01\) wskazał na brak podstaw do odrzucenia hipotezy zerowej.
 
 \hypertarget{zadanie-1}{%
 \subsection{Zadanie}\label{zadanie-1}}
 
-Na podstawie zbioru dotyczącego \href{data/50_Startups.csv}{50 startupów} określ jakie czynniki wpływają na przychód startupów.
+Na podstawie zbioru dotyczącego \href{data/startups.xlsx}{50 startupów} określ jakie czynniki wpływają na przychód startupów.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1595,7 +1697,7 @@ Wczytujemy zbiór danych i sprawdzamy czy pomiędzy zmiennymi są widoczne jakie
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-42-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-43-1.pdf}
 
 Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 
@@ -1606,7 +1708,7 @@ Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-43-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
 
 W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zbioru na dwie grupy za pomocą przekątnej.
 
@@ -1617,7 +1719,7 @@ W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zb
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-45-1.pdf}
 
 Po zestawieniu rocznego dochodu i wskaźnika wydatków wyłania się 5 potencjalnych grup, zatem te dwie cechy wykorzystamy do grupowania. Jednak przed zastosowaniem algorytmu musimy te dane przygotować normalizując zakres obu cech - w tym przypadku za pomocą standaryzacji.
 
@@ -1659,7 +1761,7 @@ W przypadku, gdy podział na grupy nie jest tak oczywisty lub bierzemy pod uwag�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-46-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
 
 Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. Według tego kryterium powinniśmy wybrać wartość 6 zamiast 5. Sprawdźmy zatem jakie otrzymamy przyporządkowanie do grup. Następnie informację o tym przypisaniu umieszczamy w oryginalnym zbiorze danych i przedstawiamy na wykresie. W celu uzyskania powtarzalnych wyników zastosujemy stałe ziarno generatora.
 
@@ -1677,7 +1779,7 @@ Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wart
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
 
 Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydział centrów skupień na początku algorytmu istnieje spora szansa, że rozwiązanie nie będzie optymalne. Rozwiązaniem tego problemu jest użycie algorytmu kmeans++ do początkowego ustalenia centrów. Ta metoda jest zaimplementowana w pakiecie \texttt{ClusterR}. Ponadto jest tam także funkcja do ustalenia optymalnej liczby skupień na podstawie wykresu osypiska.
 
@@ -1689,7 +1791,7 @@ Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydzia�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-49-1.pdf}
 
 \begin{verbatim}
 ##  [1] 398.00000 267.67171 156.91549 108.68209  65.24057  59.83221  49.72816
@@ -1714,7 +1816,7 @@ Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wart
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-49-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-50-1.pdf}
 
 Ostatnim etapem analizy jest odpowiednia charakterystyka uzyskanych klastrów - najczęściej wyznacza się średnie wartości cech w ramach każdej grupy.
 
@@ -1772,7 +1874,7 @@ Dla tych samych danych przeprowadzimy grupowanie, ale tym razem metodą hierarch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-51-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-52-1.pdf}
 
 Na podstawie dendrogramu identyfikujemy największe różnice odległości opisane na osi Y. Także w tym przypadku identyfikujemy 5 grup. Istnieje także wiele kryteriów, które mają na celu wyznaczyć optymalną liczbę grup - link.
 
@@ -1783,7 +1885,7 @@ Na podstawie dendrogramu identyfikujemy największe różnice odległości opisa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-52-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-53-1.pdf}
 
 Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych grup.
 
@@ -1800,7 +1902,7 @@ Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych grup.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-54-1.pdf}
 
 Uzyskane wyniki są bardzo zbliżone do tych otrzymanych za pomocą algorytmu k-średnich.
 
@@ -1857,7 +1959,7 @@ Porównajmy jeszcze wyniki działania tych dwóch metod na wykresach:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-56-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-57-1.pdf}
 
 Problematyczne obserwacje pochodziły z grupy klientów o przeciętnych dochodach oraz wydatkach.
 
