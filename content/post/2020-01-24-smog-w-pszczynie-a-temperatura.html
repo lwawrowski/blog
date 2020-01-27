@@ -1,5 +1,5 @@
 ---
-title: Smog w Pszczynie a temperatura
+title: Smog w Pszczynie a temperatura powietrza
 author: Łukasz
 date: '2020-01-24'
 slug: smog-w-pszczynie-a-temperatura
@@ -115,7 +115,7 @@ pm10_pszczyna &lt;- union_all(pm10_2015, pm10_2016) %&gt;%
   theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
 <p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>W ostatnich 5 latach nie nastąpiła żadne spektakularne zwiększenie liczby dni ze stężeniem PM10 w normie. Można jedynie odnotować, że w latach 2018-2019 PM10 nie przekroczyły poziomu alarmowego.</p>
-<p>Spójrzymy jescze na te same dane w ujęciu procentowych.</p>
+<p>Spójrzymy jeszcze na te same dane w ujęciu procentowych.</p>
 <pre class="r"><code>pm10_pszczyna %&gt;% 
   filter(!is.na(pm10)) %&gt;% 
   count(rok, poziom) %&gt;% 
@@ -150,8 +150,8 @@ pm10_pszczyna &lt;- union_all(pm10_2015, pm10_2016) %&gt;%
 <p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Wykres przedstawia wyraźną tendencję występowania wysokich wartości PM10 w pierwszym i czwartym kwartale. Z kolei w drugich i czwartych kwartałach wartości maksymalne nieznacznie wykraczają ponad wartość 100, natomiast mediana nigdy nie przekracza przyjętego jako norma poziomu 50.</p>
 </div>
-<div id="temperatura" class="section level1">
-<h1>Temperatura</h1>
+<div id="temperatura-powietrza" class="section level1">
+<h1>Temperatura powietrza</h1>
 <p>W drugiej części analizy wykorzystamy dane dotyczące temperatury.</p>
 <pre class="r"><code>library(imgw)
 
@@ -173,18 +173,18 @@ imgw_pszczyna &lt;- d %&gt;%
 <p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Podobnie jak w przypadku stężenia PM10 dla średniej dobowej temperatury można stwierdzić występowanie sezonowości.</p>
 </div>
-<div id="jakosc-powietrza-a-temperatura" class="section level1">
-<h1>Jakość powietrza a temperatura</h1>
+<div id="jakosc-powietrza-a-temperatura-powietrza" class="section level1">
+<h1>Jakość powietrza a temperatura powietrza</h1>
 <p>Wykorzystamy teraz zebrane dane do poszukania zależności pomiędzy stężeniem PM10 a temperaturą. W pierwszej kolejności zestawimy te dane na wykresie punktowym.</p>
 <pre class="r"><code>pm10_imgw &lt;- select(imgw_pszczyna, data, t2m_mean_daily) %&gt;% 
-  inner_join(., select(pm10_pszczyna, data, pm10)) %&gt;% 
-  filter(!is.na(pm10))</code></pre>
-<pre><code>## Joining, by = &quot;data&quot;</code></pre>
-<pre class="r"><code>ggplot(pm10_imgw, aes(y=pm10, x=t2m_mean_daily)) +
+  inner_join(., select(pm10_pszczyna, data, pm10), by=&quot;data&quot;) %&gt;% 
+  filter(!is.na(pm10))
+
+ggplot(pm10_imgw, aes(y=pm10, x=t2m_mean_daily)) +
   geom_point() +
   ylab(&quot;Stężenie PM10&quot;) +
   xlab(&quot;Średnia dobowa temperatura&quot;) +
-  ggtitle(&quot;Zależność pomiędzy stężeniem PM10 i średnią dobową temperaturą \nw latach 2015-2019&quot;) +
+  ggtitle(&quot;Zależność pomiędzy stężeniem PM10 i średnią dobową temperaturą \nw latach 2015-2019&quot;)+
   labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
   theme_light() +
   theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
@@ -193,7 +193,9 @@ imgw_pszczyna &lt;- d %&gt;%
 <p>Na kolejnym wykresie zestawimy obie analizowane cechy z uwzględnieniem czasu.</p>
 <pre class="r"><code>pm10_imgw %&gt;% 
   pivot_longer(-data) %&gt;% 
-  mutate(name=factor(name, levels = c(&quot;pm10&quot;, &quot;t2m_mean_daily&quot;), labels = c(&quot;PM10&quot;, &quot;Temperatura&quot;))) %&gt;% 
+  mutate(name=factor(name, 
+                     levels = c(&quot;pm10&quot;, &quot;t2m_mean_daily&quot;), 
+                     labels = c(&quot;PM10&quot;, &quot;Temperatura&quot;))) %&gt;% 
   ggplot(aes(x=data, y=value, color=name)) +
   geom_point(alpha = 0.5) +
   scale_color_manual(name = &quot;&quot;, values = c(&quot;grey50&quot;, &quot;deepskyblue2&quot;)) +
@@ -211,7 +213,9 @@ imgw_pszczyna &lt;- d %&gt;%
   filter(!is.na(pm10)) %&gt;% 
   mutate_if(is.numeric, scale) %&gt;% 
   pivot_longer(-data) %&gt;% 
-  mutate(name=factor(name, levels = c(&quot;pm10&quot;, &quot;t2m_mean_daily&quot;), labels = c(&quot;PM10&quot;, &quot;Temperatura&quot;)))
+  mutate(name=factor(name, 
+                     levels = c(&quot;pm10&quot;, &quot;t2m_mean_daily&quot;), 
+                     labels = c(&quot;PM10&quot;, &quot;Temperatura&quot;)))
 
 ggplot(pm10_imgw_std, aes(x=data, y=value, color=name)) +
   geom_point(alpha = 0.5) +
