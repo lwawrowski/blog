@@ -189,7 +189,7 @@ ggplot(pm10_imgw, aes(y=pm10, x=t2m_mean_daily)) +
   theme_light() +
   theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
 <p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>Nie można tu wskazać zależności liniowej - są dni z niską temperaturą i niskim stężeniem PM10, a także takie, gdzie to stężenie jest bardzo wysokie. Faktem jest natomiast, że w upalne dni stężenie PM10 jest niskie. Obliczenie współczynnika korelacji liniowej Pearsona wskazuje na wartość <span class="math inline">\(r=-0,53\)</span> czyli umiarkowaną zależność ujemną.</p>
+<p>Nie można tu wskazać zależności liniowej - są dni z niską temperaturą i niskim stężeniem PM10, a także takie, gdzie to stężenie jest bardzo wysokie. Faktem jest natomiast, że w upalne dni stężenie PM10 jest niskie. Obliczenie współczynnika korelacji liniowej Pearsona wskazuje na wartość <span class="math inline">\(r=-0,53\)</span> czyli umiarkowaną zależność ujemną. Przy czym jest to tylko informacja o współwystępowaniu obu zjawisk, a nie zależności przyczynowo-skutkowej.</p>
 <p>Na kolejnym wykresie zestawimy obie analizowane cechy z uwzględnieniem czasu.</p>
 <pre class="r"><code>pm10_imgw %&gt;% 
   pivot_longer(-data) %&gt;% 

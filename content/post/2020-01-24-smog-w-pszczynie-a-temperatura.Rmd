@@ -206,7 +206,7 @@ ggplot(pm10_imgw, aes(y=pm10, x=t2m_mean_daily)) +
 
 ```
 
-Nie można tu wskazać zależności liniowej - są dni z niską temperaturą i niskim stężeniem PM10, a także takie, gdzie to stężenie jest bardzo wysokie. Faktem jest natomiast, że w upalne dni stężenie PM10 jest niskie. Obliczenie współczynnika korelacji liniowej Pearsona wskazuje na wartość $r=-0,53$ czyli umiarkowaną zależność ujemną. 
+Nie można tu wskazać zależności liniowej - są dni z niską temperaturą i niskim stężeniem PM10, a także takie, gdzie to stężenie jest bardzo wysokie. Faktem jest natomiast, że w upalne dni stężenie PM10 jest niskie. Obliczenie współczynnika korelacji liniowej Pearsona wskazuje na wartość $r=-0,53$ czyli umiarkowaną zależność ujemną. Przy czym jest to tylko informacja o współwystępowaniu obu zjawisk, a nie zależności przyczynowo-skutkowej. 
 
 Na kolejnym wykresie zestawimy obie analizowane cechy z uwzględnieniem czasu.
 
