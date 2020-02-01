@@ -78,7 +78,7 @@ pm10_pszczyna &lt;- union_all(pm10_2015, pm10_2016) %&gt;%
 </tr>
 <tr class="odd">
 <td align="left">2019</td>
-<td align="right">9</td>
+<td align="right">7</td>
 </tr>
 </tbody>
 </table>
@@ -134,6 +134,83 @@ pm10_pszczyna &lt;- union_all(pm10_2015, pm10_2016) %&gt;%
   theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
 <p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Wniosek z powyższego wykresu nie jest zbyt pokrzepiający - tylko przez co najwyżej 71% dni w roku można cieszyć się w miarę czystym powietrzem. Z kolei 1/3 dni w roku to dni z poziomem powyżej 50 jednostek.</p>
+<p>Główny Inspektorat Ochrony Środowiska publikuje także dane na temat jakości powietrza w postaci <a href="http://powietrze.gios.gov.pl/pjp/current">indeksu jakości powietrza</a>, którzy przyporządkowuje stężenie pyłu do jednej z sześciu kategorii.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Indeks jakości powietrza</th>
+<th align="right">PM10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bardzo dobry</td>
+<td align="right">0-20</td>
+</tr>
+<tr class="even">
+<td align="left">Dobry</td>
+<td align="right">20,1-50</td>
+</tr>
+<tr class="odd">
+<td align="left">Umiarkowany</td>
+<td align="right">50,1-80</td>
+</tr>
+<tr class="even">
+<td align="left">Dostateczny</td>
+<td align="right">80,1-110</td>
+</tr>
+<tr class="odd">
+<td align="left">Zły</td>
+<td align="right">110,1-150</td>
+</tr>
+<tr class="even">
+<td align="left">Bardzo zły</td>
+<td align="right">&gt; 150</td>
+</tr>
+</tbody>
+</table>
+<p>Kolejny wykres przedstawia liczbę dni z danym indeksem jakości powiatrza zgodnie z powyższą klasyfikacją.</p>
+<pre class="r"><code>pm10_pszczyna %&gt;% 
+  filter(!is.na(pm10)) %&gt;% 
+  count(rok, indeks) %&gt;% 
+  complete(rok, indeks, fill = list(n = 0)) %&gt;% 
+  ggplot(aes(x = rok, y = n, fill = indeks)) +
+  geom_col(position = &quot;dodge&quot;) +
+  geom_text(aes(label=n), position = position_dodge(width = 0.9), vjust = -0.3) +
+  scale_fill_manual(values = c(&quot;#57B108&quot;,&quot;#B0DD10&quot;,&quot;#FFD911&quot;,&quot;#E58100&quot;,&quot;#E50000&quot;,&quot;#990000&quot;), 
+                    name = &quot;Indeks powietrza&quot;) +
+  xlab(&quot;Rok&quot;) +
+  ylab(&quot;Liczba dni&quot;) +
+  ylim(0,220) +
+  ggtitle(&quot;Liczba dni w roku z danym indeksem stężenia pyłu PM10&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(legend.position = &quot;bottom&quot;,
+        plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>W roku 2019 dni z bardzo dobrym i dobrym indeksem powietrza było w sumie 251, w roku 2018 - 236, a w 2017 - 259. Z kolei takich dni, kiedy odnotowano zły i bardzo zły indeks powietrza było odpowiednio 20 (2019), 46 (2018) i 35 (2017).</p>
+<p>Te same dane można także przedstawić w ujęciu procentowym.</p>
+<pre class="r"><code>pm10_pszczyna %&gt;% 
+  filter(!is.na(pm10)) %&gt;% 
+  count(rok, indeks) %&gt;% 
+  complete(rok, indeks, fill = list(n = 0)) %&gt;% 
+  group_by(rok) %&gt;% 
+  mutate(proc=round(n/sum(n)*100)) %&gt;% 
+  ggplot(aes(x = rok, y = proc, fill = indeks)) +
+  geom_col(position = &quot;dodge&quot;) +
+  geom_text(aes(label=proc), position = position_dodge(width = 0.9), vjust = -0.3) +
+  scale_fill_manual(values = c(&quot;#57B108&quot;,&quot;#B0DD10&quot;,&quot;#FFD911&quot;,&quot;#E58100&quot;,&quot;#E50000&quot;,&quot;#990000&quot;), 
+                    name = &quot;Indeks powietrza&quot;) +
+  xlab(&quot;Rok&quot;) +
+  ylab(&quot;Odsetek dni&quot;) +
+  ylim(0,60) +
+  ggtitle(&quot;Odsetek dni w roku z danym indeksem stężenia pyłu PM10&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(legend.position = &quot;bottom&quot;,
+        plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Na podstawie danych z powyższego wykresu można stwierdzić, że 60% dni w roku 2019 jakość powietrza była dobra lub bardzo dobra. W roku 2018 te dni stanowiły 65%, a w 2017 - 72%. Z kolei zły i bardzo zły indeks powietrza dotyczył 6% dni 2019 roku, 13% dni 2018 roku oraz 10% dni dla roku 2017. Na podstawie tak krótkiego szeregu czasowego nie można jednak wnioskować na temat istnienia trendu.</p>
 <p>Kolejny wykres przedstawia wykresy pudełkowe stężenia PM10 w podziale na lata i kwartały. Wykresy pudełkowe przedstawiają rozkład w postaci wartości minimalnej, kwartyla dolnego (25% obserwacji poniżej, 75% obserwacji powyżej), mediany (50% obserwacji poniżej, 50% obserwacji powyżej), kwartyla górnego (75% obserwacji poniżej, 25% obserwacji powyżej) oraz maksimum.</p>
 <pre class="r"><code>pm10_pszczyna %&gt;% 
   filter(!is.na(pm10)) %&gt;% 
@@ -147,7 +224,7 @@ pm10_pszczyna &lt;- union_all(pm10_2015, pm10_2016) %&gt;%
   theme_light() +
   theme(legend.position = &quot;bottom&quot;,
         plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
-<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Wykres przedstawia wyraźną tendencję występowania wysokich wartości PM10 w pierwszym i czwartym kwartale. Z kolei w drugich i czwartych kwartałach wartości maksymalne nieznacznie wykraczają ponad wartość 100, natomiast mediana nigdy nie przekracza przyjętego jako norma poziomu 50.</p>
 </div>
 <div id="temperatura-powietrza" class="section level1">
@@ -170,7 +247,7 @@ imgw_pszczyna &lt;- d %&gt;%
   theme_light() +
   theme(legend.position = &quot;bottom&quot;,
         plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
-<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Podobnie jak w przypadku stężenia PM10 dla średniej dobowej temperatury można stwierdzić występowanie sezonowości.</p>
 </div>
 <div id="jakosc-powietrza-a-temperatura-powietrza" class="section level1">
@@ -188,7 +265,7 @@ ggplot(pm10_imgw, aes(y=pm10, x=t2m_mean_daily)) +
   labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
   theme_light() +
   theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
-<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Nie można tu wskazać zależności liniowej - są dni z niską temperaturą i niskim stężeniem PM10, a także takie, gdzie to stężenie jest bardzo wysokie. Faktem jest natomiast, że w upalne dni stężenie PM10 jest niskie. Obliczenie współczynnika korelacji liniowej Pearsona wskazuje na wartość <span class="math inline">\(r=-0,53\)</span> czyli umiarkowaną zależność ujemną. Przy czym jest to tylko informacja o współwystępowaniu obu zjawisk, a nie zależności przyczynowo-skutkowej.</p>
 <p>Na kolejnym wykresie zestawimy obie analizowane cechy z uwzględnieniem czasu.</p>
 <pre class="r"><code>pm10_imgw %&gt;% 
@@ -206,7 +283,7 @@ ggplot(pm10_imgw, aes(y=pm10, x=t2m_mean_daily)) +
   theme_light() +
   theme(legend.position = &quot;bottom&quot;,
         plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
-<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Widoczne jest wzajemne przeciwstawianie się obserwacji, natomiast ze względu na to, że te cechy są mierzone na różnych skalach to trudno te wielkości porównywać. Zatem zostanie zastosowana standaryzacja, co umożliwi porównanie wartości cech.</p>
 <pre class="r"><code>pm10_imgw_std &lt;- select(imgw_pszczyna, data, t2m_mean_daily) %&gt;% 
   inner_join(., select(pm10_pszczyna, data, pm10), by=&quot;data&quot;) %&gt;% 
@@ -228,7 +305,7 @@ ggplot(pm10_imgw_std, aes(x=data, y=value, color=name)) +
   theme_light() +
   theme(legend.position = &quot;bottom&quot;,
         plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
-<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/post/2020-01-24-smog-w-pszczynie-a-temperatura_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Na powyższej grafice widać wyraźnie, że podczas dni z wysoką temperaturą powietrza poziom stężenia PM10 utrzymuje się na niskim poziomie. Z kolei spadek temperatury w większości przypadków pociąga za sobą wzrost stężenia PM10.</p>
 </div>
 <div id="podsumowanie" class="section level1">

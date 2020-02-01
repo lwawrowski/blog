@@ -134,6 +134,67 @@ pm10_pszczyna %>%
 
 Wniosek z powyższego wykresu nie jest zbyt pokrzepiający - tylko przez co najwyżej 71% dni w roku można cieszyć się w miarę czystym powietrzem. Z kolei 1/3 dni w roku to dni z poziomem powyżej 50 jednostek.
 
+Główny Inspektorat Ochrony Środowiska publikuje także dane na temat jakości powietrza w postaci [indeksu jakości powietrza](http://powietrze.gios.gov.pl/pjp/current), którzy przyporządkowuje stężenie pyłu do jednej z sześciu kategorii.
+
+| Indeks jakości powietrza | PM10 |
+|:-------------------------|-----:|
+| Bardzo dobry | 0-20 |
+| Dobry | 20,1-50 |
+| Umiarkowany | 50,1-80 |
+| Dostateczny | 80,1-110 |
+| Zły | 110,1-150 |
+| Bardzo zły | > 150 |
+
+Kolejny wykres przedstawia liczbę dni z danym indeksem jakości powiatrza zgodnie z powyższą klasyfikacją.
+
+```{r}
+pm10_pszczyna %>% 
+  filter(!is.na(pm10)) %>% 
+  count(rok, indeks) %>% 
+  complete(rok, indeks, fill = list(n = 0)) %>% 
+  ggplot(aes(x = rok, y = n, fill = indeks)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label=n), position = position_dodge(width = 0.9), vjust = -0.3) +
+  scale_fill_manual(values = c("#57B108","#B0DD10","#FFD911","#E58100","#E50000","#990000"), 
+                    name = "Indeks powietrza") +
+  xlab("Rok") +
+  ylab("Liczba dni") +
+  ylim(0,220) +
+  ggtitle("Liczba dni w roku z danym indeksem stężenia pyłu PM10") +
+  labs(caption = "Łukasz Wawrowski - wawrowski.edu.pl") +
+  theme_light() +
+  theme(legend.position = "bottom",
+        plot.caption = element_text(color = "grey80"))
+```
+
+W roku 2019 dni z bardzo dobrym i dobrym indeksem powietrza było w sumie 251, w roku 2018 - 236, a w 2017 - 259. Z kolei takich dni, kiedy odnotowano zły i bardzo zły indeks powietrza było odpowiednio 20 (2019), 46 (2018) i 35 (2017).
+
+Te same dane można także przedstawić w ujęciu procentowym.
+
+```{r}
+pm10_pszczyna %>% 
+  filter(!is.na(pm10)) %>% 
+  count(rok, indeks) %>% 
+  complete(rok, indeks, fill = list(n = 0)) %>% 
+  group_by(rok) %>% 
+  mutate(proc=round(n/sum(n)*100)) %>% 
+  ggplot(aes(x = rok, y = proc, fill = indeks)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label=proc), position = position_dodge(width = 0.9), vjust = -0.3) +
+  scale_fill_manual(values = c("#57B108","#B0DD10","#FFD911","#E58100","#E50000","#990000"), 
+                    name = "Indeks powietrza") +
+  xlab("Rok") +
+  ylab("Odsetek dni") +
+  ylim(0,60) +
+  ggtitle("Odsetek dni w roku z danym indeksem stężenia pyłu PM10") +
+  labs(caption = "Łukasz Wawrowski - wawrowski.edu.pl") +
+  theme_light() +
+  theme(legend.position = "bottom",
+        plot.caption = element_text(color = "grey80"))
+```
+
+Na podstawie danych z powyższego wykresu można stwierdzić, że 60% dni w roku 2019 jakość powietrza była dobra lub bardzo dobra. W roku 2018 te dni stanowiły 65%, a w 2017 - 72%. Z kolei zły i bardzo zły indeks powietrza dotyczył 6% dni 2019 roku, 13% dni 2018 roku oraz 10% dni dla roku 2017. Na podstawie tak krótkiego szeregu czasowego nie można jednak wnioskować na temat istnienia trendu.
+
 Kolejny wykres przedstawia wykresy pudełkowe stężenia PM10 w podziale na lata i kwartały. Wykresy pudełkowe przedstawiają rozkład w postaci wartości minimalnej, kwartyla dolnego (25% obserwacji poniżej, 75% obserwacji powyżej), mediany (50% obserwacji poniżej, 50% obserwacji powyżej), kwartyla górnego (75% obserwacji poniżej, 25% obserwacji powyżej) oraz maksimum.
 
 ```{r}
