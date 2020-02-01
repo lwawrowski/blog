@@ -82,7 +82,7 @@ pm10_pszczyna &lt;- union_all(pm10_2015, pm10_2016) %&gt;%
 </tr>
 </tbody>
 </table>
-<p>Niestety z niewiadomych przyczyn brakuje pomiarów dla kilku dni w każdym roku. Aż 17 dni w roku 2016 nie była zbierana informacja o stężeniu PM10. W pozostałych latach są to pojedyncze dni i nie stanowią znaczącej wartości względem całego roku. Te obserwacje zostaną z analizy wyeliminowane. Alternatywnie można zastosować wybraną metodę imputacji danych.</p>
+<p>Niestety z niewiadomych przyczyn brakuje pomiarów dla kilku dni w każdym roku. Aż 17 dni w roku 2016 nie była zbierana informacja o stężeniu PM10. Był to okres od 3 do 18 marca. W pozostałych latach są to pojedyncze dni i nie stanowią znaczącej wartości względem całego roku. Te obserwacje zostaną z analizy wyeliminowane. Alternatywnie można zastosować wybraną metodę imputacji danych.</p>
 <p>Następnie przeanalizujemy wartości stężenia PM10 w ujęciu czasowym.</p>
 <pre class="r"><code>pm10_pszczyna %&gt;% 
   filter(!is.na(pm10)) %&gt;% 

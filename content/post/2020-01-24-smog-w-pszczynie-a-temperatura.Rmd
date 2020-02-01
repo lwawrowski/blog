@@ -67,7 +67,7 @@ pm10_pszczyna %>%
   knitr::kable()
 ```
 
-Niestety z niewiadomych przyczyn brakuje pomiarów dla kilku dni w każdym roku. Aż 17 dni w roku 2016 nie była zbierana informacja o stężeniu PM10. W pozostałych latach są to pojedyncze dni i nie stanowią znaczącej wartości względem całego roku. Te obserwacje zostaną z analizy wyeliminowane. Alternatywnie można zastosować wybraną metodę imputacji danych. 
+Niestety z niewiadomych przyczyn brakuje pomiarów dla kilku dni w każdym roku. Aż 17 dni w roku 2016 nie była zbierana informacja o stężeniu PM10. Był to okres od 3 do 18 marca. W pozostałych latach są to pojedyncze dni i nie stanowią znaczącej wartości względem całego roku. Te obserwacje zostaną z analizy wyeliminowane. Alternatywnie można zastosować wybraną metodę imputacji danych. 
 
 Następnie przeanalizujemy wartości stężenia PM10 w ujęciu czasowym.
 
