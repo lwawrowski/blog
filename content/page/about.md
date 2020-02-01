@@ -6,7 +6,7 @@ author = "Łukasz"
 
 <img style="float: left; padding: 20px; padding-left: 0px" src="/img/photo2.jpg" height="300px">
 
-Łukasz Wawrowski - doktor nauk ekonomicznych, absolwent Wydziału Informatyki i Gospodarki Elektronicznej Uniwersytetu Ekonomicznego w Poznaniu. Swoją pasją do programowania w R i statystyki dzielę się podczas prowadzonych zajęć i szkoleń.
+Łukasz Wawrowski - doktor nauk ekonomicznych, adiunkt w Katedrze Statystyki na Uniwersytecie Ekonomicznym w Poznaniu.  
 
 Kontakt: lukasz [dot] wawrowski [at] outlook [dot] com
 
