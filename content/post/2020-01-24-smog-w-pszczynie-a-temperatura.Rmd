@@ -72,7 +72,7 @@ Niestety z niewiadomych przyczyn brakuje pomiarów dla kilku dni w każdym roku.
 Następnie przeanalizujemy wartości stężenia PM10 w ujęciu czasowym.
 
 ```{r}
-pm10_pszczyna %>% 
+p <- pm10_pszczyna %>% 
   filter(!is.na(pm10)) %>% 
   ggplot(aes(x=data, y = pm10, color = poziom)) +
   geom_point() +
@@ -84,9 +84,15 @@ pm10_pszczyna %>%
   theme_light() +
   theme(legend.position = "bottom",
         plot.caption = element_text(color = "grey80"))
+
+p
 ```
 
-Dla lat 2015-2019 wyraźnie widać kolejne pory roku - zimą stężenie pyłów PM10 jest wysokie, a latem niskie i nie przekracza normatywnego poziomu. Pod kątem rekordowo wysokich wartości warty odnotowania jest rok 2016 i 2017. Trzy najwyższe wartości występowały kolejno w dniach 9,10,11 stycznia 2017 roku. 
+Dla lat 2015-2019 wyraźnie widać kolejne pory roku - zimą stężenie pyłów PM10 jest wysokie, a latem niskie i nie przekracza normatywnego poziomu. Pod kątem rekordowo wysokich wartości warty odnotowania jest rok 2016 i 2017. Trzy najwyższe wartości występowały kolejno w dniach 9, 10, 11 stycznia 2017 roku. Poniżej ten sam wykres znajduje się w wersji interaktywnej.
+
+```{r}
+plotly::ggplotly(p)
+```
 
 Warto bliżej się przyjrzeć zdefiniowanym normom i częstości występowania.
 
