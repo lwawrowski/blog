@@ -326,3 +326,5 @@ Na powyższej grafice widać wyraźnie, że podczas dni z wysoką temperaturą p
 # Podsumowanie
 
 W tym poście zostały przedstawione tylko dwie cechy - poziom pyłów PM10 oraz średnia dobowa temperatura powietrza. W analizie smogu należałoby uwzględnić także inne cechy związane z warunkami atmosferycznymi. Na podstawie wielu takich czynników można pokusić się o stworzenie modelu prognozującego stężenie pyłów PM10. 
+
+Zbiory danych i kody użyte w analizie znajdują się w repozytorium na [githubie](https://github.com/lwawrowski/smog).
