@@ -266,6 +266,11 @@ Case study: \href{data/wybory2018.xlsx}{Wybory 2018}
 \hypertarget{testowanie-hipotez}{%
 \chapter{Testowanie hipotez}\label{testowanie-hipotez}}
 
+\href{presentations/03_testy.html}{Prezentacja}
+
+\hypertarget{wprowadzenie-2}{%
+\section{Wprowadzenie}\label{wprowadzenie-2}}
+
 Do rozwiązania wybranych zagadnień analizy statystycznej wystarczą metody weryfikacji hipotez statystycznych. Taki proces można przedstawić w następujących krokach:
 
 \begin{enumerate}
@@ -860,6 +865,11 @@ Przyjmując poziom istotności \(\alpha = 0,05\) odrzucamy hipotezę zerową - c
 \hypertarget{regresja}{%
 \chapter{Regresja}\label{regresja}}
 
+\href{presentations/04_regresja.html}{Prezentacja}
+
+\hypertarget{wprowadzenie-3}{%
+\section{Wprowadzenie}\label{wprowadzenie-3}}
+
 Metody regresji pozwalają na analizowanie zależności przyczynowo-skutkowych oraz predycję nieznanych wartości. Korzystając z tej metody należy jednak pamiętać, że model regresji jest tylko przybliżeniem rzeczywistości.
 
 Przykłady zastosowania regresji:
@@ -1393,7 +1403,7 @@ Otrzymany w ten sposób model jest tożsamy z modelem charakteryzującym się na
 ## F-statistic: 357.1 on 7 and 465 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
-Uzyskany model charakteryzuje się mniejszym błędem standardowym od modelu ze wszystkimi zmiennymi i tylko jedną nieistotną zmienną. Wyraz wolny \texttt{(Intercept)} nie musi być istotny w modelu.
+Uzyskany model charakteryzuje się nieznacznie większym błędem resztowym od modelu ze wszystkimi zmiennymi, ale wszystkie zmienne są istotne. Wyraz wolny \texttt{(Intercept)} nie musi być istotny w modelu.
 
 Wróćmy jeszcze na chwilę do tematu współliniowości zmiennych objaśniających:
 
@@ -1642,6 +1652,11 @@ Na podstawie zbioru dotyczącego \href{data/startups.xlsx}{50 startupów} okreś
 \hypertarget{grupowanie}{%
 \chapter{Grupowanie}\label{grupowanie}}
 
+\href{presentations/05_grupowanie.html}{Prezentacja}
+
+\hypertarget{wprowadzenie-4}{%
+\section{Wprowadzenie}\label{wprowadzenie-4}}
+
 Grupowanie polega na przypisanie obiektów do określonych grup/klastrów/skupień/segmentów, w których znajdą się jednostki najbardziej do siebie podobne, a powstałe grupy będą się między sobą różnić. Całe utrudnienie polega na tym, że nie wiemy ile tych grup ma powstać.
 
 \hypertarget{metoda-k-srednich}{%
@@ -1767,7 +1782,7 @@ Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wart
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{14}\NormalTok{)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{12}\NormalTok{)}
 \NormalTok{grupy <-}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ klienci_z, }\DataTypeTok{centers =} \DecValTok{5}\NormalTok{)}
 
 \NormalTok{klienci}\OperatorTok{$}\NormalTok{grupa <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(grupy}\OperatorTok{$}\NormalTok{cluster)}
