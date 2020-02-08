@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <title>Metody przetwarzania i analizy danych</title>
+    <title>Podstawy programowania</title>
     <meta charset="utf-8" />
     <meta name="author" content="© Łukasz Wawrowski" />
     <link href="libs/countdown-0.3.3/countdown.css" rel="stylesheet" />
@@ -13,8 +13,8 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Metody przetwarzania<br>i analizy danych
-## Grupowanie
+# Podstawy programowania
+## Programowanie
 ### © Łukasz Wawrowski
 
 ---
@@ -22,110 +22,27 @@ class: center, middle, inverse, title-slide
 
 
 
-# Podział metod
+# Wykonywanie warunkowe
 
-Uczenie nadzorowane - końcowy wynik jest znany
+Za pomocą instrukcji if możemy warunkowo wykonywać kod. Ogólna postać jest następująca:
 
-- regresja
+```r
+if(warunek){
+  # kod wykonany jeśli warunek jest równy TRUE
+} else if(warunek) {
+  # kod wykonany jeśli warunek jest równy TRUE
+} else {
+  # kod wykonany jeśli warunek jest równy FALSE
+}
+```
 
-- klasyfikacja
+Element warunek musi zwracać wartość logiczną `TRUE` albo `FALSE`.
 
-Uczenie nienadzorowane - końcowy wynik nie jest znany
+Operatory łączenia:
 
-- grupowanie obiektów
+- i : &amp;&amp;
 
-- grupowanie cech
-
----
-
-# Podział metod
-
-![](img/wd.jpg)
-
----
-
-# Grupowanie
-
-Metoda iteracyjna:
-
-- funkcja `kmeans()`
-
-- pakiet [_ClusterR_](https://cran.r-project.org/web/packages/ClusterR/index.html)
-
-Metoda hierarchiczna:
-
-- funkcja `hclust()`
-
-- pakiet [_ggdendro_](https://cran.r-project.org/web/packages/ggdendro/index.html)
-
-- pakiet [_clusterCrit_](https://cran.r-project.org/web/packages/clusterCrit/)
-
----
-
-# Idea
-
-Liczenie odległości pomiędzy analizowanymi obiektami.
-
-Cechy opisujące obiekty mogą być wyrażone w różnych jednostkach np. w segmentacji klientów:
-
-- wiek w latach
-
-- wydatki na zakupy
-
-- liczba wizyt w sklepie
-
-W związku z tym konieczna jest **normalizacja** cech czyli pozbawienie ich mian.
-
-Najpopularniejszą metodą normalizacji jest standaryzacja:
-
-`\(z=\frac{x-\bar{x}}{s}\)`
-
-gdzie: `\(\bar{x}\)` - średnia, `\(s\)` - odchylenie standardowe.
-
----
-
-# Standaryzacja
-
-![](05_grupowanie_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
-
-
----
-
-# Metoda k-średnich
-
-1. Wskaż liczbę grup `\(k\)`.
-
-2. Wybierz dowolne `\(k\)` punktów jako centra grup.
-
-3. Przypisz każdą z obserwacji do najbliższego centroidu.
-
-4. Oblicz nowe centrum grupy.
-
-5. Przypisz każdą z obserwacji do nowych centroidów. Jeśli któraś obserwacja zmieniła grupę - przejdź do kroku nr 4, a w przeciwnym przypadku zakończ algorytm.
-
----
-
-# Metoda k-średnich
-
-![](img/kmeans.gif)
-
-[źródło](https://dashee87.github.io/data%20science/general/Clustering-with-Scikit-with-GIFs/)
-
----
-
-# Przykład
-
-Segementacja [klientów sklepu](http://www.wawrowski.edu.pl/adr/data/klienci.csv) w oparciu o następujące dane:
-
-- klientID - identyfikator klienta
-
-- plec - płeć
-
-- wiek - wiek
-
-- roczny_dochod - roczny dochód wyrażony w tys. dolarów
-
-- wskaznik_wydatkow - klasyfikacja sklepu od 1 do 100
+- lub : ||
 
 ---
 
@@ -133,52 +50,87 @@ class: inverse
 
 # Zadanie
 
-1. Dokonaj grupowania danych dotyczących [32 samochodów](http://www.wawrowski.edu.pl/adr/data/auta.csv) według następujących zmiennych: pojemność, przebieg, lata oraz cena.
+Do obiektu przypisz liczbę, a następnie napisz kod wykonywania warunkowego, który zwróci różne komunikaty:
 
-2. Przeprowadź grupowanie [powiatów na podstawie wybranych wskaźników z 2018 roku](http://www.wawrowski.edu.pl/adr/data/daneGUS.RData).
+- podzielna przez 3,
 
+- podzielna przez 5,
 
-<div class="countdown" id="timer_5e3e5fc7" style="top:0;right:0;" data-warnwhen="0">
-<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
+- podzielna przez 3 i 5,
 
----
+- niepodzielna ani przez 3 ani przez 5.
 
-# Metoda hierarchiczna
+Operator zwracający resztę z dzielenia to `%%`.
 
-1. Każda obserwacji stanowi jedną z `\(N\)` pojedynczych grup.
-
-2. Na podstawie macierzy odległości połącz dwie najbliżej leżące obserwacje w jedną grupę.
-
-3. Połącz dwa najbliżej siebie leżące grupy w jedną.
-
-4. Powtórz krok nr 3, aż do uzyskania jednej grupy.
-
----
-
-# Dendrogram
-
-&lt;img src="img/dendrogram.png" height="500px"&gt;
-
-[źródło](https://www.data-to-viz.com/graph/dendrogram.html)
-
----
-
-class: inverse
-
-# Zadanie
-
-Do danych z poprzedniego zadania zastosuj metodę hierarchiczną.
-
-<div class="countdown" id="timer_5e3e616c" style="top:0;right:0;" data-warnwhen="0">
+<div class="countdown" id="timer_5e3e5b69" style="top:0;right:0;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
 ---
 
-class: inverse, center, middle
+# Funkcje
 
-# Pytania?
+Funkcję ograniczają potrzebę kopiowania kodu i ułatwiają wprowadzanie zmian.
+
+Stworzenie funkcji wymaga:
+
+1. wymyślenia nazwy funkcji
+
+2. określenia elementów wejściowych
+
+3. umieszczenia kodu w ciele funkcji
+
+---
+
+# Dobre praktyki tworzenia funkcji
+
+- nazwy funkcji powinny być czasownikami
+
+- ustalona notacja: podkreślnik vs. camelCase
+
+- wspólny przedrostek
+
+---
+
+class: inverse
+
+# Zadanie
+
+Napisz funkcję, która na podstawie podanej godziny wyświetli komunikat "Dzień dobry" lub "Dobry wieczór".
+
+<div class="countdown" id="timer_5e3e5c0a" style="top:0;right:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+# Pętla for
+
+Pętla składa się z trzech elementów:
+
+- wyjście
+
+- sekwencja
+
+- ciało
+
+```r
+for(iterator in zakres){
+  # ciało pętli
+}
+```
+
+---
+
+class: inverse
+
+# Zadanie
+
+Napisz pętlę, która przeprowadzi 1000 losowań lotto - 6 liczb z 49.
+
+<div class="countdown" id="timer_5e3e5a3f" style="top:0;right:0;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
