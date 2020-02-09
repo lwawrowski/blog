@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Materiały z zajęć | Metody przetwarzania i analizy danych w R</title>
+  <title>1 Wprowadzenie | Metody przetwarzania i analizy danych w R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Metody przetwarzania i analizy danych w R." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Materiały z zajęć | Metody przetwarzania i analizy danych w R" />
+  <meta property="og:title" content="1 Wprowadzenie | Metody przetwarzania i analizy danych w R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="lwawrowski/analiza-danych-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Materiały z zajęć | Metody przetwarzania i analizy danych w R" />
+  <meta name="twitter:title" content="1 Wprowadzenie | Metody przetwarzania i analizy danych w R" />
   
   <meta name="twitter:description" content="Materiały dydaktyczne do kursu Metody przetwarzania i analizy danych w R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="klasyfikacja.html"/>
-
+<link rel="prev" href="index.html"/>
+<link rel="next" href="testowanie-hipotez.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -200,61 +200,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="materiay-z-zajec" class="section level1">
-<h1><span class="header-section-number">6</span> Materiały z zajęć</h1>
-<div id="section" class="section level2">
-<h2><span class="header-section-number">6.1</span> 28.10.2018</h2>
-<p><a href="res\skrypt20181028.R">Wprowadzenie do R</a></p>
-<p><a href="res\analiza20181028.R">Analiza sejmików</a></p>
-</div>
-<div id="section-1" class="section level2">
-<h2><span class="header-section-number">6.2</span> 18.11.2018</h2>
-<p><a href="https://departmentofstatisticspue.github.io/statystyka-opisowa/analiza-struktury.html">Analiza struktury</a></p>
-<p><a href="data\rossmann.xlsx">Rossmann</a></p>
-<p><a href="res\zajecia20181118.R">Analiza struktury w R</a></p>
-</div>
-<div id="section-2" class="section level2">
-<h2><span class="header-section-number">6.3</span> 16.12.2018</h2>
-<p><a href="prezentacje\03.html">Prezentacja</a></p>
-<p><a href="data\Salary_Data.csv">Pracownicy</a></p>
-<p><a href="res\korelacje20181216.R">Korelacja w R</a></p>
-<p><a href="res\regresja20181216.Rmd">Regresja w R</a></p>
-</div>
-<div id="section-3" class="section level2">
-<h2><span class="header-section-number">6.4</span> 26.01.2019</h2>
-<p><a href="data\salary.xlsx">Pensja i doświaczenie</a></p>
-<p><a href="data\pracownicy.xlsx">Pracownicy</a></p>
-<p>Opis zbioru:</p>
+<div id="wprowadzenie" class="section level1">
+<h1><span class="header-section-number">1</span> Wprowadzenie</h1>
+<div id="narzedzie" class="section level2">
+<h2><span class="header-section-number">1.1</span> Narzędzie</h2>
 <ul>
-<li>id - kod pracownika</li>
-<li>plec - płeć pracownika (0 - mężczyzna, 1 - kobieta)</li>
-<li>data_urodz - data urodzenia</li>
-<li>edukacja - wykształcenie (w latach nauki)</li>
-<li>kat_pracownika - grupa pracownicza (1 - ochroniarz, 2 - urzędnik, 3 - menedżer)</li>
-<li>bwynagrodzenie - bieżące wynagrodzenie</li>
-<li>pwynagrodzenie - początkowe wynagrodzenie</li>
-<li>staz - staż pracy (w miesiącach)</li>
-<li>doswiadczenie - poprzednie zatrudnienie (w miesiącach)</li>
-<li>zwiazki - przynależność do związków zawodowych (0 - nie, 1 - tak)</li>
-<li>wiek - wiek (w latach)</li>
+<li>darmowe</li>
+<li>wszechstronne</li>
+<li>wsparcie społeczności</li>
+<li>wersja desktopowa i serwerowa</li>
 </ul>
-<p><a href="res\regresja20190126.R">Regresja w R</a></p>
+<p>czyli <strong>R</strong> - środowisko do obliczeń statystycznych i wizualizacji wyników</p>
+<ul>
+<li>strona projektu: <a href="https://www.r-project.org/">r-project.org</a></li>
+<li>świetne IDE: <a href="https://www.rstudio.com/">RStudio</a></li>
+<li>wersja przeglądarkowa: <a href="https://rstudio.cloud/">rstudio.cloud</a></li>
+</ul>
+<p><a href="https://www.business-science.io/business/2018/10/08/python-and-r.html">R + Python</a></p>
+</div>
+<div id="cele-analiz" class="section level2">
+<h2><span class="header-section-number">1.2</span> Cele analiz</h2>
+<p>Podstawowe:</p>
+<ul>
+<li>wnioskowanie statystyczne - porównywanie grup</li>
+<li>regresja - poszukiwanie związków</li>
+<li>klasyfikacja - przyporządkowanie do grup</li>
+<li>grupowanie - poszukiwanie grup</li>
+<li>prognozowanie - patrzenie w przyszłość</li>
+</ul>
+<p>Inne:</p>
+<ul>
+<li>analiza języka naturalnego</li>
+<li>rozpoznawanie obrazów</li>
+<li>analiza koszykowa</li>
+<li>…</li>
+</ul>
+<div id="eksporacja-danych" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Eksporacja danych</h3>
+<p>Pakiet <code>tidyverse</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<pre><code>## -- Attaching packages ------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## &lt;U+221A&gt; ggplot2 3.2.1     &lt;U+221A&gt; purrr   0.3.2
+## &lt;U+221A&gt; tibble  2.1.3     &lt;U+221A&gt; dplyr   0.8.3
+## &lt;U+221A&gt; tidyr   1.0.0     &lt;U+221A&gt; stringr 1.4.0
+## &lt;U+221A&gt; readr   1.3.1     &lt;U+221A&gt; forcats 0.4.0</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.1</code></pre>
+<pre><code>## -- Conflicts ---------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<ul>
+<li>analiza częstości dla zmiennych jakościowych</li>
+<li>analiza struktury dla zmiennych ilościowych</li>
+</ul>
+<p>Case study: <a href="data/wybory2018.xlsx">Wybory 2018</a></p>
 
 </div>
 </div>
-
-
-
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="klasyfikacja.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="testowanie-hipotez.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
