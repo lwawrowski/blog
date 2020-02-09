@@ -19,69 +19,16 @@ e-mail: lukasz.wawrowski [at] cdv.pl
 
 [Podręcznik](http://www.wawrowski.edu.pl/ppr/)
 
-## Prezentacje
-
-[Wprowadzenie](http://www.wawrowski.edu.pl/ppr/presentations/01_wprowadzenie.html)
-
-[Wczytywanie danych](http://www.wawrowski.edu.pl/ppr/presentations/02_wczytywanie.html)
-
-[Przetwarzanie danych](http://www.wawrowski.edu.pl/ppr/presentations/03_przetwarzanie.html)
-
-[Wizualizacja danych](http://www.wawrowski.edu.pl/ppr/presentations/04_wizualizacja.html)
-
-## Kody z zajęć
-
-### Grupa 1
-
-[19.10.2019](gr_20191019.html)
-
-[20.10.2019](gr1_20191020.html)
-
-[16.11.2019](gr1_20191116.html)
-
-[17.11.2019](gr1_20191117.html)
-
-### Grupa 2
-
-[19.10.2019](gr_20191019.html)
-
-[20.10.2019](gr2_20191020.html)
-
-[16.11.2019](gr2_20191116.html)
-
-[17.11.2019](gr2_20191117.html)
-
-[30.11.2019](gr2_20191130.html)
-
 # Metody analizy i przetwarzania danych
 
 [Podręcznik](http://www.wawrowski.edu.pl/adr/)
 
-## Prezentacje
+   
+   
+[Skrypty z zajęć](https://github.com/lwawrowski/cdv_bigdata)
 
-[Eksploracyjna analiza danych](http://www.wawrowski.edu.pl/adr/presentations/01_eda.html)
+Linki do prezentacji znajdują się na początku każdego rozdziału.
 
-[Raporty](http://www.wawrowski.edu.pl/adr/presentations/02_raporty.html)
-
-[Testy statystyczne](http://www.wawrowski.edu.pl/adr/presentations/03_testy.html)
-
-[Regresja liniowa](http://www.wawrowski.edu.pl/adr/presentations/04_regresja.html)
-
-## Kody z zajęć
-
-### Grupa 1
-
-[30.11.2019 EDA](gr1_20191130_eda.html)
-
-[30.11.2019 pracownicy](gr1_20191130_pracownicy.Rmd)
-
-### Grupa 2
-
-[1.12.2019 EDA](gr2_20191201_eda.html)
-
-[1.12.2019 raport](gr2_20191201_raport.Rmd)
-
-[1.12.2019 pracownicy](gr2_20191201_pracownicy.Rmd)
 
 # Zbiory danych
 
