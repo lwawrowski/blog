@@ -236,7 +236,7 @@ imgw_pszczyna <- d %>%
 
 ```
 
-W momencie publikacji tego wpisu nie były dostępne dane za grudzień 2019. Zbiór danych zawiera wiele różnych cech takich jak: temperatura, wilgotność, wysokość pokrywy śnieżnej czy stopień zachmurzenia. Szczęśliwie zbiór nie zawiera braków danych. Interesującą nas zmienną będzie średnia dobowa temperatura, której wykres przedstawiony jest poniżej.
+Zbiór danych zawiera wiele różnych cech takich jak: temperatura, wilgotność, wysokość pokrywy śnieżnej czy stopień zachmurzenia. Szczęśliwie zbiór nie zawiera braków danych. Interesującą nas zmienną będzie średnia dobowa temperatura, której wykres przedstawiony jest poniżej.
 
 ```{r}
 ggplot(imgw_pszczyna, aes(x=data, y=t2m_mean_daily)) +
