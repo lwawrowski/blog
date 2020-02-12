@@ -15,32 +15,12 @@ www: [wawrowski.edu.pl](http://www.wawrowski.edu.pl/)
 
 e-mail: lukasz.wawrowski [at] cdv.pl
 
-# Podstawy programowania w R
+# Materiały z zajęć
 
-[Podręcznik](http://www.wawrowski.edu.pl/ppr/)
+[Podstawy programowania w R - podręcznik](http://www.wawrowski.edu.pl/ppr/)
 
-# Metody analizy i przetwarzania danych
-
-[Podręcznik](http://www.wawrowski.edu.pl/adr/)
-
-   
-   
-[Skrypty z zajęć](https://github.com/lwawrowski/cdv_bigdata)
+[Metody analizy i przetwarzania danych - podręcznik](http://www.wawrowski.edu.pl/adr/)
 
 Linki do prezentacji znajdują się na początku każdego rozdziału.
 
-
-# Zbiory danych
-
-- [gus.RData](http://www.wawrowski.edu.pl/data/gus.RData)
-
-- [movies.csv](http://www.wawrowski.edu.pl/data/movies.csv)
-
-- [pgss.RData](http://www.wawrowski.edu.pl/data/pgss.RData) 
-- [opis zbioru pgss](http://www.wawrowski.edu.pl/data/P0091DOC.pdf)
-
-- [pracownicy.xlsx](http://www.wawrowski.edu.pl/data/pracownicy.xlsx)
-
-- [rossmann.xlsx](http://www.wawrowski.edu.pl/data/rossmann.xlsx)
-
-- [sf_ny_homes.csv](http://www.wawrowski.edu.pl/data/sf_ny_homes.csv)
+[Skrypty z zajęć](https://github.com/lwawrowski/cdv_bigdata)

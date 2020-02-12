@@ -169,96 +169,73 @@ Dodatkowa:
 
 \href{https://github.com/lwawrowski/cdv_bigdata}{Skrypty z zajęć}
 
+\hypertarget{analiza-opisowa}{%
+\chapter{Analiza opisowa}\label{analiza-opisowa}}
+
 \hypertarget{wprowadzenie}{%
-\chapter{Wprowadzenie}\label{wprowadzenie}}
+\section{Wprowadzenie}\label{wprowadzenie}}
 
-\hypertarget{narzedzie}{%
-\section{Narzędzie}\label{narzedzie}}
+\href{presentations/01_eda.html}{Prezentacja}
 
-\begin{itemize}
-\tightlist
-\item
-  darmowe
-\item
-  wszechstronne
-\item
-  wsparcie społeczności
-\item
-  wersja desktopowa i serwerowa
-\end{itemize}
+\hypertarget{eksploracyjna-analiza-danych}{%
+\section{Eksploracyjna analiza danych}\label{eksploracyjna-analiza-danych}}
 
-czyli \textbf{R} - środowisko do obliczeń statystycznych i wizualizacji wyników
+Explanatory Data Analysis (EDA) polega na opisie i wizualizacji danch bez zakładania hipotez badawczych. W R dostępnych jest wiele pakietów, które wspierają ten proces - \href{https://journal.r-project.org/archive/2019/RJ-2019-033/index.html}{The Landscape of R Packages for Automated Exploratory Data Analysis}.
+
+Najczęściej pobieramym pakietem jest \href{https://cran.r-project.org/web/packages/summarytools/vignettes/Introduction.html}{summarytools} z następującymi funkcjami:
 
 \begin{itemize}
 \tightlist
 \item
-  strona projektu: \href{https://www.r-project.org/}{r-project.org}
+  \texttt{view(dfSummary(zbior))} - wyświetla podsumowanie zawierające kilka statystyk opisowych, częstości, histogram i braki danych
 \item
-  świetne IDE: \href{https://www.rstudio.com/}{RStudio}
+  \texttt{freq(zbior\$zmienna)} - wyświetla tabelę częstości
 \item
-  wersja przeglądarkowa: \href{https://rstudio.cloud/}{rstudio.cloud}
+  \texttt{descr(zbior)} - wyświetla zestaw 15 statystyk opisowych
 \end{itemize}
 
-\href{https://www.business-science.io/business/2018/10/08/python-and-r.html}{R + Python}
-
-\hypertarget{cele-analiz}{%
-\section{Cele analiz}\label{cele-analiz}}
-
-Podstawowe:
+Poniżej znajduje się krótki opis tych 15 miar:
 
 \begin{itemize}
 \tightlist
 \item
-  wnioskowanie statystyczne - porównywanie grup
+  średnia (mean) - przeciętna wartość cechy
 \item
-  regresja - poszukiwanie związków
+  odchylenie standardowe (std. dev) - o ile wartości cechy odchylają się średnio od średniej
 \item
-  klasyfikacja - przyporządkowanie do grup
+  minimum (min) - minimalna wartość cechy
 \item
-  grupowanie - poszukiwanie grup
+  kwartyl pierwszy (Q1) - 25\% obserwacji ma wartości poniżej Q1, a 75\% obserwacji powyżej
 \item
-  prognozowanie - patrzenie w przyszłość
+  mediana (median) - wartość środkowa, 50\% obserwacji ma wartości poniżej Q1, a 50\% obserwacji powyżej
+\item
+  kwartyl trzeci (Q3) - 75\% obserwacji ma wartości poniżej Q3, a 25\% obserwacji powyżej
+\item
+  maksimum (max) - maksymalna wartość cechy
+\item
+  odchylenie medianowe (MAD) - mediana odchyleń od mediany
+\item
+  rozstęp międzykwartylowy (IQR) - różnica pomiędzy trzecim i pierwszym kwartylem
+\item
+  współczynnik zmienności (CV) - udział odchylenia standardowego w średniej wartości cechy (w \%)
+\item
+  skośność (skewness) - asymetria rozkładu cechy, \(< 0\) - lewostronna, \(> 0\) - prawostronna, \(= 0\) - symetryczny
+\item
+  błąd standardowy skośności (se.skewness)
+\item
+  kurtoza (kurtosis) - skupienie wartości wokół średniej, \(< 0\) - słabe, \(> 0\) - silne, \(= 0\) - normalne
+\item
+  liczba obserwacji bez braków danych (N.Valid)
+\item
+  odsetek obserwacji bez braków danych (Pct.Valid)
 \end{itemize}
-
-Inne:
-
-\begin{itemize}
-\tightlist
-\item
-  analiza języka naturalnego
-\item
-  rozpoznawanie obrazów
-\item
-  analiza koszykowa
-\item
-  \ldots{}
-\end{itemize}
-
-\hypertarget{eksporacja-danych}{%
-\subsection{Eksporacja danych}\label{eksporacja-danych}}
-
-Pakiet \texttt{tidyverse}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{itemize}
-\tightlist
-\item
-  analiza częstości dla zmiennych jakościowych
-\item
-  analiza struktury dla zmiennych ilościowych
-\end{itemize}
-
-Case study: \href{data/wybory2018.xlsx}{Wybory 2018}
 
 \hypertarget{testowanie-hipotez}{%
 \chapter{Testowanie hipotez}\label{testowanie-hipotez}}
 
-\href{presentations/03_testy.html}{Prezentacja}
+\href{presentations/02_raporty.html}{Prezentacja - raporty}
+
+\href{presentations/03_testy.html}{Prezentacja - testy}
 
 \hypertarget{wprowadzenie-1}{%
 \section{Wprowadzenie}\label{wprowadzenie-1}}
@@ -553,7 +530,7 @@ Normalność rozkładu może także zostać zweryfikowana poprzez utworzenie wyk
 
 Na wykresie przedstawiony jest wykres kwantyl-kwantyl dla 50 wartości wylosowanych z rozkładu normalnego i z rozkładu jednostajnego.
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-9-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 Jak można zauważyć punkty na wykresie po lewej stronie nie odbiegają znacząco od linii prostej, zatem można przypuszczać, że rozkład tej cechy jest normalny. Z kolei na wykresie po prawej stronie obserwuje się odstępstwo od rozkładu normalnego - wartości na krańcach linii są od niej oddalone.
 
@@ -589,7 +566,7 @@ Na poziomie \(\alpha = 0,05\) Odrzucamy \(H_0\) (p \textless{} \(\alpha\)) - do�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-11-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-10-1.pdf}
 
 \hypertarget{testowanie-wariancji---test-bartletta}{%
 \section{Testowanie wariancji - test Bartletta}\label{testowanie-wariancji---test-bartletta}}
@@ -915,7 +892,7 @@ Następnie stworzymy wykres.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-20-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-19-1.pdf}
 
 Najprostszym sposobem wizualizacji jest wykorzystanie funkcji \texttt{plot()}, niemniej taki wykres nie jest najpiękniejszy i trudno się go formatuje. Dużo lepiej skorzystać z pakietu \texttt{ggplot2}.
 
@@ -932,7 +909,7 @@ Najprostszym sposobem wizualizacji jest wykorzystanie funkcji \texttt{plot()}, n
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-21-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-20-1.pdf}
 
 W argumentach funkcji \texttt{ggplot()} podajemy co wizualizujemy, natomiast sposób prezentacji ustalany jest przez funkcje \texttt{geom}. Funkcje \texttt{xlab()} i \texttt{ylab()} określają etykiety osi, a \texttt{xlim()} i \texttt{ylim()} wartości graniczne. Funkcje rozpoczynające się od \texttt{theme\_} określają wygląd wykresu.
 
@@ -1266,7 +1243,7 @@ Pierwszą kwestią, którą się zajmiemy jest współliniowość zmiennych. W r
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-27-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-26-1.pdf}
 
 Możemy zauważyć, że wartości bieżącego wynagrodzenia są najsilniej skorelowane w wartościami wynagrodzenia początkowego. Także doświadczenie i wiek są silnie ze sobą związane, co może sugerować, że obie zmienne wnoszą do modelu podobną informację.
 
@@ -1471,7 +1448,7 @@ Reszty czyli różnice pomiędzy obserwowanymi wartościami zmiennej objaśniane
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-33-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-32-1.pdf}
 
 Reszty w naszym modelu wydają się być zbliżone do rozkładu normalnego. Jednoznaczną odpowiedź da jednak odpowiedni test.
 
@@ -1500,7 +1477,7 @@ Hipoteza zerowa w tych testach mówi o zgodności rozkładu reszt z rozkładem n
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-35-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-34-1.pdf}
 
 Gdyby wszystkie punkty leżały na prostej to oznaczałoby to normalność rozkładu reszt. Tymczasem po lewej i prawej stronie tego wykresu znajdują się potencjalne wartości odstające, które znacznie wpływają na rozkład reszt modelu.
 
@@ -1512,7 +1489,7 @@ Wartości odstające można ustalić na podstawie wielu kryteriów. Do jednych z
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-36-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-35-1.pdf}
 
 Przypisanie tej funkcji do obiektu zwraca nam tabelę z numerami zidentyfikowanych obserwacji wpływowych. W przypadku odległości Cooka jest to 35 obserwacji.
 
@@ -1524,7 +1501,7 @@ Inną miarą są reszty studentyzowane.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-37-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-36-1.pdf}
 
 Wyżej wykorzystana funkcja jako kryterium odstawania przyjmuje wartość 3 identyfikując 10 obserwacji wpływowych. Z kolei dodanie do powyższej funkcji przyrostka \emph{fit} powoduje przyjęcie jako granicy wartości równej 2.
 
@@ -1534,7 +1511,7 @@ Wyżej wykorzystana funkcja jako kryterium odstawania przyjmuje wartość 3 iden
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-38-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-37-1.pdf}
 
 W ten sposób zostało zidentyfikowanych 22 obserwacji odstających. Korzystając z odległości Cooka wyeliminujemy obserwacje odstające ze zbioru:
 
@@ -1586,7 +1563,7 @@ Model dopasowany na takim zbiorze charakteryzuje się dużo mniejszym błędem s
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-40-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-39-1.pdf}
 
 Wykres kwantyl-kwantyl wygląda już dużo lepiej i w zasadzie nie obserwuje tu się dużych odstępstw od rozkładu normalnego. Przeprowadźmy jeszcze odpowiednie testy statystyczne.
 
@@ -1704,7 +1681,7 @@ Wczytujemy zbiór danych i sprawdzamy czy pomiędzy zmiennymi są widoczne jakie
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-43-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-42-1.pdf}
 
 Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 
@@ -1715,7 +1692,7 @@ Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-43-1.pdf}
 
 W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zbioru na dwie grupy za pomocą przekątnej.
 
@@ -1726,7 +1703,7 @@ W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zb
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-45-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
 
 Po zestawieniu rocznego dochodu i wskaźnika wydatków wyłania się 5 potencjalnych grup, zatem te dwie cechy wykorzystamy do grupowania. Jednak przed zastosowaniem algorytmu musimy te dane przygotować normalizując zakres obu cech - w tym przypadku za pomocą standaryzacji.
 
@@ -1768,7 +1745,7 @@ W przypadku, gdy podział na grupy nie jest tak oczywisty lub bierzemy pod uwag�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-46-1.pdf}
 
 Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. Według tego kryterium powinniśmy wybrać wartość 6 zamiast 5. Sprawdźmy zatem jakie otrzymamy przyporządkowanie do grup. Następnie informację o tym przypisaniu umieszczamy w oryginalnym zbiorze danych i przedstawiamy na wykresie. W celu uzyskania powtarzalnych wyników zastosujemy stałe ziarno generatora.
 
@@ -1786,7 +1763,7 @@ Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wart
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
 
 Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydział centrów skupień na początku algorytmu istnieje spora szansa, że rozwiązanie nie będzie optymalne. Rozwiązaniem tego problemu jest użycie algorytmu kmeans++ do początkowego ustalenia centrów. Ta metoda jest zaimplementowana w pakiecie \texttt{ClusterR}. Ponadto jest tam także funkcja do ustalenia optymalnej liczby skupień na podstawie wykresu osypiska.
 
@@ -1798,7 +1775,7 @@ Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydzia�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-49-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
 
 \begin{verbatim}
 ##  [1] 398.00000 267.67171 156.91549 108.68209  65.24057  59.83221  49.72816
@@ -1808,7 +1785,30 @@ Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydzia�
 ## [1] "k-means clustering"
 \end{verbatim}
 
-Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. W analizowanym przypadku będzie to 5 grup. Następnie korzystamy z funkcji \texttt{KMeans\_rcpp} do wyznaczenia przynależności do grup. Ta funkcja domyślnie korzysta z algorytmu kmeans++, zatem nie ma niebezpieczeństwa, że uzyskamy niewłaściwe przyporządkowanie.
+Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. W analizowanym przypadku będzie to 5 grup.
+
+Dodatkowo można obliczyć jedno z wielu kryteriów dobroci podziału obiektów na grupy. Jednym z najpopularniejszych jest kryterium Calińskiego-Harabasza zaimplementowane m.in. w pakiecie clusterCrit. Podobnie jak w przypadku wykresu osypiska należy policzyć wartość tego kryterium dla różnej liczby segemntów i wybrać liczbę grup wskazaną przez wartość maksymalną.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(clusterCrit)}
+
+\NormalTok{kryt_ch <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(}\DecValTok{15}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(kryt_ch)) \{}
+\NormalTok{  gr <-}\StringTok{ }\KeywordTok{KMeans_rcpp}\NormalTok{(klienci_z, }\DataTypeTok{clusters =}\NormalTok{ i)}
+\NormalTok{  kryt_ch[i] <-}\StringTok{ }\KeywordTok{intCriteria}\NormalTok{(}\DataTypeTok{traj =}\NormalTok{ klienci_z, }\DataTypeTok{part =} \KeywordTok{as.integer}\NormalTok{(gr}\OperatorTok{$}\NormalTok{clusters), }\DataTypeTok{crit =} \StringTok{"cal"}\NormalTok{)}
+\NormalTok{\}}
+
+\KeywordTok{plot}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{, kryt_ch, }\DataTypeTok{type=}\StringTok{"b"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-49-1.pdf}
+
+Najwyższe wartości indeksu Calińskiego-Harabasza obserwujemy dla 5 i 9 skupień. Należy jednak pamiętać, że w grupowaniu bardzo ważna jest ocena badacza pod kątem sensowności otrzymanego podziału - łatwiej stworzyć 5 różnych kampanii reklamowych aniżeli 9.
+
+Następnie korzystamy z funkcji \texttt{KMeans\_rcpp} do wyznaczenia przynależności do grup. Ta funkcja domyślnie korzysta z algorytmu kmeans++, zatem nie ma niebezpieczeństwa, że uzyskamy niewłaściwe przyporządkowanie.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2053,73 +2053,6 @@ Wady:
 Zbuduj model klasyfikacyjny dla zbioru \href{data/Social_Network_Ads.csv}{danych} dotyczących cech internautów oraz informacji czy zamówili reklamowany produkt czy nie.
 
 Przeprowadź imputację braków danych dla zbioru \href{data/pracownicy.RData}{pracowników}.
-
-\hypertarget{materiay-z-zajec}{%
-\chapter{Materiały z zajęć}\label{materiay-z-zajec}}
-
-\hypertarget{section}{%
-\section{28.10.2018}\label{section}}
-
-\href{res/skrypt20181028.R}{Wprowadzenie do R}
-
-\href{res/analiza20181028.R}{Analiza sejmików}
-
-\hypertarget{section-1}{%
-\section{18.11.2018}\label{section-1}}
-
-\href{https://departmentofstatisticspue.github.io/statystyka-opisowa/analiza-struktury.html}{Analiza struktury}
-
-\href{data/rossmann.xlsx}{Rossmann}
-
-\href{res/zajecia20181118.R}{Analiza struktury w R}
-
-\hypertarget{section-2}{%
-\section{16.12.2018}\label{section-2}}
-
-\href{prezentacje/03.html}{Prezentacja}
-
-\href{data/Salary_Data.csv}{Pracownicy}
-
-\href{res/korelacje20181216.R}{Korelacja w R}
-
-\href{res/regresja20181216.Rmd}{Regresja w R}
-
-\hypertarget{section-3}{%
-\section{26.01.2019}\label{section-3}}
-
-\href{data/salary.xlsx}{Pensja i doświaczenie}
-
-\href{data/pracownicy.xlsx}{Pracownicy}
-
-Opis zbioru:
-
-\begin{itemize}
-\tightlist
-\item
-  id - kod pracownika
-\item
-  plec - płeć pracownika (0 - mężczyzna, 1 - kobieta)
-\item
-  data\_urodz - data urodzenia
-\item
-  edukacja - wykształcenie (w latach nauki)
-\item
-  kat\_pracownika - grupa pracownicza (1 - ochroniarz, 2 - urzędnik, 3 - menedżer)
-\item
-  bwynagrodzenie - bieżące wynagrodzenie
-\item
-  pwynagrodzenie - początkowe wynagrodzenie
-\item
-  staz - staż pracy (w miesiącach)
-\item
-  doswiadczenie - poprzednie zatrudnienie (w miesiącach)
-\item
-  zwiazki - przynależność do związków zawodowych (0 - nie, 1 - tak)
-\item
-  wiek - wiek (w latach)
-\end{itemize}
-
-\href{res/regresja20190126.R}{Regresja w R}
 
 
 \end{document}
