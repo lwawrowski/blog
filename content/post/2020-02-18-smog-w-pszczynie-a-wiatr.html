@@ -1,0 +1,242 @@
+---
+title: Smog w Pszczynie a kierunek i siła wiatru
+author: Łukasz
+date: '2020-02-18'
+slug: smog-w-pszczynie-a-wiatr
+categories:
+  - R
+tags:
+  - smog
+  - pszczyna
+  - imgw
+description: ''
+---
+
+
+
+<p>Istotnym czynnikiem mającym wpływ na jakość powietrza jest także siła i kierunek wiatru. Instytut Meteorologii i Gospodarki Wodnej gromadzi takie dane w odstępach 10 minutowych i można je pobrać z <a href="https://dane.imgw.pl/datastore">tej strony</a> dla wszystkich stacji. Dane archiwalne są w plikach .zip dla każdego miesiąca osobno. Pobrałem ręcznie 60 plików i je rozpakowałem, a następnie wczytałem je do R za pomocą poniższego skryptu.</p>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+
+wczytaj_pliki &lt;- function(nazwa){
+  
+  d &lt;- read_csv2(str_c(&quot;wiatr/&quot;,nazwa), col_names = F) %&gt;% 
+    filter(X1==249180010) # stacja w Pszczynie
+  
+  return(d)
+}
+
+# kierunek wiatru
+
+pliki_wiatr_kierunek &lt;- str_c(sort(rep(str_c(&quot;B00202A_&quot;,2015:2019),12)),
+                              &quot;_&quot;,sprintf(&quot;%02d&quot;,1:12),&quot;.csv&quot;)
+
+wiatr_kierunek &lt;- map_df(pliki_wiatr_kierunek, wczytaj_pliki)
+
+wiatr_kierunek &lt;- wiatr_kierunek %&gt;% 
+  select(data_time=X3, kierunek=X4) %&gt;% 
+  mutate(data=as_date(data_time),
+         kierunek8=cut(x=kierunek, breaks = seq(from = 0, to = 360, by = 22.5), 
+                       labels = c(&quot;N&quot;, &quot;NE&quot;, &quot;NE&quot;, &quot;E&quot;, &quot;E&quot;, &quot;SE&quot;, &quot;SE&quot;, &quot;S&quot;, 
+                                  &quot;S&quot;, &quot;SW&quot;, &quot;SW&quot;, &quot;W&quot;, &quot;W&quot;, &quot;NW&quot;, &quot;NW&quot;, &quot;N&quot;)))
+
+# siła wiatru
+
+pliki_wiatr_sila &lt;- str_c(sort(rep(str_c(&quot;B00702A_&quot;,2015:2019),12)),
+                          &quot;_&quot;,sprintf(&quot;%02d&quot;,1:12),&quot;.csv&quot;)
+
+wiatr_sila &lt;- map_df(pliki_wiatr_sila, wczytaj_pliki)
+
+wiatr_sila &lt;- wiatr_sila %&gt;% 
+  select(data_time=X3, sila=X4)
+
+wiatr_kierunek_sila &lt;- inner_join(wiatr_kierunek, wiatr_sila, by = &quot;data_time&quot;)</code></pre>
+<p>Wynikowy zbiór danych zawiera 257484 obserwacji i 5 kolumn. Kierunek wiatru jest określany na planie koła w zakresie o 0° do 360°. Dobrze to obrazuje poniższy obrazek.</p>
+<p><img src="/post/2020-02-18-smog-w-pszczynie-a-wiatr_files/figure-html/wind.png" /></p>
+<p>Na potrzeby analizy podzieliłem koło na 8 części po 45°, aby wyodrębnić najważniejsze kierunki wiatru.</p>
+<pre class="r"><code>wiatr_kierunek_sila %&gt;% 
+  count(kierunek8) %&gt;% 
+  mutate(kierunek8=fct_reorder(kierunek8, n)) %&gt;% 
+  ggplot(aes(x=kierunek8, y=n)) +
+  geom_col(fill = &quot;#6daaee&quot;) +
+  coord_flip() +
+  ylim(0,80000) +
+  xlab(&quot;Kierunek wiatru&quot;) +
+  ylab(&quot;Liczba pomiarów&quot;) +
+  ggtitle(&quot;Liczba pomiarów kierunku wiatru - dane 10-minutowe&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-02-18-smog-w-pszczynie-a-wiatr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>W Pszczynie wiatr najczęściej wieje z południowego-zachodu (SW). Na drugim i trzecim miejscu z podobnym rezultatem jest wiatr zachodni (W) i wschodni (E). Najrzadziej doświadczany jest wiatr północny.</p>
+<p>Na potrzeby analizy smogu dane dotyczące wiatru musiały zostać zagregowane do danych dziennych. W tym celu obliczyłem liczbę pomiarów kierunku wiatru każdego dnia i dla każdego dnia wybrałem ten dominujący. Jeśli jakiegoś dnia dwa kierunki występowały tyle samo razy to wybierałem ten, który wiał silniej w odniesieniu do mediany.</p>
+<pre class="r"><code>wiatr_kierunek_sila_dzien &lt;- wiatr_kierunek_sila %&gt;% 
+  group_by(data,kierunek8) %&gt;% 
+  summarise(n=n(),
+            sila_med=median(sila)) %&gt;% 
+  group_by(data) %&gt;% 
+  top_n(1,n) %&gt;% 
+  top_n(1,sila_med) %&gt;% 
+  ungroup()</code></pre>
+<p>Rezultatem jest zbiór zawierający 1815 obserwacji. Sprawdźmy czy zmienił się rozkład występowania kierunku wiatru.</p>
+<pre class="r"><code>wiatr_kierunek_sila_dzien %&gt;% 
+  count(kierunek8) %&gt;% 
+  mutate(kierunek8=fct_reorder(kierunek8, n)) %&gt;% 
+  ggplot(aes(x=kierunek8, y=n)) +
+  geom_col(fill = &quot;#6daaee&quot;) +
+  coord_flip() +
+  xlab(&quot;Kierunek wiatru&quot;) +
+  ylab(&quot;Liczba pomiarów&quot;) +
+  ggtitle(&quot;Liczba pomiarów kierunku wiatru - dane dzienne&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-02-18-smog-w-pszczynie-a-wiatr_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Nadal dominuje wiatr południowo-zachodni, natomiast nastąpiła zamiana na drugim i trzecim miejscu - wiatru zachodniego ze wschodnim. Także na ostatnich dwóch pozycjach kategorie są odwrotnie w porównaniu do pomiarów co 10 minut.</p>
+<p>Zobaczmy jak analizowane zjawisko kształtowało się w czasie.</p>
+<pre class="r"><code>ggplot(wiatr_kierunek_sila_dzien, aes(x=data, y=sila_med, color=kierunek8)) +
+  geom_point() +
+  scale_color_discrete(name = &quot;Kierunek wiatru&quot;) +
+  xlab(&quot;Data&quot;) +
+  ylab(&quot;Mediana siły wiatru (w m/s)&quot;) +
+  ggtitle(&quot;Siła i kierunek wiatru w latach 2015-2019&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(legend.position = &quot;bottom&quot;,
+        plot.caption = element_text(color = &quot;grey80&quot;)) +
+  guides(col = guide_legend(nrow = 1))</code></pre>
+<p><img src="/post/2020-02-18-smog-w-pszczynie-a-wiatr_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Można zauważyć, że zimą wiatr wieje silniej niż w pozostałej części roku. Wśród wysokich wartości dominuje kierunek południowo-zachodni i zachodni.</p>
+<p>W następnej kolejności zestawimy te dane ze stężeniem pyłów PM10.</p>
+<pre class="r"><code>pm10_wiatr &lt;- inner_join(pm10_pszczyna, wiatr_kierunek_sila_dzien, by=&quot;data&quot;) %&gt;% 
+  filter(!is.na(pm10))
+
+ggplot(pm10_wiatr, aes(x=sila_med, y=pm10, color=kierunek8)) +
+  geom_point() +
+  scale_color_discrete(name = &quot;Kierunek wiatru&quot;) +
+  xlab(&quot;Mediana siły wiatru&quot;) +
+  ylab(&quot;Stężenie PM10&quot;) +
+  ggtitle(&quot;Zależność pomiędzy stężeniem PM10 i siłą wiatru w latach 2015-2019&quot;)+
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(legend.position = &quot;bottom&quot;,
+        plot.caption = element_text(color = &quot;grey80&quot;)) +
+  guides(col = guide_legend(nrow = 1))</code></pre>
+<p><img src="/post/2020-02-18-smog-w-pszczynie-a-wiatr_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Na wykresie nie jest widoczna silna współzależność. Współczynnik korelacji liniowej pomiędzy tymi zmiennymi wynosi <span class="math inline">\(r=-0,22\)</span>, co oznacza, że pomiędzy siłą wiatru a stężeniem PM10 występuje słaba ujemna zależność. Także w przypadku kierunku wiatru nie można zidentyfikować wzorca zależności. Wysokie stężenie PM10 występuję dla wiatru z kierunku południowo-zachodniego (SW), wschodniego (E), a także północno-wschodniego (NE).</p>
+<p>W kolejnym kroku zestawimy indeks jakości powietrza z kierunkiem wiatru.</p>
+<pre class="r"><code>table(pm10_wiatr$indeks, pm10_wiatr$kierunek8) %&gt;% knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">N</th>
+<th align="right">NE</th>
+<th align="right">E</th>
+<th align="right">SE</th>
+<th align="right">S</th>
+<th align="right">SW</th>
+<th align="right">W</th>
+<th align="right">NW</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>bardzo dobry</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="right">11</td>
+<td align="right">133</td>
+<td align="right">90</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td>dobry</td>
+<td align="right">5</td>
+<td align="right">96</td>
+<td align="right">187</td>
+<td align="right">14</td>
+<td align="right">74</td>
+<td align="right">336</td>
+<td align="right">149</td>
+<td align="right">76</td>
+</tr>
+<tr class="odd">
+<td>umiarkowany</td>
+<td align="right">7</td>
+<td align="right">28</td>
+<td align="right">72</td>
+<td align="right">1</td>
+<td align="right">14</td>
+<td align="right">89</td>
+<td align="right">22</td>
+<td align="right">27</td>
+</tr>
+<tr class="even">
+<td>dostateczny</td>
+<td align="right">4</td>
+<td align="right">12</td>
+<td align="right">38</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">62</td>
+<td align="right">9</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td>zły</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">27</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">30</td>
+<td align="right">4</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td>bardzo zły</td>
+<td align="right">3</td>
+<td align="right">8</td>
+<td align="right">30</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">30</td>
+<td align="right">5</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+<p>Najwięcej dni ze złym i bardzo złym indeksem powietrza występowało razem z wiatrem wschodnim (E) i południwo-zachodnim (SW), co jest związane z faktem, że wiatr z tych kierunków najczęściej występował w Pszczynie. Powyższe dane zestawimy także w postaci względnej.</p>
+<pre class="r"><code>round_preserve_sum &lt;- function(x, digits = 0) {
+  up &lt;- 10 ^ digits
+  x &lt;- x * up
+  y &lt;- floor(x)
+  indices &lt;- tail(order(x-y), round(sum(x)) - sum(y))
+  y[indices] &lt;- y[indices] + 1
+  y / up
+}
+
+pm10_wiatr %&gt;% 
+  count(indeks, kierunek8) %&gt;% 
+  group_by(indeks) %&gt;% 
+  mutate(proc=round_preserve_sum(n/sum(n)*100),
+         proc_label=ifelse(proc &gt; 0, proc, NA)) %&gt;% 
+  ggplot(aes(x=indeks, y=proc, fill=kierunek8)) +
+  geom_col() +
+  geom_text(aes(label = proc_label), position = position_stack(0.5)) +
+  scale_fill_discrete(name = &quot;Kierunek wiatru&quot;) +
+  xlab(&quot;Indeks jakości powietrza&quot;) +
+  ylab(&quot;Odsetek dni (w %)&quot;) +
+  coord_flip() +
+  ggtitle(&quot;Udział kierunku wiatru w ramach indeksu powietrza&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(legend.position = &quot;bottom&quot;,
+        plot.caption = element_text(color = &quot;grey80&quot;)) +
+  guides(fill = guide_legend(nrow = 1))</code></pre>
+<p><img src="/post/2020-02-18-smog-w-pszczynie-a-wiatr_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Na rysunku można zauważyć, że bez względu na indeks jakości powietrza największy odsetek stanowi wiatr wiejący z południowego-zachodu (SW), a na drugim miejscu jest wiatr wschodni (E). Jedynie w przypadku bardzo dobrego poziomu jakości powietrza na drugim miejscu znajduje się wiatr zachodni (W).</p>
+<p>Niniejsza analiza nie pozwala w sposób jednoznaczny powiązać jakości powietrza z kierunkiem wiatru. Być może analiza bardziej szczegółowych danych na temat pyłów pozwoliłaby lepiej zbadać ten wpływ.</p>
