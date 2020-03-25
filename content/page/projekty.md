@@ -24,6 +24,6 @@ author = "Łukasz"
 
 [Dezagregacja wskaźników strategii Europa 2020 na poziom NTS 2 z zakresu pomiaru ubóstwa i wykluczenia społecznego](http://stat.gov.pl/statystyka-regionalna/statystyka-dla-polityki-spojnosci/statystyka-dla-polityki-spojnosci-2013-2015/badania/dezagregacja-wskaznikow-europa-2020/)
 
-[Mapy ubóstwa na poziomie podregionów w Polsce z wykorzystaniem estymacji pośredniej](http://stat.gov.pl/z-prac-studialnych/opracowania-eksperymentalne/mapy-ubostwa-na-poziomie-podregionow-w-polsce-z-wykorzystaniem-estymacji-posredniej,4,1.html)
+[Mapy ubóstwa na poziomie podregionów w Polsce z wykorzystaniem estymacji pośredniej](https://stat.gov.pl/statystyki-eksperymentalne/jakosc-zycia/mapy-ubostwa-na-poziomie-podregionow-w-polsce-z-wykorzystaniem-estymacji-posredniej,1,1.html)
 
 [Pomiar ubóstwa na poziomie powiatów (LAU 1)](http://stat.gov.pl/statystyka-regionalna/statystyka-dla-polityki-spojnosci/statystyka-dla-polityki-spojnosci-2013-2015/badania/dezagregacja-wskaznikow-z-obszaru-rynku-pracy-i-ubostwa/)
