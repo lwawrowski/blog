@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Regresja | Metody przetwarzania i analizy danych w R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Metody przetwarzania i analizy danych w R." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Regresja | Metody przetwarzania i analizy danych w R" />
   <meta property="og:type" content="book" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -135,16 +138,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html"><i class="fa fa-check"></i><b>2</b> Testowanie hipotez</a><ul>
 <li class="chapter" data-level="2.1" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#wprowadzenie-1"><i class="fa fa-check"></i><b>2.1</b> Wprowadzenie</a></li>
 <li class="chapter" data-level="2.2" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#hipoteza-statystyczna"><i class="fa fa-check"></i><b>2.2</b> Hipoteza statystyczna</a></li>
-<li class="chapter" data-level="2.3" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#poziom-istotnosci-i-wartosc-p"><i class="fa fa-check"></i><b>2.3</b> Poziom istotności i wartość p</a></li>
+<li class="chapter" data-level="2.3" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#poziom-istotności-i-wartość-p"><i class="fa fa-check"></i><b>2.3</b> Poziom istotności i wartość p</a></li>
 <li class="chapter" data-level="2.4" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testy-statystyczne"><i class="fa fa-check"></i><b>2.4</b> Testy statystyczne</a></li>
-<li class="chapter" data-level="2.5" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#zbior-danych"><i class="fa fa-check"></i><b>2.5</b> Zbiór danych</a></li>
-<li class="chapter" data-level="2.6" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-niezaleznosci"><i class="fa fa-check"></i><b>2.6</b> Test niezależności</a></li>
+<li class="chapter" data-level="2.5" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#zbiór-danych"><i class="fa fa-check"></i><b>2.5</b> Zbiór danych</a></li>
+<li class="chapter" data-level="2.6" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-niezależności"><i class="fa fa-check"></i><b>2.6</b> Test niezależności</a></li>
 <li class="chapter" data-level="2.7" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-proporcji"><i class="fa fa-check"></i><b>2.7</b> Test proporcji</a></li>
-<li class="chapter" data-level="2.8" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalnosci---test-shapiro-wilka"><i class="fa fa-check"></i><b>2.8</b> Testowanie normalności - test Shapiro-Wilka</a></li>
-<li class="chapter" data-level="2.9" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalnosci---wykres-kwantyl-kwantyl"><i class="fa fa-check"></i><b>2.9</b> Testowanie normalności - wykres kwantyl-kwantyl</a></li>
+<li class="chapter" data-level="2.8" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalności---test-shapiro-wilka"><i class="fa fa-check"></i><b>2.8</b> Testowanie normalności - test Shapiro-Wilka</a></li>
+<li class="chapter" data-level="2.9" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalności---wykres-kwantyl-kwantyl"><i class="fa fa-check"></i><b>2.9</b> Testowanie normalności - wykres kwantyl-kwantyl</a></li>
 <li class="chapter" data-level="2.10" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-wariancji---test-bartletta"><i class="fa fa-check"></i><b>2.10</b> Testowanie wariancji - test Bartletta</a></li>
-<li class="chapter" data-level="2.11" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-srednich"><i class="fa fa-check"></i><b>2.11</b> Testowanie średnich</a><ul>
-<li class="chapter" data-level="2.11.1" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-t-srednich"><i class="fa fa-check"></i><b>2.11.1</b> Test t-średnich</a></li>
+<li class="chapter" data-level="2.11" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-średnich"><i class="fa fa-check"></i><b>2.11</b> Testowanie średnich</a><ul>
+<li class="chapter" data-level="2.11.1" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-t-średnich"><i class="fa fa-check"></i><b>2.11.1</b> Test t-średnich</a></li>
 <li class="chapter" data-level="2.11.2" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#anova"><i class="fa fa-check"></i><b>2.11.2</b> ANOVA</a></li>
 <li class="chapter" data-level="2.11.3" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-wilcoxona"><i class="fa fa-check"></i><b>2.11.3</b> Test Wilcoxona</a></li>
 <li class="chapter" data-level="2.11.4" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-kruskala-wallisa"><i class="fa fa-check"></i><b>2.11.4</b> Test Kruskala-Wallisa</a></li>
@@ -161,17 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="grupowanie.html"><a href="grupowanie.html"><i class="fa fa-check"></i><b>4</b> Grupowanie</a><ul>
 <li class="chapter" data-level="4.1" data-path="grupowanie.html"><a href="grupowanie.html#wprowadzenie-3"><i class="fa fa-check"></i><b>4.1</b> Wprowadzenie</a></li>
-<li class="chapter" data-level="4.2" data-path="grupowanie.html"><a href="grupowanie.html#metoda-k-srednich"><i class="fa fa-check"></i><b>4.2</b> Metoda k-średnich</a></li>
+<li class="chapter" data-level="4.2" data-path="grupowanie.html"><a href="grupowanie.html#metoda-k-średnich"><i class="fa fa-check"></i><b>4.2</b> Metoda k-średnich</a></li>
 <li class="chapter" data-level="4.3" data-path="grupowanie.html"><a href="grupowanie.html#metoda-hierarchiczna"><i class="fa fa-check"></i><b>4.3</b> Metoda hierarchiczna</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="grupowanie.html"><a href="grupowanie.html#zadania"><i class="fa fa-check"></i><b>4.3.1</b> Zadania</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>5</b> Klasyfikacja</a><ul>
-<li class="chapter" data-level="5.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#drzewa-klasyfikacyjne"><i class="fa fa-check"></i><b>5.1</b> Drzewa klasyfikacyjne</a></li>
-<li class="chapter" data-level="5.2" data-path="klasyfikacja.html"><a href="klasyfikacja.html#knn"><i class="fa fa-check"></i><b>5.2</b> KNN</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#zadanie-2"><i class="fa fa-check"></i><b>5.2.1</b> Zadanie</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>5</b> Klasyfikacja</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -233,6 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb33-6" title="6"><span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">12</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb33-7" title="7"><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">35000</span>, <span class="dv">126000</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb33-8" title="8"><span class="st">  </span><span class="kw">theme_bw</span>()</a></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>W argumentach funkcji <code>ggplot()</code> podajemy co wizualizujemy, natomiast sposób prezentacji ustalany jest przez funkcje <code>geom</code>. Funkcje <code>xlab()</code> i <code>ylab()</code> określają etykiety osi, a <code>xlim()</code> i <code>ylim()</code> wartości graniczne. Funkcje rozpoczynające się od <code>theme_</code> określają wygląd wykresu.</p>
 <p>Modelowanie rozpoczynamy od określenia zmiennej zależnej i niezależnej.</p>
@@ -250,8 +249,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Współczynnik kierunkowy</strong> <span class="math inline">\(b_1\)</span> informuje o ile przeciętne zmieni się wartość zmiennej objaśnianej <span class="math inline">\(y\)</span>, gdy wartość zmiennej objaśniającej <span class="math inline">\(x\)</span> wzrośnie o jednostkę.</p>
 <p><strong>Wyraz wolny</strong> <span class="math inline">\(b_0\)</span> to wartość zmiennej objaśnianej <span class="math inline">\(y\)</span>, w sytuacji w której wartość zmiennej objaśniającej <span class="math inline">\(x\)</span> będzie równa 0. Często interpretacja tego parametru nie ma sensu.</p>
 <p>Następnie w R korzystamy z funkcji <code>lm</code>, w której należy określić zależność funkcyjną w formie: <code>zmienna_zalezna ~ zmienna niezalezna</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">salary_model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Salary <span class="op">~</span><span class="st"> </span>YearsExperience, <span class="dt">data =</span> salary)</a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="kw">summary</span>(salary_model)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">salary_model &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Salary <span class="op">~</span><span class="st"> </span>YearsExperience, <span class="dt">data =</span> salary)</a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">summary</span>(salary_model)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Salary ~ YearsExperience, data = salary)
@@ -285,9 +284,9 @@ $</p>
 <p><span class="math display">\[R^2=1-\frac{\sum\limits_{i=1}^{n}{(y_{i}-\hat{y}_{i})^2}}{\sum\limits_{i=1}^{n}{(y_{i}-\bar{y}_{i})^2}}\]</span></p>
 <p>Współczynnik <span class="math inline">\(R^2\)</span> (multiple R-squared) wynosi 0,957 czyli doświadczenie wyjaśnia 95,7% zmienności pensji</p>
 <p>Na podstawie tego modelu dokonamy wyznaczenia wartości teoretycznych dla kilku wybranych wartości doświadczenia. Nowe wartości muszą być w postaci zbioru danych, zatem tworzymy nową ramkę danych.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">nowiPracownicy &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">YearsExperience=</span><span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">11</span>))</a>
-<a class="sourceLine" id="cb36-2" title="2"></a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="kw">predict</span>(salary_model, nowiPracownicy)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">nowiPracownicy &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">YearsExperience=</span><span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">11</span>))</a>
+<a class="sourceLine" id="cb37-2" title="2"></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="kw">predict</span>(salary_model, nowiPracownicy)</a></code></pre></div>
 <pre><code>##        1        2        3 
 ## 101391.9 120291.8 129741.8</code></pre>
 <p>Tym sposobem uzyskujemy następujące widełki:</p>
@@ -300,10 +299,10 @@ $</li>
 $</li>
 </ul>
 <p>W powyższym przykładzie prognozowane wartości pojawiły się w konsoli, natomiast w sytuacji, w której chcielibyśmy wykonać predykcję dla bardzo wielu nowych wartości to warto te prognozowane wartości umieścić od razu w zbiorze danych. Można to zrobić w następujący sposób:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">nowiPracownicy &lt;-<span class="st"> </span>nowiPracownicy <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">salary_pred=</span><span class="kw">predict</span>(<span class="dt">object =</span> salary_model, <span class="dt">newdata =</span> .))</a>
-<a class="sourceLine" id="cb38-3" title="3"></a>
-<a class="sourceLine" id="cb38-4" title="4">nowiPracownicy</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">nowiPracownicy &lt;-<span class="st"> </span>nowiPracownicy <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">salary_pred=</span><span class="kw">predict</span>(<span class="dt">object =</span> salary_model, <span class="dt">newdata =</span> .))</a>
+<a class="sourceLine" id="cb39-3" title="3"></a>
+<a class="sourceLine" id="cb39-4" title="4">nowiPracownicy</a></code></pre></div>
 <pre><code>##   YearsExperience salary_pred
 ## 1               8    101391.9
 ## 2              10    120291.8
@@ -335,16 +334,16 @@ $</li>
 <li>wiek - wiek (w latach)</li>
 </ul>
 <p>Rozpoczynamy od wczytania danych,</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">pracownicy &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/pracownicy.xlsx&quot;</span>)</a>
-<a class="sourceLine" id="cb40-2" title="2"></a>
-<a class="sourceLine" id="cb40-3" title="3">pracownicy2 &lt;-<span class="st"> </span>pracownicy <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-4" title="4"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(wiek)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-5" title="5"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>id, <span class="op">-</span>data_urodz) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb40-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">plec=</span><span class="kw">as.factor</span>(plec),</a>
-<a class="sourceLine" id="cb40-7" title="7">         <span class="dt">kat_pracownika=</span><span class="kw">as.factor</span>(kat_pracownika),</a>
-<a class="sourceLine" id="cb40-8" title="8">         <span class="dt">zwiazki=</span><span class="kw">as.factor</span>(zwiazki))</a>
-<a class="sourceLine" id="cb40-9" title="9"></a>
-<a class="sourceLine" id="cb40-10" title="10"><span class="kw">summary</span>(pracownicy2)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">pracownicy &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/pracownicy.xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb41-2" title="2"></a>
+<a class="sourceLine" id="cb41-3" title="3">pracownicy2 &lt;-<span class="st"> </span>pracownicy <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-4" title="4"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(wiek)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-5" title="5"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>id, <span class="op">-</span>data_urodz) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb41-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">plec=</span><span class="kw">as.factor</span>(plec),</a>
+<a class="sourceLine" id="cb41-7" title="7">         <span class="dt">kat_pracownika=</span><span class="kw">as.factor</span>(kat_pracownika),</a>
+<a class="sourceLine" id="cb41-8" title="8">         <span class="dt">zwiazki=</span><span class="kw">as.factor</span>(zwiazki))</a>
+<a class="sourceLine" id="cb41-9" title="9"></a>
+<a class="sourceLine" id="cb41-10" title="10"><span class="kw">summary</span>(pracownicy2)</a></code></pre></div>
 <pre><code>##  plec       edukacja     kat_pracownika bwynagrodzenie   pwynagrodzenie 
 ##  0:257   Min.   : 8.00   1:362          Min.   : 15750   Min.   : 9000  
 ##  1:216   1st Qu.:12.00   2: 27          1st Qu.: 24000   1st Qu.:12450  
@@ -429,10 +428,10 @@ $</li>
 </tbody>
 </table>
 <p>W modelu zmienna zależna to <code>bwynagrodzenie</code>, natomiast jako zmienne niezależne bierzemy pod uwagę wszystkie pozostałe cechy. W celu uniknięcia notacji naukowej w uzyskiwanych wynikach dodajemy opcję <code>options(scipen = 5)</code>.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb42-2" title="2"></a>
-<a class="sourceLine" id="cb42-3" title="3">model &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>., pracownicy2)</a>
-<a class="sourceLine" id="cb42-4" title="4"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb43-2" title="2"></a>
+<a class="sourceLine" id="cb43-3" title="3">model &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>., pracownicy2)</a>
+<a class="sourceLine" id="cb43-4" title="4"><span class="kw">summary</span>(model)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = bwynagrodzenie ~ ., data = pracownicy2)
@@ -475,14 +474,14 @@ $</li>
 <p>Wszystkie te interpretacje obowiązują przy założeniu <em>ceteris paribus</em> - przy pozostałych warunkach niezmienionych.</p>
 <p>Ten model wymaga oczywiście ulepszenia do czego wykorzystamy pakiet <a href="https://cran.r-project.org/web/packages/olsrr/index.html">olsrr</a>.</p>
 <p>Pierwszą kwestią, którą się zajmiemy jest współliniowość zmiennych. W regresji zmienne objaśniające powinny być jak najbardziej skorelowane ze zmienną objaśnianą, a możliwie nieskorelowane ze sobą. W związku z tym wybieramy ze zbioru wyłącznie cechy ilościowe, dla którym wyznaczymy współczynnik korelacji liniowej Pearsona. Do wizualizacji tych wartości wykorzystamy pakiet <a href="https://cran.r-project.org/web/packages/corrplot/">corrplot</a> służący do wizualizacji współczynnika korelacji.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">library</span>(corrplot)</a>
-<a class="sourceLine" id="cb44-2" title="2"><span class="kw">library</span>(olsrr)</a>
-<a class="sourceLine" id="cb44-3" title="3"></a>
-<a class="sourceLine" id="cb44-4" title="4">korelacje &lt;-<span class="st"> </span>pracownicy2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb44-5" title="5"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(plec, kat_pracownika, zwiazki)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb44-6" title="6"><span class="st">  </span><span class="kw">cor</span>()</a>
-<a class="sourceLine" id="cb44-7" title="7"></a>
-<a class="sourceLine" id="cb44-8" title="8"><span class="kw">corrplot</span>(korelacje, <span class="dt">method =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;upper&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">library</span>(corrplot)</a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="kw">library</span>(olsrr)</a>
+<a class="sourceLine" id="cb45-3" title="3"></a>
+<a class="sourceLine" id="cb45-4" title="4">korelacje &lt;-<span class="st"> </span>pracownicy2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb45-5" title="5"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(plec, kat_pracownika, zwiazki)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb45-6" title="6"><span class="st">  </span><span class="kw">cor</span>()</a>
+<a class="sourceLine" id="cb45-7" title="7"></a>
+<a class="sourceLine" id="cb45-8" title="8"><span class="kw">corrplot</span>(korelacje, <span class="dt">method =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;upper&quot;</span>)</a></code></pre></div>
 <p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Możemy zauważyć, że wartości bieżącego wynagrodzenia są najsilniej skorelowane w wartościami wynagrodzenia początkowego. Także doświadczenie i wiek są silnie ze sobą związane, co może sugerować, że obie zmienne wnoszą do modelu podobną informację.</p>
 <p>W związku z tym powinniśmy wyeliminować niektóre zmienne z modelu pozostawiając te najważniejsze. Wyróżnia się trzy podejścia do tego zagadnienia:</p>
@@ -492,7 +491,7 @@ $</li>
 <li>regresja krokowa.</li>
 </ul>
 <p>W przypadku budowy wszystkich możliwych modeli należy pamiętać o rosnącej wykładniczo liczbie modeli: <span class="math inline">\(2^p-1\)</span>, gdzie <span class="math inline">\(p\)</span> oznacza liczbę zmiennych objaśniających. w rozważanym przypadku liczba modeli wynosi 255.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">wszystkie_modele &lt;-<span class="st"> </span><span class="kw">ols_step_all_possible</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">wszystkie_modele &lt;-<span class="st"> </span><span class="kw">ols_step_all_possible</span>(model)</a></code></pre></div>
 <p>W uzyskanym zbiorze danych są informacje o numerze modelu, liczbie użytych zmiennych, nazwie tych zmiennych oraz wiele miar jakości. Te, które warto wziąć pod uwagę to przede wszystkim:</p>
 <ul>
 <li><code>rsquare</code> - współczynnik R-kwadrat,</li>
@@ -502,32 +501,7 @@ $</li>
 <p>Najwyższa wartość współczynnika <span class="math inline">\(R^2\)</span> związana jest z modelem zawierającym wszystkie dostępne zmienne objaśniające. Jest to pewna niedoskonałość tej miary, która rośnie wraz z liczbą zmiennych w modelu, nawet jeśli te zmienne nie są istotne.</p>
 <p>W przypadku kryteriów informacyjnych oraz błędu średniokwadratowego interesują nas jak najmniejsze wartości. Wówczas jako najlepszy należy wskazać model nr 219 zawierający 6 zmiennych objaśniających.</p>
 <p>Metodą, która także pozwoli uzyskać optymalny model, ale przy mniejszym obciążeniu obliczeniowym jest regresja krokowa polegająca na krokowym budowaniu modelu.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">ols_step_both_aic</span>(model)</a></code></pre></div>
-<pre><code>## Stepwise Selection Method 
-## -------------------------
-## 
-## Candidate Terms: 
-## 
-## 1 . plec 
-## 2 . edukacja 
-## 3 . kat_pracownika 
-## 4 . pwynagrodzenie 
-## 5 . staz 
-## 6 . doswiadczenie 
-## 7 . zwiazki 
-## 8 . wiek 
-## 
-## 
-## Variables Entered/Removed: 
-## 
-## - pwynagrodzenie added 
-## - kat_pracownika added 
-## - doswiadczenie added 
-## - staz added 
-## - edukacja added 
-## - plec added 
-## 
-## No more variables to be added or removed.</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">ols_step_both_aic</span>(model)</a></code></pre></div>
 <pre><code>## 
 ## 
 ##                                            Stepwise Summary                                            
@@ -572,16 +546,14 @@ $</li>
 <p>Uzyskany model charakteryzuje się nieznacznie większym błędem resztowym od modelu ze wszystkimi zmiennymi, ale wszystkie zmienne są istotne. Wyraz wolny <code>(Intercept)</code> nie musi być istotny w modelu.</p>
 <p>Wróćmy jeszcze na chwilę do tematu współliniowości zmiennych objaśniających:</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">ols_vif_tol</span>(wybrany_model)</a></code></pre></div>
-<pre><code>## # A tibble: 7 x 3
-##   Variables       Tolerance   VIF
-##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;
-## 1 pwynagrodzenie      0.298  3.36
-## 2 kat_pracownika2     0.687  1.46
-## 3 kat_pracownika3     0.360  2.78
-## 4 doswiadczenie       0.705  1.42
-## 5 staz                0.986  1.01
-## 6 plec1               0.683  1.46
-## 7 edukacja            0.461  2.17</code></pre>
+<pre><code>##         Variables Tolerance      VIF
+## 1  pwynagrodzenie 0.2979792 3.355939
+## 2 kat_pracownika2 0.6867111 1.456217
+## 3 kat_pracownika3 0.3595692 2.781106
+## 4   doswiadczenie 0.7054176 1.417600
+## 5            staz 0.9862198 1.013973
+## 6           plec1 0.6831049 1.463904
+## 7        edukacja 0.4607529 2.170361</code></pre>
 <p>Współczynnik tolerancji wskazuje na procent niewyjaśnionej zmienności danej zmiennej przez pozostałe zmienne objaśniające. Przykładowo współczynnik tolerancji dla początkowego wynagrodzenia wynosi 0,2980, co oznacza, że 30% zmienności początkowego wynagrodzenia nie jest wyjaśnione przez pozostałe zmienne w modelu. Z kolei współczynnik VIF jest obliczany na podstawie wartości współczynnika tolerancji i wskazuje o ile wariancja szacowanego współczynnika regresji jest podwyższona z powodu współliniowości danej zmiennej objaśniającej z pozostałymi zmiennymi objaśniającymi. Wartość współczynnika VIF powyżej 4 należy uznać za wskazującą na współliniowość. W analizowanym przypadku takie zmienne nie występują.</p>
 <p>Ocena siły wpływu poszczególnych zmiennych objaśniających na zmienną objaśnianą w oryginalnej postaci modelu nie jest możliwa. Należy wyznaczyć standaryzowane współczynniki beta, które wyliczane są na danych standaryzowanych, czyli takich, które są pozbawione jednostek i cechują się średnią równą 0, a odchyleniem standardowym równym 1. Standaryzacja ma sens tylko dla cech numerycznych, w związku z czym korzystamy z funkcji <code>mutate_if()</code>, która jako pierwszy argument przyjmuje warunek, który ma być spełniony, aby była zastosowane przekształcenie podawane jako drugi argument.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">pracownicy2_std &lt;-<span class="st"> </span>pracownicy2 <span class="op">%&gt;%</span></a>
@@ -626,7 +598,7 @@ $</li>
 ## -----------------------------------------------
 ## Shapiro-Wilk              0.868          0.0000 
 ## Kolmogorov-Smirnov        0.1092         0.0000 
-## Cramer-von Mises         42.5504         0.0001 
+## Cramer-von Mises         42.5504         0.0000 
 ## Anderson-Darling         13.0233         0.0000 
 ## -----------------------------------------------</code></pre>
 <p>Hipoteza zerowa w tych testach mówi o zgodności rozkładu reszt z rozkładem normalnym. Na podstawie wartości p, które są mniejsze od <span class="math inline">\(\alpha=0,05\)</span> stwierdzamy, że są podstawy do odrzucenia tej hipotezy czyli reszty z naszego modelu nie mają rozkładu normalnego. W diagnostyce przyczyn takiego stanu rzeczy pomoże nam wykres kwantyl-kwantyl:</p>
@@ -644,13 +616,15 @@ $</li>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">stud2 &lt;-<span class="st"> </span><span class="kw">ols_plot_resid_stud_fit</span>(wybrany_model)</a></code></pre></div>
 <p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>W ten sposób zostało zidentyfikowanych 22 obserwacji odstających. Korzystając z odległości Cooka wyeliminujemy obserwacje odstające ze zbioru:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">outliers &lt;-<span class="st"> </span>cook<span class="op">$</span>outliers<span class="op">$</span>observation</a>
-<a class="sourceLine" id="cb62-2" title="2"></a>
-<a class="sourceLine" id="cb62-3" title="3">pracownicy_out &lt;-<span class="st"> </span>pracownicy2[<span class="op">-</span>outliers,]</a>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">outliers &lt;-<span class="st"> </span>cook<span class="op">$</span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="st">  </span><span class="kw">filter</span>(color<span class="op">==</span><span class="st">&quot;outlier&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-3" title="3"><span class="st">  </span>.<span class="op">$</span>obs</a>
 <a class="sourceLine" id="cb62-4" title="4"></a>
-<a class="sourceLine" id="cb62-5" title="5">wybrany_model_out &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>pwynagrodzenie <span class="op">+</span><span class="st"> </span>kat_pracownika <span class="op">+</span><span class="st"> </span>doswiadczenie <span class="op">+</span><span class="st"> </span>staz <span class="op">+</span><span class="st"> </span>plec <span class="op">+</span><span class="st"> </span>edukacja, </a>
-<a class="sourceLine" id="cb62-6" title="6">                        <span class="dt">data =</span> pracownicy_out)</a>
-<a class="sourceLine" id="cb62-7" title="7"><span class="kw">summary</span>(wybrany_model_out)</a></code></pre></div>
+<a class="sourceLine" id="cb62-5" title="5">pracownicy_out &lt;-<span class="st"> </span>pracownicy2[<span class="op">-</span>outliers,]</a>
+<a class="sourceLine" id="cb62-6" title="6"></a>
+<a class="sourceLine" id="cb62-7" title="7">wybrany_model_out &lt;-<span class="st"> </span><span class="kw">lm</span>(bwynagrodzenie <span class="op">~</span><span class="st"> </span>pwynagrodzenie <span class="op">+</span><span class="st"> </span>kat_pracownika <span class="op">+</span><span class="st"> </span>doswiadczenie <span class="op">+</span><span class="st"> </span>staz <span class="op">+</span><span class="st"> </span>plec <span class="op">+</span><span class="st"> </span>edukacja, </a>
+<a class="sourceLine" id="cb62-8" title="8">                        <span class="dt">data =</span> pracownicy_out)</a>
+<a class="sourceLine" id="cb62-9" title="9"><span class="kw">summary</span>(wybrany_model_out)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = bwynagrodzenie ~ pwynagrodzenie + kat_pracownika + 
@@ -686,7 +660,7 @@ $</li>
 ## -----------------------------------------------
 ## Shapiro-Wilk              0.9696         0.0000 
 ## Kolmogorov-Smirnov        0.0667         0.0405 
-## Cramer-von Mises         38.1644         0.0001 
+## Cramer-von Mises         38.1644         0.0000 
 ## Anderson-Darling          3.5421         0.0000 
 ## -----------------------------------------------</code></pre>
 <p>Tylko test Kołmogorova-Smirnova na poziomie istotności <span class="math inline">\(\alpha=0,01\)</span> wskazał na brak podstaw do odrzucenia hipotezy zerowej.</p>
@@ -727,11 +701,13 @@ $</li>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -739,12 +715,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -756,6 +731,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

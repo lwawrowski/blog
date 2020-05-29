@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Testowanie hipotez | Metody przetwarzania i analizy danych w R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Metody przetwarzania i analizy danych w R." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Testowanie hipotez | Metody przetwarzania i analizy danych w R" />
   <meta property="og:type" content="book" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -135,16 +138,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html"><i class="fa fa-check"></i><b>2</b> Testowanie hipotez</a><ul>
 <li class="chapter" data-level="2.1" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#wprowadzenie-1"><i class="fa fa-check"></i><b>2.1</b> Wprowadzenie</a></li>
 <li class="chapter" data-level="2.2" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#hipoteza-statystyczna"><i class="fa fa-check"></i><b>2.2</b> Hipoteza statystyczna</a></li>
-<li class="chapter" data-level="2.3" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#poziom-istotnosci-i-wartosc-p"><i class="fa fa-check"></i><b>2.3</b> Poziom istotności i wartość p</a></li>
+<li class="chapter" data-level="2.3" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#poziom-istotności-i-wartość-p"><i class="fa fa-check"></i><b>2.3</b> Poziom istotności i wartość p</a></li>
 <li class="chapter" data-level="2.4" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testy-statystyczne"><i class="fa fa-check"></i><b>2.4</b> Testy statystyczne</a></li>
-<li class="chapter" data-level="2.5" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#zbior-danych"><i class="fa fa-check"></i><b>2.5</b> Zbiór danych</a></li>
-<li class="chapter" data-level="2.6" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-niezaleznosci"><i class="fa fa-check"></i><b>2.6</b> Test niezależności</a></li>
+<li class="chapter" data-level="2.5" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#zbiór-danych"><i class="fa fa-check"></i><b>2.5</b> Zbiór danych</a></li>
+<li class="chapter" data-level="2.6" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-niezależności"><i class="fa fa-check"></i><b>2.6</b> Test niezależności</a></li>
 <li class="chapter" data-level="2.7" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-proporcji"><i class="fa fa-check"></i><b>2.7</b> Test proporcji</a></li>
-<li class="chapter" data-level="2.8" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalnosci---test-shapiro-wilka"><i class="fa fa-check"></i><b>2.8</b> Testowanie normalności - test Shapiro-Wilka</a></li>
-<li class="chapter" data-level="2.9" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalnosci---wykres-kwantyl-kwantyl"><i class="fa fa-check"></i><b>2.9</b> Testowanie normalności - wykres kwantyl-kwantyl</a></li>
+<li class="chapter" data-level="2.8" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalności---test-shapiro-wilka"><i class="fa fa-check"></i><b>2.8</b> Testowanie normalności - test Shapiro-Wilka</a></li>
+<li class="chapter" data-level="2.9" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-normalności---wykres-kwantyl-kwantyl"><i class="fa fa-check"></i><b>2.9</b> Testowanie normalności - wykres kwantyl-kwantyl</a></li>
 <li class="chapter" data-level="2.10" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-wariancji---test-bartletta"><i class="fa fa-check"></i><b>2.10</b> Testowanie wariancji - test Bartletta</a></li>
-<li class="chapter" data-level="2.11" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-srednich"><i class="fa fa-check"></i><b>2.11</b> Testowanie średnich</a><ul>
-<li class="chapter" data-level="2.11.1" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-t-srednich"><i class="fa fa-check"></i><b>2.11.1</b> Test t-średnich</a></li>
+<li class="chapter" data-level="2.11" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#testowanie-średnich"><i class="fa fa-check"></i><b>2.11</b> Testowanie średnich</a><ul>
+<li class="chapter" data-level="2.11.1" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-t-średnich"><i class="fa fa-check"></i><b>2.11.1</b> Test t-średnich</a></li>
 <li class="chapter" data-level="2.11.2" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#anova"><i class="fa fa-check"></i><b>2.11.2</b> ANOVA</a></li>
 <li class="chapter" data-level="2.11.3" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-wilcoxona"><i class="fa fa-check"></i><b>2.11.3</b> Test Wilcoxona</a></li>
 <li class="chapter" data-level="2.11.4" data-path="testowanie-hipotez.html"><a href="testowanie-hipotez.html#test-kruskala-wallisa"><i class="fa fa-check"></i><b>2.11.4</b> Test Kruskala-Wallisa</a></li>
@@ -161,17 +164,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="grupowanie.html"><a href="grupowanie.html"><i class="fa fa-check"></i><b>4</b> Grupowanie</a><ul>
 <li class="chapter" data-level="4.1" data-path="grupowanie.html"><a href="grupowanie.html#wprowadzenie-3"><i class="fa fa-check"></i><b>4.1</b> Wprowadzenie</a></li>
-<li class="chapter" data-level="4.2" data-path="grupowanie.html"><a href="grupowanie.html#metoda-k-srednich"><i class="fa fa-check"></i><b>4.2</b> Metoda k-średnich</a></li>
+<li class="chapter" data-level="4.2" data-path="grupowanie.html"><a href="grupowanie.html#metoda-k-średnich"><i class="fa fa-check"></i><b>4.2</b> Metoda k-średnich</a></li>
 <li class="chapter" data-level="4.3" data-path="grupowanie.html"><a href="grupowanie.html#metoda-hierarchiczna"><i class="fa fa-check"></i><b>4.3</b> Metoda hierarchiczna</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="grupowanie.html"><a href="grupowanie.html#zadania"><i class="fa fa-check"></i><b>4.3.1</b> Zadania</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>5</b> Klasyfikacja</a><ul>
-<li class="chapter" data-level="5.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#drzewa-klasyfikacyjne"><i class="fa fa-check"></i><b>5.1</b> Drzewa klasyfikacyjne</a></li>
-<li class="chapter" data-level="5.2" data-path="klasyfikacja.html"><a href="klasyfikacja.html#knn"><i class="fa fa-check"></i><b>5.2</b> KNN</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#zadanie-2"><i class="fa fa-check"></i><b>5.2.1</b> Zadanie</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="5" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>5</b> Klasyfikacja</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -216,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(H_1: \bar{x}\neq 10\)</span></p>
 <p>Zamiast znaku nierówności (<span class="math inline">\(\neq\)</span>) może się także pojawić znak mniejszości (<span class="math inline">\(&lt;\)</span>) lub większości (<span class="math inline">\(&gt;\)</span>).</p>
 </div>
-<div id="poziom-istotnosci-i-wartosc-p" class="section level2">
+<div id="poziom-istotności-i-wartość-p" class="section level2">
 <h2><span class="header-section-number">2.3</span> Poziom istotności i wartość p</h2>
 <p>Hipotezy statystyczne weryfikuje się przy określonym poziomie istotności <span class="math inline">\(\alpha\)</span>, który wskazuje maksymalny poziom akceptowalnego błędu (najczęściej <span class="math inline">\(\alpha=0,05\)</span>).</p>
 <p>Większość programów statystycznych podaje w wynikach testu wartość p. Jest to najostrzejszy poziom istotności, przy którym możemy odrzucić hipotezę <span class="math inline">\(H_0\)</span>. Jest to rozwiązanie bardzo popularne, ale nie pozbawione wad. Dokładny opis potencjalnych zagrożeń można znaleźć w <a href="http://cejsh.icm.edu.pl/cejsh/element/bwmeta1.element.cejsh-e3daa053-7cf2-4eee-9192-16c48c3a7a45/c/05.pdf">artykule</a>.</p>
@@ -227,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>W zależności od tego co chcemy weryfikować należy wybrać odpowiedni test. Tabela poniżej przedstawia dosyć wyczerpującą klasyfikację testów pobraną ze <a href="https://philipppro.github.io/Statistical_tests_overview/">strony</a>.</p>
 <p><img src="img/tests.png" /></p>
 </div>
-<div id="zbior-danych" class="section level2">
+<div id="zbiór-danych" class="section level2">
 <h2><span class="header-section-number">2.5</span> Zbiór danych</h2>
 <p>Będziemy działać na zbiorze danych dotyczącym <a href="data/pracownicy.xlsx">pracowników przedsiębiorstwa</a>. Poniżej znajduje się opis cech znajdujących się w tym zbiorze,</p>
 <ul>
@@ -248,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-3" title="3"></a>
 <a class="sourceLine" id="cb1-4" title="4">pracownicy &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/pracownicy.xlsx&quot;</span>)</a></code></pre></div>
 </div>
-<div id="test-niezaleznosci" class="section level2">
+<div id="test-niezależności" class="section level2">
 <h2><span class="header-section-number">2.6</span> Test niezależności</h2>
 <p>Za pomocą testu niezależności <span class="math inline">\(\chi^2\)</span> (chi-kwadrat) można sprawdzić czy pomiędzy dwiema cechami jakościowymi występuje zależność. Układ hipotez jest następujący:</p>
 <ul>
@@ -327,8 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(H_1\)</span>: odsetek palaczy różni się wg płci</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">prop.test</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">200</span>,<span class="dv">250</span>), <span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">500</span>,<span class="dv">600</span>))</a></code></pre></div>
 <pre><code>## 
-##  2-sample test for equality of proportions with continuity
-##  correction
+##  2-sample test for equality of proportions with continuity correction
 ## 
 ## data:  c(200, 250) out of c(500, 600)
 ## X-squared = 0.24824, df = 1, p-value = 0.6183
@@ -340,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 0.4000000 0.4166667</code></pre>
 <p>Przy poziomie istotności 0,05 nie ma podstaw do odrzucenia H0 - odsetek palaczy jest taki sam w grupach płci.</p>
 </div>
-<div id="testowanie-normalnosci---test-shapiro-wilka" class="section level2">
+<div id="testowanie-normalności---test-shapiro-wilka" class="section level2">
 <h2><span class="header-section-number">2.8</span> Testowanie normalności - test Shapiro-Wilka</h2>
 <p>Testy parametryczne z reguły wymagają spełnienia założenia o normalności rozkładu. W celu weryfikacji tego założenia należy wykorzystać jeden z testów normalności.</p>
 <p>W celu formalnego zweryfikowania rozkładu cechy można wykorzystać test Shapiro-Wilka. Układ hipotez z tym teście jest następujący:</p>
@@ -351,7 +348,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>W przeprowadzonych dotychczas symulacjach wykazano, że test Shapiro-Wilka ma największą moc spośród testów normalności, niemniej jego ograniczeniem jest maksymalna liczba obserwacji, która wynosi 5000<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <p>W programie R test Shapiro-Wilka można uruchomić za pomocą funkcji <code>shapiro.test()</code> jako argument podając wektor wartości liczbowych, który chcemy zweryfikować.</p>
 </div>
-<div id="testowanie-normalnosci---wykres-kwantyl-kwantyl" class="section level2">
+<div id="testowanie-normalności---wykres-kwantyl-kwantyl" class="section level2">
 <h2><span class="header-section-number">2.9</span> Testowanie normalności - wykres kwantyl-kwantyl</h2>
 <p>Normalność rozkładu może także zostać zweryfikowana poprzez utworzenie wykresu przedstawiającego porównanie wartości oryginalnych oraz odpowiadającym im wartości pochodzących z rozkładu normalnego. Dodatkowo prowadzona jest linia regresji pomiędzy otrzymanymi wartościami. Punkty przebiegające w pobliżu tej linii oznaczają, że rozkład tej cechy jest normalny.</p>
 <p>Na wykresie przedstawiony jest wykres kwantyl-kwantyl dla 50 wartości wylosowanych z rozkładu normalnego i z rozkładu jednostajnego.</p>
@@ -401,7 +398,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Bartlett&#39;s K-squared = 4.7659, df = 1, p-value = 0.02903</code></pre>
 <p>Przyjmując poziom istotności <span class="math inline">\(\alpha = 0,05\)</span> odrzucamy hipotezę zerową stwierdzając, że wariancje różnią się w grupach płci. Z kolei dopuszczając niższy poziom istotności <span class="math inline">\(\alpha = 0,01\)</span> podjęlibyśmy decyzję o braku podstaw do odrzucenia <span class="math inline">\(H_0\)</span> i nieistotnej różnicy pomiędzy grupami.</p>
 </div>
-<div id="testowanie-srednich" class="section level2">
+<div id="testowanie-średnich" class="section level2">
 <h2><span class="header-section-number">2.11</span> Testowanie średnich</h2>
 <p>W przypadku testowania wartości przeciętnych należy wprowadzić pojęcie prób zależnych i niezależnych:</p>
 <ul>
@@ -410,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>W zależności od tego czy spełnione są odpowiednie założenia dotyczące normalności cechy oraz równości wariancji należy wybrać odpowiedni test według poniższego diagramu.</p>
 <p><img src="img/07_testy_diagram_v3.png" /></p>
-<div id="test-t-srednich" class="section level3">
+<div id="test-t-średnich" class="section level3">
 <h3><span class="header-section-number">2.11.1</span> Test t-średnich</h3>
 <p>Weryfikacja równości średnich może odbywać się na zasadzie porównania wartości średniej w jednej grupie z arbitralnie przyjętym poziomem lub w dwóch różnych grupach. W pierwszym przypadku rozważamy układ hipotez:</p>
 <ul>
@@ -528,11 +525,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -540,12 +539,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -557,6 +555,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

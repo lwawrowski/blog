@@ -1,35 +1,45 @@
-\documentclass[]{book}
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Metody przetwarzania i analizy danych w R},
-            pdfauthor={Łukasz Wawrowski},
-            pdfborder={0 0 0},
-            breaklinks=true}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Metody przetwarzania i analizy danych w R},
+  pdfauthor={Łukasz Wawrowski},
+  pdfborder={0 0 0},
+  breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{plainnat}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -71,6 +81,9 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -80,51 +93,25 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 % Redefines (sub)paragraphs to behave more like sections
 \ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
 \fi
 \ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Metody przetwarzania i analizy danych w R}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Łukasz Wawrowski}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-    \date{}
-    \predate{}\postdate{}
-  
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -133,6 +120,12 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+
+\title{Metody przetwarzania i analizy danych w R}
+\author{Łukasz Wawrowski}
+\date{}
 
 \begin{document}
 \maketitle
@@ -272,8 +265,8 @@ Z kolei hipoteza alternatywna zakłada coś przeciwnego:
 
 Zamiast znaku nierówności (\(\neq\)) może się także pojawić znak mniejszości (\(<\)) lub większości (\(>\)).
 
-\hypertarget{poziom-istotnosci-i-wartosc-p}{%
-\section{Poziom istotności i wartość p}\label{poziom-istotnosci-i-wartosc-p}}
+\hypertarget{poziom-istotnoux15bci-i-wartoux15bux107-p}{%
+\section{Poziom istotności i wartość p}\label{poziom-istotnoux15bci-i-wartoux15bux107-p}}
 
 Hipotezy statystyczne weryfikuje się przy określonym poziomie istotności \(\alpha\), który wskazuje maksymalny poziom akceptowalnego błędu (najczęściej \(\alpha=0,05\)).
 
@@ -288,8 +281,8 @@ W zależności od tego co chcemy weryfikować należy wybrać odpowiedni test. T
 
 \includegraphics{img/tests.png}
 
-\hypertarget{zbior-danych}{%
-\section{Zbiór danych}\label{zbior-danych}}
+\hypertarget{zbiuxf3r-danych}{%
+\section{Zbiór danych}\label{zbiuxf3r-danych}}
 
 Będziemy działać na zbiorze danych dotyczącym \href{data/pracownicy.xlsx}{pracowników przedsiębiorstwa}. Poniżej znajduje się opis cech znajdujących się w tym zbiorze,
 
@@ -328,8 +321,8 @@ Będziemy działać na zbiorze danych dotyczącym \href{data/pracownicy.xlsx}{pr
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{test-niezaleznosci}{%
-\section{Test niezależności}\label{test-niezaleznosci}}
+\hypertarget{test-niezaleux17cnoux15bci}{%
+\section{Test niezależności}\label{test-niezaleux17cnoux15bci}}
 
 Za pomocą testu niezależności \(\chi^2\) (chi-kwadrat) można sprawdzić czy pomiędzy dwiema cechami jakościowymi występuje zależność. Układ hipotez jest następujący:
 
@@ -489,8 +482,7 @@ Wysunięto przypuszczenie, że palacze papierosów stanowią jednakowy odsetek w
 
 \begin{verbatim}
 ## 
-##  2-sample test for equality of proportions with continuity
-##  correction
+##  2-sample test for equality of proportions with continuity correction
 ## 
 ## data:  c(200, 250) out of c(500, 600)
 ## X-squared = 0.24824, df = 1, p-value = 0.6183
@@ -504,8 +496,8 @@ Wysunięto przypuszczenie, że palacze papierosów stanowią jednakowy odsetek w
 
 Przy poziomie istotności 0,05 nie ma podstaw do odrzucenia H0 - odsetek palaczy jest taki sam w grupach płci.
 
-\hypertarget{testowanie-normalnosci---test-shapiro-wilka}{%
-\section{Testowanie normalności - test Shapiro-Wilka}\label{testowanie-normalnosci---test-shapiro-wilka}}
+\hypertarget{testowanie-normalnoux15bci---test-shapiro-wilka}{%
+\section{Testowanie normalności - test Shapiro-Wilka}\label{testowanie-normalnoux15bci---test-shapiro-wilka}}
 
 Testy parametryczne z reguły wymagają spełnienia założenia o normalności rozkładu. W celu weryfikacji tego założenia należy wykorzystać jeden z testów normalności.
 
@@ -523,8 +515,8 @@ W przeprowadzonych dotychczas symulacjach wykazano, że test Shapiro-Wilka ma na
 
 W programie R test Shapiro-Wilka można uruchomić za pomocą funkcji \texttt{shapiro.test()} jako argument podając wektor wartości liczbowych, który chcemy zweryfikować.
 
-\hypertarget{testowanie-normalnosci---wykres-kwantyl-kwantyl}{%
-\section{Testowanie normalności - wykres kwantyl-kwantyl}\label{testowanie-normalnosci---wykres-kwantyl-kwantyl}}
+\hypertarget{testowanie-normalnoux15bci---wykres-kwantyl-kwantyl}{%
+\section{Testowanie normalności - wykres kwantyl-kwantyl}\label{testowanie-normalnoux15bci---wykres-kwantyl-kwantyl}}
 
 Normalność rozkładu może także zostać zweryfikowana poprzez utworzenie wykresu przedstawiającego porównanie wartości oryginalnych oraz odpowiadającym im wartości pochodzących z rozkładu normalnego. Dodatkowo prowadzona jest linia regresji pomiędzy otrzymanymi wartościami. Punkty przebiegające w pobliżu tej linii oznaczają, że rozkład tej cechy jest normalny.
 
@@ -625,8 +617,8 @@ Funkcję weryfikującą \(H_0\) można zapisać na dwa sposoby - wynik zawsze b�
 
 Przyjmując poziom istotności \(\alpha = 0,05\) odrzucamy hipotezę zerową stwierdzając, że wariancje różnią się w grupach płci. Z kolei dopuszczając niższy poziom istotności \(\alpha = 0,01\) podjęlibyśmy decyzję o braku podstaw do odrzucenia \(H_0\) i nieistotnej różnicy pomiędzy grupami.
 
-\hypertarget{testowanie-srednich}{%
-\section{Testowanie średnich}\label{testowanie-srednich}}
+\hypertarget{testowanie-ux15brednich}{%
+\section{Testowanie średnich}\label{testowanie-ux15brednich}}
 
 W przypadku testowania wartości przeciętnych należy wprowadzić pojęcie prób zależnych i niezależnych:
 
@@ -641,8 +633,8 @@ W zależności od tego czy spełnione są odpowiednie założenia dotyczące nor
 
 \includegraphics{img/07_testy_diagram_v3.png}
 
-\hypertarget{test-t-srednich}{%
-\subsection{Test t-średnich}\label{test-t-srednich}}
+\hypertarget{test-t-ux15brednich}{%
+\subsection{Test t-średnich}\label{test-t-ux15brednich}}
 
 Weryfikacja równości średnich może odbywać się na zasadzie porównania wartości średniej w jednej grupie z arbitralnie przyjętym poziomem lub w dwóch różnych grupach. W pierwszym przypadku rozważamy układ hipotez:
 
@@ -908,6 +900,10 @@ Najprostszym sposobem wizualizacji jest wykorzystanie funkcji \texttt{plot()}, n
 \StringTok{  }\KeywordTok{theme_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-20-1.pdf}
 
@@ -1292,34 +1288,6 @@ Metodą, która także pozwoli uzyskać optymalny model, ale przy mniejszym obci
 \end{Shaded}
 
 \begin{verbatim}
-## Stepwise Selection Method 
-## -------------------------
-## 
-## Candidate Terms: 
-## 
-## 1 . plec 
-## 2 . edukacja 
-## 3 . kat_pracownika 
-## 4 . pwynagrodzenie 
-## 5 . staz 
-## 6 . doswiadczenie 
-## 7 . zwiazki 
-## 8 . wiek 
-## 
-## 
-## Variables Entered/Removed: 
-## 
-## - pwynagrodzenie added 
-## - kat_pracownika added 
-## - doswiadczenie added 
-## - staz added 
-## - edukacja added 
-## - plec added 
-## 
-## No more variables to be added or removed.
-\end{verbatim}
-
-\begin{verbatim}
 ## 
 ## 
 ##                                            Stepwise Summary                                            
@@ -1383,16 +1351,14 @@ Wróćmy jeszcze na chwilę do tematu współliniowości zmiennych objaśniając
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 7 x 3
-##   Variables       Tolerance   VIF
-##   <chr>               <dbl> <dbl>
-## 1 pwynagrodzenie      0.298  3.36
-## 2 kat_pracownika2     0.687  1.46
-## 3 kat_pracownika3     0.360  2.78
-## 4 doswiadczenie       0.705  1.42
-## 5 staz                0.986  1.01
-## 6 plec1               0.683  1.46
-## 7 edukacja            0.461  2.17
+##         Variables Tolerance      VIF
+## 1  pwynagrodzenie 0.2979792 3.355939
+## 2 kat_pracownika2 0.6867111 1.456217
+## 3 kat_pracownika3 0.3595692 2.781106
+## 4   doswiadczenie 0.7054176 1.417600
+## 5            staz 0.9862198 1.013973
+## 6           plec1 0.6831049 1.463904
+## 7        edukacja 0.4607529 2.170361
 \end{verbatim}
 
 Współczynnik tolerancji wskazuje na procent niewyjaśnionej zmienności danej zmiennej przez pozostałe zmienne objaśniające. Przykładowo współczynnik tolerancji dla początkowego wynagrodzenia wynosi 0,2980, co oznacza, że 30\% zmienności początkowego wynagrodzenia nie jest wyjaśnione przez pozostałe zmienne w modelu. Z kolei współczynnik VIF jest obliczany na podstawie wartości współczynnika tolerancji i wskazuje o ile wariancja szacowanego współczynnika regresji jest podwyższona z powodu współliniowości danej zmiennej objaśniającej z pozostałymi zmiennymi objaśniającymi. Wartość współczynnika VIF powyżej 4 należy uznać za wskazującą na współliniowość. W analizowanym przypadku takie zmienne nie występują.
@@ -1464,7 +1430,7 @@ Reszty w naszym modelu wydają się być zbliżone do rozkładu normalnego. Jedn
 ## -----------------------------------------------
 ## Shapiro-Wilk              0.868          0.0000 
 ## Kolmogorov-Smirnov        0.1092         0.0000 
-## Cramer-von Mises         42.5504         0.0001 
+## Cramer-von Mises         42.5504         0.0000 
 ## Anderson-Darling         13.0233         0.0000 
 ## -----------------------------------------------
 \end{verbatim}
@@ -1517,7 +1483,9 @@ W ten sposób zostało zidentyfikowanych 22 obserwacji odstających. Korzystają
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{outliers <-}\StringTok{ }\NormalTok{cook}\OperatorTok{$}\NormalTok{outliers}\OperatorTok{$}\NormalTok{observation}
+\NormalTok{outliers <-}\StringTok{ }\NormalTok{cook}\OperatorTok{$}\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(color}\OperatorTok{==}\StringTok{"outlier"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{.}\OperatorTok{$}\NormalTok{obs}
 
 \NormalTok{pracownicy_out <-}\StringTok{ }\NormalTok{pracownicy2[}\OperatorTok{-}\NormalTok{outliers,]}
 
@@ -1579,7 +1547,7 @@ Wykres kwantyl-kwantyl wygląda już dużo lepiej i w zasadzie nie obserwuje tu 
 ## -----------------------------------------------
 ## Shapiro-Wilk              0.9696         0.0000 
 ## Kolmogorov-Smirnov        0.0667         0.0405 
-## Cramer-von Mises         38.1644         0.0001 
+## Cramer-von Mises         38.1644         0.0000 
 ## Anderson-Darling          3.5421         0.0000 
 ## -----------------------------------------------
 \end{verbatim}
@@ -1628,8 +1596,8 @@ Na podstawie zbioru dotyczącego \href{data/startups.xlsx}{50 startupów} okreś
 
 Grupowanie polega na przypisanie obiektów do określonych grup/klastrów/skupień/segmentów, w których znajdą się jednostki najbardziej do siebie podobne, a powstałe grupy będą się między sobą różnić. Całe utrudnienie polega na tym, że nie wiemy ile tych grup ma powstać.
 
-\hypertarget{metoda-k-srednich}{%
-\section{Metoda k-średnich}\label{metoda-k-srednich}}
+\hypertarget{metoda-k-ux15brednich}{%
+\section{Metoda k-średnich}\label{metoda-k-ux15brednich}}
 
 Najpopularniejszą metodą grupowania jest metoda k-średnich. Do jej zalet należy zaliczyć to, że dobrze działa zarówno na małych, jak i dużych zbiorach i jest bardzo efektywny - zwykle osiąga zbieżność w mniej niż 10 iteracjach. Z wad należy wskazać losowy wybór początkowych centrów skupień, co może skutkować nieprawidłowym przypisaniem obiektów do grup.
 
@@ -1984,75 +1952,6 @@ Problematyczne obserwacje pochodziły z grupy klientów o przeciętnych dochodac
 \hypertarget{klasyfikacja}{%
 \chapter{Klasyfikacja}\label{klasyfikacja}}
 
-\href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{A visual introduction to machine learning}
-
-\hypertarget{drzewa-klasyfikacyjne}{%
-\section{Drzewa klasyfikacyjne}\label{drzewa-klasyfikacyjne}}
-
-Zalety:
-
-\begin{itemize}
-\tightlist
-\item
-  łatwa interpretacja
-\item
-  nie trzeba normalizować cech
-\item
-  rozwiązuje problemy liniowe i nieliniowe
-\end{itemize}
-
-Wady:
-
-\begin{itemize}
-\tightlist
-\item
-  mała efektywność przy małych zbiorach danych
-\item
-  łatwo można przeuczyć
-\end{itemize}
-
-\hypertarget{knn}{%
-\section{KNN}\label{knn}}
-
-Algorytm:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Określ liczbę sąsiadów - \(K\)
-\item
-  Wyznacz \(K\) sąsiadów dla nowego punktu na podstawie wybranej odległości
-\item
-  Oblicz liczbę sąsiadów, w każdej z grup
-\item
-  Przypisz nową obserwację do grupy, w której ma więcej najbliższych sąsiadów
-\end{enumerate}
-
-Zalety:
-
-\begin{itemize}
-\tightlist
-\item
-  łatwa interpretacja
-\item
-  szybki i efektywny
-\end{itemize}
-
-Wady:
-
-\begin{itemize}
-\tightlist
-\item
-  trzeba określić liczbę sąsiadów
-\end{itemize}
-
-\hypertarget{zadanie-2}{%
-\subsection{Zadanie}\label{zadanie-2}}
-
-Zbuduj model klasyfikacyjny dla zbioru \href{data/Social_Network_Ads.csv}{danych} dotyczących cech internautów oraz informacji czy zamówili reklamowany produkt czy nie.
-
-Przeprowadź imputację braków danych dla zbioru \href{data/pracownicy.RData}{pracowników}.
-
+\href{presentations/06_klasyfikacja.html}{Prezentacja}
 
 \end{document}
