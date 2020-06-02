@@ -522,7 +522,7 @@ Normalność rozkładu może także zostać zweryfikowana poprzez utworzenie wyk
 
 Na wykresie przedstawiony jest wykres kwantyl-kwantyl dla 50 wartości wylosowanych z rozkładu normalnego i z rozkładu jednostajnego.
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-8-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-9-1.pdf}
 
 Jak można zauważyć punkty na wykresie po lewej stronie nie odbiegają znacząco od linii prostej, zatem można przypuszczać, że rozkład tej cechy jest normalny. Z kolei na wykresie po prawej stronie obserwuje się odstępstwo od rozkładu normalnego - wartości na krańcach linii są od niej oddalone.
 
@@ -558,7 +558,7 @@ Na poziomie \(\alpha = 0,05\) Odrzucamy \(H_0\) (p \textless{} \(\alpha\)) - do�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 \hypertarget{testowanie-wariancji---test-bartletta}{%
 \section{Testowanie wariancji - test Bartletta}\label{testowanie-wariancji---test-bartletta}}
@@ -884,7 +884,7 @@ Następnie stworzymy wykres.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-19-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-20-1.pdf}
 
 Najprostszym sposobem wizualizacji jest wykorzystanie funkcji \texttt{plot()}, niemniej taki wykres nie jest najpiękniejszy i trudno się go formatuje. Dużo lepiej skorzystać z pakietu \texttt{ggplot2}.
 
@@ -901,11 +901,7 @@ Najprostszym sposobem wizualizacji jest wykorzystanie funkcji \texttt{plot()}, n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## `geom_smooth()` using formula 'y ~ x'
-\end{verbatim}
-
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-20-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-21-1.pdf}
 
 W argumentach funkcji \texttt{ggplot()} podajemy co wizualizujemy, natomiast sposób prezentacji ustalany jest przez funkcje \texttt{geom}. Funkcje \texttt{xlab()} i \texttt{ylab()} określają etykiety osi, a \texttt{xlim()} i \texttt{ylim()} wartości graniczne. Funkcje rozpoczynające się od \texttt{theme\_} określają wygląd wykresu.
 
@@ -1239,7 +1235,7 @@ Pierwszą kwestią, którą się zajmiemy jest współliniowość zmiennych. W r
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-26-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-27-1.pdf}
 
 Możemy zauważyć, że wartości bieżącego wynagrodzenia są najsilniej skorelowane w wartościami wynagrodzenia początkowego. Także doświadczenie i wiek są silnie ze sobą związane, co może sugerować, że obie zmienne wnoszą do modelu podobną informację.
 
@@ -1414,7 +1410,7 @@ Reszty czyli różnice pomiędzy obserwowanymi wartościami zmiennej objaśniane
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-32-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-33-1.pdf}
 
 Reszty w naszym modelu wydają się być zbliżone do rozkładu normalnego. Jednoznaczną odpowiedź da jednak odpowiedni test.
 
@@ -1443,7 +1439,7 @@ Hipoteza zerowa w tych testach mówi o zgodności rozkładu reszt z rozkładem n
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-34-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-35-1.pdf}
 
 Gdyby wszystkie punkty leżały na prostej to oznaczałoby to normalność rozkładu reszt. Tymczasem po lewej i prawej stronie tego wykresu znajdują się potencjalne wartości odstające, które znacznie wpływają na rozkład reszt modelu.
 
@@ -1455,9 +1451,9 @@ Wartości odstające można ustalić na podstawie wielu kryteriów. Do jednych z
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-35-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-36-1.pdf}
 
-Przypisanie tej funkcji do obiektu zwraca nam tabelę z numerami zidentyfikowanych obserwacji wpływowych. W przypadku odległości Cooka jest to 35 obserwacji.
+Przypisanie tej funkcji do obiektu zwraca nam tabelę z numerami zidentyfikowanych obserwacji wpływowych. W przypadku odległości Cooka jest to 35 obserwacji. Granica przynależności do grupy wartości odstających jest wyznaczana według wzoru: \(4/n\), gdzie \(n\) to liczba wszystkich obserwacji.
 
 Inną miarą są reszty studentyzowane.
 
@@ -1467,7 +1463,7 @@ Inną miarą są reszty studentyzowane.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-36-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-37-1.pdf}
 
 Wyżej wykorzystana funkcja jako kryterium odstawania przyjmuje wartość 3 identyfikując 10 obserwacji wpływowych. Z kolei dodanie do powyższej funkcji przyrostka \emph{fit} powoduje przyjęcie jako granicy wartości równej 2.
 
@@ -1477,15 +1473,13 @@ Wyżej wykorzystana funkcja jako kryterium odstawania przyjmuje wartość 3 iden
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-37-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-38-1.pdf}
 
 W ten sposób zostało zidentyfikowanych 22 obserwacji odstających. Korzystając z odległości Cooka wyeliminujemy obserwacje odstające ze zbioru:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{outliers <-}\StringTok{ }\NormalTok{cook}\OperatorTok{$}\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(color}\OperatorTok{==}\StringTok{"outlier"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{.}\OperatorTok{$}\NormalTok{obs}
+\NormalTok{outliers <-}\StringTok{ }\NormalTok{cook}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{obs[cook}\OperatorTok{$}\NormalTok{data}\OperatorTok{$}\NormalTok{color }\OperatorTok{==}\StringTok{ "outlier"}\NormalTok{]}
 
 \NormalTok{pracownicy_out <-}\StringTok{ }\NormalTok{pracownicy2[}\OperatorTok{-}\NormalTok{outliers,]}
 
@@ -1531,7 +1525,7 @@ Model dopasowany na takim zbiorze charakteryzuje się dużo mniejszym błędem s
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-39-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-40-1.pdf}
 
 Wykres kwantyl-kwantyl wygląda już dużo lepiej i w zasadzie nie obserwuje tu się dużych odstępstw od rozkładu normalnego. Przeprowadźmy jeszcze odpowiednie testy statystyczne.
 
@@ -1649,7 +1643,7 @@ Wczytujemy zbiór danych i sprawdzamy czy pomiędzy zmiennymi są widoczne jakie
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-42-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-43-1.pdf}
 
 Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 
@@ -1660,7 +1654,7 @@ Pomiędzy wiekiem a rocznym dochodem nie widać zależności.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-43-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
 
 W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zbioru na dwie grupy za pomocą przekątnej.
 
@@ -1671,7 +1665,7 @@ W przypadku wieku i wskaźnika wydatków moglibyśmy się pokusić o podział zb
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-44-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-45-1.pdf}
 
 Po zestawieniu rocznego dochodu i wskaźnika wydatków wyłania się 5 potencjalnych grup, zatem te dwie cechy wykorzystamy do grupowania. Jednak przed zastosowaniem algorytmu musimy te dane przygotować normalizując zakres obu cech - w tym przypadku za pomocą standaryzacji.
 
@@ -1713,7 +1707,7 @@ W przypadku, gdy podział na grupy nie jest tak oczywisty lub bierzemy pod uwag�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-46-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
 
 Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wartości wariancji wewnątrz-grupowej. Według tego kryterium powinniśmy wybrać wartość 6 zamiast 5. Sprawdźmy zatem jakie otrzymamy przyporządkowanie do grup. Następnie informację o tym przypisaniu umieszczamy w oryginalnym zbiorze danych i przedstawiamy na wykresie. W celu uzyskania powtarzalnych wyników zastosujemy stałe ziarno generatora.
 
@@ -1731,7 +1725,7 @@ Wybieramy liczbę skupień po której nie następuje już gwałtowny spadek wart
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-47-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
 
 Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydział centrów skupień na początku algorytmu istnieje spora szansa, że rozwiązanie nie będzie optymalne. Rozwiązaniem tego problemu jest użycie algorytmu kmeans++ do początkowego ustalenia centrów. Ta metoda jest zaimplementowana w pakiecie \texttt{ClusterR}. Ponadto jest tam także funkcja do ustalenia optymalnej liczby skupień na podstawie wykresu osypiska.
 
@@ -1743,7 +1737,7 @@ Jak zauważamy ten podział nie jest właściwy. Ze względu na losowy przydzia�
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-48-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-49-1.pdf}
 
 \begin{verbatim}
 ##  [1] 398.00000 267.67171 156.91549 108.68209  65.24057  59.83221  49.72816
@@ -1772,7 +1766,7 @@ Dodatkowo można obliczyć jedno z wielu kryteriów dobroci podziału obiektów 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-49-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-50-1.pdf}
 
 Najwyższe wartości indeksu Calińskiego-Harabasza obserwujemy dla 5 i 9 skupień. Należy jednak pamiętać, że w grupowaniu bardzo ważna jest ocena badacza pod kątem sensowności otrzymanego podziału - łatwiej stworzyć 5 różnych kampanii reklamowych aniżeli 9.
 
@@ -1791,7 +1785,7 @@ Następnie korzystamy z funkcji \texttt{KMeans\_rcpp} do wyznaczenia przynależn
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-50-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-51-1.pdf}
 
 Ostatnim etapem analizy jest odpowiednia charakterystyka uzyskanych klastrów - najczęściej wyznacza się średnie wartości cech w ramach każdej grupy.
 
@@ -1849,7 +1843,7 @@ Dla tych samych danych przeprowadzimy grupowanie, ale tym razem metodą hierarch
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-52-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-53-1.pdf}
 
 Na podstawie dendrogramu identyfikujemy największe różnice odległości opisane na osi Y. Także w tym przypadku identyfikujemy 5 grup. Istnieje także wiele kryteriów, które mają na celu wyznaczyć optymalną liczbę grup - link.
 
@@ -1860,7 +1854,7 @@ Na podstawie dendrogramu identyfikujemy największe różnice odległości opisa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-54-1.pdf}
 
 Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych grup.
 
@@ -1877,7 +1871,7 @@ Następnie dopisujemy do oryginalnego zbioru danych etykiety utworzonych grup.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-54-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-55-1.pdf}
 
 Uzyskane wyniki są bardzo zbliżone do tych otrzymanych za pomocą algorytmu k-średnich.
 
@@ -1934,7 +1928,7 @@ Porównajmy jeszcze wyniki działania tych dwóch metod na wykresach:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-57-1.pdf}
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-58-1.pdf}
 
 Problematyczne obserwacje pochodziły z grupy klientów o przeciętnych dochodach oraz wydatkach.
 
@@ -1953,5 +1947,486 @@ Problematyczne obserwacje pochodziły z grupy klientów o przeciętnych dochodac
 \chapter{Klasyfikacja}\label{klasyfikacja}}
 
 \href{presentations/06_klasyfikacja.html}{Prezentacja}
+
+\hypertarget{wprowadzenie-4}{%
+\section{Wprowadzenie}\label{wprowadzenie-4}}
+
+Celem analizy klasyfikacji jest zbudowanie modelu predykcyjnego, który w rezultacie zwróci prawdopodobieństwo przynależności danej obserwacji do jeden z dwóch klas. Przykładowo na podstawie danych o klientach banku można stworzyć model oceny zdolności kredytowej dla nowych klientów. W tym rozdziale posłużymy się \href{https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)}{German Credit Data} do budowy takiego predyktora. Wybrane kolumny z tego zbioru znajdują się w \href{data/german_credit_data.xlsx}{tym pliku}.
+
+W pierwszym kroku wczytujemy dane i dokonujemy niezbędnych przekształceń tego zbioru. Z wykorzystaniem funkcji \texttt{clean\_names()} z pakietu \emph{janitor} zamieniamy nazwy kolumn w przyjazne przetwarzaniu przez komputer (brak spacji, polskich znaków, itp.). Następnie zmienne tekstowe zamieniamy na zmienne jakościowe - faktory oraz tworzymy nową kolumnę zawierającą wysokość raty kredytu.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(readxl)}
+\KeywordTok{library}\NormalTok{(janitor)}
+
+\NormalTok{credit <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"data/german_credit_data.xlsx"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{clean_names}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate_if}\NormalTok{(is.character, as.factor) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{job=}\KeywordTok{as.factor}\NormalTok{(job),}
+         \DataTypeTok{installment=}\NormalTok{credit_amount}\OperatorTok{/}\NormalTok{duration)}
+
+\KeywordTok{summary}\NormalTok{(credit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age            sex      job     housing      saving_accounts
+##  Min.   :19.00   female:310   0: 22   free:108   little    :603   
+##  1st Qu.:27.00   male  :690   1:200   own :713   moderate  :103   
+##  Median :33.00                2:630   rent:179   quite rich: 63   
+##  Mean   :35.55                3:148              rich      : 48   
+##  3rd Qu.:42.00                                   NA's      :183   
+##  Max.   :75.00                                                    
+##                                                                   
+##  checking_account credit_amount      duration                   purpose   
+##  little  :274     Min.   :  250   Min.   : 4.0   car                :337  
+##  moderate:269     1st Qu.: 1366   1st Qu.:12.0   radio/TV           :280  
+##  rich    : 63     Median : 2320   Median :18.0   furniture/equipment:181  
+##  NA's    :394     Mean   : 3271   Mean   :20.9   business           : 97  
+##                   3rd Qu.: 3972   3rd Qu.:24.0   education          : 59  
+##                   Max.   :18424   Max.   :72.0   repairs            : 22  
+##                                                  (Other)            : 24  
+##    risk      installment     
+##  bad :300   Min.   :  24.06  
+##  good:700   1st Qu.:  89.60  
+##             Median : 130.33  
+##             Mean   : 167.69  
+##             3rd Qu.: 206.18  
+##             Max.   :2482.67  
+## 
+\end{verbatim}
+
+Zamiana cech tekstowych na faktory pozwala w podsumowaniu wygenerowanym przez funkcję \texttt{summary()} obserwować od razu częstości poszczególnych wariantów. Możemy zaobserwować występowanie braków danych w zmiennych saving accounts i checking\_account. Generalnie jest to zbyt duży problem, bo tylko niektóre algorytmy klasyfikacji nie obsługują braków danych w zmiennych objaśniających. Ważne jest, żeby braki danych nie występowały dla cechy decyzyjnej.
+
+Obserwacje z brakami danych można usunąć, ale często spowodowałoby to znaczne zmniejszenie próby badawczej, zatem stosuje się metody mające na celu uzupełnienie braków danych. W najprostszym przypadku braki można zastąpić średnią, medianą lub dominantą. Do bardziej zaawansowanych sposobów należy metoda najbliższych sąsiadów (\href{https://cran.r-project.org/web/packages/VIM/index.html}{VIM}) albo imputacja wielokrotna (\href{https://cran.r-project.org/web/packages/mice/index.html}{mice}).
+
+W omawianym przypadku klientów wiarygodnych jest 700, a tych, którzy nie spłacili zobowiązania 300. Mamy zatem do czynienia z niezbalansowaną próbą. W idealnym przypadku klasyfikacji, przypadków z każdej grupy powinno być tyle samo. W przeciwnym przypadku model będzie działał lepiej dla klasy większościowej. Najprostszą metodą balansowania danych jest upsampling czyli dolosowywanie obserwacji z klasy mniejszościowej, tak aby wyrównać liczebności. Przeciwieństwem tego podejścia jest downsampling. Alternatywnie można zastosować metodę SMOTE, która generuje sztuczne obserwacje dla klasy mniejszościowej (pakiety \href{https://cran.r-project.org/web/packages/DMwR/index.html}{DMwR}, \href{https://cran.r-project.org/web/packages/imbalance/index.html}{imbalance}).
+
+\hypertarget{drzewa-decyzyjne}{%
+\section{Drzewa decyzyjne}\label{drzewa-decyzyjne}}
+
+Najpopularniejszą metodą klasyfikacji są drzewa decyzyjne, które charakteryzują się z reguły dobrą efektywnością i pozwalają na łatwą interpretację zastosowanych reguł klasyfikacji. Wykorzystamy pakiet \href{https://cran.r-project.org/web/packages/rpart/index.html}{rpart} do stworzenia drzewa oraz pakiet \href{https://cran.r-project.org/web/packages/rpart.plot/index.html}{rpart.plot} do wizualizacji.
+
+Proces tworzenia drzewa jest bardzo prosty, a argumenty w funkcji \texttt{rpart()} są takie same jak w regresji liniowej.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rpart)}
+\KeywordTok{library}\NormalTok{(rpart.plot)}
+
+\NormalTok{m1 <-}\StringTok{ }\KeywordTok{rpart}\NormalTok{(}\DataTypeTok{formula =}\NormalTok{ risk }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ credit)}
+
+\KeywordTok{rpart.plot}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-62-1.pdf}
+
+W rezultacie uzyskujemy drzewo decyzyjne z optymalnie dobranymi zmiennymi objaśniającymi. W każdym węźle drzewa podane są następujące wartości: - prognozowana klasa, prawdopodobieństwa zaklasyfikowania do klasy pozytywnej, odsetek obserwacji w węźle. Domyślnym progiem klasyfikacji jest wartość 0,5. Jeżeli prawdopodobieństwo jest poniżej tej wartości to nastąpi przypisanie do grupy klientów niespłacających pożyczki, a jeśli powyżej to do tej drugiej grupy.
+
+Oceny jakości klasyfikatora dokonuje się na podstawie \href{https://pl.wikipedia.org/wiki/Tablica_pomy\%C5\%82ek}{macierzy pomyłek} oraz miar wyznaczonych na jej podstawie. Najpopularniejsze z nich to:
+
+\begin{itemize}
+\tightlist
+\item
+  dokładność (accuracy): \% poprawnie zaklasyfikowanych
+\item
+  precyzja (precison): \% poprawnie rozpoznanych przypadków pozytywnych TP/(TP+FP)
+\item
+  czułość (sensitivity/recall): \% prawdziwie pozytywnych TP/(TP+FN)
+\item
+  swoistość (specificity): \% prawdziwie negatywnych TN/(TN+FP)
+\item
+  F1: średnia harmoniczna z czułości i precyzji 2TP/(2TP+FP+FN)
+\end{itemize}
+
+Im wyższe wartości tych miar tym lepszy klasyfikator. Do wyznaczenia tych miar w R służy funkcja z pakietu \href{https://topepo.github.io/caret/}{caret}. W tym celu trzeba wyznaczyć wartości prognozowanej klasy na podstawie modelu.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(caret)}
+
+\NormalTok{pred_risk_m1 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(}\DataTypeTok{object =}\NormalTok{ m1, }\DataTypeTok{newdata =}\NormalTok{ credit, }\DataTypeTok{type =} \StringTok{"class"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Argument \texttt{type} określa typ predykcji: \texttt{"class"} oznacza prognozowaną klasę, a \texttt{"prob"} prawdopodobieństwo. Na tej podstawie oraz wartości rzeczywistych tworzymy macierz pomyłek:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{confusionMatrix}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ pred_risk_m1, }\DataTypeTok{reference =}\NormalTok{ credit}\OperatorTok{$}\NormalTok{risk, }\DataTypeTok{positive =} \StringTok{"good"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"everything"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction bad good
+##       bad  117   60
+##       good 183  640
+##                                           
+##                Accuracy : 0.757           
+##                  95% CI : (0.7292, 0.7833)
+##     No Information Rate : 0.7             
+##     P-Value [Acc > NIR] : 3.553e-05       
+##                                           
+##                   Kappa : 0.3447          
+##                                           
+##  Mcnemar's Test P-Value : 5.024e-15       
+##                                           
+##             Sensitivity : 0.9143          
+##             Specificity : 0.3900          
+##          Pos Pred Value : 0.7776          
+##          Neg Pred Value : 0.6610          
+##               Precision : 0.7776          
+##                  Recall : 0.9143          
+##                      F1 : 0.8404          
+##              Prevalence : 0.7000          
+##          Detection Rate : 0.6400          
+##    Detection Prevalence : 0.8230          
+##       Balanced Accuracy : 0.6521          
+##                                           
+##        'Positive' Class : good            
+## 
+\end{verbatim}
+
+W naszym przykładzie spośród 1000 klientów, model jako wiarygodnych kredytobiorców zaklasyfikował 640, a 117 prawidłowo jako osoby, które nie spłaciły zobowiązania. W 60 przypadkach model uznał brak zdolności kredytowej u klienta, podczas gdy w rzeczywistości pożyczka została spłacona. Dla 183 klientów podjętoby odwrotną decyzję - model przyznałby kredyt, a w rzeczywistości osoby te nie spłaciły pożyczki. Dokładność w tym przypadku wynosi 75,7\%, a precyzja 77,8\%. Czułość tego predyktora jest wysoka (91,4\%), ale swoistość już nie (39\%), na co może mieć wpływ niezbalansowanie danych.
+
+Przedstawiony powyżej przykład miał charakter analizy ekspolarycyjnej - opartej na całym zbiorze danych. W praktyce stosuje się podejście polegające na podziale zbioru danych na zbiór treningowy oraz walidacyjny. Na danych ze zbioru treningowego buduje się model, który następnie testowany jest na danych, których nigdy wcześniej ``nie widział'' - na zbiorze walidacyjnym. Miary klasyfikacji obliczone na podstawie zbioru walidacyjnego dostarczają realnej oceny jakości klasyfikatora.
+
+Do podziału zbioru służy funkcja \texttt{createDataPartition()} z pakietu \emph{caret}. Zbiory treningowy i walidacyjny tworzone są w taki sposób, aby zachować proporcje w zmiennej decyzyjnej. Domyślnie funkcja dzieli zbiór danych w układzie 50/50, natomiast w tym przykładzie 80\% obserwacji umieścimy w zbiorze treningowym.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{split <-}\StringTok{ }\KeywordTok{createDataPartition}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ credit}\OperatorTok{$}\NormalTok{risk, }\DataTypeTok{p =} \FloatTok{0.8}\NormalTok{)}
+
+\NormalTok{train_credit <-}\StringTok{ }\NormalTok{credit[split}\OperatorTok{$}\NormalTok{Resample1,]}
+\NormalTok{valid_credit <-}\StringTok{ }\NormalTok{credit[}\OperatorTok{-}\NormalTok{split}\OperatorTok{$}\NormalTok{Resample1,]}
+
+\KeywordTok{summary}\NormalTok{(train_credit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age            sex      job     housing      saving_accounts
+##  Min.   :19.00   female:252   0: 17   free: 80   little    :486   
+##  1st Qu.:27.00   male  :548   1:159   own :576   moderate  : 85   
+##  Median :33.00                2:504   rent:144   quite rich: 49   
+##  Mean   :35.43                3:120              rich      : 34   
+##  3rd Qu.:42.00                                   NA's      :146   
+##  Max.   :75.00                                                    
+##                                                                   
+##  checking_account credit_amount      duration                    purpose   
+##  little  :228     Min.   :  276   Min.   : 4.00   car                :284  
+##  moderate:205     1st Qu.: 1374   1st Qu.:12.00   radio/TV           :219  
+##  rich    : 46     Median : 2326   Median :18.00   furniture/equipment:139  
+##  NA's    :321     Mean   : 3300   Mean   :21.02   business           : 76  
+##                   3rd Qu.: 3965   3rd Qu.:24.00   education          : 46  
+##                   Max.   :18424   Max.   :72.00   repairs            : 17  
+##                                                   (Other)            : 19  
+##    risk      installment     
+##  bad :240   Min.   :  24.06  
+##  good:560   1st Qu.:  87.18  
+##             Median : 131.74  
+##             Mean   : 168.95  
+##             3rd Qu.: 206.06  
+##             Max.   :2482.67  
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(valid_credit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age            sex      job     housing      saving_accounts
+##  Min.   :20.00   female: 58   0:  5   free: 28   little    :117   
+##  1st Qu.:27.00   male  :142   1: 41   own :137   moderate  : 18   
+##  Median :34.00                2:126   rent: 35   quite rich: 14   
+##  Mean   :36.02                3: 28              rich      : 14   
+##  3rd Qu.:42.00                                   NA's      : 37   
+##  Max.   :74.00                                                    
+##                                                                   
+##  checking_account credit_amount      duration                    purpose  
+##  little  :46      Min.   :  250   Min.   : 4.00   radio/TV           :61  
+##  moderate:64      1st Qu.: 1308   1st Qu.:12.00   car                :53  
+##  rich    :17      Median : 2261   Median :18.00   furniture/equipment:42  
+##  NA's    :73      Mean   : 3157   Mean   :20.43   business           :21  
+##                   3rd Qu.: 4003   3rd Qu.:24.00   education          :13  
+##                   Max.   :15672   Max.   :48.00   repairs            : 5  
+##                                                   (Other)            : 5  
+##    risk      installment    
+##  bad : 60   Min.   : 38.12  
+##  good:140   1st Qu.: 93.12  
+##             Median :127.23  
+##             Mean   :162.62  
+##             3rd Qu.:206.21  
+##             Max.   :730.80  
+## 
+\end{verbatim}
+
+Wykorzystując tak przygotowane dane możemy jeszcze raz wykorzystać drzewa decyzyjne do stworzenia klasyfikatora, ale tym razem wyłącznie na zbiorze treningowym.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2 <-}\StringTok{ }\KeywordTok{rpart}\NormalTok{(risk }\OperatorTok{~}\StringTok{ }\NormalTok{., train_credit)}
+
+\KeywordTok{rpart.plot}\NormalTok{(m2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Wawrowski_ADR_files/figure-latex/unnamed-chunk-66-1.pdf}
+
+Utworzone drzewo będzie różnić się od tego, które powstało na podstawie całego zbioru danych. Następnie obliczamy prognozowane klasy na obu zbiorach i wyznaczamy macierze pomyłek.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred_risk_m2_train <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(}\DataTypeTok{object =}\NormalTok{ m2, }\DataTypeTok{newdata =}\NormalTok{ train_credit, }\DataTypeTok{type =} \StringTok{"class"}\NormalTok{)}
+\NormalTok{pred_risk_m2_valid <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(}\DataTypeTok{object =}\NormalTok{ m2, }\DataTypeTok{newdata =}\NormalTok{ valid_credit, }\DataTypeTok{type =} \StringTok{"class"}\NormalTok{)}
+
+\CommentTok{# train}
+\KeywordTok{confusionMatrix}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ pred_risk_m2_train, }\DataTypeTok{reference =}\NormalTok{ train_credit}\OperatorTok{$}\NormalTok{risk, }
+                \DataTypeTok{positive =} \StringTok{"good"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"everything"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction bad good
+##       bad   94   38
+##       good 146  522
+##                                           
+##                Accuracy : 0.77            
+##                  95% CI : (0.7392, 0.7987)
+##     No Information Rate : 0.7             
+##     P-Value [Acc > NIR] : 5.783e-06       
+##                                           
+##                   Kappa : 0.3716          
+##                                           
+##  Mcnemar's Test P-Value : 3.067e-15       
+##                                           
+##             Sensitivity : 0.9321          
+##             Specificity : 0.3917          
+##          Pos Pred Value : 0.7814          
+##          Neg Pred Value : 0.7121          
+##               Precision : 0.7814          
+##                  Recall : 0.9321          
+##                      F1 : 0.8502          
+##              Prevalence : 0.7000          
+##          Detection Rate : 0.6525          
+##    Detection Prevalence : 0.8350          
+##       Balanced Accuracy : 0.6619          
+##                                           
+##        'Positive' Class : good            
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# valid}
+\KeywordTok{confusionMatrix}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ pred_risk_m2_valid, }\DataTypeTok{reference =}\NormalTok{ valid_credit}\OperatorTok{$}\NormalTok{risk, }
+                \DataTypeTok{positive =} \StringTok{"good"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"everything"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction bad good
+##       bad   18   11
+##       good  42  129
+##                                           
+##                Accuracy : 0.735           
+##                  95% CI : (0.6681, 0.7948)
+##     No Information Rate : 0.7             
+##     P-Value [Acc > NIR] : 0.1579          
+##                                           
+##                   Kappa : 0.2598          
+##                                           
+##  Mcnemar's Test P-Value : 0.00003775      
+##                                           
+##             Sensitivity : 0.9214          
+##             Specificity : 0.3000          
+##          Pos Pred Value : 0.7544          
+##          Neg Pred Value : 0.6207          
+##               Precision : 0.7544          
+##                  Recall : 0.9214          
+##                      F1 : 0.8296          
+##              Prevalence : 0.7000          
+##          Detection Rate : 0.6450          
+##    Detection Prevalence : 0.8550          
+##       Balanced Accuracy : 0.6107          
+##                                           
+##        'Positive' Class : good            
+## 
+\end{verbatim}
+
+Generalnie wyniki w obu przypadkach powinny być do siebie zbliżone, przy czym na zbiorze walidacyjnym miary jakości predycji mogą być trochę gorsze. Bardzo wysoka wartość dokładność na zbiorze treningowym, a niska na zbiorze walidacyjnym jest symptomem przeuczenia modelu - algorytm nauczył się odpowiedzi ``na pamięć''.
+
+\hypertarget{gradient-boosting-machine}{%
+\section{Gradient Boosting Machine}\label{gradient-boosting-machine}}
+
+Spróbujemy polepszyć jakość klasyfikacji z wykorzystaniem metody gradient boostingu. W tym celu wykorzystamy pakiet \href{https://www.h2o.ai/}{h2o}, który dostarcza kompleksowych rozwiązań z zakresu machine learning. W pierwszej kolejności trzeba zmienić format danych na ten obsługowany przez pakiet.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(h2o)}
+
+\KeywordTok{h2o.init}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Connection successful!
+## 
+## R is connected to the H2O cluster: 
+##     H2O cluster uptime:         7 minutes 37 seconds 
+##     H2O cluster timezone:       Europe/Warsaw 
+##     H2O data parsing timezone:  UTC 
+##     H2O cluster version:        3.30.0.1 
+##     H2O cluster version age:    1 month and 29 days  
+##     H2O cluster name:           H2O_started_from_R_lukas_xpm862 
+##     H2O cluster total nodes:    1 
+##     H2O cluster total memory:   3.98 GB 
+##     H2O cluster total cores:    8 
+##     H2O cluster allowed cores:  8 
+##     H2O cluster healthy:        TRUE 
+##     H2O Connection ip:          localhost 
+##     H2O Connection port:        54321 
+##     H2O Connection proxy:       NA 
+##     H2O Internal Security:      FALSE 
+##     H2O API Extensions:         Amazon S3, Algos, AutoML, Core V3, TargetEncoder, Core V4 
+##     R Version:                  R version 4.0.0 (2020-04-24)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{h2o.no_progress}\NormalTok{() }\CommentTok{# brak pasków postępu}
+
+\NormalTok{train_credit_h2o <-}\StringTok{ }\KeywordTok{as.h2o}\NormalTok{(train_credit)}
+\NormalTok{valid_credit_h2o <-}\StringTok{ }\KeywordTok{as.h2o}\NormalTok{(valid_credit)}
+\end{Highlighting}
+\end{Shaded}
+
+Następnie deklarujemy nazwy wykorzystywanych zmiennych i uruchamiamy procedurę:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y_var <-}\StringTok{ "risk"}
+\NormalTok{x_var <-}\StringTok{ }\KeywordTok{names}\NormalTok{(credit)[}\OperatorTok{-}\DecValTok{10}\NormalTok{]}
+
+\NormalTok{m3 <-}\StringTok{ }\KeywordTok{h2o.gbm}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x_var, }
+              \DataTypeTok{y =}\NormalTok{ y_var, }
+              \DataTypeTok{training_frame =}\NormalTok{ train_credit_h2o, }
+              \DataTypeTok{validation_frame =}\NormalTok{ valid_credit_h2o, }
+              \DataTypeTok{seed =} \DecValTok{1}\NormalTok{)}
+
+\NormalTok{m3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Model Details:
+## ==============
+## 
+## H2OBinomialModel: gbm
+## Model ID:  GBM_model_R_1591105482481_310 
+## Model Summary: 
+##   number_of_trees number_of_internal_trees model_size_in_bytes min_depth
+## 1              50                       50               13914         5
+##   max_depth mean_depth min_leaves max_leaves mean_leaves
+## 1         5    5.00000          7         26    17.66000
+## 
+## 
+## H2OBinomialMetrics: gbm
+## ** Reported on training data. **
+## 
+## MSE:  0.07736868
+## RMSE:  0.2781523
+## LogLoss:  0.2767961
+## Mean Per-Class Error:  0.09880952
+## AUC:  0.9704167
+## AUCPR:  0.9862121
+## Gini:  0.9408333
+## R^2:  0.6315777
+## 
+## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
+##        bad good    Error     Rate
+## bad    202   38 0.158333  =38/240
+## good    22  538 0.039286  =22/560
+## Totals 224  576 0.075000  =60/800
+## 
+## Maximum Metrics: Maximum metrics at their respective thresholds
+##                         metric threshold      value idx
+## 1                       max f1  0.568378   0.947183 232
+## 2                       max f2  0.425774   0.965217 277
+## 3                 max f0point5  0.642867   0.951409 205
+## 4                 max accuracy  0.576117   0.925000 228
+## 5                max precision  0.985657   1.000000   0
+## 6                   max recall  0.314379   1.000000 319
+## 7              max specificity  0.985657   1.000000   0
+## 8             max absolute_mcc  0.576117   0.819649 228
+## 9   max min_per_class_accuracy  0.644367   0.912500 204
+## 10 max mean_per_class_accuracy  0.642867   0.914286 205
+## 11                     max tns  0.985657 240.000000   0
+## 12                     max fns  0.985657 559.000000   0
+## 13                     max fps  0.039037 240.000000 399
+## 14                     max tps  0.314379 560.000000 319
+## 15                     max tnr  0.985657   1.000000   0
+## 16                     max fnr  0.985657   0.998214   0
+## 17                     max fpr  0.039037   1.000000 399
+## 18                     max tpr  0.314379   1.000000 319
+## 
+## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
+## H2OBinomialMetrics: gbm
+## ** Reported on validation data. **
+## 
+## MSE:  0.1742677
+## RMSE:  0.4174538
+## LogLoss:  0.5334558
+## Mean Per-Class Error:  0.4166667
+## AUC:  0.7427381
+## AUCPR:  0.8549562
+## Gini:  0.4854762
+## R^2:  0.1701539
+## 
+## Confusion Matrix (vertical: actual; across: predicted) for F1-optimal threshold:
+##        bad good    Error     Rate
+## bad     10   50 0.833333   =50/60
+## good     0  140 0.000000   =0/140
+## Totals  10  190 0.250000  =50/200
+## 
+## Maximum Metrics: Maximum metrics at their respective thresholds
+##                         metric threshold      value idx
+## 1                       max f1  0.251100   0.848485 189
+## 2                       max f2  0.251100   0.933333 189
+## 3                 max f0point5  0.586949   0.823864 140
+## 4                 max accuracy  0.540278   0.760000 149
+## 5                max precision  0.977718   1.000000   0
+## 6                   max recall  0.251100   1.000000 189
+## 7              max specificity  0.977718   1.000000   0
+## 8             max absolute_mcc  0.586949   0.413905 140
+## 9   max min_per_class_accuracy  0.726448   0.700000 115
+## 10 max mean_per_class_accuracy  0.586949   0.705952 140
+## 11                     max tns  0.977718  60.000000   0
+## 12                     max fns  0.977718 139.000000   0
+## 13                     max fps  0.074617  60.000000 199
+## 14                     max tps  0.251100 140.000000 189
+## 15                     max tnr  0.977718   1.000000   0
+## 16                     max fnr  0.977718   0.992857   0
+## 17                     max fpr  0.074617   1.000000 199
+## 18                     max tpr  0.251100   1.000000 189
+## 
+## Gains/Lift Table: Extract with `h2o.gainsLift(<model>, <data>)` or `h2o.gainsLift(<model>, valid=<T/F>, xval=<T/F>)`
+\end{verbatim}
 
 \end{document}

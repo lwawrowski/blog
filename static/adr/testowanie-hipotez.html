@@ -169,7 +169,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.1" data-path="grupowanie.html"><a href="grupowanie.html#zadania"><i class="fa fa-check"></i><b>4.3.1</b> Zadania</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>5</b> Klasyfikacja</a></li>
+<li class="chapter" data-level="5" data-path="klasyfikacja.html"><a href="klasyfikacja.html"><i class="fa fa-check"></i><b>5</b> Klasyfikacja</a><ul>
+<li class="chapter" data-level="5.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#wprowadzenie-4"><i class="fa fa-check"></i><b>5.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="5.2" data-path="klasyfikacja.html"><a href="klasyfikacja.html#drzewa-decyzyjne"><i class="fa fa-check"></i><b>5.2</b> Drzewa decyzyjne</a></li>
+<li class="chapter" data-level="5.3" data-path="klasyfikacja.html"><a href="klasyfikacja.html#gradient-boosting-machine"><i class="fa fa-check"></i><b>5.3</b> Gradient Boosting Machine</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="klasyfikacja.html"><a href="klasyfikacja.html#zadania-1"><i class="fa fa-check"></i><b>5.3.1</b> Zadania</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -352,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.9</span> Testowanie normalności - wykres kwantyl-kwantyl</h2>
 <p>Normalność rozkładu może także zostać zweryfikowana poprzez utworzenie wykresu przedstawiającego porównanie wartości oryginalnych oraz odpowiadającym im wartości pochodzących z rozkładu normalnego. Dodatkowo prowadzona jest linia regresji pomiędzy otrzymanymi wartościami. Punkty przebiegające w pobliżu tej linii oznaczają, że rozkład tej cechy jest normalny.</p>
 <p>Na wykresie przedstawiony jest wykres kwantyl-kwantyl dla 50 wartości wylosowanych z rozkładu normalnego i z rozkładu jednostajnego.</p>
-<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Jak można zauważyć punkty na wykresie po lewej stronie nie odbiegają znacząco od linii prostej, zatem można przypuszczać, że rozkład tej cechy jest normalny. Z kolei na wykresie po prawej stronie obserwuje się odstępstwo od rozkładu normalnego - wartości na krańcach linii są od niej oddalone.</p>
 <p><strong>Przykład</strong></p>
 <p>Czy cecha <em>doświadczenie</em> ma rozkład normalny? Sprawdź za pomocą odpowiedniego testu oraz wykresu kwantyl-kwantyl.</p>
@@ -368,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">ggplot</span>(pracownicy, <span class="kw">aes</span>(<span class="dt">sample =</span> doswiadczenie)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">stat_qq</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw">stat_qq_line</span>()</a></code></pre></div>
-<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="testowanie-wariancji---test-bartletta" class="section level2">
 <h2><span class="header-section-number">2.10</span> Testowanie wariancji - test Bartletta</h2>
