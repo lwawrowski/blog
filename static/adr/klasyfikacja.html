@@ -441,17 +441,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">library</span>(h2o)</a>
 <a class="sourceLine" id="cb104-2" title="2"></a>
 <a class="sourceLine" id="cb104-3" title="3"><span class="kw">h2o.init</span>()</a></code></pre></div>
-<pre><code>##  Connection successful!
+<pre><code>## 
+## H2O is not running yet, starting it now...
+## 
+## Note:  In case of errors look at the following log files:
+##     C:\Users\lukas\AppData\Local\Temp\RtmpqezXOo\file17a467324088/h2o_lukas_started_from_r.out
+##     C:\Users\lukas\AppData\Local\Temp\RtmpqezXOo\file17a419754323/h2o_lukas_started_from_r.err
+## 
+## 
+## Starting H2O JVM and connecting: . Connection successful!
 ## 
 ## R is connected to the H2O cluster: 
-##     H2O cluster uptime:         54 minutes 58 seconds 
+##     H2O cluster uptime:         5 seconds 23 milliseconds 
 ##     H2O cluster timezone:       Europe/Warsaw 
 ##     H2O data parsing timezone:  UTC 
 ##     H2O cluster version:        3.30.0.1 
-##     H2O cluster version age:    1 month and 29 days  
+##     H2O cluster version age:    2 months  
 ##     H2O cluster name:           H2O_started_from_R_lukas_xpm862 
 ##     H2O cluster total nodes:    1 
-##     H2O cluster total memory:   3.95 GB 
+##     H2O cluster total memory:   3.98 GB 
 ##     H2O cluster total cores:    8 
 ##     H2O cluster allowed cores:  8 
 ##     H2O cluster healthy:        TRUE 
@@ -480,10 +488,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ==============
 ## 
 ## H2OBinomialModel: gbm
-## Model ID:  GBM_model_R_1591105482481_8557 
+## Model ID:  GBM_model_R_1591256341659_1 
 ## Model Summary: 
 ##   number_of_trees number_of_internal_trees model_size_in_bytes min_depth
-## 1              50                       50               13917         5
+## 1              50                       50               13916         5
 ##   max_depth mean_depth min_leaves max_leaves mean_leaves
 ## 1         5    5.00000          7         26    17.66000
 ## 
@@ -616,14 +624,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" title="1">gbm_grid &lt;-<span class="st"> </span><span class="kw">h2o.grid</span>(<span class="dt">algorithm =</span> <span class="st">&quot;gbm&quot;</span>, </a>
 <a class="sourceLine" id="cb112-2" title="2">                     <span class="dt">x =</span> x_var, </a>
 <a class="sourceLine" id="cb112-3" title="3">                     <span class="dt">y =</span> y_var,</a>
-<a class="sourceLine" id="cb112-4" title="4">                     <span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid1&quot;</span>,</a>
+<a class="sourceLine" id="cb112-4" title="4">                     <span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>,</a>
 <a class="sourceLine" id="cb112-5" title="5">                     <span class="dt">training_frame =</span> train_credit_h2o,</a>
 <a class="sourceLine" id="cb112-6" title="6">                     <span class="dt">validation_frame =</span> valid_credit_h2o,</a>
 <a class="sourceLine" id="cb112-7" title="7">                     <span class="dt">seed =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb112-8" title="8">                     <span class="dt">hyper_params =</span> gbm_params,</a>
 <a class="sourceLine" id="cb112-9" title="9">                     <span class="dt">search_criteria =</span> search_criteria)</a>
 <a class="sourceLine" id="cb112-10" title="10"></a>
-<a class="sourceLine" id="cb112-11" title="11">gbm_gridperf &lt;-<span class="st"> </span><span class="kw">h2o.getGrid</span>(<span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid1&quot;</span>,</a>
+<a class="sourceLine" id="cb112-11" title="11">gbm_gridperf &lt;-<span class="st"> </span><span class="kw">h2o.getGrid</span>(<span class="dt">grid_id =</span> <span class="st">&quot;gbm_grid&quot;</span>,</a>
 <a class="sourceLine" id="cb112-12" title="12">                            <span class="dt">sort_by =</span> <span class="st">&quot;auc&quot;</span>,</a>
 <a class="sourceLine" id="cb112-13" title="13">                            <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb112-14" title="14"></a>
@@ -634,10 +642,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ==============
 ## 
 ## H2OBinomialModel: gbm
-## Model ID:  gbm_grid1_model_5 
+## Model ID:  gbm_grid_model_5 
 ## Model Summary: 
 ##   number_of_trees number_of_internal_trees model_size_in_bytes min_depth
-## 1             120                      120               12695         2
+## 1             120                      120               12698         2
 ##   max_depth mean_depth min_leaves max_leaves mean_leaves
 ## 1         2    2.00000          3          4     3.76667
 ## 
@@ -795,14 +803,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" title="1"><span class="kw">h2o.partialPlot</span>(<span class="dt">object =</span> m4, <span class="dt">data =</span> valid_credit_h2o, <span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">&quot;checking_account&quot;</span>,<span class="st">&quot;credit_amount&quot;</span>))</a></code></pre></div>
 <p><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-77-1.png" width="672" /><img src="Wawrowski_ADR_files/figure-html/unnamed-chunk-77-2.png" width="672" /></p>
 <pre><code>## [[1]]
-## PartialDependence: Partial Dependence Plot of model gbm_grid1_model_5 on column &#39;checking_account&#39;
+## PartialDependence: Partial Dependence Plot of model gbm_grid_model_5 on column &#39;checking_account&#39;
 ##   checking_account mean_response stddev_response std_error_mean_response
 ## 1           little      0.592628        0.181815                0.012856
 ## 2         moderate      0.631352        0.175209                0.012389
 ## 3             rich      0.805179        0.112347                0.007944
 ## 
 ## [[2]]
-## PartialDependence: Partial Dependence Plot of model gbm_grid1_model_5 on column &#39;credit_amount&#39;
+## PartialDependence: Partial Dependence Plot of model gbm_grid_model_5 on column &#39;credit_amount&#39;
 ##    credit_amount mean_response stddev_response std_error_mean_response
 ## 1     250.000000      0.820332        0.154227                0.010906
 ## 2    1061.684211      0.730765        0.191768                0.013560
