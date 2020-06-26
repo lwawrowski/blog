@@ -116,7 +116,7 @@ logs_anonim %>%
   
 ```
 
-Na pierwszym miejscu link do skryptu i do konkretnego rozdziału poświęconemu miarom klasycznym. Kolejne dwa miejsca to przedziały ufności. Kolejne pozycje pokazują, że studenci woleli oglądać screencast aniżeli czytać rozdział skryptu.
+Na pierwszym miejscu link do konkretnego rozdziału skryptu poświęconemu miarom klasycznym. Jedna wyświetlenie mniej ma cały skrypt. Dwa następne miejsca to przedziały ufności. Kolejne pozycje pokazują, że studenci woleli oglądać screencast aniżeli czytać rozdział skryptu.
 
 # Analiza czasowa
 
