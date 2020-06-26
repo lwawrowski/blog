@@ -38,20 +38,20 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "Blog"
     url = "/"
     weight = 1
+    
+[[menu.main]]
+    name = "Publikacje"
+    url = "/page/publikacje/"
+    weight = 2
 
 [[menu.main]]
     name = "Projekty"
     url = "/page/projekty/"
-    weight = 2
+    weight = 3
 
 [[menu.main]]
     name = "Dydaktyka"
     url = "/page/dydaktyka/"
-    weight = 3
-
-[[menu.main]]
-    name = "Publikacje"
-    url = "/page/publikacje/"
     weight = 4
     
 [[menu.main]]
