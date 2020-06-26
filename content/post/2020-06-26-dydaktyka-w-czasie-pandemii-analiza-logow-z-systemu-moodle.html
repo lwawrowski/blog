@@ -1,0 +1,161 @@
+---
+title: Dydaktyka w czasie pandemii - analiza logów z systemu moodle
+author: Łukasz Wawrowski
+date: '2020-06-26'
+slug: dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle
+categories:
+  - R
+tags:
+  - tidyverse
+  - moodle
+description: ''
+---
+
+
+
+<p>W semestrze letnim roku akademickiego 2019/2020 miałem okazję prowadzić przedmiot Statystyka na kierunku Rachunkowość i Finanse Przedsiębiorstw. Pandemia COVID19 spowodowała, że większość nauczycieli musiała z dnia na dzień zmienić sposób prowadzenia zajęć ze stacjonarnego na zdalny. Trzeba było szybko przestawić się na nowy tryb nauki i znaleźć optymalny sposób prowadzenia zajęć oraz metodę weryfikacji umiejętności studentów. W moim przypadku zdecydowałem się na nagrywanie screencastów - widok ekranu komputera z komentarzem głosowym. Przy okazji doskonaliłem <a href="https://departmentofstatisticspue.github.io/statystyka-opisowa/index.html">skrypt ze statystyki</a>. Elementem weryfikacji wiedzy były quizy stworzone za pomocą świetnego pakietu <a href="http://www.r-exams.org/">exams</a>. Dodatkowo na zakończenie semestru studenci mieli przygotować prosty projekt dotyczący regresji liniowej.</p>
+<p>Wszystkie wyżej wymienione elementy umieszczałem na platformie moodle. System ten zbiera informacje o wszystkich aktywnościach użytkowników i analiza tych aktywności będzie tematem tego wpisu.</p>
+<div id="przygotowanie-danych" class="section level1">
+<h1>Przygotowanie danych</h1>
+<p>Raport aktywności z systemu moodle zawiera następujące elementy:</p>
+<ul>
+<li>stempel czasu,</li>
+<li>twórcę aktywności,</li>
+<li>kogo ta aktywność dotyczyła,</li>
+<li>kontekst zdarzenia,</li>
+<li>składnik,</li>
+<li>nazwa zdarzenia,</li>
+<li>opis,</li>
+<li>pochodzenia (strona internetowa lub inne),</li>
+<li>adres IP.</li>
+</ul>
+<p>W ciągu semestru 83 studentów oraz ja wygenerowaliśmy 49264 różnych aktywności. Oryginalny zbiór danych zawierał dane osobowe, zatem przeprowadziłem anomizację i w miejsce imion i nazwisk wstawiłem losowe ciągi znaków. Zostawiłem tylko swoje inicjały, żeby odróżnić aktywności nauczyciela od aktywności studentów.</p>
+</div>
+<div id="analiza-częstości" class="section level1">
+<h1>Analiza częstości</h1>
+<p>Do analizy przydadzą się trzy pakiety: tidyverse - do przetwarzania i wizualizacji, lubridate - do operacji na datach oraz ggTimeSeries - do wizualizacji kalendarza. Na pierwszy ogień weźmy najczęściej wyświetlany typ składnika kursu.</p>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+library(ggTimeSeries)
+
+load(&quot;data/logs_anonim.RData&quot;)
+
+logs_anonim %&gt;% 
+  filter(nazwa_anonim != &quot;ŁW&quot;) %&gt;% 
+  count(skladnik) %&gt;% 
+  arrange(n) %&gt;% 
+  filter(n &gt; 1000) %&gt;% 
+  mutate(skladnik=fct_reorder(skladnik,n)) %&gt;% 
+  ggplot(aes(x=skladnik, y=n)) + 
+  geom_col(fill = &quot;#6daaee&quot;) + 
+  geom_text(aes(label = n), hjust = 1.1) +
+  xlab(&quot;Liczba wyświetleń&quot;) +
+  ylab(&quot;Typ składnika kursu&quot;) +
+  coord_flip() +
+  ggtitle(&quot;Typ składnika kursu wg liczby wyświetleń - powyżej 1000&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-06-26-dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Na pierwszym miejscu jest <em>Test (Quiz)</em>, który studenci musieli rozwiązać, aby uzyskać punkty niezbędne do zaliczenia przedmiotu. <em>System</em> na drugim miejscu to wyświetlenie strony kursu. <em>Adres URL</em> zawierał link do skryptów oraz screencastów, natomiast <em>Plik</em> to plik Excela zawierający rozwiązanie omawianego problemu. <em>Zadanie</em> to z kolei zasób z projektem.</p>
+<p>Sprawdźmy zatem jaki konkretny składnik kursu był najczęściej klikany.</p>
+<pre class="r"><code>logs_anonim %&gt;% 
+  filter(nazwa_anonim != &quot;ŁW&quot;) %&gt;% 
+  filter(kontekst_zdarzenia != &quot;Kurs: Statystyka - stacj. I st. - RiFP - (lab.) - dr Łukasz Wawrowski&quot;) %&gt;% 
+  count(kontekst_zdarzenia) %&gt;% 
+  mutate(kontekst_zdarzenia=gsub(&quot; - quiz&quot;, &quot;&quot;, kontekst_zdarzenia)) %&gt;% 
+  filter(n &gt; 1000) %&gt;% 
+  mutate(kontekst_zdarzenia=fct_reorder(kontekst_zdarzenia,n)) %&gt;% 
+  ggplot(aes(x=kontekst_zdarzenia, y=n)) + 
+  geom_col(fill = &quot;#6daaee&quot;) + 
+  geom_text(aes(label = n), hjust = 1.1) +
+  xlab(&quot;Liczba wyświetleń&quot;) +
+  ylab(&quot;Składnik kursu&quot;) +
+  coord_flip() +
+  ggtitle(&quot;Składniki kursu wg liczby wyświetleń - powyżej 1000&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-06-26-dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Niespodzianek nie ma - najczęściej wyświetlane były quizy. Studenci najpierw odwiedzali ten zasób, żeby quiz rozwiązać, a po tygodniu, żeby sprawdzić poprawność odpowiedzi. Pierwsze 4 miejsca to 4 tygodnie zajęć od rozpoczęcia pandemii. Na piątym miejscu jest projekt zaliczeniowy.</p>
+<p>Materiały z jakiego tematu były najczęściej otwierane? Poniżej analiza częstości wyłącznie adresów URL.</p>
+<pre class="r"><code>logs_anonim %&gt;% 
+  filter(nazwa_anonim != &quot;ŁW&quot;) %&gt;% 
+  filter(grepl(&quot;Adres URL:&quot;, kontekst_zdarzenia)) %&gt;% 
+  mutate(kontekst_zdarzenia=gsub(&quot;Adres URL: &quot;, &quot;&quot;, kontekst_zdarzenia)) %&gt;% 
+  count(kontekst_zdarzenia) %&gt;% 
+  mutate(kontekst_zdarzenia=fct_reorder(kontekst_zdarzenia,n)) %&gt;% 
+  ggplot(aes(x=kontekst_zdarzenia, y=n)) + 
+  geom_col(fill = &quot;#6daaee&quot;) + 
+  geom_text(aes(label = n), hjust = 1.1) +
+  xlab(&quot;Liczba wyświetleń&quot;) +
+  ylab(&quot;Składnik kursu&quot;) +
+  coord_flip() +
+  ggtitle(&quot;Adresy URL wg liczby wyświetleń&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-06-26-dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Na pierwszym miejscu link do skryptu i do konkretnego rozdziału poświęconemu miarom klasycznym. Kolejne dwa miejsca to przedziały ufności. Kolejne pozycje pokazują, że studenci woleli oglądać screencast aniżeli czytać rozdział skryptu.</p>
+</div>
+<div id="analiza-czasowa" class="section level1">
+<h1>Analiza czasowa</h1>
+<p>Zajęcia w planie zajęć miałem zaplanowane na wtorki i zawsze starałem się tego dnia udostępnić materiały z nowego tematu. Niestety dwa razy mi się to nie udało - zajęcia zostały udostępnione w środę. Zobaczmy jak wyglądała aktywność studentów w tygodniu przed pandemią, kiedy zajęcia odbyły się stacjonarnie po raz ostatni - 9-15.03.2020.</p>
+<pre class="r"><code>logs_anonim %&gt;% 
+  filter(czas &gt;= &quot;2020-03-09 00:00:00&quot;, czas &lt;= &quot;2020-03-15 23:59:00&quot;, nazwa_anonim != &quot;ŁW&quot;) %&gt;% 
+  count(czas) %&gt;% 
+  ggplot(aes(x=czas, y=n)) + 
+  geom_point(color = &quot;#6daaee&quot;) +
+  ylab(&quot;Liczba akcji&quot;) +
+  ylim(0,50) +
+  ggtitle(&quot;Liczba aktywności w ciągu tygodnia 9-15.03.2020&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-06-26-dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Widoczny jest pik aktywności we wtorek - w pozostałe dni pojedyncze logowania do kursu. Weźmy teraz pod uwagę wybrany tydzień w kwietniu.</p>
+<pre class="r"><code>logs_anonim %&gt;% 
+  filter(czas &gt;= &quot;2020-04-20 00:00:00&quot;, czas &lt;= &quot;2020-04-26 23:59:00&quot;, nazwa_anonim != &quot;ŁW&quot;) %&gt;% 
+  count(czas) %&gt;% 
+  ggplot(aes(x=czas, y=n)) +
+  geom_point(color = &quot;#6daaee&quot;) +
+  ylab(&quot;Liczba akcji&quot;) +
+  ylim(0,20) +
+  ggtitle(&quot;Liczba aktywności w ciągu tygodnia 20-26.04.2020&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-06-26-dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Widać wyraźnie, że aktywność studentów rozłożyła się na pozostałe dni tygodnia. Szczególnie na poniedziałek i wtorek, kiedy mijał termin rozwiązania quizu. Aktywność w całym semestrze widoczna jest poniżej.</p>
+<pre class="r"><code>logs_anonim %&gt;% 
+  filter(godz &gt;= &quot;2020-03-09 01:00:00&quot;, godz &lt;= &quot;2020-06-14 23:00:00&quot;, nazwa_anonim != &quot;ŁW&quot;) %&gt;% 
+  count(czas) %&gt;% 
+  ggplot(aes(x=czas, y=n)) + 
+  geom_point(color = &quot;#6daaee&quot;) +
+  ylab(&quot;Liczba akcji&quot;) +
+  ylim(0,50) +
+  ggtitle(&quot;Liczba aktywności w czasie semestru&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme_light() +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-06-26-dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Na zakończenie wizualizacja tych danych w formie kalendarza.</p>
+<pre class="r"><code>logs_anonim %&gt;% 
+  filter(nazwa_anonim != &quot;ŁW&quot;, czas &gt;= &quot;2020-03-09 00:00:00&quot;) %&gt;% 
+  mutate(dzien=ymd(format(round(czas, units=&quot;days&quot;), format=&quot;%Y-%m-%d&quot;))) %&gt;% 
+  count(dzien) %&gt;% 
+  ggTimeSeries::ggplot_calendar_heatmap(dtDateValue = ., 
+                                        cDateColumnName = &quot;dzien&quot;, 
+                                        cValueColumnName = &quot;n&quot;) +
+  scale_fill_continuous(low = &quot;#ffffbf&quot;, high = &quot;#d73027&quot;, name = &quot;Liczba\naktywności&quot;) +
+  xlab(&quot;Miesiąc&quot;) + ylab(&quot;Dzień tygodnia&quot;) +
+  ggtitle(&quot;Liczba aktywności w czasie semestru&quot;) +
+  labs(caption = &quot;Łukasz Wawrowski - wawrowski.edu.pl&quot;) +
+  theme(plot.caption = element_text(color = &quot;grey80&quot;))</code></pre>
+<p><img src="/post/2020-06-26-dydaktyka-w-czasie-pandemii-analiza-logow-z-systemu-moodle_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Na tej wizualizacji wyraźnie widać większą aktywność w środy - w ten dzień były publikowane wyniki z quizu. Czerwone kwadraty w czwartki w marcu i kwietniu wskazują na realizację trudniejszych zagadnień i próby prawidłowego rozwiązania quizu. Z kolei 9 czerwca upływał termin złożenia projektu i widać wyraźną mobilizację już od trzeciego czerwca. W ostatnim analizowanym tygodniu odbył się egzamin i także można zaobserwować większą aktywność studentów w poprzedzających dniach.</p>
+</div>
+<div id="podsumowanie" class="section level1">
+<h1>Podsumowanie</h1>
+<p>Dane z logów systemu moodle pozwalają na całkiem ciekawą analizę zachowań. Można to zrobić globalnie albo analizować konkretnego studenta. Jeżeli zajęcia w kolejnym roku akademickim będą odbywały się stacjonarnie to będzie okazja do analizy porównawczej.</p>
+</div>
