@@ -7,6 +7,8 @@ author = "Łukasz"
 | [Google Scholar](https://scholar.google.pl/citations?user=nQFr4NMAAAAJ) | [ResearchGate](https://www.researchgate.net/profile/Lukasz_Wawrowski) | [ORCID](https://orcid.org/0000-0002-1201-5344) |
 |:-----:|:-----:|:-----:|
 
+[Wawrowski, Ł., 2020, _Estymacja pośrednia wskaźników ubóstwa na poziomie powiatów_, Wiadomości Statystyczne, vol. 65 (8), s. 7-26](https://ws.stat.gov.pl/Article/2020/8/007-026)
+
 [Dehnel, G., Wawrowski, Ł., 2020, _Robust estimation of wages in small enterprises: the application to Poland’s districts_, Statistics in Transition new series, vol. 21 (1), s. 137-157](/articles/sit_2020.pdf)
 
 [Dehnel, G., Wawrowski, Ł., 2019, _Estimation of the average wage in Polish small companies using the robust approach_, Przegląd Statystyczny, Statistical Review, vol. 66 (3), s. 200-213](/articles/ps_2019.pdf)
