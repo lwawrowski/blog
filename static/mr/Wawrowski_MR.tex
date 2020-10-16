@@ -46,6 +46,46 @@
   urlcolor=Blue,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -309,6 +349,202 @@ Uczniowie nieobecni podczas testu kompetencji z matematyki mogą celowo opuszcza
 \subsection{Błąd dopasowania (adjustement error)}\label{bux142ux105d-dopasowania-adjustement-error}}
 
 Wykorzystanie danych na temat populacji, wskaźnika kompletności w poprawie jakości próby może spowodować przeszacowanie lub niedoszacowanie wyników dla określonych grup.
+
+\hypertarget{wprowadzenie-do-r}{%
+\chapter{Wprowadzenie do R}\label{wprowadzenie-do-r}}
+
+\href{presentations/02_wprowadzenieR.html}{Prezentacja}
+
+\hypertarget{wczytanie-danych}{%
+\section{Wczytanie danych}\label{wczytanie-danych}}
+
+Wykorzystamy zbiór danych dotyczących wyników drugiej tury wyborów prezydenckich w Polsce na poziomie obwodów wyborczych. Dane pochodzą z serwisu \href{https://prezydent20200628.pkw.gov.pl/prezydent20200628/pl/dane_w_arkuszach}{PKW}, a plik Excel znajduje się \href{data/wybory2020.xlsx}{tutaj}.
+
+Dane wczytujemy z wykorzystaniem pakietu \emph{readxl}, a następnie czyścimy nazwy kolumn oraz wybieramy te zawierające kluczowe informacje:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{wp \textless{}{-}}\StringTok{ }\NormalTok{readxl}\OperatorTok{::}\KeywordTok{read\_xlsx}\NormalTok{(}\StringTok{"data/wybory2020.xlsx"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\NormalTok{janitor}\OperatorTok{::}\KeywordTok{clean\_names}\NormalTok{(.) }\OperatorTok{\%\textgreater{}\%}\StringTok{  }
+\StringTok{  }\KeywordTok{select}\NormalTok{(symbol\_kontrolny}\OperatorTok{:}\NormalTok{percent\_glosow\_niewaznych, percent\_glosow\_waznych}\OperatorTok{:}\NormalTok{rafal\_kazimierz\_trzaskowski)}
+
+\KeywordTok{summary}\NormalTok{(wp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  symbol_kontrolny       nr_okw       kod_teryt          typ_gminy        
+##  Length:27227       Min.   : 1.00   Length:27227       Length:27227      
+##  Class :character   1st Qu.:14.00   Class :character   Class :character  
+##  Mode  :character   Median :26.00   Mode  :character   Mode  :character  
+##                     Mean   :25.45                                        
+##                     3rd Qu.:37.00                                        
+##                     Max.   :49.00                                        
+##                                                                          
+##   numer_obwodu     typ_obszaru         typ_obwodu          siedziba        
+##  Min.   :   1.00   Length:27227       Length:27227       Length:27227      
+##  1st Qu.:   3.00   Class :character   Class :character   Class :character  
+##  Median :   7.00   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :  38.29                                                           
+##  3rd Qu.:  18.00                                                           
+##  Max.   :1147.00                                                           
+##                                                                            
+##     gmina              powiat          wojewodztwo          frekwencja    
+##  Length:27227       Length:27227       Length:27227       Min.   :  0.00  
+##  Class :character   Class :character   Class :character   1st Qu.: 61.82  
+##  Mode  :character   Mode  :character   Mode  :character   Median : 67.18  
+##                                                           Mean   : 66.42  
+##                                                           3rd Qu.: 72.14  
+##                                                           Max.   :100.00  
+##                                                                           
+##  percent_glosow_niewaznych percent_glosow_waznych andrzej_sebastian_duda
+##  Min.   : 0.0000           Min.   : 66.67         Min.   :  0.00        
+##  1st Qu.: 0.5300           1st Qu.: 98.87         1st Qu.: 42.59        
+##  Median : 0.8200           Median : 99.18         Median : 54.81        
+##  Mean   : 0.9358           Mean   : 99.06         Mean   : 56.64        
+##  3rd Qu.: 1.1300           3rd Qu.: 99.47         3rd Qu.: 70.85        
+##  Max.   :33.3300           Max.   :100.00         Max.   :100.00        
+##  NA's   :3                 NA's   :3              NA's   :3             
+##  rafal_kazimierz_trzaskowski
+##  Min.   :  0.00             
+##  1st Qu.: 29.15             
+##  Median : 45.19             
+##  Mean   : 43.36             
+##  3rd Qu.: 57.41             
+##  Max.   :100.00             
+##  NA's   :3
+\end{verbatim}
+
+Spróbujmy odpowiedzieć na kilka pytań dotyczących analizowanych danych.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ile obwodów głosowania miało frekwencję powyżej 80\%?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wp }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(frekwencja }\OperatorTok{\textgreater{}}\StringTok{ }\DecValTok{80}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 1
+##       n
+##   <int>
+## 1  1189
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Ile obwodów głosowania znajduje się w Poznaniu?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wp }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(powiat }\OperatorTok{==}\StringTok{ "Poznań"}\NormalTok{) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{count}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 1
+##       n
+##   <int>
+## 1   251
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Ile jest obwodów według typu obszaru?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wp }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{count}\NormalTok{(typ\_obszaru)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   typ_obszaru                    n
+##   <chr>                      <int>
+## 1 dzielnica w m.st. Warszawa   771
+## 2 miasto                     12538
+## 3 miasto i wieś                 82
+## 4 statek                         8
+## 5 wieś                       13661
+## 6 zagranica                    167
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Jaka była średnia frekwencja w województwach?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wp }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(wojewodztwo) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{srednia\_frekwencja=}\KeywordTok{mean}\NormalTok{(frekwencja)) }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(srednia\_frekwencja)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 16 x 2
+##    wojewodztwo         srednia_frekwencja
+##    <chr>                            <dbl>
+##  1 opolskie                          59.0
+##  2 warmińsko-mazurskie               59.9
+##  3 podlaskie                         63.2
+##  4 lubuskie                          63.3
+##  5 zachodniopomorskie                63.7
+##  6 kujawsko-pomorskie                63.8
+##  7 lubelskie                         64.8
+##  8 dolnośląskie                      65.2
+##  9 świętokrzyskie                    65.5
+## 10 podkarpackie                      65.8
+## 11 śląskie                           66.1
+## 12 pomorskie                         67.0
+## 13 wielkopolskie                     67.5
+## 14 łódzkie                           68.7
+## 15 małopolskie                       69.6
+## 16 mazowieckie                       72.0
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Gdzie była największa różnica pomiędzy kandydatami?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diff \textless{}{-}}\StringTok{ }\NormalTok{wp }\OperatorTok{\%\textgreater{}\%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{roznica =} \KeywordTok{abs}\NormalTok{(andrzej\_sebastian\_duda}\OperatorTok{{-}}\NormalTok{rafal\_kazimierz\_trzaskowski))}
+\end{Highlighting}
+\end{Shaded}
+
 
   \bibliography{book.bib}
 
