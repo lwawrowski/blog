@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Podstawy programowania R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Podstawy programowania R" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 
 <link rel="next" href="wprowadzenie-do-r.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,21 +50,21 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -83,7 +84,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -133,43 +134,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Wprowadzenie</a></li>
-<li class="chapter" data-level="1" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html"><i class="fa fa-check"></i><b>1</b> Wprowadzenie do R</a><ul>
-<li class="chapter" data-level="1.1" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#wprowadzenie-1"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html"><i class="fa fa-check"></i><b>1</b> Wprowadzenie do R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
 <li class="chapter" data-level="1.2" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#r"><i class="fa fa-check"></i><b>1.2</b> R</a></li>
 <li class="chapter" data-level="1.3" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#rstudio"><i class="fa fa-check"></i><b>1.3</b> RStudio</a></li>
 <li class="chapter" data-level="1.4" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#ważne-informacje"><i class="fa fa-check"></i><b>1.4</b> Ważne informacje</a></li>
 <li class="chapter" data-level="1.5" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#pakiety"><i class="fa fa-check"></i><b>1.5</b> Pakiety</a></li>
 <li class="chapter" data-level="1.6" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#r-jako-kalkulator"><i class="fa fa-check"></i><b>1.6</b> R jako kalkulator</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="struktury-danych.html"><a href="struktury-danych.html"><i class="fa fa-check"></i><b>2</b> Struktury danych</a><ul>
-<li class="chapter" data-level="2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor"><i class="fa fa-check"></i><b>2.1</b> Wektor</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-logicznych"><i class="fa fa-check"></i><b>2.1.1</b> Wektor wartości logicznych</a></li>
-<li class="chapter" data-level="2.1.2" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-liczbowych"><i class="fa fa-check"></i><b>2.1.2</b> Wektor wartości liczbowych</a></li>
-<li class="chapter" data-level="2.1.3" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-tekstowych"><i class="fa fa-check"></i><b>2.1.3</b> Wektor wartości tekstowych</a></li>
-<li class="chapter" data-level="2.1.4" data-path="struktury-danych.html"><a href="struktury-danych.html#przeciążanie-wektora"><i class="fa fa-check"></i><b>2.1.4</b> Przeciążanie wektora</a></li>
-<li class="chapter" data-level="2.1.5" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-wektorach"><i class="fa fa-check"></i><b>2.1.5</b> Operacje na wektorach</a></li>
-<li class="chapter" data-level="2.1.6" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-agregujące"><i class="fa fa-check"></i><b>2.1.6</b> Operacje agregujące</a></li>
-<li class="chapter" data-level="2.1.7" data-path="struktury-danych.html"><a href="struktury-danych.html#sprawdzanie-typu-wektora"><i class="fa fa-check"></i><b>2.1.7</b> Sprawdzanie typu wektora</a></li>
-<li class="chapter" data-level="2.1.8" data-path="struktury-danych.html"><a href="struktury-danych.html#rzutowanie-wektorów"><i class="fa fa-check"></i><b>2.1.8</b> Rzutowanie wektorów</a></li>
-<li class="chapter" data-level="2.1.9" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-wektorów"><i class="fa fa-check"></i><b>2.1.9</b> Indeksowanie wektorów</a></li>
-<li class="chapter" data-level="2.1.10" data-path="struktury-danych.html"><a href="struktury-danych.html#wartości-nieliczbowe"><i class="fa fa-check"></i><b>2.1.10</b> Wartości nieliczbowe</a></li>
-<li class="chapter" data-level="2.1.11" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania"><i class="fa fa-check"></i><b>2.1.11</b> Zadania</a></li>
+<li class="chapter" data-level="2" data-path="struktury-danych.html"><a href="struktury-danych.html"><i class="fa fa-check"></i><b>2</b> Struktury danych</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#obiekty"><i class="fa fa-check"></i><b>2.1</b> Obiekty</a></li>
+<li class="chapter" data-level="2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor"><i class="fa fa-check"></i><b>2.2</b> Wektor</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-logicznych"><i class="fa fa-check"></i><b>2.2.1</b> Wektor wartości logicznych</a></li>
+<li class="chapter" data-level="2.2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-liczbowych"><i class="fa fa-check"></i><b>2.2.2</b> Wektor wartości liczbowych</a></li>
+<li class="chapter" data-level="2.2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-tekstowych"><i class="fa fa-check"></i><b>2.2.3</b> Wektor wartości tekstowych</a></li>
+<li class="chapter" data-level="2.2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#przeciążanie-wektora"><i class="fa fa-check"></i><b>2.2.4</b> Przeciążanie wektora</a></li>
+<li class="chapter" data-level="2.2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-wektorach"><i class="fa fa-check"></i><b>2.2.5</b> Operacje na wektorach</a></li>
+<li class="chapter" data-level="2.2.6" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-agregujące"><i class="fa fa-check"></i><b>2.2.6</b> Operacje agregujące</a></li>
+<li class="chapter" data-level="2.2.7" data-path="struktury-danych.html"><a href="struktury-danych.html#sprawdzanie-typu-wektora"><i class="fa fa-check"></i><b>2.2.7</b> Sprawdzanie typu wektora</a></li>
+<li class="chapter" data-level="2.2.8" data-path="struktury-danych.html"><a href="struktury-danych.html#rzutowanie-wektorów"><i class="fa fa-check"></i><b>2.2.8</b> Rzutowanie wektorów</a></li>
+<li class="chapter" data-level="2.2.9" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-wektorów"><i class="fa fa-check"></i><b>2.2.9</b> Indeksowanie wektorów</a></li>
+<li class="chapter" data-level="2.2.10" data-path="struktury-danych.html"><a href="struktury-danych.html#wartości-nieliczbowe"><i class="fa fa-check"></i><b>2.2.10</b> Wartości nieliczbowe</a></li>
+<li class="chapter" data-level="2.2.11" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania"><i class="fa fa-check"></i><b>2.2.11</b> Zadania</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#macierz"><i class="fa fa-check"></i><b>2.2</b> Macierz</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#łączenie-macierzy"><i class="fa fa-check"></i><b>2.2.1</b> Łączenie macierzy</a></li>
-<li class="chapter" data-level="2.2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-macierzy"><i class="fa fa-check"></i><b>2.2.2</b> Indeksowanie macierzy</a></li>
-<li class="chapter" data-level="2.2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-macierzach"><i class="fa fa-check"></i><b>2.2.3</b> Operacje na macierzach</a></li>
-<li class="chapter" data-level="2.2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#zadanie"><i class="fa fa-check"></i><b>2.2.4</b> Zadanie</a></li>
+<li class="chapter" data-level="2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#macierz"><i class="fa fa-check"></i><b>2.3</b> Macierz</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="struktury-danych.html"><a href="struktury-danych.html#łączenie-macierzy"><i class="fa fa-check"></i><b>2.3.1</b> Łączenie macierzy</a></li>
+<li class="chapter" data-level="2.3.2" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-macierzy"><i class="fa fa-check"></i><b>2.3.2</b> Indeksowanie macierzy</a></li>
+<li class="chapter" data-level="2.3.3" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-macierzach"><i class="fa fa-check"></i><b>2.3.3</b> Operacje na macierzach</a></li>
+<li class="chapter" data-level="2.3.4" data-path="struktury-danych.html"><a href="struktury-danych.html#zadanie"><i class="fa fa-check"></i><b>2.3.4</b> Zadanie</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#czynnik"><i class="fa fa-check"></i><b>2.3</b> Czynnik</a></li>
-<li class="chapter" data-level="2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#lista"><i class="fa fa-check"></i><b>2.4</b> Lista</a></li>
-<li class="chapter" data-level="2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#ramka-danych"><i class="fa fa-check"></i><b>2.5</b> Ramka danych</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania-1"><i class="fa fa-check"></i><b>2.5.1</b> Zadania</a></li>
+<li class="chapter" data-level="2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#czynnik"><i class="fa fa-check"></i><b>2.4</b> Czynnik</a></li>
+<li class="chapter" data-level="2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#lista"><i class="fa fa-check"></i><b>2.5</b> Lista</a></li>
+<li class="chapter" data-level="2.6" data-path="struktury-danych.html"><a href="struktury-danych.html#ramka-danych"><i class="fa fa-check"></i><b>2.6</b> Ramka danych</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania-1"><i class="fa fa-check"></i><b>2.6.1</b> Zadania</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html"><i class="fa fa-check"></i><b>3</b> Przetwarzanie danych</a><ul>
+<li class="chapter" data-level="3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html"><i class="fa fa-check"></i><b>3</b> Przetwarzanie danych</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#wprowadzenie---pakiet-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Wprowadzenie - pakiet tidyverse</a></li>
-<li class="chapter" data-level="3.2" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#import-danych"><i class="fa fa-check"></i><b>3.2</b> Import danych</a><ul>
+<li class="chapter" data-level="3.2" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#import-danych"><i class="fa fa-check"></i><b>3.2</b> Import danych</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#pliki-csv"><i class="fa fa-check"></i><b>3.2.1</b> Pliki CSV</a></li>
 <li class="chapter" data-level="3.2.2" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#pliki-excel"><i class="fa fa-check"></i><b>3.2.2</b> Pliki excel</a></li>
 <li class="chapter" data-level="3.2.3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#pliki-tekstowe"><i class="fa fa-check"></i><b>3.2.3</b> Pliki tekstowe</a></li>
@@ -184,11 +193,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#łączenie-zbiorów"><i class="fa fa-check"></i><b>3.10</b> Łączenie zbiorów</a></li>
 <li class="chapter" data-level="3.11" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#szeroka-i-wąska-reprezentacja-danych"><i class="fa fa-check"></i><b>3.11</b> Szeroka i wąska reprezentacja danych</a></li>
 <li class="chapter" data-level="3.12" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#eksport-danych"><i class="fa fa-check"></i><b>3.12</b> Eksport danych</a></li>
-<li class="chapter" data-level="3.13" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#zadania-2"><i class="fa fa-check"></i><b>3.13</b> Zadania</a></li>
+<li class="chapter" data-level="3.13" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania"><i class="fa fa-check"></i><b>3.13</b> Zadania</a></li>
 <li class="chapter" data-level="3.14" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#case-study"><i class="fa fa-check"></i><b>3.14</b> Case study</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a><ul>
-<li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wprowadzenie-2"><i class="fa fa-check"></i><b>4.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="index.html"><a href="index.html#wprowadzenie"><i class="fa fa-check"></i><b>4.1</b> Wprowadzenie</a></li>
 <li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-punktowy"><i class="fa fa-check"></i><b>4.2</b> Wykres punktowy</a></li>
 <li class="chapter" data-level="4.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram"><i class="fa fa-check"></i><b>4.3</b> Histogram</a></li>
 <li class="chapter" data-level="4.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-pudełkowy"><i class="fa fa-check"></i><b>4.4</b> Wykres pudełkowy</a></li>
@@ -198,7 +208,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#facets"><i class="fa fa-check"></i><b>4.8</b> Facets</a></li>
 <li class="chapter" data-level="4.9" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-interaktywny"><i class="fa fa-check"></i><b>4.9</b> Wykres interaktywny</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
+<li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#instrukcje-warunkowe"><i class="fa fa-check"></i><b>5.1</b> Instrukcje warunkowe</a></li>
 <li class="chapter" data-level="5.2" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.2</b> Funkcje</a></li>
 <li class="chapter" data-level="5.3" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#pętle"><i class="fa fa-check"></i><b>5.3</b> Pętle</a></li>
@@ -227,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Podstawy programowania R</h1>
 <p class="author"><em>Łukasz Wawrowski</em></p>
 </div>
-<div id="wprowadzenie" class="section level1 unnumbered">
+<div id="wprowadzenie" class="section level1 unnumbered" number="">
 <h1>Wprowadzenie</h1>
 <p>Polecana literatura:</p>
 <ul>

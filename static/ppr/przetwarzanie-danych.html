@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Przetwarzanie danych | Podstawy programowania R</title>
   <meta name="description" content="Materiały dydaktyczne do kursu Podstawy programowania." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Przetwarzanie danych | Podstawy programowania R" />
   <meta property="og:type" content="book" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="struktury-danych.html"/>
 <link rel="next" href="wizualizacja-danych.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,21 +50,21 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -83,7 +84,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -133,43 +134,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Wprowadzenie</a></li>
-<li class="chapter" data-level="1" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html"><i class="fa fa-check"></i><b>1</b> Wprowadzenie do R</a><ul>
-<li class="chapter" data-level="1.1" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#wprowadzenie-1"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="1" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html"><i class="fa fa-check"></i><b>1</b> Wprowadzenie do R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#wprowadzenie"><i class="fa fa-check"></i><b>1.1</b> Wprowadzenie</a></li>
 <li class="chapter" data-level="1.2" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#r"><i class="fa fa-check"></i><b>1.2</b> R</a></li>
 <li class="chapter" data-level="1.3" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#rstudio"><i class="fa fa-check"></i><b>1.3</b> RStudio</a></li>
 <li class="chapter" data-level="1.4" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#ważne-informacje"><i class="fa fa-check"></i><b>1.4</b> Ważne informacje</a></li>
 <li class="chapter" data-level="1.5" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#pakiety"><i class="fa fa-check"></i><b>1.5</b> Pakiety</a></li>
 <li class="chapter" data-level="1.6" data-path="wprowadzenie-do-r.html"><a href="wprowadzenie-do-r.html#r-jako-kalkulator"><i class="fa fa-check"></i><b>1.6</b> R jako kalkulator</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="struktury-danych.html"><a href="struktury-danych.html"><i class="fa fa-check"></i><b>2</b> Struktury danych</a><ul>
-<li class="chapter" data-level="2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor"><i class="fa fa-check"></i><b>2.1</b> Wektor</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-logicznych"><i class="fa fa-check"></i><b>2.1.1</b> Wektor wartości logicznych</a></li>
-<li class="chapter" data-level="2.1.2" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-liczbowych"><i class="fa fa-check"></i><b>2.1.2</b> Wektor wartości liczbowych</a></li>
-<li class="chapter" data-level="2.1.3" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-tekstowych"><i class="fa fa-check"></i><b>2.1.3</b> Wektor wartości tekstowych</a></li>
-<li class="chapter" data-level="2.1.4" data-path="struktury-danych.html"><a href="struktury-danych.html#przeciążanie-wektora"><i class="fa fa-check"></i><b>2.1.4</b> Przeciążanie wektora</a></li>
-<li class="chapter" data-level="2.1.5" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-wektorach"><i class="fa fa-check"></i><b>2.1.5</b> Operacje na wektorach</a></li>
-<li class="chapter" data-level="2.1.6" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-agregujące"><i class="fa fa-check"></i><b>2.1.6</b> Operacje agregujące</a></li>
-<li class="chapter" data-level="2.1.7" data-path="struktury-danych.html"><a href="struktury-danych.html#sprawdzanie-typu-wektora"><i class="fa fa-check"></i><b>2.1.7</b> Sprawdzanie typu wektora</a></li>
-<li class="chapter" data-level="2.1.8" data-path="struktury-danych.html"><a href="struktury-danych.html#rzutowanie-wektorów"><i class="fa fa-check"></i><b>2.1.8</b> Rzutowanie wektorów</a></li>
-<li class="chapter" data-level="2.1.9" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-wektorów"><i class="fa fa-check"></i><b>2.1.9</b> Indeksowanie wektorów</a></li>
-<li class="chapter" data-level="2.1.10" data-path="struktury-danych.html"><a href="struktury-danych.html#wartości-nieliczbowe"><i class="fa fa-check"></i><b>2.1.10</b> Wartości nieliczbowe</a></li>
-<li class="chapter" data-level="2.1.11" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania"><i class="fa fa-check"></i><b>2.1.11</b> Zadania</a></li>
+<li class="chapter" data-level="2" data-path="struktury-danych.html"><a href="struktury-danych.html"><i class="fa fa-check"></i><b>2</b> Struktury danych</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#obiekty"><i class="fa fa-check"></i><b>2.1</b> Obiekty</a></li>
+<li class="chapter" data-level="2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor"><i class="fa fa-check"></i><b>2.2</b> Wektor</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-logicznych"><i class="fa fa-check"></i><b>2.2.1</b> Wektor wartości logicznych</a></li>
+<li class="chapter" data-level="2.2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-liczbowych"><i class="fa fa-check"></i><b>2.2.2</b> Wektor wartości liczbowych</a></li>
+<li class="chapter" data-level="2.2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#wektor-wartości-tekstowych"><i class="fa fa-check"></i><b>2.2.3</b> Wektor wartości tekstowych</a></li>
+<li class="chapter" data-level="2.2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#przeciążanie-wektora"><i class="fa fa-check"></i><b>2.2.4</b> Przeciążanie wektora</a></li>
+<li class="chapter" data-level="2.2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-wektorach"><i class="fa fa-check"></i><b>2.2.5</b> Operacje na wektorach</a></li>
+<li class="chapter" data-level="2.2.6" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-agregujące"><i class="fa fa-check"></i><b>2.2.6</b> Operacje agregujące</a></li>
+<li class="chapter" data-level="2.2.7" data-path="struktury-danych.html"><a href="struktury-danych.html#sprawdzanie-typu-wektora"><i class="fa fa-check"></i><b>2.2.7</b> Sprawdzanie typu wektora</a></li>
+<li class="chapter" data-level="2.2.8" data-path="struktury-danych.html"><a href="struktury-danych.html#rzutowanie-wektorów"><i class="fa fa-check"></i><b>2.2.8</b> Rzutowanie wektorów</a></li>
+<li class="chapter" data-level="2.2.9" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-wektorów"><i class="fa fa-check"></i><b>2.2.9</b> Indeksowanie wektorów</a></li>
+<li class="chapter" data-level="2.2.10" data-path="struktury-danych.html"><a href="struktury-danych.html#wartości-nieliczbowe"><i class="fa fa-check"></i><b>2.2.10</b> Wartości nieliczbowe</a></li>
+<li class="chapter" data-level="2.2.11" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania"><i class="fa fa-check"></i><b>2.2.11</b> Zadania</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#macierz"><i class="fa fa-check"></i><b>2.2</b> Macierz</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="struktury-danych.html"><a href="struktury-danych.html#łączenie-macierzy"><i class="fa fa-check"></i><b>2.2.1</b> Łączenie macierzy</a></li>
-<li class="chapter" data-level="2.2.2" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-macierzy"><i class="fa fa-check"></i><b>2.2.2</b> Indeksowanie macierzy</a></li>
-<li class="chapter" data-level="2.2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-macierzach"><i class="fa fa-check"></i><b>2.2.3</b> Operacje na macierzach</a></li>
-<li class="chapter" data-level="2.2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#zadanie"><i class="fa fa-check"></i><b>2.2.4</b> Zadanie</a></li>
+<li class="chapter" data-level="2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#macierz"><i class="fa fa-check"></i><b>2.3</b> Macierz</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="struktury-danych.html"><a href="struktury-danych.html#łączenie-macierzy"><i class="fa fa-check"></i><b>2.3.1</b> Łączenie macierzy</a></li>
+<li class="chapter" data-level="2.3.2" data-path="struktury-danych.html"><a href="struktury-danych.html#indeksowanie-macierzy"><i class="fa fa-check"></i><b>2.3.2</b> Indeksowanie macierzy</a></li>
+<li class="chapter" data-level="2.3.3" data-path="struktury-danych.html"><a href="struktury-danych.html#operacje-na-macierzach"><i class="fa fa-check"></i><b>2.3.3</b> Operacje na macierzach</a></li>
+<li class="chapter" data-level="2.3.4" data-path="struktury-danych.html"><a href="struktury-danych.html#zadanie"><i class="fa fa-check"></i><b>2.3.4</b> Zadanie</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="struktury-danych.html"><a href="struktury-danych.html#czynnik"><i class="fa fa-check"></i><b>2.3</b> Czynnik</a></li>
-<li class="chapter" data-level="2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#lista"><i class="fa fa-check"></i><b>2.4</b> Lista</a></li>
-<li class="chapter" data-level="2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#ramka-danych"><i class="fa fa-check"></i><b>2.5</b> Ramka danych</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania-1"><i class="fa fa-check"></i><b>2.5.1</b> Zadania</a></li>
+<li class="chapter" data-level="2.4" data-path="struktury-danych.html"><a href="struktury-danych.html#czynnik"><i class="fa fa-check"></i><b>2.4</b> Czynnik</a></li>
+<li class="chapter" data-level="2.5" data-path="struktury-danych.html"><a href="struktury-danych.html#lista"><i class="fa fa-check"></i><b>2.5</b> Lista</a></li>
+<li class="chapter" data-level="2.6" data-path="struktury-danych.html"><a href="struktury-danych.html#ramka-danych"><i class="fa fa-check"></i><b>2.6</b> Ramka danych</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania-1"><i class="fa fa-check"></i><b>2.6.1</b> Zadania</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html"><i class="fa fa-check"></i><b>3</b> Przetwarzanie danych</a><ul>
+<li class="chapter" data-level="3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html"><i class="fa fa-check"></i><b>3</b> Przetwarzanie danych</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#wprowadzenie---pakiet-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Wprowadzenie - pakiet tidyverse</a></li>
-<li class="chapter" data-level="3.2" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#import-danych"><i class="fa fa-check"></i><b>3.2</b> Import danych</a><ul>
+<li class="chapter" data-level="3.2" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#import-danych"><i class="fa fa-check"></i><b>3.2</b> Import danych</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#pliki-csv"><i class="fa fa-check"></i><b>3.2.1</b> Pliki CSV</a></li>
 <li class="chapter" data-level="3.2.2" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#pliki-excel"><i class="fa fa-check"></i><b>3.2.2</b> Pliki excel</a></li>
 <li class="chapter" data-level="3.2.3" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#pliki-tekstowe"><i class="fa fa-check"></i><b>3.2.3</b> Pliki tekstowe</a></li>
@@ -184,11 +193,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#łączenie-zbiorów"><i class="fa fa-check"></i><b>3.10</b> Łączenie zbiorów</a></li>
 <li class="chapter" data-level="3.11" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#szeroka-i-wąska-reprezentacja-danych"><i class="fa fa-check"></i><b>3.11</b> Szeroka i wąska reprezentacja danych</a></li>
 <li class="chapter" data-level="3.12" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#eksport-danych"><i class="fa fa-check"></i><b>3.12</b> Eksport danych</a></li>
-<li class="chapter" data-level="3.13" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#zadania-2"><i class="fa fa-check"></i><b>3.13</b> Zadania</a></li>
+<li class="chapter" data-level="3.13" data-path="struktury-danych.html"><a href="struktury-danych.html#zadania"><i class="fa fa-check"></i><b>3.13</b> Zadania</a></li>
 <li class="chapter" data-level="3.14" data-path="przetwarzanie-danych.html"><a href="przetwarzanie-danych.html#case-study"><i class="fa fa-check"></i><b>3.14</b> Case study</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a><ul>
-<li class="chapter" data-level="4.1" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wprowadzenie-2"><i class="fa fa-check"></i><b>4.1</b> Wprowadzenie</a></li>
+<li class="chapter" data-level="4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html"><i class="fa fa-check"></i><b>4</b> Wizualizacja danych</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="index.html"><a href="index.html#wprowadzenie"><i class="fa fa-check"></i><b>4.1</b> Wprowadzenie</a></li>
 <li class="chapter" data-level="4.2" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-punktowy"><i class="fa fa-check"></i><b>4.2</b> Wykres punktowy</a></li>
 <li class="chapter" data-level="4.3" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#histogram"><i class="fa fa-check"></i><b>4.3</b> Histogram</a></li>
 <li class="chapter" data-level="4.4" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-pudełkowy"><i class="fa fa-check"></i><b>4.4</b> Wykres pudełkowy</a></li>
@@ -198,7 +208,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.8" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#facets"><i class="fa fa-check"></i><b>4.8</b> Facets</a></li>
 <li class="chapter" data-level="4.9" data-path="wizualizacja-danych.html"><a href="wizualizacja-danych.html#wykres-interaktywny"><i class="fa fa-check"></i><b>4.9</b> Wykres interaktywny</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a><ul>
+<li class="chapter" data-level="5" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html"><i class="fa fa-check"></i><b>5</b> Programowanie w R</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#instrukcje-warunkowe"><i class="fa fa-check"></i><b>5.1</b> Instrukcje warunkowe</a></li>
 <li class="chapter" data-level="5.2" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#funkcje"><i class="fa fa-check"></i><b>5.2</b> Funkcje</a></li>
 <li class="chapter" data-level="5.3" data-path="programowanie-w-r.html"><a href="programowanie-w-r.html#pętle"><i class="fa fa-check"></i><b>5.3</b> Pętle</a></li>
@@ -223,11 +234,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="przetwarzanie-danych" class="section level1">
+<div id="przetwarzanie-danych" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Przetwarzanie danych</h1>
 <p><a href="presentations/02_wczytywanie.html">Prezentacja - wczytywanie danych</a></p>
 <p><a href="presentations/03_przetwarzanie.html">Prezentacja - przetwarzanie</a></p>
-<div id="wprowadzenie---pakiet-tidyverse" class="section level2">
+<div id="wprowadzenie---pakiet-tidyverse" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Wprowadzenie - pakiet tidyverse</h2>
 <p>Pakiet <code>tidyverse</code> to zestaw pakietów do kompleksowego przetwarzania i wizualizacji danych. Ładuje następujące pakiety:</p>
 <ul>
@@ -247,12 +258,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Wobec tego załadujmy pakiet <code>tidyverse</code>:</p>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="przetwarzanie-danych.html#cb248-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## -- Attaching packages --------------------------------------------- tidyverse 1.3.0 --</code></pre>
-<pre><code>## &lt;U+221A&gt; ggplot2 3.3.1     &lt;U+221A&gt; purrr   0.3.4
-## &lt;U+221A&gt; tibble  3.0.1     &lt;U+221A&gt; dplyr   0.8.5
-## &lt;U+221A&gt; tidyr   1.1.0     &lt;U+221A&gt; stringr 1.4.0
+<pre><code>## -- Attaching packages ----------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## &lt;U+221A&gt; ggplot2 3.3.2     &lt;U+221A&gt; purrr   0.3.4
+## &lt;U+221A&gt; tibble  3.0.3     &lt;U+221A&gt; dplyr   1.0.2
+## &lt;U+221A&gt; tidyr   1.1.2     &lt;U+221A&gt; stringr 1.4.0
 ## &lt;U+221A&gt; readr   1.3.1     &lt;U+221A&gt; forcats 0.5.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------------ tidyverse_conflicts() --
+<pre><code>## -- Conflicts -------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>W konsoli pojawi się informacja o wersji załadowanych pakietów oraz o konfliktach występujących pomiędzy pakietami. Konflikty te wynikają z takich samych nazw funkcji w różnych pakietach. Kolejność wczytywania pakietów ma znaczenie - kolejny pakiet przykryje funkcje z wcześniej wczytanego. Wywołanie przykrytej funkcji jest możliwe poprzez zapis <code>nazwa_pakietu::nazwa_funkcji</code>.</p>
@@ -273,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb252-14"><a href="przetwarzanie-danych.html#cb252-14"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weight_kg=</span>weight<span class="op">/</span><span class="dv">1000</span>)</span></code></pre></div>
 <p>Rozwiązanie z wykorzystaniem wbudowanych funkcji to 133 znaki, natomiast wykorzystanie <code>tidyverse</code> to 30% oszczędność miejsca i tylko 92 znaki.</p>
 </div>
-<div id="import-danych" class="section level2">
+<div id="import-danych" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Import danych</h2>
 <p>Wczytywanie danych do R jest możliwe z wielu różnych źródeł. Funkcje, które to umożliwiają zwykle mają nazwę rozpoczynającą się od <code>read</code>.</p>
 <p>Będziemy korzystać z następujących zbiorów danych:</p>
@@ -283,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="data/rossmann.xlsx">rossmann</a> - plik excel zawierający dane ze sklepów Rossmann,</li>
 <li><a href="http://www.mbnet.com.pl/dl.txt">lotto</a> - plik tekstowy zawierający dane z losowań Lotto.</li>
 </ul>
-<div id="pliki-csv" class="section level3">
+<div id="pliki-csv" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Pliki CSV</h3>
 <p>Do wczytywania plików csv można wykorzystać wbudowaną funkcję <code>read.csv()</code> lub tą pochodzącą z pakietu <code>readr</code> - <code>read_csv()</code>. W obu przypadkach wynik wczytania będzie podobny.</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="przetwarzanie-danych.html#cb253-1"></a>movies &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/movies.csv&quot;</span>)</span>
@@ -306,7 +317,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Jeśli nas plik ma nietypową strukturę to w funkcji <code>read.csv()</code> możemy określić dodatkowe argumenty informując o nazwach kolumn obecnych w pliku (<code>header =</code>), separatorze kolumn (<code>sep =</code>) lub separatorze miejsc dziesiętnych (<code>dec =</code>)</p>
 <div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="przetwarzanie-danych.html#cb255-1"></a>movies &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/movies.csv&quot;</span>, <span class="dt">header =</span> T, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;.&quot;</span>)</span></code></pre></div>
 </div>
-<div id="pliki-excel" class="section level3">
+<div id="pliki-excel" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Pliki excel</h3>
 <p>Do wczytywania plików z Excela niezbędny jest dodatkowy pakiet <code>readxl</code>. W funkcji <code>read_xlsx()</code> podajemy jako argument nazwę pliku. Możemy także dodać nazwę lub numer arkusza w argumencie (<code>sheet =</code>) oraz zakres komórek jako wartość argumentu <code>range =</code>.</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="przetwarzanie-danych.html#cb256-1"></a><span class="kw">library</span>(readxl)</span>
@@ -320,14 +331,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb256-9"><a href="przetwarzanie-danych.html#cb256-9"></a></span>
 <span id="cb256-10"><a href="przetwarzanie-danych.html#cb256-10"></a>rossmann &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/rossmann.xlsx&quot;</span>)</span></code></pre></div>
 </div>
-<div id="pliki-tekstowe" class="section level3">
+<div id="pliki-tekstowe" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Pliki tekstowe</h3>
 <p>Z kolei do wczytywania plików tekstowych wykorzystuje się funkcję <code>read.table()</code>. Wczytywany plik nie musi być zlokalizowany na dysku twardym - może to być link internetowy.</p>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="przetwarzanie-danych.html#cb257-1"></a>lotto &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://www.mbnet.com.pl/dl.txt&quot;</span>)</span>
 <span id="cb257-2"><a href="przetwarzanie-danych.html#cb257-2"></a><span class="kw">names</span>(lotto) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lp&quot;</span>, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;numery&quot;</span>)</span></code></pre></div>
 </div>
 </div>
-<div id="filtrowanie" class="section level2">
+<div id="filtrowanie" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Filtrowanie</h2>
 <p>Do przetwarzania danych służą funkcje z pakietu <code>dplyr</code>. Większość z nich jako pierwszy argument przyjmuje przetwarzany zbiór danych, ale można tego uniknąć wykorzystując symbole <code>%&gt;%</code>.</p>
 <p>Filtrowanie polega na wybraniu obserwacji, które spełniają określony warunek lub warunki. Ze zbioru <code>movies</code> wybierzmy wszystkie komedie:</p>
@@ -351,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb263-4"><a href="przetwarzanie-danych.html#cb263-4"></a>movies_<span class="dv">2000</span>_<span class="dv">2010</span> &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span></span>
 <span id="cb263-5"><a href="przetwarzanie-danych.html#cb263-5"></a><span class="st">  </span><span class="kw">filter</span>(year <span class="op">%in%</span><span class="st"> </span><span class="dv">2000</span><span class="op">:</span><span class="dv">2010</span>)</span></code></pre></div>
 </div>
-<div id="wybieranie-kolumn" class="section level2">
+<div id="wybieranie-kolumn" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Wybieranie kolumn</h2>
 <p>Do wyboru kolumn służy funkcja <code>select()</code>. Zmodyfikujemy wcześniej utworzony zbiór <code>komedie</code>:</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="przetwarzanie-danych.html#cb264-1"></a>komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span></span>
@@ -377,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb268-2"><a href="przetwarzanie-danych.html#cb268-2"></a><span class="st">  </span><span class="kw">filter</span>(genre<span class="op">==</span><span class="st">&quot;Comedy&quot;</span>) <span class="op">%&gt;%</span></span>
 <span id="cb268-3"><a href="przetwarzanie-danych.html#cb268-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>genre, <span class="op">-</span><span class="kw">c</span>(gross<span class="op">:</span>reviews))</span></code></pre></div>
 </div>
-<div id="tworzenie-nowych-zmiennych" class="section level2">
+<div id="tworzenie-nowych-zmiennych" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Tworzenie nowych zmiennych</h2>
 <p>Do utworzenia nowej zmiennej wykorzystuje się funkcję <code>mutate()</code>. Utwórzmy w naszym zbiorze nową zmienną, która będzie zawierała czas trwania filmu w godzinach:</p>
 <div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="przetwarzanie-danych.html#cb269-1"></a>komedie &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span></span>
@@ -395,7 +406,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb271-3"><a href="przetwarzanie-danych.html#cb271-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>genre, <span class="op">-</span><span class="kw">c</span>(gross<span class="op">:</span>reviews)) <span class="op">%&gt;%</span></span>
 <span id="cb271-4"><a href="przetwarzanie-danych.html#cb271-4"></a><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">dur_hour =</span> <span class="kw">round</span>(duration<span class="op">/</span><span class="dv">60</span>,<span class="dv">1</span>))</span></code></pre></div>
 </div>
-<div id="zmiana-nazwy-zmiennej" class="section level2">
+<div id="zmiana-nazwy-zmiennej" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Zmiana nazwy zmiennej</h2>
 <p>Do zmiany nazw zmiennych służy funkcja <code>rename()</code>. Najpierw podajemy nazwę nowej zmiennej, a po znaku równości starą nazwę:</p>
 <div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="przetwarzanie-danych.html#cb272-1"></a>bank &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
@@ -405,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb273-2"><a href="przetwarzanie-danych.html#cb273-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="dt">lokata=</span>wynik)</span></code></pre></div>
 <p>W takim przypadku trzeba jednak pamiętać o wypisaniu wszystkich zmiennych, które mają się znaleźć w zbiorze wynikowym.</p>
 </div>
-<div id="podsumowanie-danych" class="section level2">
+<div id="podsumowanie-danych" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Podsumowanie danych</h2>
 <p>Funkcja <code>summarise()</code> służy do podsumowań danych w formie zagregowanej:</p>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="przetwarzanie-danych.html#cb274-1"></a>bank <span class="op">%&gt;%</span></span>
@@ -417,13 +428,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1         1362.           448</code></pre>
 <p>Podsumowanie danych ma najwięcej sensu w połączniu z funkcją grupującą.</p>
 </div>
-<div id="grupowanie" class="section level2">
+<div id="grupowanie" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Grupowanie</h2>
 <p>Do grupowania obserwacji służy funkcja <code>group_by()</code>. Zobaczmy jak wyglądają statystyki salda w poszczególnych grupach wykształcenia:</p>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="przetwarzanie-danych.html#cb276-1"></a>bank <span class="op">%&gt;%</span></span>
 <span id="cb276-2"><a href="przetwarzanie-danych.html#cb276-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
 <span id="cb276-3"><a href="przetwarzanie-danych.html#cb276-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),</span>
 <span id="cb276-4"><a href="przetwarzanie-danych.html#cb276-4"></a>            <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 4 x 3
 ##   wykszt     saldo_srednia saldo_mediana
 ##   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
@@ -432,10 +444,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 wyzsze             1758.           577
 ## 4 &lt;NA&gt;               1527.           568</code></pre>
 <p>Po przecinku w funkcji <code>group_by()</code> można wskazać kolejne zmienne grupujące:</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="przetwarzanie-danych.html#cb278-1"></a>bank <span class="op">%&gt;%</span></span>
-<span id="cb278-2"><a href="przetwarzanie-danych.html#cb278-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt, hipoteka) <span class="op">%&gt;%</span></span>
-<span id="cb278-3"><a href="przetwarzanie-danych.html#cb278-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),</span>
-<span id="cb278-4"><a href="przetwarzanie-danych.html#cb278-4"></a>            <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="przetwarzanie-danych.html#cb279-1"></a>bank <span class="op">%&gt;%</span></span>
+<span id="cb279-2"><a href="przetwarzanie-danych.html#cb279-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt, hipoteka) <span class="op">%&gt;%</span></span>
+<span id="cb279-3"><a href="przetwarzanie-danych.html#cb279-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),</span>
+<span id="cb279-4"><a href="przetwarzanie-danych.html#cb279-4"></a>            <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;wykszt&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 8 x 4
 ## # Groups:   wykszt [4]
 ##   wykszt     hipoteka saldo_srednia saldo_mediana
@@ -449,11 +462,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 7 &lt;NA&gt;       nie              1780.          679 
 ## 8 &lt;NA&gt;       tak              1207.          442</code></pre>
 <p>Przydatna jest także funkcja <code>n()</code>, która nie przyjmuje żadnego argumentu i zwraca liczebność zbioru bądź grupy.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="przetwarzanie-danych.html#cb280-1"></a>bank <span class="op">%&gt;%</span></span>
-<span id="cb280-2"><a href="przetwarzanie-danych.html#cb280-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
-<span id="cb280-3"><a href="przetwarzanie-danych.html#cb280-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczebnosc=</span><span class="kw">n</span>(),</span>
-<span id="cb280-4"><a href="przetwarzanie-danych.html#cb280-4"></a>            <span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),</span>
-<span id="cb280-5"><a href="przetwarzanie-danych.html#cb280-5"></a>            <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="przetwarzanie-danych.html#cb282-1"></a>bank <span class="op">%&gt;%</span></span>
+<span id="cb282-2"><a href="przetwarzanie-danych.html#cb282-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
+<span id="cb282-3"><a href="przetwarzanie-danych.html#cb282-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczebnosc=</span><span class="kw">n</span>(),</span>
+<span id="cb282-4"><a href="przetwarzanie-danych.html#cb282-4"></a>            <span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),</span>
+<span id="cb282-5"><a href="przetwarzanie-danych.html#cb282-5"></a>            <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 4 x 4
 ##   wykszt     liczebnosc saldo_srednia saldo_mediana
 ##   &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;         &lt;dbl&gt;
@@ -462,9 +476,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 wyzsze          13301         1758.           577
 ## 4 &lt;NA&gt;             1857         1527.           568</code></pre>
 <p>Jeżeli chcemy tylko wyznaczyć liczebności grup to możemy skorzystać z funkcji <code>count()</code>:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="przetwarzanie-danych.html#cb282-1"></a>bank <span class="op">%&gt;%</span></span>
-<span id="cb282-2"><a href="przetwarzanie-danych.html#cb282-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
-<span id="cb282-3"><a href="przetwarzanie-danych.html#cb282-3"></a><span class="st">  </span><span class="kw">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="przetwarzanie-danych.html#cb285-1"></a>bank <span class="op">%&gt;%</span></span>
+<span id="cb285-2"><a href="przetwarzanie-danych.html#cb285-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
+<span id="cb285-3"><a href="przetwarzanie-danych.html#cb285-3"></a><span class="st">  </span><span class="kw">count</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ## # Groups:   wykszt [4]
 ##   wykszt         n
@@ -475,10 +489,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 &lt;NA&gt;        1857</code></pre>
 <p>Jedną z kategorii zmiennej wykształcenie jest brak danych (<code>NA</code>). Zamienimy tą wartość na kategorię <em>nieustalone</em> z wykorzystaniem funkcji <code>mutate()</code> oraz <code>if_else()</code>. Funkcja <code>if_else()</code> przyjmuje trzy argumenty - pierwszy (<code>condition =</code>) to warunek, który jest weryfikowany, następnie podajemy wartość, która ma być wprowadzona w przypadku spełnienia warunku (<code>true =</code>), a na końcu wartość dla niespełnionego warunku (<code>false =</code>). Jest to odpowiednik funkcji <code>JEŻELI</code> z Excela.</p>
 <p>W omawianym przykładzie warunkiem jest sprawdzenie czy wartości zmiennej <code>wykszt</code> są równe <code>NA</code>. Jeśli tak to na ich miejsce wprowadzany jest tekst <em>nieustalone</em>, a w przeciwnym przypadku pozostaje oryginalna wartość.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="przetwarzanie-danych.html#cb284-1"></a>bank <span class="op">%&gt;%</span></span>
-<span id="cb284-2"><a href="przetwarzanie-danych.html#cb284-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wykszt=</span><span class="kw">if_else</span>(<span class="kw">is.na</span>(wykszt), <span class="st">&quot;nieustalone&quot;</span>, wykszt)) <span class="op">%&gt;%</span></span>
-<span id="cb284-3"><a href="przetwarzanie-danych.html#cb284-3"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
-<span id="cb284-4"><a href="przetwarzanie-danych.html#cb284-4"></a><span class="st">  </span><span class="kw">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="przetwarzanie-danych.html#cb287-1"></a>bank <span class="op">%&gt;%</span></span>
+<span id="cb287-2"><a href="przetwarzanie-danych.html#cb287-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wykszt=</span><span class="kw">if_else</span>(<span class="kw">is.na</span>(wykszt), <span class="st">&quot;nieustalone&quot;</span>, wykszt)) <span class="op">%&gt;%</span></span>
+<span id="cb287-3"><a href="przetwarzanie-danych.html#cb287-3"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
+<span id="cb287-4"><a href="przetwarzanie-danych.html#cb287-4"></a><span class="st">  </span><span class="kw">count</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ## # Groups:   wykszt [4]
 ##   wykszt          n
@@ -488,21 +502,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 srednie     23202
 ## 4 wyzsze      13301</code></pre>
 </div>
-<div id="sortowanie" class="section level2">
+<div id="sortowanie" class="section level2" number="3.9">
 <h2><span class="header-section-number">3.9</span> Sortowanie</h2>
 <p>Sortowanie jest możliwe z wykorzystaniem funkcji <code>arrange()</code>. Jako argument podajemy zmienną według, której chcemy posortować zbiór. Domyślne zbiór sortowany jest rosnąco - od wartości najmniejszych do największych:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="przetwarzanie-danych.html#cb286-1"></a>bank_sort &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
-<span id="cb286-2"><a href="przetwarzanie-danych.html#cb286-2"></a><span class="st">  </span><span class="kw">arrange</span>(saldo)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="przetwarzanie-danych.html#cb289-1"></a>bank_sort &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
+<span id="cb289-2"><a href="przetwarzanie-danych.html#cb289-2"></a><span class="st">  </span><span class="kw">arrange</span>(saldo)</span></code></pre></div>
 <p>Zmiana kierunku sortowania jest możliwa po zastosowaniu funkcji <code>desc()</code>:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="przetwarzanie-danych.html#cb287-1"></a>bank_sort &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
-<span id="cb287-2"><a href="przetwarzanie-danych.html#cb287-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(saldo))</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="przetwarzanie-danych.html#cb290-1"></a>bank_sort &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
+<span id="cb290-2"><a href="przetwarzanie-danych.html#cb290-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(saldo))</span></code></pre></div>
 <p>Sortowanie możemy także zastosować do wyników podsumowania danych:</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="przetwarzanie-danych.html#cb288-1"></a>bank <span class="op">%&gt;%</span></span>
-<span id="cb288-2"><a href="przetwarzanie-danych.html#cb288-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
-<span id="cb288-3"><a href="przetwarzanie-danych.html#cb288-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczebnosc=</span><span class="kw">n</span>(),</span>
-<span id="cb288-4"><a href="przetwarzanie-danych.html#cb288-4"></a>            <span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),</span>
-<span id="cb288-5"><a href="przetwarzanie-danych.html#cb288-5"></a>            <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo)) <span class="op">%&gt;%</span></span>
-<span id="cb288-6"><a href="przetwarzanie-danych.html#cb288-6"></a><span class="st">  </span><span class="kw">arrange</span>(saldo_srednia)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="przetwarzanie-danych.html#cb291-1"></a>bank <span class="op">%&gt;%</span></span>
+<span id="cb291-2"><a href="przetwarzanie-danych.html#cb291-2"></a><span class="st">  </span><span class="kw">group_by</span>(wykszt) <span class="op">%&gt;%</span></span>
+<span id="cb291-3"><a href="przetwarzanie-danych.html#cb291-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczebnosc=</span><span class="kw">n</span>(),</span>
+<span id="cb291-4"><a href="przetwarzanie-danych.html#cb291-4"></a>            <span class="dt">saldo_srednia=</span><span class="kw">mean</span>(saldo),</span>
+<span id="cb291-5"><a href="przetwarzanie-danych.html#cb291-5"></a>            <span class="dt">saldo_mediana=</span><span class="kw">median</span>(saldo)) <span class="op">%&gt;%</span></span>
+<span id="cb291-6"><a href="przetwarzanie-danych.html#cb291-6"></a><span class="st">  </span><span class="kw">arrange</span>(saldo_srednia)</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 4 x 4
 ##   wykszt     liczebnosc saldo_srednia saldo_mediana
 ##   &lt;chr&gt;           &lt;int&gt;         &lt;dbl&gt;         &lt;dbl&gt;
@@ -511,34 +526,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 &lt;NA&gt;             1857         1527.           568
 ## 4 wyzsze          13301         1758.           577</code></pre>
 </div>
-<div id="łączenie-zbiorów" class="section level2">
+<div id="łączenie-zbiorów" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> Łączenie zbiorów</h2>
 <p>W celu zaprezentowania funkcji łączących dane przygotujemy kilka zbiorów pomocniczych:</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="przetwarzanie-danych.html#cb290-1"></a>praca_czas &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
-<span id="cb290-2"><a href="przetwarzanie-danych.html#cb290-2"></a><span class="st">  </span><span class="kw">group_by</span>(praca) <span class="op">%&gt;%</span></span>
-<span id="cb290-3"><a href="przetwarzanie-danych.html#cb290-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_czas=</span><span class="kw">mean</span>(czas))</span>
-<span id="cb290-4"><a href="przetwarzanie-danych.html#cb290-4"></a></span>
-<span id="cb290-5"><a href="przetwarzanie-danych.html#cb290-5"></a>praca_saldo &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
-<span id="cb290-6"><a href="przetwarzanie-danych.html#cb290-6"></a><span class="st">  </span><span class="kw">group_by</span>(praca) <span class="op">%&gt;%</span></span>
-<span id="cb290-7"><a href="przetwarzanie-danych.html#cb290-7"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_saldo=</span><span class="kw">mean</span>(saldo))</span>
-<span id="cb290-8"><a href="przetwarzanie-danych.html#cb290-8"></a></span>
-<span id="cb290-9"><a href="przetwarzanie-danych.html#cb290-9"></a>zawod_saldo &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
-<span id="cb290-10"><a href="przetwarzanie-danych.html#cb290-10"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">zawod=</span>praca) <span class="op">%&gt;%</span></span>
-<span id="cb290-11"><a href="przetwarzanie-danych.html#cb290-11"></a><span class="st">  </span><span class="kw">group_by</span>(zawod) <span class="op">%&gt;%</span></span>
-<span id="cb290-12"><a href="przetwarzanie-danych.html#cb290-12"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_saldo=</span><span class="kw">mean</span>(saldo))</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="przetwarzanie-danych.html#cb294-1"></a>praca_czas &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
+<span id="cb294-2"><a href="przetwarzanie-danych.html#cb294-2"></a><span class="st">  </span><span class="kw">group_by</span>(praca) <span class="op">%&gt;%</span></span>
+<span id="cb294-3"><a href="przetwarzanie-danych.html#cb294-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_czas=</span><span class="kw">mean</span>(czas))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="przetwarzanie-danych.html#cb296-1"></a>praca_saldo &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
+<span id="cb296-2"><a href="przetwarzanie-danych.html#cb296-2"></a><span class="st">  </span><span class="kw">group_by</span>(praca) <span class="op">%&gt;%</span></span>
+<span id="cb296-3"><a href="przetwarzanie-danych.html#cb296-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_saldo=</span><span class="kw">mean</span>(saldo))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="przetwarzanie-danych.html#cb298-1"></a>zawod_saldo &lt;-<span class="st"> </span>bank <span class="op">%&gt;%</span></span>
+<span id="cb298-2"><a href="przetwarzanie-danych.html#cb298-2"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">zawod=</span>praca) <span class="op">%&gt;%</span></span>
+<span id="cb298-3"><a href="przetwarzanie-danych.html#cb298-3"></a><span class="st">  </span><span class="kw">group_by</span>(zawod) <span class="op">%&gt;%</span></span>
+<span id="cb298-4"><a href="przetwarzanie-danych.html#cb298-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_saldo=</span><span class="kw">mean</span>(saldo))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <p>Do łączenia dwóch zbiorów danych służy funkcja <code>inner_join()</code>, która jako argumenty przyjmuje nazwy zbiorów danych oraz klucz łączenia. Jeśli w obu zbiorach występują kolumny o takich samych nazwach to zostaną potraktowane jako klucz łączenia:</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="przetwarzanie-danych.html#cb291-1"></a>praca_czas_saldo &lt;-<span class="st"> </span><span class="kw">inner_join</span>(praca_czas, praca_saldo)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="przetwarzanie-danych.html#cb300-1"></a>praca_czas_saldo &lt;-<span class="st"> </span><span class="kw">inner_join</span>(praca_czas, praca_saldo)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;praca&quot;</code></pre>
 <p>Jeśli takie kolumny nie będą istniały to wywołanie funkcji zwróci błąd:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="przetwarzanie-danych.html#cb293-1"></a>praca_czas_saldo &lt;-<span class="st"> </span><span class="kw">inner_join</span>(praca_czas, zawod_saldo)</span></code></pre></div>
-<pre><code>## Error: `by` required, because the data sources have no common variables</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="przetwarzanie-danych.html#cb302-1"></a>praca_czas_saldo &lt;-<span class="st"> </span><span class="kw">inner_join</span>(praca_czas, zawod_saldo)</span></code></pre></div>
+<pre><code>## Error: `by` must be supplied when `x` and `y` have no common variables.
+## i use by = character()` to perform a cross-join.</code></pre>
 <p>W takich przypadku należy wskazać klucz połączenia w postaci <code>by = c("id1"="id2")</code>:</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="przetwarzanie-danych.html#cb295-1"></a>praca_czas_saldo &lt;-<span class="st"> </span><span class="kw">inner_join</span>(praca_czas, zawod_saldo, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;praca&quot;</span>=<span class="st">&quot;zawod&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="przetwarzanie-danych.html#cb304-1"></a>praca_czas_saldo &lt;-<span class="st"> </span><span class="kw">inner_join</span>(praca_czas, zawod_saldo, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;praca&quot;</span>=<span class="st">&quot;zawod&quot;</span>))</span></code></pre></div>
 <p>Jeśli w jednym ze zbiorów nie ma wszystkich identyfikatorów, które znajdują się w drugim zbiorze to zastosowanie funkcji <code>inner_join()</code> będzie skutkowało zbiorem, w którym znajdą się tylko te obserwacje, które udało się połączyć.</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="przetwarzanie-danych.html#cb296-1"></a>praca_saldo_<span class="dv">1500</span> &lt;-<span class="st"> </span>praca_saldo <span class="op">%&gt;%</span></span>
-<span id="cb296-2"><a href="przetwarzanie-danych.html#cb296-2"></a><span class="st">  </span><span class="kw">filter</span>(sr_saldo <span class="op">&gt;</span><span class="st"> </span><span class="dv">1500</span>)</span>
-<span id="cb296-3"><a href="przetwarzanie-danych.html#cb296-3"></a></span>
-<span id="cb296-4"><a href="przetwarzanie-danych.html#cb296-4"></a><span class="kw">inner_join</span>(praca_czas, praca_saldo_<span class="dv">1500</span>, <span class="dt">by=</span><span class="st">&quot;praca&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="przetwarzanie-danych.html#cb305-1"></a>praca_saldo_<span class="dv">1500</span> &lt;-<span class="st"> </span>praca_saldo <span class="op">%&gt;%</span></span>
+<span id="cb305-2"><a href="przetwarzanie-danych.html#cb305-2"></a><span class="st">  </span><span class="kw">filter</span>(sr_saldo <span class="op">&gt;</span><span class="st"> </span><span class="dv">1500</span>)</span>
+<span id="cb305-3"><a href="przetwarzanie-danych.html#cb305-3"></a></span>
+<span id="cb305-4"><a href="przetwarzanie-danych.html#cb305-4"></a><span class="kw">inner_join</span>(praca_czas, praca_saldo_<span class="dv">1500</span>, <span class="dt">by=</span><span class="st">&quot;praca&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   praca sr_czas sr_saldo
 ##   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
@@ -549,7 +566,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5     8    287.    1984.
 ## 6    NA    238.    1772.</code></pre>
 <p>Jeśli chcemy pozostawić niedopasowane obserwacje to należy wykorzystać jedną z funkcji - <code>left_join()</code> lub <code>right_join()</code> w zależności od tego dla którego zbioru chcemy pozostawić wszystkie informacje.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="przetwarzanie-danych.html#cb298-1"></a><span class="kw">left_join</span>(praca_czas, praca_saldo_<span class="dv">1500</span>, <span class="dt">by=</span><span class="st">&quot;praca&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="przetwarzanie-danych.html#cb307-1"></a><span class="kw">left_join</span>(praca_czas, praca_saldo_<span class="dv">1500</span>, <span class="dt">by=</span><span class="st">&quot;praca&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 3
 ##    praca sr_czas sr_saldo
 ##    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
@@ -565,21 +582,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10    10    257.      NA 
 ## 11    NA    238.    1772.</code></pre>
 </div>
-<div id="szeroka-i-wąska-reprezentacja-danych" class="section level2">
+<div id="szeroka-i-wąska-reprezentacja-danych" class="section level2" number="3.11">
 <h2><span class="header-section-number">3.11</span> Szeroka i wąska reprezentacja danych</h2>
 <p>Do wyjaśnienia kwestii szerokiej i wąskiej reprezentacji danych posłużymy się danymi z GUS dotyczącymi przeciętnego miesięcznego spożycie wybranych artykułów żywnościowych na 1 osobę w 2016 roku - <a href="data/spozycie.xlsx">plik</a>.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="przetwarzanie-danych.html#cb300-1"></a>spozycie &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/spozycie.xlsx&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="przetwarzanie-danych.html#cb309-1"></a>spozycie &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;data/spozycie.xlsx&quot;</span>)</span></code></pre></div>
 <p>Taka tabela jest przykładem szerokiej reprezentacji danych. Z kolei w niektórych sytuacjach wygodnie jest korzystać z wąskiej reprezentacji danych, a niektóre pakiety wręcz wymagają takich zbiorów wejściowych.</p>
 <p>Do transformacji danych z reprezentacji szerokiej na wąską służy funkcja <code>gather()</code> (pol. <em>gromadzić</em>). Kluczowe są w niej dwa argumenty - pierwszy (<code>key</code>) określa nazwę nowej kolumny, która będzie zawierała nazwy zmiennych, a drugi (<code>value</code>) określa nazwę nowej kolumny, która będzie zawierała wartości zmiennych. Jako kolejne argumenty podaje się nazwy kolumn, które mają być transformowane lub nazwy kolumn ze znakiem minus <code>-</code>, które nie mają być transformowane.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="przetwarzanie-danych.html#cb301-1"></a>spozycie_waskie &lt;-<span class="st"> </span>spozycie <span class="op">%&gt;%</span></span>
-<span id="cb301-2"><a href="przetwarzanie-danych.html#cb301-2"></a><span class="st">  </span><span class="kw">gather</span>(artykul, spozycie, mieso, owoce, warzywa)</span>
-<span id="cb301-3"><a href="przetwarzanie-danych.html#cb301-3"></a></span>
-<span id="cb301-4"><a href="przetwarzanie-danych.html#cb301-4"></a><span class="co"># spozycie_waskie &lt;- spozycie %&gt;%</span></span>
-<span id="cb301-5"><a href="przetwarzanie-danych.html#cb301-5"></a><span class="co">#   gather(artykul, spozycie, -kod, -nazwa)</span></span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="przetwarzanie-danych.html#cb310-1"></a>spozycie_waskie &lt;-<span class="st"> </span>spozycie <span class="op">%&gt;%</span></span>
+<span id="cb310-2"><a href="przetwarzanie-danych.html#cb310-2"></a><span class="st">  </span><span class="kw">gather</span>(artykul, spozycie, mieso, owoce, warzywa)</span>
+<span id="cb310-3"><a href="przetwarzanie-danych.html#cb310-3"></a></span>
+<span id="cb310-4"><a href="przetwarzanie-danych.html#cb310-4"></a><span class="co"># spozycie_waskie &lt;- spozycie %&gt;%</span></span>
+<span id="cb310-5"><a href="przetwarzanie-danych.html#cb310-5"></a><span class="co">#   gather(artykul, spozycie, -kod, -nazwa)</span></span></code></pre></div>
 <p>W takiej formie łatwiej podsumować dane:</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="przetwarzanie-danych.html#cb302-1"></a>spozycie_waskie <span class="op">%&gt;%</span></span>
-<span id="cb302-2"><a href="przetwarzanie-danych.html#cb302-2"></a><span class="st">  </span><span class="kw">group_by</span>(artykul) <span class="op">%&gt;%</span></span>
-<span id="cb302-3"><a href="przetwarzanie-danych.html#cb302-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_spozycie=</span><span class="kw">mean</span>(spozycie))</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="przetwarzanie-danych.html#cb311-1"></a>spozycie_waskie <span class="op">%&gt;%</span></span>
+<span id="cb311-2"><a href="przetwarzanie-danych.html#cb311-2"></a><span class="st">  </span><span class="kw">group_by</span>(artykul) <span class="op">%&gt;%</span></span>
+<span id="cb311-3"><a href="przetwarzanie-danych.html#cb311-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_spozycie=</span><span class="kw">mean</span>(spozycie))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 3 x 2
 ##   artykul sr_spozycie
 ##   &lt;chr&gt;         &lt;dbl&gt;
@@ -587,25 +605,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 owoce          3.65
 ## 3 warzywa        8.85</code></pre>
 <p>W porównaniu do szerokiej reprezentacji danych:</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="przetwarzanie-danych.html#cb304-1"></a>spozycie <span class="op">%&gt;%</span></span>
-<span id="cb304-2"><a href="przetwarzanie-danych.html#cb304-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_spozycie_mieso=</span><span class="kw">mean</span>(mieso),</span>
-<span id="cb304-3"><a href="przetwarzanie-danych.html#cb304-3"></a>            <span class="dt">sr_spozycie_owoce=</span><span class="kw">mean</span>(owoce),</span>
-<span id="cb304-4"><a href="przetwarzanie-danych.html#cb304-4"></a>            <span class="dt">sr_spozycie_warzywa=</span><span class="kw">mean</span>(warzywa))</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="przetwarzanie-danych.html#cb314-1"></a>spozycie <span class="op">%&gt;%</span></span>
+<span id="cb314-2"><a href="przetwarzanie-danych.html#cb314-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sr_spozycie_mieso=</span><span class="kw">mean</span>(mieso),</span>
+<span id="cb314-3"><a href="przetwarzanie-danych.html#cb314-3"></a>            <span class="dt">sr_spozycie_owoce=</span><span class="kw">mean</span>(owoce),</span>
+<span id="cb314-4"><a href="przetwarzanie-danych.html#cb314-4"></a>            <span class="dt">sr_spozycie_warzywa=</span><span class="kw">mean</span>(warzywa))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 3
 ##   sr_spozycie_mieso sr_spozycie_owoce sr_spozycie_warzywa
 ##               &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;
 ## 1              5.47              3.65                8.85</code></pre>
 <p>Transformacja z wąskiej do szerokiej reprezentacji danych jest możliwa z zastosowaniem funkcji <code>spread()</code> (pol. <em>rozprzestrzeniać</em>). W przypadku tej funkcji niezbędne są dwa argumenty - pierwszy (<code>key</code>) wskazuje kolumnę zawierającą nazwy dla nowych zmiennych, a drugi argument (<code>value</code>) wskazuje kolumnę zawierającą wartości dla nowych zmiennych.</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="przetwarzanie-danych.html#cb306-1"></a>spozycie_szerokie &lt;-<span class="st"> </span>spozycie_waskie <span class="op">%&gt;%</span></span>
-<span id="cb306-2"><a href="przetwarzanie-danych.html#cb306-2"></a><span class="st">  </span><span class="kw">spread</span>(artykul, spozycie)</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="przetwarzanie-danych.html#cb316-1"></a>spozycie_szerokie &lt;-<span class="st"> </span>spozycie_waskie <span class="op">%&gt;%</span></span>
+<span id="cb316-2"><a href="przetwarzanie-danych.html#cb316-2"></a><span class="st">  </span><span class="kw">spread</span>(artykul, spozycie)</span></code></pre></div>
 </div>
-<div id="eksport-danych" class="section level2">
+<div id="eksport-danych" class="section level2" number="3.12">
 <h2><span class="header-section-number">3.12</span> Eksport danych</h2>
 <p>Zapis zbioru danych do zewnętrznego pliku jest możliwy z wykorzystaniem funkcji <code>write.table()</code>. Jako argumenty tej funkcji określamy: zbiór danych (<code>x</code>), docelowe miejsce na dysku i nazwę pliku (<code>file</code>), separator kolumn (<code>sep</code>), separator miejsc dziesiętnych (<code>dec</code>) oraz argument <code>row.names = FALSE</code>, dzięki któremu unikniemy dodatkowych numerów wierszy.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="przetwarzanie-danych.html#cb307-1"></a><span class="kw">write.table</span>(spozycie_waskie, <span class="dt">file =</span> <span class="st">&quot;data/spozycie_w.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;,&quot;</span>, <span class="dt">row.names=</span>F)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="przetwarzanie-danych.html#cb317-1"></a><span class="kw">write.table</span>(spozycie_waskie, <span class="dt">file =</span> <span class="st">&quot;data/spozycie_w.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;,&quot;</span>, <span class="dt">row.names=</span>F)</span></code></pre></div>
 <p>Taki plik jest plikiem csv, który możemy otworzyć w Excelu i zapisać go z rozszerzeniem .xlsx. Teoretycznie istnieje pakiet <code>xlsx</code>, który umożliwia zapisywanie zbiorów od razu do Excela, ale działa w oparciu o Javę, co bywa problematyczne.</p>
 </div>
-<div id="zadania-2" class="section level2">
+<div id="zadania" class="section level2" number="3.13">
 <h2><span class="header-section-number">3.13</span> Zadania</h2>
 <p>Na podstawie zbioru rossmann odpowiedź na pytania:</p>
 <ol style="list-style-type: decimal">
@@ -615,7 +633,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Czy w ciągu roku odległość do najbliższego sklepu konkurencji zmieniła się dla jakiegokolwiek sklepu Rossmann?</li>
 </ol>
 </div>
-<div id="case-study" class="section level2">
+<div id="case-study" class="section level2" number="3.14">
 <h2><span class="header-section-number">3.14</span> Case study</h2>
 <p>Rozważmy sklepy Rossmann, które w 2014 roku były otwarte powyżej 300 dni w roku. Czy średnia sprzedaż wyrażona w zł w sklepach Rossmann różni się statystycznie pomiędzy grupami zdefiniowanymi przez asortyment sklepu? Dane na temat średniego kursu miesięcznego euro pobierz ze stron <a href="http://www.nbp.pl/home.aspx?f=/kursy/arch_a.html">NBP</a>.</p>
 
