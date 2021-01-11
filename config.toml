@@ -5,7 +5,7 @@ languageCode = "pl-pl"
 copyright = "Łukasz Wawrowski"
 disqusShortname = "lukaszwawrowski"
 googleAnalytics = "UA-49771039-5"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "\\.knit\\.md$", "\\.utf8\\.md$", "_cache$"]
 
 [Author]
     name = "Łukasz Wawrowski"
