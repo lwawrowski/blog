@@ -6,7 +6,11 @@ author = "Łukasz"
 
 <img style="float: left; padding: 20px; padding-left: 0px" src="/img/photo2.jpg" height="300px">
 
-Łukasz Wawrowski - doktor nauk ekonomicznych, adiunkt w Katedrze Statystyki na Uniwersytecie Ekonomicznym w Poznaniu.  
+Łukasz Wawrowski - doktor nauk ekonomicznych
+
+- Ekspert @ [QED Software](https://qed.pl/)
+
+- Analityk danych programista @ [Instytut Technik Innowacyjnych EMAG](http://ibemag.pl/pl/)
 
 Kontakt: lukasz [dot] wawrowski [at] outlook [dot] com
 
