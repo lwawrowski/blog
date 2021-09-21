@@ -7,6 +7,8 @@ author = "Łukasz"
 | [Google Scholar](https://scholar.google.pl/citations?user=nQFr4NMAAAAJ) | [ResearchGate](https://www.researchgate.net/profile/Lukasz_Wawrowski) | [ORCID](https://orcid.org/0000-0002-1201-5344) |
 |:-----:|:-----:|:-----:|
 
+[Wawrowski, Ł., Beręsewicz, M., 2021, _Small area estimates of the low work intensity indicator at voivodeship level in Poland_, Statistics in Transition New Series, vol. 22(2), s. 155-172](/articles/icpram_2021.pdf)
+
 [Michalak, M., Wawrowski, Ł., Sikora, M., Kurianowicz, R., Kozłowski, A., Białas, A., 2021, _Outlier Detection in Network Traffic Monitoring_, In Proceedings of the 10th International Conference on Pattern Recognition Applications and Methods - Volume 1: ICPRAM, ISBN 978-989-758-486-2, s. 523-530, DOI: 10.5220/0010238205230530](/articles/icpram_2021.pdf)
 
 [Wawrowski, Ł., 2020, _Estymacja pośrednia wskaźników ubóstwa na poziomie powiatów_, Wiadomości Statystyczne, vol. 65 (8), s. 7-26](https://ws.stat.gov.pl/Article/2020/8/007-026)
